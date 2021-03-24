@@ -19,7 +19,6 @@
     "jquery-validation": "^1.19.3",
     "jspdf": "^2.3.1",
     "jspdf-autotable": "^3.5.14",
-    "optimize-css-assets-webpack-plugin": "^5.0.4",
     "react-dev-utils": "^11.0.4",
     "sizzle": "^2.3.6",
     "style-loader": "^2.0.0",

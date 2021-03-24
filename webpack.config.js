@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 //const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+//const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -43,6 +43,7 @@ module.exports = {
   },
   optimization:{
   	minimize:true,
-    minimizer: [new TerserPlugin({extractComments:false,}), new OptimizeCssAssetsPlugin(),]
+    minimizer: [new TerserPlugin({extractComments:false,}), //new OptimizeCssAssetsPlugin(),
+    ]
   }
 }
