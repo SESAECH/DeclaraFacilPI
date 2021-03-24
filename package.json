@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
-    "dev": "webpack-dev-server --mode development --open",
+    "dev": "webpack-cli serve --mode development --open",
     "dev:analyze": "npm run dev -- --env.addons=bundleanalyzer",
     "build:analyze": "npm run webpack --env.addons=bundleanalyzer"
   },
@@ -21,6 +21,8 @@
     "jspdf": "^2.3.1",
     "jspdf-autotable": "^3.5.14",
     "react-dev-utils": "^11.0.4",
+    "schema-util": "^3.4.6",
+    "schema-utils": "^2.7.1",
     "sizzle": "^2.3.6",
     "style-loader": "^2.0.0",
     "sweetalert": "^2.1.2",
