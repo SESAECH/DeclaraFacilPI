@@ -276,6 +276,89 @@ function eliminarExperienciaLaboral(data){
     }
 }
 
+//funcionalidad en boton agregar/actualizar registro.
+function funcionalidadGuardarRegistroExperienciaLaboral(seccionNo, seccionName, modulo, accion, uuid=null){
+    var form = "#form" + seccionName + " ";
+    //ocultar/mostrar formularios
+    $(modulo + ".formPrincipal").addClass("animated fadeOut").addClass("hide");                      
+    $(modulo + ".formSecundario").html(formExperienciaLaboral).removeClass("hide").addClass("animated fadeIn");    
+    $(form + ".titulo-seccion").text(accion + " REGISTRO");
+
+    if (accion=="EDITAR"){
+        $(form + ".btnAgregar").data("uuid", uuid);
+        $(form + ".btnAgregar").html('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/></svg> Actualizar');
+    }
+
+    //catalogos que se usan en el modulo.
+    loadCat(tipoOperacion, ".CBOtipoOperacion");
+    loadCat(ambitoSector, ".CBOambitoSector");
+    loadCat(nivelOrdenGobierno, ".CBOnivelOrdenGobierno");
+    loadCat(ambitoPublico, ".CBOambitoPublico");
+    loadCat(extranjero, ".CBOubicacion"); 
+    loadCat(sector, ".CBOsector");
+    if(captura.tipo_declaracion == "INICIAL"){
+        $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
+    }
+    loadFormAmbitoSector();
+
+    $(form + ".btnCerrar").unbind("click");
+    $(form + ".btnAgregar").unbind("click");
+
+     //btn cerrar formulario.   
+    $(form + ".btnCerrar").on('click',function() {
+        $(modulo + ".formSecundario").html("").addClass("hide");
+        $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut");
+    }); 
+    
+    $("#form" + seccionName).validate({
+        rules: {
+            tipoOperacion : { required: true },
+            ambitoSector : { required: true },
+            nivelOrdenGobierno : { required: true },
+            ambitoPublico : { required: true },
+            nombreEntePublico : { required: true },
+            areaAdscripcion : { required: true },
+            empleoCargoComision : { required: true },
+            funcionPrincipal : { required: true },
+            fechaIngreso : { required: true },
+            fechaEgreso : { required: true },
+            ubicacion : { required: true }
+        },
+        messages: {
+            tipoOperacion : { required: "Seleccione el tipo de operación." },
+            ambitoSector: { required: "Seleccione el ámbito o sector en el que laboraste." },
+            nivelOrdenGobierno : { required: "Seleccione el orden de gobierno." },
+            ambitoPublico : { required: "Seleccione el ámbito público." },
+            nombreEntePublico : { required: "Ingrese el nombre del ente público." },
+            areaAdscripcion : { required: "Ingrese el área de adscripción." },
+            empleoCargoComision : { required: "Ingrese el empleo, cargo o comisión." },
+            funcionPrincipal : { required: "Ingrese la función principal." },
+            fechaIngreso : { required: "Ingrese la fecha de ingreso." },
+            fechaEgreso : { required: "Ingrese la fecha de egreso." },
+            ubicacion : { required: "Seleccione la ubicación." }
+        }
+    });
+
+    //btn agregar registro.
+    $(form + ".btnAgregar").on('click',function() {
+        var formulario = "#form" + seccionName;
+        console.log("formActual", formulario);
+        if( $("#form" + seccionName).valid() ) {
+            var uuidItem;
+            if (accion=="EDITAR"){ uuidItem = uuid;}
+            else{ uuidItem= generarUUID();}       
+            guardarRegistroExperienciaLaboral(uuidItem, seccionNo, seccionName, modulo);
+            pintarTablaExperienciaLaboral(seccionNo, seccionName);       
+            //ocultar/mostrar formularos.
+            $(modulo + ".formSecundario").html("").addClass("hide");
+            $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut"); 
+            $(modulo + ".btnTerminar").removeClass("hide");
+            goTop();
+        }
+            
+    });
+}
+
 //guardar registro en el JsonResult.
 function guardarRegistroExperienciaLaboral(uuidItem, seccionNo, seccionName, modulo){
     var form="#form" + seccionName;
@@ -328,58 +411,8 @@ function guardarRegistroExperienciaLaboral(uuidItem, seccionNo, seccionName, mod
     $(".status-seccion-patrimonial-" + seccionNo).removeClass("indicador-status indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
 }
 
-//funcionalidad en boton agregar/actualizar registro.
-function funcionalidadGuardarRegistroExperienciaLaboral(seccionNo, seccionName, modulo, accion, uuid=null){
-    var form = "#form" + seccionName + " ";
-    //ocultar/mostrar formularios
-    $(modulo + ".formPrincipal").addClass("animated fadeOut").addClass("hide");                      
-    $(modulo + ".formSecundario").html(formExperienciaLaboral).removeClass("hide").addClass("animated fadeIn");    
-    $(form + ".titulo-seccion").text(accion + " REGISTRO");
-
-    if (accion=="EDITAR"){
-        $(form + ".btnAgregar").data("uuid", uuid);
-        $(form + ".btnAgregar").html('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/></svg> Actualizar');
-    }
-
-    //catalogos que se usan en el modulo.
-    loadCat(tipoOperacion, ".CBOtipoOperacion");
-    loadCat(ambitoSector, ".CBOambitoSector");
-    loadCat(nivelOrdenGobierno, ".CBOnivelOrdenGobierno");
-    loadCat(ambitoPublico, ".CBOambitoPublico");
-    loadCat(extranjero, ".CBOubicacion"); 
-    loadCat(sector, ".CBOsector");
-    if(captura.tipo_declaracion == "INICIAL"){
-        $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
-    }
-    loadFormAmbitoSector();
-
-    $(form + ".btnCerrar").unbind("click");
-    $(form + ".btnAgregar").unbind("click");
-
-     //btn cerrar formulario.   
-     $(form + ".btnCerrar").on('click',function() {
-        $(modulo + ".formSecundario").html("").addClass("hide");
-        $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut");
-    }); 
-    
-    //btn agregar registro.
-    $(form + ".btnAgregar").on('click',function() {
-        var uuidItem;
-        if (accion=="EDITAR"){ uuidItem = uuid;}
-        else{ uuidItem= generarUUID();}       
-        guardarRegistroExperienciaLaboral(uuidItem, seccionNo, seccionName, modulo);
-        pintarTablaExperienciaLaboral(seccionNo, seccionName);       
-        //ocultar/mostrar formularos.
-        $(modulo + ".formSecundario").html("").addClass("hide");
-        $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut"); 
-        $(modulo + ".btnTerminar").removeClass("hide");
-        goTop();          
-    });
-}
-
 function loadFormAmbitoSector(){
     $("#formExperienciaLaboral .ambitoSectorContent").addClass("hide");
     if($("#formExperienciaLaboral select[name='ambitoSector'] option:selected").val() =="PUB"){ $("#publicoContent").removeClass("hide");}
     else{$("#privadoContent").removeClass("hide");}
 }
-
