@@ -163,6 +163,7 @@ function loadCat(catalogo, obj){
         else{$(obj).append('<option value="' + item + '">' + item + '</option>');}                    
     });
 }
+window.loadCat = loadCat;
 
 //carga los municipios.
 function loadMunicipios(obj, filtro){
@@ -173,7 +174,7 @@ function loadMunicipios(obj, filtro){
         }                        
     });
 }
-
+window.loadMunicipios = loadMunicipios;
 
 //genera un uuid.
 function generarUUID() {
@@ -185,7 +186,7 @@ function generarUUID() {
     });
     return uuid;
 }
-
+window.generarUUID = generarUUID;
 //move to top site.
 function goTop(){
     $('html, body').animate({

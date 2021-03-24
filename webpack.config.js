@@ -14,12 +14,17 @@ module.exports = {
 	path: `${__dirname}/dist`,
 	filename: 'bundle.js',
   },
-  mode:'production',
+  mode:'development',
   target:'web',
   performance: {
     maxAssetSize: 10485760,  //10Mb
     maxEntrypointSize: 5242880, //5 Mb
     hints: 'warning'
+  },
+  devServer: {
+    contentBase:'./dist/',
+    publicPath:'/live/',
+    hot:true,
   },
   plugins:[ 
     new webpack.ProvidePlugin({ $: "jquery", jQuery: 'jquery','window.jQuery': 'jquery'}),
