@@ -40,6 +40,22 @@ function habilitarSeccion(declaracionSeccion, seccionNo, seccionName){
 }
 window.actualizarStatusSeccion =actualizarStatusSeccion;
 
+function setVaribleGlobal(campo, valor){
+    if (campo=="domicilio"){
+        if (valor=="MX"){
+            $("#mex-tab").removeClass("hide");
+            $("#ext-tab").addClass("hide");
+            jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio="MX";
+         }
+        else{
+            $("#mex-tab").removeClass("hide");
+            $("#ext-tab").addClass("hide");
+            jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio="EXT";
+        }
+    }
+}
+window.setVaribleGlobal=setVaribleGlobal;
+
 $(".chkNinguno").on("change",function() {
     var btnAgregar = "#modulo" + this.dataset.form + " .btnAgregar";
     var btnTerminar = "#modulo" + this.dataset.form + " .btnTerminar";
@@ -147,7 +163,6 @@ function loadCat(catalogo, obj){
         else{$(obj).append('<option value="' + item + '">' + item + '</option>');}                    
     });
 }
-window.loadCat = loadCat;
 
 //carga los municipios.
 function loadMunicipios(obj, filtro){
@@ -158,7 +173,7 @@ function loadMunicipios(obj, filtro){
         }                        
     });
 }
-window.loadMunicipios = loadMunicipios;
+
 
 //genera un uuid.
 function generarUUID() {
@@ -170,7 +185,6 @@ function generarUUID() {
     });
     return uuid;
 }
-window.generarUUID = generarUUID ;
 
 //move to top site.
 function goTop(){

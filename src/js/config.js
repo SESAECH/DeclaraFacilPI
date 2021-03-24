@@ -29,6 +29,29 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
     //variables globales de captura.
     captura.formato = this.dataset.formato;
     captura.declaracion =  declaraciones[captura.formato.toLowerCase()];
+    //configurar jsonResult.
+    if (captura.formato =="COMPLETA"){
+        if (captura.tipo_declaracion=="MODIFICACION"){
+            delete jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
+        }
+    }
+    else{
+        delete jsonResult.declaracion.interes;
+        delete jsonResult.declaracion.situacionPatrimonial.vehiculos;
+        delete jsonResult.declaracion.situacionPatrimonial.prestamoOComodato;
+        delete jsonResult.declaracion.situacionPatrimonial.inversiones;
+        delete jsonResult.declaracion.situacionPatrimonial.datosPareja;
+        delete jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico;
+        delete jsonResult.declaracion.situacionPatrimonial.bienesInmuebles;
+        delete jsonResult.declaracion.situacionPatrimonial.bienesMuebles;
+        delete jsonResult.declaracion.situacionPatrimonial.adeudos;
+        if (captura.tipo_declaracion=="MODIFICACION"){
+            delete jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
+        }
+    }
+    //variables de apoyo en json.
+    jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio="MX";
+    
 
     //titulo del formulario de captura.
     $(".titulo-declaracion-captura").text("DECLARACIÓN " + captura.tipo_declaracion + " | " + captura.formato);
@@ -72,21 +95,21 @@ var declaraciones={
     "completa":{
         "situacion_patrimonial":{
             "secciones":{
-                "1":{"no":1,"titulo":"Datos generales", "moduloName":"moduloDatosGenerales", "status":"SIN_INFO", "apartado": "situacion_patrimonial" },
-                "2":{"no":2,"titulo":"Domicilio del Declarante", "moduloName":"moduloDomicilio", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
-                "3":{"no":3,"titulo":"Datos curriculares del Declarante", "moduloName":"moduloCV", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
-                "4":{"no":4,"titulo":"Datos del empleo, cargo o comisión", "moduloName":"moduloEmpleoCargoComision", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
-                "5":{"no":5,"titulo":"Experiencia laboral", "moduloName":"moduloExperienciaLaboral", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
-                "6":{"no":6,"titulo":"Datos de la Pareja", "moduloName":"moduloPareja", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
-                "7":{"no":7,"titulo":"Datos del dependiente económico", "moduloName":"moduloDependientesEconomicos", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
-                "8":{"no":8,"titulo":"Ingresos netos del Declarante, Pareja y/o dependientes económicos", "moduloName":"moduloIngresos", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
-                "9":{"no":9,"titulo":"¿Te desempeñaste como servidor público el año inmediato anterior?", "moduloName":"moduloDesempenoServidorPublico", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
-                "10":{"no":10,"titulo":"Bienes inmuebles", "moduloName":"moduloBienesInmuebles", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
-                "11":{"no":11,"titulo":"Vehículos.", "moduloName":"moduloVehiculos", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
-                "12":{"no":12,"titulo":"Bienes muebles", "moduloName":"moduloBienesMuebles", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
-                "13":{"no":13,"titulo":"Inversiones, cuentas bancarias y otro tipo de valores/activos.", "moduloName":"moduloInversiones", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
-                "14":{"no":14,"titulo":"Adeudos/pasivos", "moduloName":"moduloAdeudos", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
-                "15":{"no":15,"titulo":"Préstamo o comodato por terceros", "moduloName":"moduloPrestamos", "status":"SIN_INFO", "apartado": "situacion_patrimonial"}
+                "1":{"no":1,"titulo":"Datos generales", "moduloName":"moduloDatosGenerales", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloDatosGenerales" },
+                "2":{"no":2,"titulo":"Domicilio del Declarante", "moduloName":"moduloDomicilio", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloDomicilio" },
+                "3":{"no":3,"titulo":"Datos curriculares del Declarante", "moduloName":"moduloCV", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloCV"},
+                "4":{"no":4,"titulo":"Datos del empleo, cargo o comisión", "moduloName":"moduloEmpleoCargoComision", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloEmpleoCargoComision"},
+                "5":{"no":5,"titulo":"Experiencia laboral", "moduloName":"moduloExperienciaLaboral", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloExperienciaLaboral"},
+                "6":{"no":6,"titulo":"Datos de la Pareja", "moduloName":"moduloPareja", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloPareja"},
+                "7":{"no":7,"titulo":"Datos del dependiente económico", "moduloName":"moduloDependientesEconomicos", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloDependientesEconomicos"},
+                "8":{"no":8,"titulo":"Ingresos netos del Declarante, Pareja y/o dependientes económicos", "moduloName":"moduloIngresos", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloIngresos"},
+                "9":{"no":9,"titulo":"¿Te desempeñaste como servidor público el año inmediato anterior?", "moduloName":"moduloDesempenoServidorPublico", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloDesempenoServidorPublico"},
+                "10":{"no":10,"titulo":"Bienes inmuebles", "moduloName":"moduloBienesInmuebles", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloBienesInmuebles"},
+                "11":{"no":11,"titulo":"Vehículos.", "moduloName":"moduloVehiculos", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloVehiculos"},
+                "12":{"no":12,"titulo":"Bienes muebles", "moduloName":"moduloBienesMuebles", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloBienesMuebles"},
+                "13":{"no":13,"titulo":"Inversiones, cuentas bancarias y otro tipo de valores/activos.", "moduloName":"moduloInversiones", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloInversiones"},
+                "14":{"no":14,"titulo":"Adeudos/pasivos", "moduloName":"moduloAdeudos", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloAdeudos"},
+                "15":{"no":15,"titulo":"Préstamo o comodato por terceros", "moduloName":"moduloPrestamos", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloPrestamos"}
             }
         },
         "interes":{
@@ -104,13 +127,13 @@ var declaraciones={
     "simplificada":{
         "situacion_patrimonial":{
             "secciones":{
-                "1":{"no":1,"titulo":"Datos generales", "moduloName":"moduloDatosGenerales", "status":"SIN_INFO", "apartado": "situacion_patrimonial" },
-                "2":{"no":2,"titulo":"Domicilio del Declarante", "moduloName":"moduloDomicilio", "status":"SIN_INFO" , "apartado": "situacion_patrimonial"},
-                "3":{"no":3,"titulo":"Datos curriculares del Declarante", "moduloName":"moduloCV", "status":"SIN_INFO" , "apartado": "situacion_patrimonial"},
-                "4":{"no":4,"titulo":"Datos del empleo, cargo o comisión", "moduloName":"moduloEmpleoCargoComision", "status":"SIN_INFO" , "apartado": "situacion_patrimonial"},
-                "5":{"no":5,"titulo":"Experiencia laboral", "moduloName":"moduloExperienciaLaboral", "status":"SIN_INFO", "apartado": "situacion_patrimonial" },
-                "6":{"no":6,"titulo":"Ingresos netos del Declarante", "moduloName":"moduloIngresosDecSimplificada", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
-                "7":{"no":7,"titulo":"¿Te desempeñaste como servidor público el año inmediato anterior?", "moduloName":"moduloDesempenoServidorPublico", "status":"SIN_INFO", "apartado": "situacion_patrimonial"},
+                "1":{"no":1,"titulo":"Datos generales", "moduloName":"moduloDatosGenerales", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloDatosGenerales" },
+                "2":{"no":2,"titulo":"Domicilio del Declarante", "moduloName":"moduloDomicilio", "status":"SIN_INFO" , "apartado": "situacion_patrimonial", "help": "ayuda de moduloDomicilio"},
+                "3":{"no":3,"titulo":"Datos curriculares del Declarante", "moduloName":"moduloCV", "status":"SIN_INFO" , "apartado": "situacion_patrimonial", "help": "ayuda de moduloCV"},
+                "4":{"no":4,"titulo":"Datos del empleo, cargo o comisión", "moduloName":"moduloEmpleoCargoComision", "status":"SIN_INFO" , "apartado": "situacion_patrimonial", "help": "ayuda de moduloEmpleoCargoComision"},
+                "5":{"no":5,"titulo":"Experiencia laboral", "moduloName":"moduloExperienciaLaboral", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloExperienciaLaboral" },
+                "6":{"no":6,"titulo":"Ingresos netos del Declarante", "moduloName":"moduloIngresosDecSimplificada", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloIngresosDecSimplificada"},
+                "7":{"no":7,"titulo":"¿Te desempeñaste como servidor público el año inmediato anterior?", "moduloName":"moduloDesempenoServidorPublico", "status":"SIN_INFO", "apartado": "situacion_patrimonial", "help": "ayuda de moduloDesempenoServidorPublico"},
             }
         },
         "interes":{

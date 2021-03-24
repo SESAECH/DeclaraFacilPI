@@ -11,11 +11,24 @@ function initDomicilio(data){
     $(form + ".CBOentidadFederativa").on('change', function() {
         loadMunicipios(form + ".CBOmunicipioAlcaldia", this.value);
     });
-
+    $(form + '.rdDomicilio').click(function(){
+        if(this.id =="domicilioMX"){
+            $(form + "#domMexico").removeClass("hide");
+            $(form + "#domExtranjero").addClass("hide");
+            jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio="MX";
+        }
+        else{ 
+            $(form + "#domExtranjero").removeClass("hide");
+            $(form + "#domMexico").addClass("hide");
+            jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio="EXT";
+        }
+    });
     //validar status de la sección.
     switch(seccion.status){
         case "SIN_INFO": 
-             //asginar valores predeterminados a catálogos(ayuda al usuario).
+            //asginar valores predeterminados a catálogos(ayuda al usuario).
+            $("#domicilioMX").prop("checked", true);
+            $(form + "#domMexico").removeClass("hide");
             $(form + ".CBOpais").val("MX");
             $(form + ".CBOentidadFederativa").val("07").change();
             $(form + ".btnGuardar").removeClass("hide");

@@ -828,7 +828,7 @@
         return pageFormats[value];
       });
   
-      format = format || "a4";
+      format = format || "letter";
   
       var ApiMode = {
         COMPAT: "compat",

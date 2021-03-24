@@ -67,7 +67,7 @@ var formCV = '<form action="" id="formCV">\
     </div>\
 </div>\
 </form>';
-
+window.formCV = formCV;
 
 
 function initCV(data){

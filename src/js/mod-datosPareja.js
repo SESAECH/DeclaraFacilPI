@@ -174,7 +174,6 @@ function guardarFormPareja(seccionNo, seccionName){
         }
     });
 }
-window.guardarFormPareja = guardarFormPareja;
 
 function loadInfoPareja(seccionName){
     var root = jsonResult.declaracion.situacionPatrimonial.datosPareja;

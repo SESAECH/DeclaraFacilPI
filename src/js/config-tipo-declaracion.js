@@ -11,8 +11,28 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
     
     //variables globales de captura.
     captura.formato = this.dataset.formato;                                
-    captura.declaracion =  declaraciones[captura.formato.toLowerCase()];     
+    captura.declaracion =  declaraciones[captura.formato.toLowerCase()];    
+    if (captura.formato =="COMPLETA"){
+        if (captura.tipo_declaracion=="MODIFICACION"){
+            delete jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
+        }
+    }
+    else{
+        delete jsonResult.declaracion.interes;
+        delete jsonResult.declaracion.situacionPatrimonial.vehiculos;
+        delete jsonResult.declaracion.situacionPatrimonial.prestamoOComodato;
+        delete jsonResult.declaracion.situacionPatrimonial.inversiones;
+        delete jsonResult.declaracion.situacionPatrimonial.datosPareja;
+        delete jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico;
+        delete jsonResult.declaracion.situacionPatrimonial.bienesInmuebles;
+        delete jsonResult.declaracion.situacionPatrimonial.bienesMuebles;
+        delete jsonResult.declaracion.situacionPatrimonial.adeudos;
+        if (captura.tipo_declaracion=="MODIFICACION"){
+            delete jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
+        }
+    }
     
+
     //titulo del formulario de captura.
     $(".titulo-declaracion-captura").text("DECLARACIÓN " + captura.tipo_declaracion + " | " + captura.formato);
     
