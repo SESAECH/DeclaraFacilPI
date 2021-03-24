@@ -70,20 +70,46 @@ function guardarFormEmpleoCargoComision(seccionNo, seccionName,  seccionApartado
     var formulario = "#form" + seccionName + " ";
     $(formulario).validate({
         rules: {
-            nombre : { required: true, maxlength: 50},
-            primerApellido : { required: true, },
-            rfc:{ required: true, minlength: 10, maxlength:10},
-            homoClave :{required: true, minlength: 3, maxlength:3}
+            nivelOrdenGobierno : { required: true },
+            ambitoPublico : { required: true },
+            nombreEntePublico : { required: true },
+            areaAdscripcion : { required: true },
+            empleoCargoComision : { required: true },
+            contratadoPorHonorarios : { required: true },
+            nivelEmpleoCargoComision : { required: true },
+            funcionPrincipal : { required: true },
+            fechaTomaPosesion : { required: true },
+            telefono : { required: true, number: true, minlength: 10, maxlength: 10 },
+            entidadFederativa : { required: true },
+            municipioAlcaldia : { required: true },
+            calle : { required: true },
+            numeroExterior : { required: true },
+            coloniaLocalidad : { required: true },
+            codigoPostal : { required: true, number: true, minlength: 5, maxlength: 5 },
+            ciudadLocalidad : { required: true },
+            estadoProvincia : { required: true },
+            pais : { required: true }
         },
-        messages : {
-            nombre: { required: "Ingresa el nombre", maxlength: "Máximo de caracteres es 50."},
-            primerApellido: { required: "Ingresa el primerApellido"},
-            segundoApellido: { required: "Ingresa el primerApellido"},
-            rfc: { required: "Ingresa el rfc", minlength: "Minimo de 10 caractes."},
-            homoClave: {
-                required: "Ingresa la homoclave",
-                minlength:"Minimo de caracteres es 3."
-            }
+        messages: {
+            nivelOrdenGobierno : { required: "Seleccione el orden de gobierno." },
+            ambitoPublico : { required: "Seleccione el ámbito público." },
+            nombreEntePublico: { required: "Ingrese el nombre del ente público."},
+            areaAdscripcion : { required: "Ingrese el área de adscripción." },
+            empleoCargoComision: { required: "Ingrese el empleo, cargo o comisión." },
+            contratadoPorHonorarios : { required: "Seleccione si o no está contratado por honorarios." },
+            nivelEmpleoCargoComision : { required: "Ingrese el nivel del empleo, cargo o comisión." },
+            funcionPrincipal : { required : "Ingrese la función principal." },
+            fechaTomaPosesion : { required: "Ingrese la fecha de posesión."},
+            telefono : { required: "Ingrese el número telefónico de oficina", number: "Solo se permiten caracteres numéricos.", minlength: "El mínimo de caracteres es de 10", maxlength: "El máximo de caracteres es de 10." },
+            entidadFederativa: { required: "Seleccione la entidad federativa." },
+            municipioAlcaldia: { required: "Seleccione el municipio o alcaldía." },
+            calle: { required: "Ingrese la calle." },
+            numeroExterior : { required: "Ingrese el número exterior." },
+            coloniaLocalidad : { required: "Ingrese la colonia o localidad." },
+            codigoPostal : { required: "Ingrese el C.P.", number: "Solo se permiten caracteres numéricos.", minlength: "El mínimo de caracteres es de 5.", maxlength: "El máximo de caracteres es de 5." },
+            ciudadLocalidad : { required: "Ingrese la ciudad o localidad." },
+            estadoProvincia : { required: "Ingrese el estado o provincia." },
+            pais : { required: "Selecione el país." }
         },
         // Make sure the form is submitted to the destination defined
         // in the "action" attribute of the form when valid

@@ -15,7 +15,7 @@ var formCV = '<form action="" id="formCV">\
     </div> \
     <div class="col-lg-8">\
         <div class="form-group">\
-            <label>NOMBRE</label>\
+            <label>INSTITUCIÓN EDUCATIVA</label>\
             <input type="text" name="nombre" class="form-control" required>\
         </div>\
     </div>\
@@ -28,7 +28,7 @@ var formCV = '<form action="" id="formCV">\
     <div class="col-lg-8">\
         <div class="form-group">\
             <label>CARRERA O ÁREA DE CONOCIMIENTO</label>\
-            <input type="text" name="carreraAreaConocimiento" class="form-control" required>\
+            <input type="text" name="carreraAreaConocimiento" class="form-control">\
         </div>\
     </div>\
     <div class="col-lg-4">\
@@ -67,8 +67,6 @@ var formCV = '<form action="" id="formCV">\
     </div>\
 </div>\
 </form>';
-window.formCV = formCV;
-
 
 function initCV(data){
     var seccion = JSON.parse(atob(data));
@@ -144,7 +142,6 @@ function initCV(data){
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
 }
-window.initCV = initCV;
 
 function pintarTablaCV(seccionNo, seccionName){
     var html="";
@@ -164,7 +161,6 @@ function pintarTablaCV(seccionNo, seccionName){
     });
     $(".tbl" + seccionName + " tbody").empty().append(html);
 }
-window.pintarTabla = pintarTabla;
 
 function editarCV(data){
     var item = JSON.parse(atob(data));
@@ -181,8 +177,6 @@ function editarCV(data){
     $("#form" + item.seccionName + " select[name='documentoObtenido']").val(nodo.documentoObtenido);
     $("#form" + item.seccionName + " input[name='fechaObtencion']").val(nodo.fechaObtencion);    
 }
-window.editarCV =editarCV;
-
 
 function eliminarCV(data){
     var item = JSON.parse(atob(data));
@@ -193,7 +187,6 @@ function eliminarCV(data){
         $("#modulo" + item.seccionName + " .btnTerminar").addClass("hide");
     }
 }
-window.eliminarCV = eliminarCV;
 
 function funcionalidadGuardarRegistroCV(seccionNo, seccionName, modulo, accion, uuid=null){
     var form = "#form" + seccionName + " ";
@@ -224,27 +217,49 @@ function funcionalidadGuardarRegistroCV(seccionNo, seccionName, modulo, accion, 
     $(form + ".btnCerrar").on('click',function() {
         $(modulo + ".formSecundario").html("").addClass("hide");
         $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut");
-    }); 
+    });
+
+    $("#form" + seccionName).validate({
+        rules: {
+            tipoOperacion : { required: true },
+            nivel : { required: true },
+            nombre : { required: true },
+            ubicacion : { required: true },
+            estatus : { required: true },
+            documentoObtenido : { required: true },
+            fechaObtencion : { required: true }
+        },
+        messages: {
+            tipoOperacion : { required: "Seleccione el tipo de operación." },
+            nivel: { required: "Seleccione el nivel." },
+            nombre : { required: "Ingrese la institución educativa." },
+            ubicacion : { required: "Seleccione la ubicación." },
+            estatus : { required: "Seleccione el estatus." },
+            documentoObtenido : { required: "Seleccione el documento obtenido." },
+            fechaObtencion : { required: "Ingrese la fecha de obtención del documento." }
+        }
+    });
 
     //btn agregar registro.
     $(form + ".btnAgregar").on('click',function() {
-        var uuidItem;
-        if (accion=="EDITAR"){ uuidItem = uuid;}
-        else{ uuidItem= generarUUID();}       
-        guardarRegistroCV(uuidItem, seccionNo, seccionName, modulo);
-        pintarTablaCV(seccionNo, seccionName);       
-        //ocultar/mostrar formularos.
-        $(modulo + ".formSecundario").html("").addClass("hide");
-        $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut"); 
-        $(modulo + ".btnTerminar").removeClass("hide");
-        goTop();          
+        if( $("#form" + seccionName).valid() ) {
+            var uuidItem;
+            if (accion=="EDITAR"){ uuidItem = uuid;}
+            else{ uuidItem= generarUUID();}       
+            guardarRegistroCV(uuidItem, seccionNo, seccionName, modulo);
+            pintarTablaCV(seccionNo, seccionName);       
+            //ocultar/mostrar formularos.
+            $(modulo + ".formSecundario").html("").addClass("hide");
+            $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut"); 
+            $(modulo + ".btnTerminar").removeClass("hide");
+            goTop();
+        }    
     });
 }
-window.funcionalidadGuardarRegistroCV = funcionalidadGuardarRegistroCV;
 
 //guaradr registro en el JsonResult.
 function guardarRegistroCV(uuidItem, seccionNo, seccionName, modulo){
-    var form="#form" + seccionName;
+    var form = "#form" + seccionName;
     jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.aclaracionesObservaciones =  $(modulo + "textarea[name='aclaracionesObservaciones']").val();
     jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad[uuidItem] =
     {
@@ -267,4 +282,4 @@ function guardarRegistroCV(uuidItem, seccionNo, seccionName, modulo){
     captura.declaracion.situacion_patrimonial.secciones[seccionNo].status= "EN_PROCESO";
     $(".status-seccion-patrimonial-" + seccionNo).removeClass("indicador-status, indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
 }
-window.guardarRegistroCV = guardarRegistroCV;
+

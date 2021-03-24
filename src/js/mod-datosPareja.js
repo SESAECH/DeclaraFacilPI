@@ -83,25 +83,102 @@ function funcionalidadPareja(seccionNo, seccionName, seccionStatus){
         habilitarSeccion("situacion_patrimonial", seccionNo, seccionName);
     });    
 }
-window.funcionalidadPareja = funcionalidadPareja;
 
 function guardarFormPareja(seccionNo, seccionName){
+    $.validator.addMethod("RFC", function (value, element) {
+        if ( value !== '' ) {
+            var patt = new RegExp("^[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?$");
+            return patt.test(value);
+        } else {
+            return false;
+        }
+    }, "Ingrese un RFC válido.");
+    $.validator.addMethod("CURP", function (value, element) {
+        if (value !== '') {
+            var patt = new RegExp("^[A-Z][A,E,I,O,U,X][A-Z]{2}[0-9]{2}[0-1][0-9][0-3][0-9][M,H][A-Z]{2}[B,C,D,F,G,H,J,K,L,M,N,Ñ,P,Q,R,S,T,V,W,X,Y,Z]{3}[0-9,A-Z][0-9]$");
+            return patt.test(value);
+        } else {
+            return false;
+        }
+    }, "Ingrese una CURP válida.");
     $("#form" + seccionName).validate({
         rules: {
-            nombre : { required: true, maxlength: 50},
-            primerApellido : { required: true, },
-            rfc:{ required: true, minlength: 10, maxlength:10},
-            homoClave :{required: true, minlength: 3, maxlength:3}
+            tipoOperacion : { required: true },
+            nombre : { required: true, maxlength: 50 },
+            primerApellido : { required: true },
+            fechaNacimiento : { required: true },
+            rfc : { required: true, minlength: 12, maxlength: 13, RFC: true },
+            curp : { required: true, minlength: 18, maxlength: 18, CURP: true },
+            relacionConDeclarante : { required: true },
+            esDependienteEconomico : { required: true },
+            ciudadanoExtranjero : { required: true },
+            habitaDomicilioDeclarante : { required: true },
+            lugarDondeReside : { required: true },
+            calle : { required: true },
+            numeroExterior : { required: true },
+            coloniaLocalidad : { required: true },
+            municipioAlcaldia : { required: true },
+            entidadFederativa : { required: true },
+            codigoPostal : { required: true, number: true, minlength: 5, maxlength: 5 },
+            ciudadLocalidad : { required: true },
+            estadoProvincia : { required: true },
+            pais : { required: true },
+            actividadLaboral : { required: true },
+            nivelOrdenGobierno : { required: true },
+            ambitoPublico : { required: true },
+            nombreEntePublico : { required: true },
+            areaAdscripcion : { required: true },
+            empleoCargoComision : { required: true },
+            funcionPrincipal : { required: true },
+            salarioMensualNeto : { required: true, number: true },
+            moneda : { required: true },
+            fechaIngreso : { required: true },
+            nombreEmpresaSociedadAsociacion : { required: true },
+            // empleoCargoComision : { required: true },
+            rfc : { required: true, minlength: 10, maxlength: 10, RFC: true },
+            // fechaIngreso : { required: true },
+            sector : { required: true },
+            // salarioMensualNeto : { required: true, number: true },
+            proveedorContratistaGobierno : { required: true }
         },
-        messages : {
-            nombre: { required: "Ingresa el nombre", maxlength: "Máximo de caracteres es 50."},
-            primerApellido: { required: "Ingresa el primerApellido"},
-            segundoApellido: { required: "Ingresa el primerApellido"},
-            rfc: { required: "Ingresa el rfc", minlength: "Minimo de 10 caractes."},
-            homoClave: {
-                required: "Ingresa la homoclave",
-                minlength:"Minimo de caracteres es 3."
-            }
+        messages: {
+            tipoOperacion : { required: "Selecione el tipo de operación." },
+            nombre : { required: "Ingrese el nombre.", maxlength: "El máximo de caracteres es de 50." },
+            primerApellido : { required: "Ingrese el primer apellido." },
+            fechaNacimiento : { required: "Ingrese la fecha de nacimmiento." },
+            rfc : { required: "Ingrese el RFC.", minlength: "El minimo de caracteres es de 12.", maxlength: "El máximo de caracteres es de 13." },
+            curp : { required: "Ingrese la CURP.", minlength: "El mínimo de caracteres es de 18.", maxlength: "El máximo de caracteres es de 18." },
+            relacionConDeclarante : { required: "Seleccione la relación con el declarante." },
+            esDependienteEconomico : { required: "Seleccione si es dependiente económico." },
+            ciudadanoExtranjero : { required: "Seleccione si es ciudadano extranjero." },
+            habitaDomicilioDeclarante : { required: "Seleccione si habita el domicilio del declarante." },
+            lugarDondeReside : { required: "Seleccione el lugar donde reside." },
+            calle : { required: "Ingrese la calle." },
+            numeroExterior : { required: "Ingrese el número exterior." },
+            coloniaLocalidad : { required: "Ingrese la colonia o localidad." },
+            municipioAlcaldia : { required: "Seleccione el municipio o alcaldía." },
+            entidadFederativa : { required: "Seleccione la entidad federativa." },
+            codigoPostal : { required: "Ingrese el C.P.", number: "Solo se permiten caracteres numéricos.", minlength: "El mínimo de caracteres es de 5.", maxlength: "El máximo de caracteres es de 5." },
+            ciudadLocalidad : { required: "Ingrese la ciudad o localidad." },
+            estadoProvincia : { required: "Ingrese el estado o provincia." },
+            pais : { required: "Seleccione el país." },
+            actividadLaboral : { required: "Ingrese la activiad laboral." },
+            nivelOrdenGobierno : { required: "Seleccione el orden de gobierno." },
+            ambitoPublico : { required: "Seleccione el ámbito público." },
+            nombreEntePublico : { required: "Ingrese el nombre del ente público." },
+            areaAdscripcion : { required: "Ingrese el área de adscripción." },
+            empleoCargoComision : { required: "Ingrese el empleo, cargo o comisión." },
+            funcionPrincipal : { required: "Ingrese la función principal." },
+            salarioMensualNeto : { required: "Ingrese el salario mensual neto.", number: "Solo se permiten caracteres numéricos." },
+            moneda : { required: "Seleccione el tipo de moneda." },
+            fechaIngreso : { required: "Ingrese la fecha de ingreso." },
+            nombreEmpresaSociedadAsociacion : { required: "Ingrese el nombre de la empresa, sociedad o asociación." },
+            // empleoCargoComision : { required: "Ingrese el empleo, cargo o comisión." },
+            rfc : { required: "Ingrese el RFC.", minlength: "El minimo de caracteres es de 12.", maxlength: "El máximo de caracteres es de 13." },
+            // fechaIngreso : { required: "Ingrese la fecha de ingreso." },
+            sector : { required: "Seleccione el sector." },
+            // salarioMensualNeto : { required: "Ingrese el salario mensual neto.", number: "Solo se permiten caracteres numéricos." },
+            proveedorContratistaGobierno : { required: "Seleccione si es contratista de gobierno." }
         },
         // Make sure the form is submitted to the destination defined
         // in the "action" attribute of the form when valid
@@ -239,4 +316,3 @@ function loadInfoPareja(seccionName){
         $("#form" + seccionName + " textarea[name='aclaracionesObservaciones']").val(root.aclaracionesObservaciones);        
     }  
 }
-window.loadInfoPareja = loadInfoPareja;

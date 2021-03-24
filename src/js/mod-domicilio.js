@@ -11,24 +11,11 @@ function initDomicilio(data){
     $(form + ".CBOentidadFederativa").on('change', function() {
         loadMunicipios(form + ".CBOmunicipioAlcaldia", this.value);
     });
-    $(form + '.rdDomicilio').click(function(){
-        if(this.id =="domicilioMX"){
-            $(form + "#domMexico").removeClass("hide");
-            $(form + "#domExtranjero").addClass("hide");
-            jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio="MX";
-        }
-        else{ 
-            $(form + "#domExtranjero").removeClass("hide");
-            $(form + "#domMexico").addClass("hide");
-            jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio="EXT";
-        }
-    });
+
     //validar status de la sección.
     switch(seccion.status){
         case "SIN_INFO": 
-            //asginar valores predeterminados a catálogos(ayuda al usuario).
-            $("#domicilioMX").prop("checked", true);
-            $(form + "#domMexico").removeClass("hide");
+             //asginar valores predeterminados a catálogos(ayuda al usuario).
             $(form + ".CBOpais").val("MX");
             $(form + ".CBOentidadFederativa").val("07").change();
             $(form + ".btnGuardar").removeClass("hide");
@@ -70,25 +57,31 @@ function initDomicilio(data){
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
 }
-window.initDomicilio = initDomicilio;
 
 function guardarFormDomicilio(seccionNo, seccionName, seccionApartado){
+
     $("#form" + seccionName).validate({
         rules: {
-            nombre : { required: true, maxlength: 50},
-            primerApellido : { required: true, },
-            rfc:{ required: true, minlength: 10, maxlength:10},
-            homoClave :{required: true, minlength: 3, maxlength:3}
+            entidadFederativa : { required: true },
+            municipioAlcaldia : { required: true },
+            calle : { required: true },
+            numeroExterior : { required: true },
+            coloniaLocalidad : { required: true },
+            codigoPostal : { required: true, number: true, minlength: 5, maxlength: 5 },
+            ciudadLocalidad : { required: true },
+            estadoProvincia : { required: true },
+            pais : { required: true }
         },
         messages : {
-            nombre: { required: "Ingresa el nombre", maxlength: "Máximo de caracteres es 50."},
-            primerApellido: { required: "Ingresa el primerApellido"},
-            segundoApellido: { required: "Ingresa el primerApellido"},
-            rfc: { required: "Ingresa el rfc", minlength: "Minimo de 10 caractes."},
-            homoClave: {
-                required: "Ingresa la homoclave",
-                minlength:"Minimo de caracteres es 3."
-            }
+            entidadFederativa: { required: "Seleccione la entidad federativa." },
+            municipioAlcaldia: { required: "Seleccione el municipio o alcaldía." },
+            calle: { required: "Ingrese la calle." },
+            numeroExterior : { required: "Ingrese el número exterior." },
+            coloniaLocalidad : { required: "Ingrese la colonia o localidad." },
+            codigoPostal : { required: "Ingrese el C.P.", number: "Solo se permiten caracteres numéricos.", minlength: "El mínimo de caracteres es de 5.", maxlength: "El máximo de caracteres es de 5." },
+            ciudadLocalidad : { required: "Ingrese la ciudad o localidad." },
+            estadoProvincia : { required: "Ingrese el estado o provincia." },
+            pais : { required: "Selecione el país." }
         },
         // Make sure the form is submitted to the destination defined
         // in the "action" attribute of the form when valid
@@ -122,7 +115,6 @@ function guardarFormDomicilio(seccionNo, seccionName, seccionApartado){
         }
     });    
 }
-window.guardarFormDomicilio = guardarFormDomicilio;
 
 function loadInfoDomicilio(){
     var root = jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante;
@@ -148,4 +140,3 @@ function loadInfoDomicilio(){
     //generales
      $("textarea[name='aclaracionesObservaciones']").val(root.aclaracionesObservaciones);
 }
-window.loadInfoDomicilio = loadInfoDomicilio;

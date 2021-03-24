@@ -58,22 +58,50 @@ function initDatosGenerales(data){
 }
 
 function guardarFormDatosGenerales(seccionNo, seccionName, seccionApartado){
+    $.validator.addMethod("RFC", function (value, element) {
+        if ( value !== '' ) {
+            var patt = new RegExp("^[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?$");
+            return patt.test(value);
+        } else {
+            return false;
+        }
+    }, "Ingrese un RFC válido.");
+    $.validator.addMethod("CURP", function (value, element) {
+        if (value !== '') {
+            var patt = new RegExp("^[A-Z][A,E,I,O,U,X][A-Z]{2}[0-9]{2}[0-1][0-9][0-3][0-9][M,H][A-Z]{2}[B,C,D,F,G,H,J,K,L,M,N,Ñ,P,Q,R,S,T,V,W,X,Y,Z]{3}[0-9,A-Z][0-9]$");
+            return patt.test(value);
+        } else {
+            return false;
+        }
+    }, "Ingrese una CURP válida.");
     $("#form" + seccionName).validate({
         rules: {
-            nombre : { required: true, maxlength: 50},
-            primerApellido : { required: true, },
-            rfc:{ required: true, minlength: 10, maxlength:10},
-            homoClave :{required: true, minlength: 3, maxlength:3}
+            nombre : { required: true, maxlength: 50 },
+            primerApellido : { required: true },
+            rfc : { required: true, minlength: 10, maxlength: 10, RFC: true },
+            homoClave : { required: true, minlength: 3, maxlength: 3 },
+            curp : { required: true, minlength: 18, maxlength: 18, CURP: true },
+            personal : { required: true, email: true },
+            casa : { required: true, number: true, minlength: 10, maxlength: 10, TEL: true },
+            celularPersonal : { required: true, number: true, minlength: 10, maxlength: 10, TEL: true },
+            situacionPersonalEstadoCivil : { required: true },
+            regimenMatrimonial : { required: true },
+            paisNacimiento : { required: true },
+            nacionalidad : { required: true }
         },
-        messages : {
-            nombre: { required: "Ingresa el nombre", maxlength: "Máximo de caracteres es 50."},
-            primerApellido: { required: "Ingresa el primer apellido"},
-            segundoApellido: { required: "Ingresa el segundo apellido"},
-            rfc: { required: "Ingresa el rfc", minlength: "Minimo de 10 caractes."},
-            homoClave: {
-                required: "Ingresa la homoclave",
-                minlength:"Minimo de caracteres es 3."
-            }
+        messages: {
+            nombre : { required: "Ingrese el nombre.", maxlength: "El máximo de caracteres es de 50." },
+            primerApellido : { required: "Ingrese el primer apellido." },
+            rfc : { required: "Ingrese el RFC.", minlength: "El minimo de caracteres es de 10.", maxlength: "El máximo de caracteres es de 10." },
+            homoClave : { required: "Ingrese la homoclave.", minlength: "El mínimo de caracteres es de 3.", maxlength: "El máximo de caracteres es de 3." },
+            curp : { required: "Ingrese la CURP.", minlength: "El mínimo de caracteres es de 18.", maxlength: "El máximo de caracteres es de 18." },
+            personal : { required: "Ingrese el correo electrónico personal.", email: "El formato del correo electrónico no es válido." },
+            casa : { required: "Ingrese el número telefónico de casa", number: "Solo se permiten caracteres numéricos.", minlength: "El mínimo de caracteres es de 10", maxlength: "El máximo de caracteres es de 10." },
+            celularPersonal : { required: "Ingrese el número de celular personal.", number: "Solo se permiten caracteres numéricos.", minlength: "El mínimo de caracteres es de 10.", maxlength: "El máximo de caracteres es de 10." },
+            situacionPersonalEstadoCivil : { required: "Seleccione el estado civil." },
+            regimenMatrimonial : { required: "Seleccione el régimen matrimonial." },
+            paisNacimiento : { required: "Selecione el país de nacimiento." },
+            nacionalidad : { required: "Seleccione la nacionalidad." }
         },
         // Make sure the form is submitted to the destination defined
         // in the "action" attribute of the form when valid
