@@ -1,0 +1,138 @@
+function initDomicilio(data){
+    var seccion = JSON.parse(atob(data));
+    var seccionName = seccion.moduloName.replace("modulo","");
+    var form = "#form" + seccion.moduloName.replace("modulo", "")+ " ";
+    var modulo = "#" + seccion.moduloName + " ";
+
+    //cargar catalogos.
+    loadCat(entidadFederativa, ".CBOentidadFederativa");    
+    loadCat(paises, ".CBOpais");
+    
+    $(form + ".CBOentidadFederativa").on('change', function() {
+        loadMunicipios(form + ".CBOmunicipioAlcaldia", this.value);
+    });
+
+    //validar status de la sección.
+    switch(seccion.status){
+        case "SIN_INFO": 
+             //asginar valores predeterminados a catálogos(ayuda al usuario).
+            $(form + ".CBOpais").val("MX");
+            $(form + ".CBOentidadFederativa").val("07").change();
+            $(form + ".btnGuardar").removeClass("hide");
+            $(form + ".btnTerminar").removeClass("hide");
+            $(modulo + ".btnHabilitar").addClass("hide");
+        break;
+        case "EN_PROCESO":
+            //cargar información guardada previamente.
+            window["loadInfo" + seccion.moduloName.replace("modulo","")];
+            $(form + ".btnGuardar").removeClass("hide");
+            $(form + ".btnTerminar").removeClass("hide");
+            $(modulo + ".btnHabilitar").addClass("hide");
+            break;
+        case "TERMINADO":
+            //cargar información guardada previamente.
+            window["loadInfo" + seccion.moduloName.replace("modulo","")];           
+            $(form + ":input").prop("disabled", true);
+
+            $(form + ".btnGuardar").addClass("hide");
+            $(form + ".btnTerminar").addClass("hide");
+            $(modulo + ".btnHabilitar").removeClass("hide").prop("disabled", false);
+        break;
+    }
+
+    //funcionalidad a buttons
+    $(form + ".btnGuardar").unbind("click");
+    $(form + ".btnTerminar").unbind("click");
+    $(modulo + ".btnHabilitar").unbind("click");
+    
+    $(form + ".btnGuardar").on('click',function() {
+        window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
+    });
+    $(form + ".btnTerminar").on('click',function() {
+        window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);        
+    });    
+    $(modulo + ".btnHabilitar").on('click',function() {
+        habilitarSeccion(seccion.apartado, seccion.no, seccionName);
+    });
+    $(".content_seccion").addClass("hide");
+    $("#" + seccion.moduloName).removeClass("hide");
+}
+window.initDomicilio = initDomicilio;
+
+function guardarFormDomicilio(seccionNo, seccionName, seccionApartado){
+    $("#form" + seccionName).validate({
+        rules: {
+            nombre : { required: true, maxlength: 50},
+            primerApellido : { required: true, },
+            rfc:{ required: true, minlength: 10, maxlength:10},
+            homoClave :{required: true, minlength: 3, maxlength:3}
+        },
+        messages : {
+            nombre: { required: "Ingresa el nombre", maxlength: "Máximo de caracteres es 50."},
+            primerApellido: { required: "Ingresa el primerApellido"},
+            segundoApellido: { required: "Ingresa el primerApellido"},
+            rfc: { required: "Ingresa el rfc", minlength: "Minimo de 10 caractes."},
+            homoClave: {
+                required: "Ingresa la homoclave",
+                minlength:"Minimo de caracteres es 3."
+            }
+        },
+        // Make sure the form is submitted to the destination defined
+        // in the "action" attribute of the form when valid
+        submitHandler: function(form, btn) {
+            var root = jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante;
+            //domicilio mexico.
+            root.domicilioMexico.calle = $("#domMexico input[name='calle']").val();
+            root.domicilioMexico.numeroExterior = $("#domMexico input[name='numeroExterior']").val();
+            root.domicilioMexico.numeroInterior = $("#domMexico input[name='numeroInterior']").val();
+            root.domicilioMexico.coloniaLocalidad = $("#domMexico input[name='coloniaLocalidad']").val();
+            root.domicilioMexico.municipioAlcaldia.clave = $("#domMexico select[name='municipioAlcaldia'] option:selected").val();
+            root.domicilioMexico.municipioAlcaldia.valor = $("#domMexico select[name='municipioAlcaldia'] option:selected")[0].innerText;
+            root.domicilioMexico.entidadFederativa.clave = $("#domMexico select[name='entidadFederativa'] option:selected").val();
+            root.domicilioMexico.entidadFederativa.valor = $("#domMexico select[name='entidadFederativa'] option:selected")[0].innerText;
+            root.domicilioMexico.codigoPostal = $("#domMexico input[name='codigoPostal']").val();
+            
+            //domicilio extranjero
+            root.domicilioExtranjero.calle = $("#domExtranjero input[name='calle']").val();
+            root.domicilioExtranjero.numeroExterior = $("#domExtranjero input[name='numeroExterior']").val();
+            root.domicilioExtranjero.numeroInterior = $("#domExtranjero input[name='numeroInterior']").val();
+            root.domicilioExtranjero.ciudadLocalidad = $("#domExtranjero input[name='ciudadLocalidad']").val();
+            root.domicilioExtranjero.estadoProvincia = $("#domExtranjero input[name='estadoProvincia']").val();
+            root.domicilioExtranjero.pais = $("#domExtranjero select[name='pais'] option:selected").val();
+            root.domicilioExtranjero.codigoPostal = $("#domExtranjero input[name='codigoPostal']").val();
+
+            //generales
+            root.aclaracionesObservaciones = $("textarea[name='aclaracionesObservaciones']").val();
+        
+            //actualiza el status de la sección (en proceso/terminado).
+            actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);            
+        }
+    });    
+}
+window.guardarFormDomicilio = guardarFormDomicilio;
+
+function loadInfoDomicilio(){
+    var root = jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante;
+            
+    //domicilio mexico.
+    $("#domMexico input[name='calle']").val(root.domicilioMexico.calle);
+    $("#domMexico input[name='numeroExterior']").val(root.domicilioMexico.numeroExterior);
+    $("#domMexico input[name='numeroInterior']").val(root.domicilioMexico.numeroInterior);
+    $("#domMexico input[name='coloniaLocalidad']").val(root.domicilioMexico.coloniaLocalidad);
+    $("#domMexico select[name='municipioAlcaldia']").val(root.domicilioMexico.municipioAlcaldia.clave);
+    $("#domMexico select[name='entidadFederativa']").val(root.domicilioMexico.entidadFederativa.clave);
+    $("#domMexico input[name='codigoPostal']").val(root.domicilioMexico.codigoPostal);
+
+    //domicilio extranjero
+    $("#domExtranjero input[name='calle']").val(root.domicilioExtranjero.calle);
+    $("#domExtranjero input[name='numeroExterior']").val(root.domicilioExtranjero.numeroExterior);
+    $("#domExtranjero input[name='numeroInterior']").val(root.domicilioExtranjero.numeroInterior);
+    $("#domExtranjero input[name='ciudadLocalidad']").val(root.domicilioExtranjero.ciudadLocalidad);
+    $("#domExtranjero input[name='estadoProvincia']").val(root.domicilioExtranjero.estadoProvincia);
+    $("#domExtranjero select[name='pais']").val(root.domicilioExtranjero.pais);
+    $("#domExtranjero input[name='codigoPostal']").val(root.domicilioExtranjero.codigoPostal);
+
+    //generales
+     $("textarea[name='aclaracionesObservaciones']").val(root.aclaracionesObservaciones);
+}
+window.loadInfoDomicilio = loadInfoDomicilio;

@@ -1,0 +1,39 @@
+{
+  "name": "Declarafacil PI",
+  "version": "0.7.0",
+  "description": "Sistema de Apoyo para Presentar Declaración Patrimonial y de Intereses",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev:analyze": "npm run dev -- --env.addons=bundleanalyzer",
+    "build:analyze": "npm run webpack --env.addons=bundleanalyzer"
+  },
+  "author": "SESAECH (Secretaria Ejecutiva del Sistema Anticorrupcion del Estado de Chiapas)",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.1.3",
+    "html-loader": "^2.1.2",
+    "html-webpack-plugin": "^5.3.1",
+    "jquery-validation": "^1.19.3",
+    "jspdf": "^2.3.1",
+    "jspdf-autotable": "^3.5.14",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "react-dev-utils": "^11.0.4",
+    "sizzle": "^2.3.6",
+    "style-loader": "^2.0.0",
+    "sweetalert": "^2.1.2",
+    "terser-webpack-plugin": "^5.1.1",
+    "webpack": "^5.24.4",
+    "webpack-bundle-analyzer": "^4.4.0",
+    "webpack-cli": "^4.5.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.13.10",
+    "@popperjs/core": "^2.9.1",
+    "bootstrap": "^4.6.0",
+    "jquery": "^3.6.0",
+    "popper.js": "^1.16.1"
+  }
+}
