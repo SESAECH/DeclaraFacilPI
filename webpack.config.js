@@ -18,17 +18,22 @@ module.exports = {
   target:'web',
   performance: {
     maxAssetSize: 10485760,  //10Mb
-    maxEntrypointSize: 5242880, //5 Mb
+    maxEntrypointSize: 7340032, //7 Mb
     hints: 'warning'
   },
   devServer: {
     contentBase:'./dist/',
     publicPath:'/live/',
     hot:true,
+    open: true,
+    inline:true,
+    hotOnly: true,
+    watchContentBase:true,
   },
+  devtool:'inline-source-map',
   plugins:[ 
     new webpack.ProvidePlugin({ $: "jquery", jQuery: 'jquery','window.jQuery': 'jquery'}),
-    new webpack.optimize.LimitChunkCountPlugin({maxChunks:1,}),
+//    new webpack.optimize.LimitChunkCountPlugin({maxChunks:1,}),
     new HtmlWebpackPlugin({inject:true,template:'./src/declaraFacilPI.html', filename:'Declarafacil.html'}),
     //new MiniCssExtractPlugin(),
     //new BundleAnalyzerPlugin(),

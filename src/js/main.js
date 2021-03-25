@@ -60,3 +60,5 @@ import './config-pdf.js';
 
 
 console.log ('CSS y JS cargados...');
+//if (module.hot) {module.hot.accept( './generales.js',function(){console.log ('Aceptando cambios'); window.loadCat=loadCat;})}
+module.hot.accept();

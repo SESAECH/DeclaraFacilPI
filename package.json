@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
     "dev": "webpack-cli serve --mode development --open",
-    "hotdev": "webpack serve --open",
+    "hotdev": "webpack serve --mode development --hot --open",
     "dev:analyze": "npm run dev -- --env.addons=bundleanalyzer",
     "build:analyze": "npm run webpack --env.addons=bundleanalyzer"
   },

@@ -154,7 +154,7 @@ $(".chkNinguno").on("change",function() {
 
 
 //carga los catalogos(arrays)
-function loadCat(catalogo, obj){
+window.loadCat = function (catalogo, obj){
     $(obj).empty();
     $.each(catalogo, function (index, item) {
         if (typeof item.clave !="undefined"){$(obj).append('<option value="' + item.clave + '">' + item.valor + '</option>');}
@@ -162,9 +162,12 @@ function loadCat(catalogo, obj){
         else if (typeof item.cve_agee !="undefined"){$(obj).append('<option value="' + item.cve_agee + '">' + item.nom_agee + '</option>');}
         else{$(obj).append('<option value="' + item + '">' + item + '</option>');}                    
     });
-}
-window.loadCat = loadCat;
 
+   //alert("Estamos cargando catalogo en: " + JSON.stringify(obj));
+}
+//window.loadCat = loadCat;
+
+module.hot.accept();
 //carga los municipios.
 function loadMunicipios(obj, filtro){
     $(obj).empty();
