@@ -3,6 +3,9 @@ document.title = "DeclaraFácil | Gobierno del Estado de Chiapas";
 $(".sistemaTitulo").html("DeclaraFácil PI | <small>Versión Portable</small>");
 $(".sistemaPiePagina1").text("Secretaría Ejecutiva del Sistema Anticorrupción del Estado de Chiapas");
 
+$("#sidebarMenu").addClass("hide");
+$("#contentMain").removeClass("col-md-9 col-lg-9").addClass("col-12");
+
 //------------------------------------------------------------------------------------------//
 //varibles globales.
 //arreglo con valores de la captura del usuario.
@@ -12,7 +15,6 @@ var captura={
     "status_gral":"",
     "declaracion":[]
 };
-window.captura = captura;
 //------------------------------------------------------------------------------------------//
 //seleccionar el tipo y formato de declaración que se va a capturar.
 //button seleccionar tipo de declaración
@@ -25,6 +27,9 @@ $('.btnSelectTipoDeclaracion').on('click',function() {
 //button seleccionar formato de declaración.
 $('.btnSelectFormatoDeclaracion').on('click',function() {
     var htmlSecciones = "";
+
+    $("#sidebarMenu").removeClass("hide");
+    $("#contentMain").removeClass("col-12").addClass("col-md-9 col-lg-9");
 
     //variables globales de captura.
     captura.formato = this.dataset.formato;
@@ -51,7 +56,7 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
     }
     //variables de apoyo en json.
     jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio="MX";
-    
+    jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.domicilio="MX";
 
     //titulo del formulario de captura.
     $(".titulo-declaracion-captura").text("DECLARACIÓN " + captura.tipo_declaracion + " | " + captura.formato);
@@ -60,7 +65,7 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
     htmlSecciones+='<h6 class="text-muted p10">Situación Patrimonial</h6>';
     $.each(captura.declaracion.situacion_patrimonial.secciones, function(index, item){
         htmlSecciones+='<li class="nav-item">\
-                            <a class="nav-link" href="javascript:void(0);" onclick="iniciarModulo(\'' + btoa(JSON.stringify(item)) + '\');">\
+                            <a class="nav-link lnk' + item.moduloName + '" href="javascript:void(0);" onclick="iniciarModulo(\'' + btoa(JSON.stringify(item)) + '\');">\
                                 <span class="indicador">' + item.no + '</span>\
                                 <span>' + item.titulo + '</span>\
                                 <span class="indicador-status status-seccion-patrimonial-' + item.no +' float-right">PENDIENTE</span>\
@@ -71,7 +76,7 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
         htmlSecciones+='<h6 class="text-muted p10">Intereses</h6>';
         $.each(captura.declaracion.interes.secciones, function(index, item){
             htmlSecciones+='<li class="nav-item">\
-                            <a class="nav-link" href="javascript:void(0);" onclick="iniciarModulo(\'' + btoa(JSON.stringify(item)) + '\');">\
+                            <a class="nav-link lnk' + item.moduloName + '" href="javascript:void(0);" onclick="iniciarModulo(\'' + btoa(JSON.stringify(item)) + '\');">\
                                 <span class="indicador">' + item.no + '</span>\
                                 <span>' + item.titulo + '</span>\
                                 <span class="indicador-status status-seccion-intereses-' + item.no +' float-right">PENDIENTE</span>\
@@ -82,12 +87,51 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
 
     $("#menuSecciones").empty().append(htmlSecciones);  
     //ocultar/mostrar controles base.
-    $("#contentSelectTipoDeclaracion").empty().addClass("hide");
+    $("#contentSelectTipoDeclaracion").addClass("hide");
     $("#contentHeaderDeclaracion").removeClass("hide");
 
     $("#btnGuardarAvance").removeClass("hide");
     $("#btnTerminarDeclaracion").removeClass("hide");
+    $("#modalIniciar").modal("show");
 }); 
+
+document.getElementById('inputfile')
+            .addEventListener('change', function() {
+              
+            var fr=new FileReader();
+            fr.onload=function(){
+                cargarFileDeclaracion(fr.result);
+                document.getElementById('output')
+                        .textContent=fr.result;
+            }
+              
+            fr.readAsText(this.files[0]);
+        })
+
+function regresarAlInicio(){
+    captura.tipo_declaracion = "";    
+    captura.formato = "";
+    captura.declaracion =  [];
+    captura.status_gral = "";
+    $("#sidebarMenu").addClass("hide");
+    $("#contentMain").removeClass("col-md-9 col-lg-9").addClass("col-12");
+        
+    $("#contentSelectTipoDeclaracion").removeClass("hide");
+    $("#contentHeaderDeclaracion").addClass("hide");
+
+    $("#btnGuardarAvance").addClass("hide");
+    $("#btnTerminarDeclaracion").addClass("hide");
+    $("#modalIniciar").modal("hide");
+
+    $(".btnSelectTipoDeclaracion").removeClass("active");
+    $(".btnSelectFormatoDeclaracion").removeClass("active");     
+    
+    //ocultar content de captura.
+    $("#contentCapturaDeclaracion, #contentSelectFormatoDeclaracion").addClass("hide");
+    
+    
+}
+
 
 //------------------------------------------------------------------------------------------//
 //secciones de declaraciones.
@@ -142,4 +186,6 @@ var declaraciones={
     }
 };
 
-window.declaraciones=declaraciones;
+
+window.captura = captura;
+window.declaraciones = declaraciones;
