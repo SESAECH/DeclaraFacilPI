@@ -1,5 +1,5 @@
 
-function initEmpleoCargoComision(data){
+window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
     var seccion = JSON.parse(atob(data));
     var seccionName = seccion.moduloName.replace("modulo","");
     var form = "#form" + seccion.moduloName.replace("modulo", "")+ " ";
@@ -64,9 +64,9 @@ function initEmpleoCargoComision(data){
     });
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
-}
+};
 
-function guardarFormEmpleoCargoComision(seccionNo, seccionName,  seccionApartado){
+window.guardarFormEmpleoCargoComision = function guardarFormEmpleoCargoComision(seccionNo, seccionName,  seccionApartado){
     var formulario = "#form" + seccionName + " ";
     $(formulario).validate({
         rules: {
@@ -153,9 +153,9 @@ function guardarFormEmpleoCargoComision(seccionNo, seccionName,  seccionApartado
             actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);
         }
     });    
-}
+};
 
-function loadInfoEmpleoCargoComision(form){
+window.loadInfoEmpleoCargoComision = function loadInfoEmpleoCargoComision(form){
     var root = jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision;
     
     $(form + "select[name='tipoOperacion']").val(root.tipoOperacion);
@@ -191,4 +191,4 @@ function loadInfoEmpleoCargoComision(form){
 
     //generales
      $(form + "textarea[name='aclaracionesObservaciones']").val(root.aclaracionesObservaciones);
-}
+};

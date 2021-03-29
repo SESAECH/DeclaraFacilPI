@@ -1,5 +1,5 @@
 
-function funcionalidadDependientesEconomicos(seccionNo, seccionName, seccionStatus){
+window.funcionalidadDependientesEconomicos = function funcionalidadDependientesEconomicos(seccionNo, seccionName, seccionStatus){
     $(".btnAgregarDependientesEconomicos").attr('data-seccion_name', seccionName);
     $(".btnAgregarDependientesEconomicos").attr('data-seccion_no', seccionNo);
     $("#modulo"+seccionName + " .formSecundario").addClass("hide");
@@ -68,10 +68,10 @@ function funcionalidadDependientesEconomicos(seccionNo, seccionName, seccionStat
         captura.declaracion.situacion_patrimonial.secciones[seccionNo].status= "EN_PROCESO";
         $(".status-seccion-patrimonial-" + seccionNo).removeClass("indicador-status indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
     });
-}
+};
 
 //funcionalidad tabla html y buttons.
-function funcionalidadTablaDependientesEconomicos(seccionNo, seccionName){
+window.funcionalidadTablaDependientesEconomicos = function funcionalidadTablaDependientesEconomicos(seccionNo, seccionName){
     pintarTablaDependientesEconomicos(seccionNo, seccionName);
     //funcionalidad de buttons del registro.    
     $(".btnEliminar").on('click',function() { 
@@ -121,10 +121,10 @@ function funcionalidadTablaDependientesEconomicos(seccionNo, seccionName){
         $("#form" + this.dataset.seccion_name + " select[name='ubicacion']").val(nodo.ubicacion);
         loadFormAmbitoSectorDependientesEconomicos();
     });
-}
+};
 
 //pintar tabla html.
-function pintarTablaDependientesEconomicos(seccionNo, seccionName){
+window.pintarTablaDependientesEconomicos = function pintarTablaDependientesEconomicos(seccionNo, seccionName){
     var html="";
     const lista = jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.dependienteEconomico;//.sort((a, b) => b.fechaObtencion - a.fechaObtencion);
     Object.keys(lista.sort((a, b) => b.fechaIngreso - a.fechaIngreso)).forEach(function (row) {
@@ -140,10 +140,10 @@ function pintarTablaDependientesEconomicos(seccionNo, seccionName){
         html+="</tr>";
     });
     $(".tbl" + seccionName + " tbody").empty().append(html);
-}
+};
 
 //guardar registro en el JsonResult.
-function guardarRegistroDependientesEconomicos(uuidItem, seccionNo, seccionName){
+window.guardarRegistroDependientesEconomicos = function guardarRegistroDependientesEconomicos(uuidItem, seccionNo, seccionName){
     var form="#form" + seccionName;
     var root = 
     jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.ninguno=false;
@@ -223,10 +223,10 @@ function guardarRegistroDependientesEconomicos(uuidItem, seccionNo, seccionName)
     //cambiar status a captura.
     captura.declaracion.situacion_patrimonial.secciones[seccionNo].status= "EN_PROCESO";
     $(".status-seccion-patrimonial-" + seccionNo).removeClass("indicador-status indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
-}
+};
 
 //funcionalidad en boton agregar/actualizar registro.
-function funcionalidadGuardarRegistroDependientesEconomicos(seccionNo, seccionName, accion, uuid=null){
+window.funcionalidadGuardarRegistroDependientesEconomicos = function funcionalidadGuardarRegistroDependientesEconomicos(seccionNo, seccionName, accion, uuid=null){
     //ocultar/mostrar formularios
     $("#contentSeccion" + seccionNo + " .formPrincipal").addClass("animated fadeOut").addClass("hide");                      
     $("#contentSeccion" + seccionNo + " .formSecundario").removeClass("hide").addClass("animated fadeIn");
@@ -309,11 +309,10 @@ function funcionalidadGuardarRegistroDependientesEconomicos(seccionNo, seccionNa
         $(".btnTerminar" + this.dataset.seccion_name).removeClass("hide");
         goTop();          
     });
-}
+};
 
-
-function loadFormAmbitoSectorDependientesEconomicos(){
+window.loadFormAmbitoSectorDependientesEconomicos = function loadFormAmbitoSectorDependientesEconomicos(){
     $(".laboralDependienteContent").addClass("hide");
     if($("select[name='ambitoSector'] option:selected").val() =="PUB"){ $("#laboralDependientePubContent").removeClass("hide");}
     else{$("#laboralDependientePriContent").removeClass("hide");}
-}
+};

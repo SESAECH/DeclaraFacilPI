@@ -1,6 +1,7 @@
 
-function generarPDF(){
-    var doc = new jspdf.jsPDF();//'p', 'pt', 'letter');
+window.generarPDF = function generarPDF(){
+ // cambio por mecanismo de llamada   var doc = new jspdf.jsPDF();//'p', 'pt', 'letter');
+    var doc = new jsPDF({orientation:'p', unit:'pt', format:'letter', putOnlyUsedFonts:true, compress:true}); //CARTA
     doc.setProperties({
         title: 'Declaracion Patrimonial y de Intereses',
         subject: 'This is the subject',
@@ -106,10 +107,10 @@ function generarPDF(){
     const fecha = new Date();
     var filename = $("input[name='curp']").val() + "_" + captura.tipo_declaracion + "_" + fecha.getFullYear() + ".pdf";
     doc.save(filename);
-}
+};
 
 
-function llenarPDF(){
+window.llenarPDF = function llenarPDF(){
     var html="";
     //DATOS DE PRUEBA.
     jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.nombreEntePublico = "SECRETARÍA EJECUTIVA DEL SISTEMA ANTICORRUPCIÓN DEL ESTADO DE CHIAPAS";
@@ -300,6 +301,6 @@ function llenarPDF(){
                 </tr>';
     }
     $("#pdfMiDeclaracion_experienciaLaboral>tbody").empty().append(html);
-}
+};
 
-window.generarPDF = generarPDF;
+//window.generarPDF = generarPDF;

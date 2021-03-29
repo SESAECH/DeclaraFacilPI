@@ -14,7 +14,7 @@ $("#btnGuardarAvance").on('click',function() {
     download(filename, text);                    
 });
 
-function download(filename, text) {
+window.download = function download(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
@@ -25,9 +25,9 @@ function download(filename, text) {
     element.click();
 
     document.body.removeChild(element);
-}
+};
 
-function generarPDF2() {
+window.generarPDF2 = function generarPDF2() {
     var doc = new jsPDF('p', 'pt', 'letter');
     doc.setProperties({
         title: 'Declaracion Patrimonial',
@@ -44,12 +44,10 @@ function generarPDF2() {
       /* 'pagesplit': true, */
       //'elementHandlers': specialElementHandlers
     });
-  
-    doc.save('informe.pdf');
-  }
+      doc.save('informe.pdf');
+  };
 
-
-function generarPDFs(){
+window.generarPDFs = function generarPDFs(){
     //var doc = new jsPDF('p','in','ibs');
     var doc = new jsPDF('p', 'pt', 'letter');
     doc.setProperties({
@@ -82,7 +80,7 @@ function generarPDFs(){
     html2pdf(hoja, doc, function (doc) {
         doc.save('mideclaracion_.pdf');
     });                                
-}
+};
 /* 
 function generarPDF(){
     const invoice = this.document.getElementById("declaracionPDF");

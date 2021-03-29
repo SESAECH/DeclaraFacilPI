@@ -1,5 +1,5 @@
 
-var formExperienciaLaboral='<form action="" id="formExperienciaLaboral">\
+window.formExperienciaLaboral='<form action="" id="formExperienciaLaboral">\
                                 <h5 class="titulo-seccion"></h5>\
                                 <div class="row p10">\
                                     <div class="col-lg-6">\
@@ -124,7 +124,7 @@ var formExperienciaLaboral='<form action="" id="formExperienciaLaboral">\
                             </form>';
 
 
-function initExperienciaLaboral(data){
+window.initExperienciaLaboral = function initExperienciaLaboral(data){
     var seccion = JSON.parse(atob(data));
     var seccionName = seccion.moduloName.replace("modulo","");
     var form = "#form" + seccion.moduloName.replace("modulo", "")+ " ";
@@ -214,11 +214,10 @@ function initExperienciaLaboral(data){
 
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
-}
-
+};
 
 //pintar tabla html.
-function pintarTablaExperienciaLaboral(seccionNo, seccionName){
+window.pintarTablaExperienciaLaboral = function pintarTablaExperienciaLaboral(seccionNo, seccionName){
     var html="";
     const lista = jsonResult.declaracion.situacionPatrimonial.experienciaLaboral.experiencia;//.sort((a, b) => b.fechaObtencion - a.fechaObtencion);
     Object.keys(lista.sort((a, b) => b.fechaIngreso - a.fechaIngreso)).forEach(function (row) {
@@ -235,9 +234,9 @@ function pintarTablaExperienciaLaboral(seccionNo, seccionName){
         html+="</tr>";
     });
     $(".tbl" + seccionName + " tbody").empty().append(html);
-}
+};
 
-function editarExperienciaLaboral(data){
+window.editarExperienciaLaboral = function editarExperienciaLaboral(data){
     var item = JSON.parse(atob(data));
     var modulo = "#modulo" + item.seccionName  + " ";
     funcionalidadGuardarRegistroExperienciaLaboral(item.seccionNo, item.seccionName, modulo, "EDITAR", item.uuid);
@@ -264,9 +263,9 @@ function editarExperienciaLaboral(data){
     $("#form" + item.seccionName + " input[name='fechaEgreso']").val(nodo.fechaEgreso);
     $("#form" + item.seccionName + " select[name='ubicacion']").val(nodo.ubicacion);
     loadFormAmbitoSector();   
-}
+};
 
-function eliminarExperienciaLaboral(data){
+window.eliminarExperienciaLaboral = function eliminarExperienciaLaboral(data){
     var item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
     delete jsonResult.declaracion.situacionPatrimonial.experienciaLaboral.experiencia[item.uuid];
@@ -274,10 +273,10 @@ function eliminarExperienciaLaboral(data){
     if (Object.keys(jsonResult.declaracion.situacionPatrimonial.experienciaLaboral.experiencia).length==0){
         $("#modulo" + item.seccionName + " .btnTerminar").addClass("hide");
     }
-}
+};
 
 //funcionalidad en boton agregar/actualizar registro.
-function funcionalidadGuardarRegistroExperienciaLaboral(seccionNo, seccionName, modulo, accion, uuid=null){
+window.funcionalidadGuardarRegistroExperienciaLaboral = function funcionalidadGuardarRegistroExperienciaLaboral(seccionNo, seccionName, modulo, accion, uuid=null){
     var form = "#form" + seccionName + " ";
     //ocultar/mostrar formularios
     $(modulo + ".formPrincipal").addClass("animated fadeOut").addClass("hide");                      
@@ -357,10 +356,10 @@ function funcionalidadGuardarRegistroExperienciaLaboral(seccionNo, seccionName, 
         }
             
     });
-}
+};
 
 //guardar registro en el JsonResult.
-function guardarRegistroExperienciaLaboral(uuidItem, seccionNo, seccionName, modulo){
+window.guardarRegistroExperienciaLaboral = function guardarRegistroExperienciaLaboral(uuidItem, seccionNo, seccionName, modulo){
     var form="#form" + seccionName;
     jsonResult.declaracion.situacionPatrimonial.experienciaLaboral.ninguno=false;
     jsonResult.declaracion.situacionPatrimonial.experienciaLaboral.aclaracionesObservaciones =  $(modulo + " textarea[name='aclaracionesObservaciones']").val();
@@ -409,10 +408,10 @@ function guardarRegistroExperienciaLaboral(uuidItem, seccionNo, seccionName, mod
     //cambiar status a captura.
     captura.declaracion.situacion_patrimonial.secciones[seccionNo].status= "EN_PROCESO";
     $(".status-seccion-patrimonial-" + seccionNo).removeClass("indicador-status indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
-}
+};
 
-function loadFormAmbitoSector(){
+window.loadFormAmbitoSector = function loadFormAmbitoSector(){
     $("#formExperienciaLaboral .ambitoSectorContent").addClass("hide");
     if($("#formExperienciaLaboral select[name='ambitoSector'] option:selected").val() =="PUB"){ $("#publicoContent").removeClass("hide");}
     else{$("#privadoContent").removeClass("hide");}
-}
+};

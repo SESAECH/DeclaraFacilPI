@@ -1,5 +1,20 @@
+//alertar del cerrado, y forzar mayusculas
+$(document).ready(function() {
+
+                console.log( "ready!" );
+                $("#contentSelectTipoDeclaracion").removeClass("hide");
+                window.onbeforeunload = function () {
+                    return 'Are you really want to perform the action?';
+                }
+                $("input[type=text]").keyup(function () {  
+                    $(this).val($(this).val().toUpperCase());  
+                });
+            });
+
+
 //configuración de sistema.
-document.title = "DeclaraFácil | Gobierno del Estado de Chiapas";
+//document.title = "DeclaraFácil PI | Gobierno del Estado de Chiapas"; //pone el título del sistema
+
 $(".sistemaTitulo").html("DeclaraFácil PI | <small>Versión Portable</small>");
 $(".sistemaPiePagina1").text("Secretaría Ejecutiva del Sistema Anticorrupción del Estado de Chiapas");
 
@@ -9,7 +24,7 @@ $("#contentMain").removeClass("col-md-9 col-lg-9").addClass("col-12");
 //------------------------------------------------------------------------------------------//
 //varibles globales.
 //arreglo con valores de la captura del usuario.
-var captura={
+window.captura ={
     "tipo_declaracion":"",
     "formato":"",
     "status_gral":"",
@@ -106,9 +121,9 @@ document.getElementById('inputfile')
             }
               
             fr.readAsText(this.files[0]);
-        })
+        });
 
-function regresarAlInicio(){
+window.regresarAlInicio = function regresarAlInicio(){
     captura.tipo_declaracion = "";    
     captura.formato = "";
     captura.declaracion =  [];
@@ -128,14 +143,12 @@ function regresarAlInicio(){
     
     //ocultar content de captura.
     $("#contentCapturaDeclaracion, #contentSelectFormatoDeclaracion").addClass("hide");
-    
-    
-}
+};
 
 
 //------------------------------------------------------------------------------------------//
 //secciones de declaraciones.
-var declaraciones={
+window.declaraciones={
     "completa":{
         "situacion_patrimonial":{
             "secciones":{
@@ -187,5 +200,5 @@ var declaraciones={
 };
 
 
-window.captura = captura;
-window.declaraciones = declaraciones;
+//window.captura = captura;
+//window.declaraciones = declaraciones;

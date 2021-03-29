@@ -1,9 +1,7 @@
-function  funcionalidadDesempenoServidorPublico(seccionNo, seccionName, seccionStatus){
+window.funcionalidadDesempenoServidorPublico = function  funcionalidadDesempenoServidorPublico(seccionNo, seccionName, seccionStatus){
+};
 
-
-}
-
-function guardarFormDesempenoServidorPublico(seccionNo, seccionName){
+window.guardarFormDesempenoServidorPublico = function guardarFormDesempenoServidorPublico(seccionNo, seccionName){
     $("#form" + seccionName).validate({
         rules: {
             nombre : { required: true, maxlength: 50},
@@ -52,4 +50,4 @@ function guardarFormDesempenoServidorPublico(seccionNo, seccionName){
             actualizarStatusSeccion("situacion_patrimonial", seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);            
         }
     });    
-}
+};

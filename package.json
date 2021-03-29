@@ -1,6 +1,6 @@
 {
   "name": "Declarafacil PI",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Sistema de Apoyo para Presentar Declaración Patrimonial y de Intereses",
   "main": "main.js",
   "scripts": {

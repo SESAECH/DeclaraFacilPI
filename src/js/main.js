@@ -22,8 +22,11 @@ import 'jquery-validation';
 import swal from 'sweetalert';
 window.swal = swal;
 
-import 'jspdf';
+import  jsPDF from 'jspdf';
+
 import 'jspdf-autotable';
+
+//window.jsPDF = window.jspdf = jsPDF;
 
 //variables globales
 /*var captura={
@@ -34,6 +37,8 @@ import 'jspdf-autotable';
             };
 window.captura=captura;
 */
+
+
 // añadir los modulos del sistema
 
 //import './mideclaracion.js';
@@ -41,6 +46,8 @@ window.captura=captura;
 import './catalogos.js';
 import './catalogos-muns.js';
 import './config.js';
+import './guardar-avance.js'; 
+import './config-cargar-file.js';
 import './mod-init.js';
 import './generales.js';
 
@@ -52,8 +59,6 @@ import './mod-cv.js';
 import './mod-empleo.js';
 import './mod-experiencia-laboral.js';
 import './mod-participacion-empresas.js';
-
-import './guardar-avance.js';
 
 import './config-pdf.js';
 

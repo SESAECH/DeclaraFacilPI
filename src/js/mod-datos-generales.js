@@ -1,5 +1,5 @@
 
-function initDatosGenerales(data){
+window.initDatosGenerales = function initDatosGenerales(data){
     var seccion = JSON.parse(atob(data));
     var seccionName = seccion.moduloName.replace("modulo","");
     var form = "#form" + seccion.moduloName.replace("modulo", "")+ " ";
@@ -55,9 +55,9 @@ function initDatosGenerales(data){
     });
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
-}
+};
 
-function guardarFormDatosGenerales(seccionNo, seccionName, seccionApartado){
+window.guardarFormDatosGenerales = function guardarFormDatosGenerales(seccionNo, seccionName, seccionApartado){
     $.validator.addMethod("RFC", function (value, element) {
         if ( value !== '' ) {
             var patt = new RegExp("^[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?$");
@@ -130,9 +130,9 @@ function guardarFormDatosGenerales(seccionNo, seccionName, seccionApartado){
             actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);
         }
     });    
-}
+};
 
-function loadInfoDatosGenerales(){
+window.loadInfoDatosGenerales = function loadInfoDatosGenerales(){
     var infoSeccionGuardada = jsonResult.declaracion.situacionPatrimonial.datosGenerales;
     $.each(infoSeccionGuardada, function (index, item) {
         if(typeof item == "string"){ document.getElementsByName(index)[0].value = item; }
@@ -152,8 +152,10 @@ function loadInfoDatosGenerales(){
             }
         }
     });
-}
+};
 
+/*
 window.initDatosGenerales=initDatosGenerales;
 window.loadInfoDatosGenerales=loadInfoDatosGenerales;
 window.guardarFormDatosGenerales=guardarFormDatosGenerales;
+*/

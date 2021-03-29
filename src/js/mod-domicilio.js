@@ -1,4 +1,4 @@
-function initDomicilio(data){
+window.initDomicilio = function initDomicilio(data){
     var seccion = JSON.parse(atob(data));
     var seccionName = seccion.moduloName.replace("modulo","");
     var form = "#form" + seccion.moduloName.replace("modulo", "")+ " ";
@@ -56,9 +56,9 @@ function initDomicilio(data){
     });
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
-}
+};
 
-function guardarFormDomicilio(seccionNo, seccionName, seccionApartado){
+window.guardarFormDomicilio = function guardarFormDomicilio(seccionNo, seccionName, seccionApartado){
 
     $("#form" + seccionName).validate({
         rules: {
@@ -114,9 +114,9 @@ function guardarFormDomicilio(seccionNo, seccionName, seccionApartado){
             actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);            
         }
     });    
-}
+};
 
-function loadInfoDomicilio(){
+window.loadInfoDomicilio = function loadInfoDomicilio(){
     var root = jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante;
             
     //domicilio mexico.
@@ -139,4 +139,4 @@ function loadInfoDomicilio(){
 
     //generales
      $("textarea[name='aclaracionesObservaciones']").val(root.aclaracionesObservaciones);
-}
+};

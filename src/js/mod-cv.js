@@ -1,4 +1,4 @@
-var formCV = '<form action="" id="formCV">\
+window.formCV = '<form action="" id="formCV">\
 <h5 class="titulo-seccion"></h5>\
 <div class="row p10">\
     <div class="col-lg-6">\
@@ -68,7 +68,7 @@ var formCV = '<form action="" id="formCV">\
 </div>\
 </form>';
 
-function initCV(data){
+window.initCV = function initCV(data){
     var seccion = JSON.parse(atob(data));
     var seccionName = seccion.moduloName.replace("modulo","");
     var form = "#form" + seccion.moduloName.replace("modulo", "")+ " ";
@@ -141,9 +141,9 @@ function initCV(data){
 
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
-}
+};
 
-function pintarTablaCV(seccionNo, seccionName){
+window.pintarTablaCV = function pintarTablaCV(seccionNo, seccionName){
     var html="";
     const lista = jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad;//.sort((a, b) => b.fechaObtencion - a.fechaObtencion);
     Object.keys(lista.sort((a, b) => b.fechaObtencion - a.fechaObtencion)).forEach(function (row) {
@@ -160,9 +160,9 @@ function pintarTablaCV(seccionNo, seccionName){
         html+="</tr>";
     });
     $(".tbl" + seccionName + " tbody").empty().append(html);
-}
+};
 
-function editarCV(data){
+window.editarCV = function editarCV(data){
     var item = JSON.parse(atob(data));
     var modulo = "#modulo" + item.seccionName  + " ";
     funcionalidadGuardarRegistroCV(item.seccionNo, item.seccionName, modulo, "EDITAR", item.uuid);
@@ -176,9 +176,9 @@ function editarCV(data){
     $("#form" + item.seccionName + " select[name='estatus']").val(nodo.estatus);
     $("#form" + item.seccionName + " select[name='documentoObtenido']").val(nodo.documentoObtenido);
     $("#form" + item.seccionName + " input[name='fechaObtencion']").val(nodo.fechaObtencion);    
-}
+};
 
-function eliminarCV(data){
+window.eliminarCV = function eliminarCV(data){
     var item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
     delete jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad[item.uuid];
@@ -186,9 +186,9 @@ function eliminarCV(data){
     if (Object.keys(jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad).length==0){
         $("#modulo" + item.seccionName + " .btnTerminar").addClass("hide");
     }
-}
+};
 
-function funcionalidadGuardarRegistroCV(seccionNo, seccionName, modulo, accion, uuid=null){
+window.funcionalidadGuardarRegistroCV = function funcionalidadGuardarRegistroCV(seccionNo, seccionName, modulo, accion, uuid=null){
     var form = "#form" + seccionName + " ";
     //ocultar/mostrar formularios
     $(modulo + ".formPrincipal").addClass("animated fadeOut").addClass("hide");                      
@@ -255,10 +255,10 @@ function funcionalidadGuardarRegistroCV(seccionNo, seccionName, modulo, accion, 
             goTop();
         }    
     });
-}
+};
 
 //guaradr registro en el JsonResult.
-function guardarRegistroCV(uuidItem, seccionNo, seccionName, modulo){
+window.guardarRegistroCV = function guardarRegistroCV(uuidItem, seccionNo, seccionName, modulo){
     var form = "#form" + seccionName;
     jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.aclaracionesObservaciones =  $(modulo + "textarea[name='aclaracionesObservaciones']").val();
     jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad[uuidItem] =
@@ -281,5 +281,5 @@ function guardarRegistroCV(uuidItem, seccionNo, seccionName, modulo){
     //cambiar status a captura.
     captura.declaracion.situacion_patrimonial.secciones[seccionNo].status= "EN_PROCESO";
     $(".status-seccion-patrimonial-" + seccionNo).removeClass("indicador-status, indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
-}
+};
 

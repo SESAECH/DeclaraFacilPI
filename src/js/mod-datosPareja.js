@@ -1,6 +1,6 @@
 
 
-function funcionalidadPareja(seccionNo, seccionName, seccionStatus){
+window.funcionalidadPareja = function funcionalidadPareja(seccionNo, seccionName, seccionStatus){
     document.forms["form" + seccionName].getElementsByClassName("btnGuardar")[0].dataset.seccion_no = seccionNo; ;
     document.forms["form" + seccionName].getElementsByClassName("btnGuardar")[0].dataset.seccion_name = seccionName; ;
     //cargar catalogos.    
@@ -82,9 +82,9 @@ function funcionalidadPareja(seccionNo, seccionName, seccionStatus){
     $(".btnHabilitar").on("click",function() {
         habilitarSeccion("situacion_patrimonial", seccionNo, seccionName);
     });    
-}
+};
 
-function guardarFormPareja(seccionNo, seccionName){
+window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName){
     $.validator.addMethod("RFC", function (value, element) {
         if ( value !== '' ) {
             var patt = new RegExp("^[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?$");
@@ -250,9 +250,9 @@ function guardarFormPareja(seccionNo, seccionName){
             actualizarStatusSeccion("situacion_patrimonial", seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);            
         }
     });
-}
+};
 
-function loadInfoPareja(seccionName){
+window.loadInfoPareja = function loadInfoPareja(seccionName){
     var root = jsonResult.declaracion.situacionPatrimonial.datosPareja;
     if (root.ninguno){
         $("#checkNingunaPareja")[0].checked=true;
@@ -315,4 +315,4 @@ function loadInfoPareja(seccionName){
         //generales
         $("#form" + seccionName + " textarea[name='aclaracionesObservaciones']").val(root.aclaracionesObservaciones);        
     }  
-}
+};

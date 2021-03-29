@@ -1,4 +1,4 @@
-var jsonResult = {
+window.jsonResult = {
     "declaracion": {
         "situacionPatrimonial": {
           "datosGenerales": {
@@ -998,4 +998,4 @@ var jsonResult = {
       }
 };
 
-window.jsonResult = jsonResult;
+//window.jsonResult = jsonResult;

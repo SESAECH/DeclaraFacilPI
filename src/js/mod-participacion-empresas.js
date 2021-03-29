@@ -1,4 +1,4 @@
-var formParticipacionEmpresas ='<form action="" id="formParticipacionEmpresas">\
+window.formParticipacionEmpresas =formParticipacionEmpresas ='<form action="" id="formParticipacionEmpresas">\
                 <h5 class="titulo-seccion"></h5>\
                 <div class="row p10">\
                     <div class="col-lg-5">\
@@ -104,7 +104,7 @@ var formParticipacionEmpresas ='<form action="" id="formParticipacionEmpresas">\
             </form>';
 
             
-function loadFuncionalidadParticipacionEmpresas(seccionNo, seccionName, seccionStatus){
+window.loadFuncionalidadParticipacionEmpresas = function loadFuncionalidadParticipacionEmpresas(seccionNo, seccionName, seccionStatus){
     $(".btnAgregarParticipacionEmpresas").attr('data-seccion_name', seccionName);
     $(".btnAgregarParticipacionEmpresas").attr('data-seccion_no', seccionNo);
     //validar en que proceso se encuentra el modulo seleccionado.
@@ -228,9 +228,9 @@ function loadFuncionalidadParticipacionEmpresas(seccionNo, seccionName, seccionS
             $("#contentSeccion" + this.dataset.seccion_no + " .formPrincipal").removeClass("hide").addClass("animated fadeOut");
         });
     });
-}
+};
 
-function addRowToTable(row, uuid, seccionNo, seccionName){
+window.addRowToTable = function addRowToTable(row, uuid, seccionNo, seccionName){
     var html="";
     html+="<tr id='" + uuid + "'>";
     html+=" <td colspan='3'>";
@@ -342,5 +342,4 @@ function addRowToTable(row, uuid, seccionNo, seccionName){
             $("#contentSeccion" + this.dataset.seccion_no + " .formPrincipal").removeClass("hide").addClass("animated fadeOut");
         });        
     });
-
-}
+};

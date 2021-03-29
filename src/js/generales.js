@@ -1,5 +1,5 @@
 
-function actualizarStatusSeccion(declaracionSeccion, seccionNo, seccionName, status){
+window.actualizarStatusSeccion = function actualizarStatusSeccion(declaracionSeccion, seccionNo, seccionName, status){
     captura.declaracion[declaracionSeccion].secciones[seccionNo].status= status;
     if(status ==="EN_PROCESO"){
         $(".status-seccion-patrimonial-" + seccionNo).removeClass("indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
@@ -14,10 +14,10 @@ function actualizarStatusSeccion(declaracionSeccion, seccionNo, seccionName, sta
     }
     //scroll top de la página.
     goTop();
-}
-window.actualizarStatusSeccion = actualizarStatusSeccion;
+};
+//window.actualizarStatusSeccion = actualizarStatusSeccion;
 
-function habilitarSeccion(declaracionSeccion, seccionNo, seccionName){
+window.habilitarSeccion = function habilitarSeccion(declaracionSeccion, seccionNo, seccionName){
     captura.declaracion[declaracionSeccion].secciones[seccionNo].status= "EN_PROCESO";
     $(".status-seccion-patrimonial-" + seccionNo).removeClass("indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
     if (seccionName=="Pareja"){
@@ -37,10 +37,10 @@ function habilitarSeccion(declaracionSeccion, seccionNo, seccionName){
     $(".btnHabilitar").addClass("hide");  
     //scroll top de la página.
     goTop();  
-}
-window.actualizarStatusSeccion =actualizarStatusSeccion;
+};
+//window.actualizarStatusSeccion =actualizarStatusSeccion;
 
-function setVaribleGlobal(campo, valor){
+window.setVaribleGlobal =  function setVaribleGlobal(campo, valor){
     if (campo=="domicilio"){
         if (valor=="MX"){
             $("#mex-tab").removeClass("hide");
@@ -53,8 +53,8 @@ function setVaribleGlobal(campo, valor){
             jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio="EXT";
         }
     }
-}
-window.setVaribleGlobal=setVaribleGlobal;
+};
+//window.setVaribleGlobal=setVaribleGlobal;
 
 $(".chkNinguno").on("change",function() {
     var btnAgregar = "#modulo" + this.dataset.form + " .btnAgregar";
@@ -164,23 +164,23 @@ window.loadCat = function (catalogo, obj){
     });
 
    //alert("Estamos cargando catalogo en: " + JSON.stringify(obj));
-}
+};
 //window.loadCat = loadCat;
 
-module.hot.accept();
+//module.hot.accept();
 //carga los municipios.
-function loadMunicipios(obj, filtro){
+window.loadMunicipios = function loadMunicipios(obj, filtro){
     $(obj).empty();
     $.each(municipios, function (index, item) {
         if (item.cve_agee === filtro){
             $(obj).append('<option value="' + item.cve_agem + '">' + item.nom_agem + '</option>');
         }                        
     });
-}
-window.loadMunicipios = loadMunicipios;
+};
+//window.loadMunicipios = loadMunicipios;
 
 //genera un uuid.
-function generarUUID() {
+window.generarUUID  = function generarUUID() {
     var dt = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = (dt + Math.random() * 16) % 16 | 0;
@@ -188,17 +188,18 @@ function generarUUID() {
         return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
     return uuid;
-}
-window.generarUUID = generarUUID;
+};
+//window.generarUUID = generarUUID;
+
 //move to top site.
-function goTop(){
+window.goTop = function goTop(){
     $('html, body').animate({
         scrollTop: 0//$(".titulo-seccion").offset().top
     }, 1000);
-}
-window.goTop = goTop;
+};
+//window.goTop = goTop;
 
-function mensajeSwal(titulo, mensaje, tipo){
+window.mensajeSwal = function mensajeSwal(titulo, mensaje, tipo){
     swal.fire({
         title: titulo,
         text: mensaje,
@@ -211,10 +212,10 @@ function mensajeSwal(titulo, mensaje, tipo){
         },
         closeOnConfirm: true
     });
-}
-window.mensajeSwal = mensajeSwal;
+};
+//window.mensajeSwal = mensajeSwal;
 
-function oderByColumn(arreglo, COLUMN, orden) {
+window.oderByColumn = function oderByColumn(arreglo, COLUMN, orden) {
     function SortByName(a, b) {
         var result;
         var aName, bName;
@@ -235,5 +236,5 @@ function oderByColumn(arreglo, COLUMN, orden) {
 
     arreglo.sort(SortByName);
     return arreglo;
-}
-window.oderByColumn =oderByColumn;
+};
+//window.oderByColumn =oderByColumn;

@@ -1,4 +1,4 @@
-function cargarFileDeclaracion(data){
+window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
     try {
         let avanceCaptura = JSON.parse(data);
         /* $.each(avanceCaptura.metadatos.secciones, function (index, item) {
@@ -18,8 +18,9 @@ function cargarFileDeclaracion(data){
         
 
     } catch(e) {
+        alert (e);
         alert("El archivo esta dañado, no se puede cargar al sistema."); // error in the above string (in this case, yes)!
     }
-}
+};
 
-window.cargarFileDeclaracion = cargarFileDeclaracion;
+//window.cargarFileDeclaracion = cargarFileDeclaracion;
