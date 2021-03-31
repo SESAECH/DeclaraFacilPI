@@ -675,7 +675,7 @@
                             <div class="content_seccion hide" id="moduloExperienciaLaboral">
                                 <h5 class="titulo-seccion"></h5>
                                 <div class="alert alert-warning subtitulo-seccion">
-                                    <strong>*</strong> AGREGUE DEL MAS ACTUAL AL.....
+                                    <strong>*</strong> 
                                 </div>
                                 <div class="formPrincipal">
                                     <div class="row mt10">
@@ -731,6 +731,502 @@
                                     </div> 
                                 </div>
                                 <div class="formSecundario"></div>           
+                            </div>
+                            <!-- modulo ingresos -->
+                            <div class="content_seccion hide" id="moduloIngresos">
+                                <h5 class="titulo-seccion"></h5>
+                                <div class="alert alert-warning subtitulo-seccion help">
+                                </div>
+                                <form action="" id="formIngresos">
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <label style="text-align: justify;">I.- REMUNERACIÓN MENSUAL NETA DEL DECLARANTE POR SU CARGO PÚBLICO (POR CONCEPTO DE SUELDOS, HONORARIOS, COMPENSACIONES, BONOS Y OTRAS PRESTACIONES)(CANTIDADES NETAS DESPUÉS DE IMPUESTOS)</label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="row">
+                                                        <div class="col-md-7">
+                                                            <div class="form-group">
+                                                                <label>CANTIDAD</label>
+                                                                <input type="text" name="remuneracionMensualCargoPublico_valor" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="form-group">
+                                                                <label>MONEDA</label>
+                                                                <select name="remuneracionMensualCargoPublico_moneda" class="form-control CBOmoneda"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                       
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <label style="text-align: justify;">II.- OTROS INGRESOS MENSUALES DEL DECLARANTE (SUMA DEL II.1 AL II.4)</label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="row">
+                                                        <div class="col-md-7">
+                                                            <div class="form-group">
+                                                                <label>CANTIDAD</label>
+                                                                <input type="text" name="valor" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="form-group">
+                                                                <label>MONEDA</label>
+                                                                <select name="moneda" class="form-control CBOmoneda"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                       
+                                    </div>                               
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <label style="text-align: justify;">II.1.- POR ACTIVIDAD INDUSTRIAL, COMERCIAL Y/O EMPRESARIAL (DESPUÉS DE IMPUESTOS)</label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="row">
+                                                        <div class="col-md-7">
+                                                            <div class="form-group">
+                                                                <label>CANTIDAD</label>
+                                                                <input type="text" name="actividadIndustialRemuneracionTotalCantidad" class="form-control text-right" disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="form-group">
+                                                                <label>MONEDA</label>
+                                                                <select name="actividadIndustialRemuneracionTotalMoneda" class="form-control CBOmoneda" disabled></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>NOMBRE O RAZÓN SOCIAL</label>
+                                                                <input type="text" name="actividadIndustialNombreRazonSocial" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>TIPO DE NEGOCIO</label>
+                                                                <input type="text" name="actividadIndustialTipoNegocio" class="form-control" required>
+                                                            </div>
+                                                        </div>                                                       
+                                                    </div>
+                                                    <div class="row">                                                        
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label>REMUNERACIÓN</label>
+                                                                <input type="text" name="actividadIndustialRemuneracionCantidad" class="form-control text-right" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-group">
+                                                                <label>MONEDA</label>
+                                                                <select name="actividadIndustialRemuneracionMoneda" class="form-control CBOmoneda" disabled></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2 pt25">
+                                                            <button type="button" class="btn btn-light btnAgregarActividadIndustial" onclick="agregarActividadIndustrial();">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                                </svg>
+                                                                Agregar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                        
+                                        </div>                    
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" style="width: 40%;">Nombre o razón social</th>
+                                                        <th class="text-center" style="width: 30%;">Tipo de negocio</th>
+                                                        <th class="text-right"  style="width: 10%;">Remuneración</th>
+                                                        <th class="text-right"  style="width: 20%;">Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tableActividadIndustrial">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12"><hr/></div>                    
+                                    </div>                
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label style="text-align: justify;">II.2.- POR ACTIVIDAD FINANCIERA (RENDIMIENTOS O GANANCIAS) (DESPUÉS DE IMPUESTOS)</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>CANTIDAD</label>
+                                                                <input type="text" name="valor" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>MONEDA</label>
+                                                                <select name="moneda" class="form-control CBOmoneda"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                    
+                                        <div class="col-lg-12">
+                                            <div class="card">
+                                                <div class="card-header">                                
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>TIPO DE INSTRUMENTO QUE GENERÓ EL RENDIMIENTO O GANANCIA</label>
+                                                                <select name="tipoInstrumento" class="form-control CBOtipoInstrumento"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>REMUNERACIÓN</label>
+                                                                        <input type="text" name="valor" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>MONEDA</label>
+                                                                        <select name="moneda" class="form-control CBOmoneda"></select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 text-right">
+                                                            <button type="button" class="btn btn-success btnAgregarActividadFinanciera">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                                </svg>
+                                                                Agregar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                        
+                                        </div>                    
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <table class="table table-bordered">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                    <th scope="col">No.</th>
+                                                    <th scope="col">Tipo de Instrumento</th>                                
+                                                    <th scope="col">Remuneración</th>
+                                                    <th scope="col">Moneda</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tableActividadFinanciera">
+                                                    <!-- <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Público</td>
+                                                        <td>Comisión Federal de Electricidad</td>
+                                                        <td>Unidad de Concesiones y Servicios</td>
+                                                        <td>Titular de Unidad</td>
+                                                    </tr>                                                               -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12"><hr/></div>                    
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label style="text-align: justify;">II.3.- POR SERVICIOS PROFESIONALES, CONSEJOS, CONSULTORÍAS Y/O ASESORÍAS (DESPUÉS DE IMPUESTOS)</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>CANTIDAD</label>
+                                                                <input type="text" name="valor" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>MONEDA</label>
+                                                                <select name="moneda" class="form-control CBOmoneda"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="card">
+                                                <div class="card-header">                                
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>TIPO DE SERVICIO PRESTADO</label>
+                                                                <input type="text" name="tipoServicio" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>REMUNERACIÓN</label>
+                                                                        <input type="text" name="valor" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>MONEDA</label>
+                                                                        <select name="moneda" class="form-control CBOmoneda"></select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 text-right">
+                                                            <button type="button" class="btn btn-success btnAgregarServicio">Agregar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                        
+                                        </div>
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <table class="table table-bordered">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                    <th scope="col">No.</th>
+                                                    <th scope="col">Tipo de servicio prestado</th>                                
+                                                    <th scope="col">Remuneración</th>
+                                                    <th scope="col">Moneda</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tableServicios">
+                                                    <!-- <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Público</td>
+                                                        <td>Comisión Federal de Electricidad</td>
+                                                        <td>Unidad de Concesiones y Servicios</td>
+                                                        <td>Titular de Unidad</td>
+                                                    </tr>                                                               -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12"><hr/></div>                    
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label style="text-align: justify;">II.4.- OTROS INGRESOS NO CONSIDERADOS A LOS ANTERIORES (DESPUÉS DE IMPUESTOS)</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>CANTIDAD</label>
+                                                                <input type="text" name="valor" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>MONEDA</label>
+                                                                <select name="moneda" class="form-control CBOmoneda"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                    
+                                        <div class="col-lg-12">
+                                            <div class="card">
+                                                <div class="card-header">                                
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>ESPECIFICAR TIPO DE INGRESO (ARRENDAMIENTO, REGALÍA, SORTEOS, CONCURSOS, DONACIONES, SEGURO DE VIDA, ETC)</label>
+                                                                <input type="text" name="tipoIngreso" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label><br/>REMUNERACIÓN</label>
+                                                                        <input type="text" name="valor" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label><br/>MONEDA</label>
+                                                                        <select name="moneda" class="form-control CBOmoneda"></select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 text-right">
+                                                            <button type="button" class="btn btn-success btnAgregarOtroIngreso">Agregar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                        
+                                        </div>
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <table class="table table-bordered">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                    <th scope="col">No.</th>
+                                                    <th scope="col">Tipo de ingreso</th>                                
+                                                    <th scope="col">Remuneración</th>
+                                                    <th scope="col">Moneda</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tableOtrosIngresos">
+                                                    <!-- <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Público</td>
+                                                        <td>Comisión Federal de Electricidad</td>
+                                                        <td>Unidad de Concesiones y Servicios</td>
+                                                        <td>Titular de Unidad</td>
+                                                    </tr>                                                               -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12"><hr/></div>                    
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label style="text-align: justify;">A.- INGRESO MENSUAL NETO DEL DECLARANTE (SUMA DEL NUMERAL I Y II)</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>CANTIDAD</label>
+                                                                <input type="text" name="valor" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>MONEDA</label>
+                                                                <select name="moneda" class="form-control CBOmoneda"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                       
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label style="text-align: justify;">B.- INGRESO MENSUAL DE LA PAREJA Y/O DEPENDIENTES ECONÓMICOS (DESPUÉS DE IMPUESTOS)</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>CANTIDAD</label>
+                                                                <input type="text" name="valor" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>MONEDA</label>
+                                                                <select name="moneda" class="form-control CBOmoneda"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                       
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label style="text-align: justify;">C.- TOTAL DE INGRESOS MENSUALES NETOS PERCIBIDOS POR EL DECLARANTE, PAREJA Y/O DEPENDIENTES ECONÓMICOS (SUMA DE LOS APARTADOS A Y B)</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>CANTIDAD</label>
+                                                                <input type="text" name="valor" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>MONEDA</label>
+                                                                <select name="moneda" class="form-control CBOmoneda"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                       
+                                    </div>
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>ACLARACIONES/OBSERVACIONES</label>
+                                                <textarea name="aclaracionesObservaciones" class="form-control" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 text-right">
+                                            <button class="btn btn-primary pull-rigth mr10 btnContinuar" data-seccion="8" data-form="Ingresos">Continuar</button>
+                                            <button class="btn btn-primary pull-rigth mr10 btnTerminar" data-seccion="8" data-form="Ingresos">Terminar</button>
+                                        </div>
+                                    </div>        
+                                </form>        
                             </div>
 
                             <div class="content_seccion hide" id="contentPDF">
@@ -1032,7 +1528,6 @@
                                             </tbody>
                                         </table>
 
-
                                         <table  style="width: 100%; font-size: 14px" id="pdfTitulo6">
                                             <thead>
                                                 <tr><th style="background-color: #621132; color: #fff;">6. INGRESOS NETOS DEL DECLARANTE</th></tr>
@@ -1110,20 +1605,12 @@
                         </button>
                        </div>
                        <div class="col-lg-8">
-
                        </div>
                    </div>
-                   
-                    <div class="btn-group btn-block" role="group" aria-label="Basic example">
-                        
-                        
-                        
-                    </div>
                 </div>
               </div>
             </div>
-          </div>        
-
+        </div>
         <!-- scripts -->
         <!--
         <script src="js/jquery-3.5.1.min.js"></script>

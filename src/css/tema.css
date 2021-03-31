@@ -45,6 +45,7 @@ body{ background-color: #F8F9FA; font-size: 13px; }
 .sidebar .nav-link {
   font-weight: 500;
   color: #333;
+  padding: 10px;
 }
 
 .sidebar .nav-link .feather {
@@ -52,8 +53,9 @@ body{ background-color: #F8F9FA; font-size: 13px; }
   color: #999;
 }
 
-.sidebar .nav-link.active {
-  color: #007bff;
+.sidebar .nav-link.active {  
+  color: #ffffff;
+  background-color: #621132 !important;
 }
 
 .sidebar .nav-link:hover .feather,
@@ -109,6 +111,7 @@ body{ background-color: #F8F9FA; font-size: 13px; }
 input { text-transform: uppercase; }
 .p5{ padding:5px !important;}
 .p10{ padding:10px !important;}
+.pt25{ padding-top:25px !important;}
 .pb20{ padding-bottom: 20px;}
 .m0{ margin:0px !important;}
 .mt10{ margin-top:10px !important;}
@@ -279,9 +282,18 @@ a:hover {
   }
 
 
+  .custom-radio .custom-control-input:disabled:checked~.custom-control-label::before {
+    background-color: #fdf1f6;
+}
 
-
-
+.swal2-styled.swal2-confirm {
+  border: 0;
+  border-radius: .25em;
+  background: initial;
+  background-color: #ad1f59;
+  color: #fff;
+  font-size: 1.0625em;
+}
 
 
 

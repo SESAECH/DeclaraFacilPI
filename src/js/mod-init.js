@@ -1,12 +1,10 @@
 window.iniciarModulo = function iniciarModulo(data){
     var seccion = JSON.parse(atob(data));
-    var item = captura.declaracion[seccion.apartado].secciones[seccion.no];
+    var item = jsonResult.captura.declaracion[seccion.apartado].secciones[seccion.no];
     $(".nav-link").removeClass("active");
     $(".lnk" + seccion.moduloName).addClass("active");
     $(".titulo-seccion").text(seccion.no + ". " + seccion.titulo.toUpperCase());
     $("#" + seccion.moduloName + " .help").html(seccion.help);
-    console.log (seccion.moduloName);
-    console.log (item);
     window["init" + seccion.moduloName.replace("modulo","")](btoa(JSON.stringify(item)));
 };
 

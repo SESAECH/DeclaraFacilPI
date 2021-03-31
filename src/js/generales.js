@@ -1,12 +1,11 @@
-
 window.actualizarStatusSeccion = function actualizarStatusSeccion(declaracionSeccion, seccionNo, seccionName, status){
-    captura.declaracion[declaracionSeccion].secciones[seccionNo].status= status;
+    jsonResult.captura.declaracion[declaracionSeccion].secciones[seccionNo].status= status;
     if(status ==="EN_PROCESO"){
-        $(".status-seccion-patrimonial-" + seccionNo).removeClass("indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
+        $(".status-seccion-" + declaracionSeccion + "-" + seccionNo).removeClass("indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
         mensajeSwal("Aviso","Sección guardada con exito.", "success");
     }
     else{
-        $(".status-seccion-patrimonial-" + seccionNo).removeClass("indicador-status").addClass("indicador-status-success").text("TERMINADO");
+        $(".status-seccion-" + declaracionSeccion + "-" + seccionNo).removeClass("indicador-status").addClass("indicador-status-success").text("TERMINADO");
         $("#form" + seccionName +" :input").prop("disabled", true);
         $(".btnGuardar, .btnTerminar").addClass("hide");
         $(".btnHabilitar").removeClass("hide").prop("disabled", false);
@@ -14,12 +13,11 @@ window.actualizarStatusSeccion = function actualizarStatusSeccion(declaracionSec
     }
     //scroll top de la página.
     goTop();
-};
-//window.actualizarStatusSeccion = actualizarStatusSeccion;
+}
 
 window.habilitarSeccion = function habilitarSeccion(declaracionSeccion, seccionNo, seccionName){
-    captura.declaracion[declaracionSeccion].secciones[seccionNo].status= "EN_PROCESO";
-    $(".status-seccion-patrimonial-" + seccionNo).removeClass("indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
+    jsonResult.captura.declaracion[declaracionSeccion].secciones[seccionNo].status= "EN_PROCESO";
+    $(".status-seccion-" + declaracionSeccion + "-" + seccionNo).removeClass("indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
     if (seccionName=="Pareja"){
         if(!jsonResult.declaracion.situacionPatrimonial.datosPareja.ninguno){
             $("#form" + seccionName +" :input").prop("disabled", false);            
@@ -37,8 +35,7 @@ window.habilitarSeccion = function habilitarSeccion(declaracionSeccion, seccionN
     $(".btnHabilitar").addClass("hide");  
     //scroll top de la página.
     goTop();  
-};
-//window.actualizarStatusSeccion =actualizarStatusSeccion;
+}
 
 window.setVaribleGlobal =  function setVaribleGlobal(campo, valor){
     if (campo=="domicilio"){

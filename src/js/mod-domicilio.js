@@ -11,11 +11,24 @@ window.initDomicilio = function initDomicilio(data){
     $(form + ".CBOentidadFederativa").on('change', function() {
         loadMunicipios(form + ".CBOmunicipioAlcaldia", this.value);
     });
-
+    $(form + '.rdDomicilio').click(function(){
+        if(this.id =="domicilioMX"){
+            $(form + "#domMexico").removeClass("hide");
+            $(form + "#domExtranjero").addClass("hide");
+            jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio="MX";
+        }
+        else{ 
+            $(form + "#domExtranjero").removeClass("hide");
+            $(form + "#domMexico").addClass("hide");
+            jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio="EXT";
+        }
+    });
     //validar status de la sección.
     switch(seccion.status){
         case "SIN_INFO": 
-             //asginar valores predeterminados a catálogos(ayuda al usuario).
+            //asginar valores predeterminados a catálogos(ayuda al usuario).
+            $("#domicilioMX").prop("checked", true);
+            $(form + "#domMexico").removeClass("hide");
             $(form + ".CBOpais").val("MX");
             $(form + ".CBOentidadFederativa").val("07").change();
             $(form + ".btnGuardar").removeClass("hide");
@@ -24,14 +37,14 @@ window.initDomicilio = function initDomicilio(data){
         break;
         case "EN_PROCESO":
             //cargar información guardada previamente.
-            window["loadInfo" + seccion.moduloName.replace("modulo","")];
+            window["loadInfo" + seccion.moduloName.replace("modulo","")](); 
             $(form + ".btnGuardar").removeClass("hide");
             $(form + ".btnTerminar").removeClass("hide");
             $(modulo + ".btnHabilitar").addClass("hide");
             break;
         case "TERMINADO":
             //cargar información guardada previamente.
-            window["loadInfo" + seccion.moduloName.replace("modulo","")];           
+            window["loadInfo" + seccion.moduloName.replace("modulo","")]();           
             $(form + ":input").prop("disabled", true);
 
             $(form + ".btnGuardar").addClass("hide");
@@ -56,10 +69,9 @@ window.initDomicilio = function initDomicilio(data){
     });
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
-};
+}
 
 window.guardarFormDomicilio = function guardarFormDomicilio(seccionNo, seccionName, seccionApartado){
-
     $("#form" + seccionName).validate({
         rules: {
             entidadFederativa : { required: true },
@@ -114,18 +126,28 @@ window.guardarFormDomicilio = function guardarFormDomicilio(seccionNo, seccionNa
             actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);            
         }
     });    
-};
+}
 
 window.loadInfoDomicilio = function loadInfoDomicilio(){
     var root = jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante;
-            
+
+    if (jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio=="MX"){ 
+        $("#domicilioMX").prop("checked", true); 
+        $("#domMexico").removeClass("hide");
+        $("#domExtranjero").addClass("hide");
+    }
+    else{ 
+        $("#domicilioEXT").prop("checked", true); 
+        $("#domExtranjero").removeClass("hide");
+        $("#domMexico").addClass("hide");
+    }
     //domicilio mexico.
     $("#domMexico input[name='calle']").val(root.domicilioMexico.calle);
     $("#domMexico input[name='numeroExterior']").val(root.domicilioMexico.numeroExterior);
     $("#domMexico input[name='numeroInterior']").val(root.domicilioMexico.numeroInterior);
-    $("#domMexico input[name='coloniaLocalidad']").val(root.domicilioMexico.coloniaLocalidad);
+    $("#domMexico input[name='coloniaLocalidad']").val(root.domicilioMexico.coloniaLocalidad);    
+    $("#domMexico select[name='entidadFederativa']").val(root.domicilioMexico.entidadFederativa.clave).trigger("change");
     $("#domMexico select[name='municipioAlcaldia']").val(root.domicilioMexico.municipioAlcaldia.clave);
-    $("#domMexico select[name='entidadFederativa']").val(root.domicilioMexico.entidadFederativa.clave);
     $("#domMexico input[name='codigoPostal']").val(root.domicilioMexico.codigoPostal);
 
     //domicilio extranjero
@@ -139,4 +161,4 @@ window.loadInfoDomicilio = function loadInfoDomicilio(){
 
     //generales
      $("textarea[name='aclaracionesObservaciones']").val(root.aclaracionesObservaciones);
-};
+}

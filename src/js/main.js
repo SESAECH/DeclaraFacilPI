@@ -50,8 +50,8 @@ import './guardar-avance.js';
 import './config-cargar-file.js';
 import './mod-init.js';
 import './generales.js';
-
-import './estructura-declaracion-inicial.js';
+import './config-estructura.js';
+/* import './estructura-declaracion-inicial.js'; */
 
 import './mod-datos-generales.js';
 import './mod-domicilio.js';

@@ -23,14 +23,14 @@ window.initDatosGenerales = function initDatosGenerales(data){
         break;
         case "EN_PROCESO":
             //cargar información guardada previamente.
-            window["loadInfo" + seccionName];
+            window["loadInfo" + seccionName]();
             $(form + ".btnGuardar").removeClass("hide");
             $(form + ".btnTerminar").removeClass("hide");
             $(modulo + ".btnHabilitar").addClass("hide");
             break;
         case "TERMINADO":
             //cargar información guardada previamente.
-            window["loadInfo" + seccionName];           
+            window["loadInfo" + seccionName]();
             $(form + ":input").prop("disabled", true);
 
             $(form + ".btnGuardar").addClass("hide");
@@ -55,7 +55,7 @@ window.initDatosGenerales = function initDatosGenerales(data){
     });
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
-};
+}
 
 window.guardarFormDatosGenerales = function guardarFormDatosGenerales(seccionNo, seccionName, seccionApartado){
     $.validator.addMethod("RFC", function (value, element) {
@@ -82,8 +82,8 @@ window.guardarFormDatosGenerales = function guardarFormDatosGenerales(seccionNo,
             homoClave : { required: true, minlength: 3, maxlength: 3 },
             curp : { required: true, minlength: 18, maxlength: 18, CURP: true },
             personal : { required: true, email: true },
-            casa : { required: true, number: true, minlength: 10, maxlength: 10, TEL: true },
-            celularPersonal : { required: true, number: true, minlength: 10, maxlength: 10, TEL: true },
+            casa : { required: true, number: true, minlength: 10, maxlength: 10 },
+            celularPersonal : { required: true, number: true, minlength: 10, maxlength: 10 },
             situacionPersonalEstadoCivil : { required: true },
             regimenMatrimonial : { required: true },
             paisNacimiento : { required: true },

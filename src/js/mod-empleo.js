@@ -16,14 +16,28 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
     $(form + ".CBOentidadFederativa").on('change', function() {
         loadMunicipios(form + ".CBOmunicipioAlcaldia", this.value);
     });
-    if(captura.tipo_declaracion == "INICIAL"){
+    if(jsonResult.captura.tipo_declaracion == "INICIAL"){
         $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
     }
+    $(form + '.rdDomicilio').click(function(){
+        if(this.id =="domicilioEmpMX"){
+            $(form + "#domEmpMexico").removeClass("hide");
+            $(form + "#domEmpExtranjero").addClass("hide");
+            jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.domicilio="MX";
+        }
+        else{ 
+            $(form + "#domEmpExtranjero").removeClass("hide");
+            $(form + "#domEmpMexico").addClass("hide");
+            jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.domicilio="EXT";
+        }
+    });
 
     //validar status de la sección.
     switch(seccion.status){
         case "SIN_INFO": 
             //asginar valores predeterminados a catálogos(ayuda al usuario).
+            $(form + "#domicilioEmpMX").prop("checked", true);
+            $(form + "#domEmpMexico").removeClass("hide");
             $(form + ".CBOpais").val("MX");
             $(form + ".CBOentidadFederativa").val("07").change();
             $(form + ".btnGuardar").removeClass("hide");
@@ -64,9 +78,9 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
     });
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
-};
+}
 
-window.guardarFormEmpleoCargoComision = function guardarFormEmpleoCargoComision(seccionNo, seccionName,  seccionApartado){
+window.guardarFormEmpleoCargoComision = function guardarFormEmpleoCargoComision(seccionNo, seccionName,  seccionApartado){    
     var formulario = "#form" + seccionName + " ";
     $(formulario).validate({
         rules: {
@@ -128,32 +142,55 @@ window.guardarFormEmpleoCargoComision = function guardarFormEmpleoCargoComision(
             root.telefonoOficina.telefono =     $(formulario + "input[name='telefono'] ").val();
             root.telefonoOficina.extension =    $(formulario + "input[name='extension']").val();
 
-            //domicilio mexico.
-            root.domicilioMexico.calle = $("#domEmpMexico input[name='calle']").val();
-            root.domicilioMexico.numeroExterior = $("#domEmpMexico input[name='numeroExterior']").val();
-            root.domicilioMexico.numeroInterior = $("#domEmpMexico input[name='numeroInterior']").val();
-            root.domicilioMexico.coloniaLocalidad = $("#domEmpMexico input[name='coloniaLocalidad']").val();
-            root.domicilioMexico.municipioAlcaldia.clave = $("#domEmpMexico select[name='municipioAlcaldia'] option:selected").val();
-            root.domicilioMexico.municipioAlcaldia.valor = $("#domEmpMexico select[name='municipioAlcaldia'] option:selected")[0].innerText;
-            root.domicilioMexico.entidadFederativa.clave = $("#domEmpMexico select[name='entidadFederativa'] option:selected").val();
-            root.domicilioMexico.entidadFederativa.valor = $("#domEmpMexico select[name='entidadFederativa'] option:selected")[0].innerText;
-            root.domicilioMexico.codigoPostal = $("#domEmpMexico input[name='codigoPostal']").val();
-            
-            //domicilio extranjero
-            root.domicilioExtranjero.calle = $("#domEmpExtranjero input[name='calle']").val();
-            root.domicilioExtranjero.numeroExterior = $("#domEmpExtranjero input[name='numeroExterior']").val();
-            root.domicilioExtranjero.numeroInterior = $("#domEmpExtranjero input[name='numeroInterior']").val();
-            root.domicilioExtranjero.ciudadLocalidad = $("#domEmpExtranjero input[name='ciudadLocalidad']").val();
-            root.domicilioExtranjero.estadoProvincia = $("#domEmpExtranjero input[name='estadoProvincia']").val();
-            root.domicilioExtranjero.pais = $("#domEmpExtranjero select[name='pais'] option:selected").val();
-            root.domicilioExtranjero.codigoPostal = $("#domEmpExtranjero input[name='codigoPostal']").val();
-            
+            if (jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.domicilio =="MX"){
+                //domicilio mexico.
+                root.domicilioMexico.calle = $("#domEmpMexico input[name='calle']").val();
+                root.domicilioMexico.numeroExterior = $("#domEmpMexico input[name='numeroExterior']").val();
+                root.domicilioMexico.numeroInterior = $("#domEmpMexico input[name='numeroInterior']").val();
+                root.domicilioMexico.coloniaLocalidad = $("#domEmpMexico input[name='coloniaLocalidad']").val();
+                root.domicilioMexico.municipioAlcaldia.clave = $("#domEmpMexico select[name='municipioAlcaldia'] option:selected").val();
+                root.domicilioMexico.municipioAlcaldia.valor = $("#domEmpMexico select[name='municipioAlcaldia'] option:selected")[0].innerText;
+                root.domicilioMexico.entidadFederativa.clave = $("#domEmpMexico select[name='entidadFederativa'] option:selected").val();
+                root.domicilioMexico.entidadFederativa.valor = $("#domEmpMexico select[name='entidadFederativa'] option:selected")[0].innerText;
+                root.domicilioMexico.codigoPostal = $("#domEmpMexico input[name='codigoPostal']").val();
+
+                //domicilio extranjero
+                root.domicilioExtranjero.calle = "";
+                root.domicilioExtranjero.numeroExterior = "";
+                root.domicilioExtranjero.numeroInterior = "";
+                root.domicilioExtranjero.ciudadLocalidad = "";
+                root.domicilioExtranjero.estadoProvincia = "";
+                root.domicilioExtranjero.pais = "MX"
+                root.domicilioExtranjero.codigoPostal = "";
+            }
+            else{
+                $("#domEmpMexico select[name='entidadFederativa'] option:selected").val("07").trigger("change");
+                //domicilio mexico.
+                root.domicilioMexico.calle = "";
+                root.domicilioMexico.numeroExterior = "";
+                root.domicilioMexico.numeroInterior = "";
+                root.domicilioMexico.coloniaLocalidad = "";
+                root.domicilioMexico.municipioAlcaldia.clave = $("#domEmpMexico select[name='municipioAlcaldia'] option:selected").val();
+                root.domicilioMexico.municipioAlcaldia.valor = $("#domEmpMexico select[name='municipioAlcaldia'] option:selected")[0].innerText;
+                root.domicilioMexico.entidadFederativa.clave = $("#domEmpMexico select[name='entidadFederativa'] option:selected").val();
+                root.domicilioMexico.entidadFederativa.valor = $("#domEmpMexico select[name='entidadFederativa'] option:selected")[0].innerText;
+                root.domicilioMexico.codigoPostal = "";
+
+                //domicilio extranjero
+                root.domicilioExtranjero.calle = $("#domEmpExtranjero input[name='calle']").val();
+                root.domicilioExtranjero.numeroExterior = $("#domEmpExtranjero input[name='numeroExterior']").val();
+                root.domicilioExtranjero.numeroInterior = $("#domEmpExtranjero input[name='numeroInterior']").val();
+                root.domicilioExtranjero.ciudadLocalidad = $("#domEmpExtranjero input[name='ciudadLocalidad']").val();
+                root.domicilioExtranjero.estadoProvincia = $("#domEmpExtranjero input[name='estadoProvincia']").val();
+                root.domicilioExtranjero.pais = $("#domEmpExtranjero select[name='pais'] option:selected").val();
+                root.domicilioExtranjero.codigoPostal = $("#domEmpExtranjero input[name='codigoPostal']").val();
+            }                                            
             root.aclaracionesObservaciones = $(formulario + "textarea[name='aclaracionesObservaciones']").val();
             //actualiza el status de la sección (en proceso/terminado).
             actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);
         }
     });    
-};
+}
 
 window.loadInfoEmpleoCargoComision = function loadInfoEmpleoCargoComision(form){
     var root = jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision;
@@ -170,7 +207,16 @@ window.loadInfoEmpleoCargoComision = function loadInfoEmpleoCargoComision(form){
     $(form + "input[name='fechaTomaPosesion']").val(root.fechaTomaPosesion);
     $(form + "input[name='telefono'] ").val(root.telefonoOficina.telefono);
     $(form + "input[name='extension']").val(root.telefonoOficina.extension);
-
+    if (root.domicilio=="MX"){
+        $(form + "#domicilioEmpMX").prop("checked", true);
+        $(form + "#domEmpMexico").removeClass("hide");
+        $(form + "#domEmpExtranjero").addClass("hide");
+    }
+    else{
+        $(form + "#domicilioEmpEXT").prop("checked", true);
+        $(form + "#domEmpExtranjero").removeClass("hide");
+        $(form + "#domEmpMexico").addClass("hide");
+    }
     //domicilio mexico.
     $("#domEmpMexico input[name='calle']").val(root.domicilioMexico.calle);
     $("#domEmpMexico input[name='numeroExterior']").val(root.domicilioMexico.numeroExterior);
@@ -191,4 +237,4 @@ window.loadInfoEmpleoCargoComision = function loadInfoEmpleoCargoComision(form){
 
     //generales
      $(form + "textarea[name='aclaracionesObservaciones']").val(root.aclaracionesObservaciones);
-};
+}

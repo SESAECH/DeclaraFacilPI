@@ -68,6 +68,7 @@ window.formCV = '<form action="" id="formCV">\
 </div>\
 </form>';
 
+
 window.initCV = function initCV(data){
     var seccion = JSON.parse(atob(data));
     var seccionName = seccion.moduloName.replace("modulo","");
@@ -124,7 +125,7 @@ window.initCV = function initCV(data){
         $(modulo + ".btnEliminar").addClass("hide");
         //cambiar status.
         $(modulo + ".btnHabilitar").removeClass("hide");
-        captura.declaracion[seccion.apartado].secciones[seccion.no].status= "TERMINADO";
+        jsonResult.declaracion[seccion.apartado].secciones[seccion.no].status= "TERMINADO";
         $(".status-seccion-patrimonial-" + seccion.no).removeClass("indicador-status indicador-status-process").addClass("indicador-status-success").text("TERMINADO");
     });
     
@@ -135,18 +136,19 @@ window.initCV = function initCV(data){
         $(modulo + ".btnEliminar").removeClass("hide");
         $(modulo + "textarea[name='aclaracionesObservaciones']").prop("disabled", false);
         $(modulo + ".btnHabilitar").addClass("hide");
-        captura.declaracion[seccion.apartado].secciones[seccion.no].status= "EN_PROCESO";
+        jsonResult.captura.declaracion[seccion.apartado].secciones[seccion.no].status= "EN_PROCESO";
         $(".status-seccion-patrimonial-" + seccion.no).removeClass("indicador-status indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
     });
 
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
-};
+}
 
 window.pintarTablaCV = function pintarTablaCV(seccionNo, seccionName){
     var html="";
     const lista = jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad;//.sort((a, b) => b.fechaObtencion - a.fechaObtencion);
-    Object.keys(lista.sort((a, b) => b.fechaObtencion - a.fechaObtencion)).forEach(function (row) {
+    //Object.keys(lista.sort((a, b) => b.fechaObtencion - a.fechaObtencion)).forEach(function (row) {}
+    Object.keys(lista).forEach(function (row) {
         var params = { uuid: lista[row].uuid, seccionNo: seccionNo, seccionName: seccionName };
         html+="<tr id='" + lista[row].uuid + "'>";
         html+=" <td>" + lista[row].fechaObtencion +"</td>";
@@ -160,7 +162,7 @@ window.pintarTablaCV = function pintarTablaCV(seccionNo, seccionName){
         html+="</tr>";
     });
     $(".tbl" + seccionName + " tbody").empty().append(html);
-};
+}
 
 window.editarCV = function editarCV(data){
     var item = JSON.parse(atob(data));
@@ -176,7 +178,7 @@ window.editarCV = function editarCV(data){
     $("#form" + item.seccionName + " select[name='estatus']").val(nodo.estatus);
     $("#form" + item.seccionName + " select[name='documentoObtenido']").val(nodo.documentoObtenido);
     $("#form" + item.seccionName + " input[name='fechaObtencion']").val(nodo.fechaObtencion);    
-};
+}
 
 window.eliminarCV = function eliminarCV(data){
     var item = JSON.parse(atob(data));
@@ -186,9 +188,9 @@ window.eliminarCV = function eliminarCV(data){
     if (Object.keys(jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad).length==0){
         $("#modulo" + item.seccionName + " .btnTerminar").addClass("hide");
     }
-};
+}
 
-window.funcionalidadGuardarRegistroCV = function funcionalidadGuardarRegistroCV(seccionNo, seccionName, modulo, accion, uuid=null){
+window.funcionalidadGuardarRegistroCV = function funcionalidadGuardarRegistroCV(seccionNo, seccionName, modulo, accion, uuid=null){    
     var form = "#form" + seccionName + " ";
     //ocultar/mostrar formularios
     $(modulo + ".formPrincipal").addClass("animated fadeOut").addClass("hide");                      
@@ -206,7 +208,7 @@ window.funcionalidadGuardarRegistroCV = function funcionalidadGuardarRegistroCV(
     loadCat(estatus, form + ".CBOestatus"); 
     loadCat(documentoObtenido, form + ".CBOdocumentoObtenido");
 
-    if(captura.tipo_declaracion == "INICIAL"){
+    if(jsonResult.captura.tipo_declaracion == "INICIAL"){
         $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
     }
 
@@ -217,7 +219,7 @@ window.funcionalidadGuardarRegistroCV = function funcionalidadGuardarRegistroCV(
     $(form + ".btnCerrar").on('click',function() {
         $(modulo + ".formSecundario").html("").addClass("hide");
         $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut");
-    });
+    }); 
 
     $("#form" + seccionName).validate({
         rules: {
@@ -252,14 +254,14 @@ window.funcionalidadGuardarRegistroCV = function funcionalidadGuardarRegistroCV(
             $(modulo + ".formSecundario").html("").addClass("hide");
             $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut"); 
             $(modulo + ".btnTerminar").removeClass("hide");
-            goTop();
-        }    
+            goTop(); 
+        }         
     });
-};
+}
 
 //guaradr registro en el JsonResult.
 window.guardarRegistroCV = function guardarRegistroCV(uuidItem, seccionNo, seccionName, modulo){
-    var form = "#form" + seccionName;
+    var form="#form" + seccionName;
     jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.aclaracionesObservaciones =  $(modulo + "textarea[name='aclaracionesObservaciones']").val();
     jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad[uuidItem] =
     {
@@ -279,7 +281,6 @@ window.guardarRegistroCV = function guardarRegistroCV(uuidItem, seccionNo, secci
         "fechaObtencion": $(form + " input[name='fechaObtencion']").val()
     };
     //cambiar status a captura.
-    captura.declaracion.situacion_patrimonial.secciones[seccionNo].status= "EN_PROCESO";
-    $(".status-seccion-patrimonial-" + seccionNo).removeClass("indicador-status, indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
-};
-
+    jsonResult.captura.declaracion.situacionPatrimonial.secciones[seccionNo].status= "EN_PROCESO";
+    $(".status-seccion-" + jsonResult.captura.declaracion.situacionPatrimonial.secciones[seccionNo].apartado + "-" + seccionNo).removeClass("indicador-status, indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
+}
