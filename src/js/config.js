@@ -1,7 +1,7 @@
 //alertar del cerrado, y forzar mayusculas
 $(document).ready(function() {
-
                 console.log( "ready!" );
+                moment.locale('es-mx'); 
                 $("#contentSelectTipoDeclaracion").removeClass("hide");
                 window.onbeforeunload = function () {
                     return 'Are you really want to perform the action?';
@@ -117,11 +117,11 @@ document.getElementById('inputfile')
             var fr=new FileReader();
             fr.onload=function(){
                 cargarFileDeclaracion(fr.result);
-                document.getElementById('output')
-                        .textContent=fr.result;
+                //document.getElementById('output').textContent=fr.result;
             }
               
             fr.readAsText(this.files[0]);
+            this.value="";
         });
 
 window.regresarAlInicio = function regresarAlInicio(){
@@ -173,13 +173,13 @@ window.declaraciones={
         },
         "interes":{
             "secciones":{
-                "1":{"no":1,"titulo":"Participación en empresas, sociedades o asociaciones.", "moduloName":"moduloParticipacionEmpresas", "status":"SIN_INFO", "apartado": "interes", "seccion": "", "help": "ayuda de moduloParticipacionEmpresas"},
-                "2":{"no":2,"titulo":"¿Participa en alguna de estas instituciones?", "moduloName":"moduloParticipacionInstituciones", "status":"SIN_INFO", "apartado": "interes", "seccion": "", "help": "ayuda de moduloParticipacionInstituciones"},
-                "3":{"no":3,"titulo":"Apoyos o beneficios públicos.", "moduloName":"moduloApoyosPublicos", "status":"SIN_INFO", "apartado": "interes", "seccion": "", "help": "ayuda de moduloApoyosPublicos"},
-                "4":{"no":4,"titulo":"Representación.", "moduloName":"moduloRepresentacion", "status":"SIN_INFO", "apartado": "interes", "seccion": "", "help": "ayuda de moduloRepresentacion"},
-                "5":{"no":5,"titulo":"Clientes principales", "moduloName":"moduloClientesPrincipales", "status":"SIN_INFO", "apartado": "interes", "seccion": "", "help": "ayuda de moduloClientesPrincipales"},
-                "6":{"no":6,"titulo":"Beneficios privados", "moduloName":"moduloBeneficiosPrivados", "status":"SIN_INFO", "apartado": "interes", "seccion": "", "help": "ayuda de moduloBeneficiosPrivados"},
-                "7":{"no":7,"titulo":"Fideicomisos", "moduloName":"moduloFideicomisos", "status":"SIN_INFO", "apartado": "interes", "seccion": "", "help": "ayuda de moduloFideicomisos"}
+                "1":{"no":1,"titulo":"Participación en empresas, sociedades o asociaciones.", "moduloName":"moduloParticipacionEmpresas", "status":"SIN_INFO", "apartado": "interes", "seccion": "participacion", "help": "ayuda de moduloParticipacionEmpresas"},
+                "2":{"no":2,"titulo":"¿Participa en alguna de estas instituciones?", "moduloName":"moduloParticipacionInstituciones", "status":"SIN_INFO", "apartado": "interes", "seccion": "participacionTomaDecisiones", "help": "ayuda de moduloParticipacionInstituciones"},
+                "3":{"no":3,"titulo":"Apoyos o beneficios públicos.", "moduloName":"moduloApoyosPublicos", "status":"SIN_INFO", "apartado": "interes", "seccion": "apoyos", "help": "ayuda de moduloApoyosPublicos"},
+                "4":{"no":4,"titulo":"Representación.", "moduloName":"moduloRepresentacion", "status":"SIN_INFO", "apartado": "interes", "seccion": "representacion", "help": "ayuda de moduloRepresentacion"},
+                "5":{"no":5,"titulo":"Clientes principales", "moduloName":"moduloClientesPrincipales", "status":"SIN_INFO", "apartado": "interes", "seccion": "clientesPrincipales", "help": "ayuda de moduloClientesPrincipales"},
+                "6":{"no":6,"titulo":"Beneficios privados", "moduloName":"moduloBeneficiosPrivados", "status":"SIN_INFO", "apartado": "interes", "seccion": "beneficiosPrivados", "help": "ayuda de moduloBeneficiosPrivados"},
+                "7":{"no":7,"titulo":"Fideicomisos", "moduloName":"moduloFideicomisos", "status":"SIN_INFO", "apartado": "interes", "seccion": "fideicomisos", "help": "ayuda de moduloFideicomisos"}
             }
         }
     },

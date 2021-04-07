@@ -15,7 +15,7 @@ window.formCV = '<form action="" id="formCV">\
     </div> \
     <div class="col-lg-8">\
         <div class="form-group">\
-            <label>INSTITUCIÓN EDUCATIVA</label>\
+            <label>NOMBRE</label>\
             <input type="text" name="nombre" class="form-control" required>\
         </div>\
     </div>\
@@ -67,7 +67,6 @@ window.formCV = '<form action="" id="formCV">\
     </div>\
 </div>\
 </form>';
-
 
 window.initCV = function initCV(data){
     var seccion = JSON.parse(atob(data));
@@ -125,8 +124,9 @@ window.initCV = function initCV(data){
         $(modulo + ".btnEliminar").addClass("hide");
         //cambiar status.
         $(modulo + ".btnHabilitar").removeClass("hide");
-        jsonResult.declaracion[seccion.apartado].secciones[seccion.no].status= "TERMINADO";
-        $(".status-seccion-patrimonial-" + seccion.no).removeClass("indicador-status indicador-status-process").addClass("indicador-status-success").text("TERMINADO");
+        jsonResult.captura.declaracion[seccion.apartado].secciones[seccion.no].status= "TERMINADO";
+        $(".status-seccion-" + seccion.apartado + "-" + seccion.no).removeClass("indicador-status indicador-status-process").addClass("indicador-status-success").text("TERMINADO");
+        validarDeclaracionTerminada();
     });
     
     $(modulo + ".btnHabilitar").on("click",function() {  
@@ -137,7 +137,8 @@ window.initCV = function initCV(data){
         $(modulo + "textarea[name='aclaracionesObservaciones']").prop("disabled", false);
         $(modulo + ".btnHabilitar").addClass("hide");
         jsonResult.captura.declaracion[seccion.apartado].secciones[seccion.no].status= "EN_PROCESO";
-        $(".status-seccion-patrimonial-" + seccion.no).removeClass("indicador-status indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
+        $(".status-seccion-" + seccion.apartado + "-" + seccion.no).removeClass("indicador-status indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
+        validarDeclaracionTerminada();
     });
 
     $(".content_seccion").addClass("hide");
@@ -238,7 +239,7 @@ window.funcionalidadGuardarRegistroCV = function funcionalidadGuardarRegistroCV(
             ubicacion : { required: "Seleccione la ubicación." },
             estatus : { required: "Seleccione el estatus." },
             documentoObtenido : { required: "Seleccione el documento obtenido." },
-            fechaObtencion : { required: "Ingrese la fecha de obtención del documento." }
+            fechaObtencion : { required: "Ingrese la fecha de obtención del documento." }                    
         }
     });
 
@@ -262,7 +263,7 @@ window.funcionalidadGuardarRegistroCV = function funcionalidadGuardarRegistroCV(
 //guaradr registro en el JsonResult.
 window.guardarRegistroCV = function guardarRegistroCV(uuidItem, seccionNo, seccionName, modulo){
     var form="#form" + seccionName;
-    jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.aclaracionesObservaciones =  $(modulo + "textarea[name='aclaracionesObservaciones']").val();
+    jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.aclaracionesObservaciones =  $(modulo + "textarea[name='aclaracionesObservaciones']").val().toUpperCase();
     jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad[uuidItem] =
     {
         "uuid": uuidItem,
@@ -284,3 +285,4 @@ window.guardarRegistroCV = function guardarRegistroCV(uuidItem, seccionNo, secci
     jsonResult.captura.declaracion.situacionPatrimonial.secciones[seccionNo].status= "EN_PROCESO";
     $(".status-seccion-" + jsonResult.captura.declaracion.situacionPatrimonial.secciones[seccionNo].apartado + "-" + seccionNo).removeClass("indicador-status, indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
 }
+

@@ -11,6 +11,7 @@ window.actualizarStatusSeccion = function actualizarStatusSeccion(declaracionSec
         $(".btnHabilitar").removeClass("hide").prop("disabled", false);
         mensajeSwal("Aviso","Sección terminada con exito.", "success");
     }
+    validarDeclaracionTerminada();
     //scroll top de la página.
     goTop();
 }
@@ -33,6 +34,7 @@ window.habilitarSeccion = function habilitarSeccion(declaracionSeccion, seccionN
         $(".btnGuardar, .btnTerminar").removeClass("hide");
     }        
     $(".btnHabilitar").addClass("hide");  
+    validarDeclaracionTerminada();
     //scroll top de la página.
     goTop();  
 }
@@ -235,3 +237,43 @@ window.oderByColumn = function oderByColumn(arreglo, COLUMN, orden) {
     return arreglo;
 };
 //window.oderByColumn =oderByColumn;
+
+
+$(".numeric").keypress(function (e) {
+    //if the letter is not digit then display error and don't type anything
+    if (e.which !== 8 && e.which !== 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        //show_alert("#msg_numeric", "warning", "<p>Solo Numer</p>");
+
+        //$("#msg_pago").html("Digits Only").show().fadeOut("slow");
+        return false;
+    }
+});
+
+
+window.format = function format(num) {
+    var n = num.toString(), p = n.indexOf('.');
+    return n.replace(/\d(?=(?:\d{3})+(?:\.|$))/g, function ($0, i) {
+        return p < 0 || i < p ? ($0 + ',') : $0;
+    });
+}
+
+window.validarDeclaracionTerminada = function validarDeclaracionTerminada(){
+    let terminado=true;
+    Object.keys(jsonResult.captura.declaracion.situacionPatrimonial.secciones).forEach(function (row) {
+        if (jsonResult.captura.declaracion.situacionPatrimonial.secciones[row].status !="TERMINADO")   {
+            terminado=false;
+            return false;
+        }
+    });
+    if (terminado){
+        Object.keys(jsonResult.captura.declaracion.interes.secciones).forEach(function (row) {
+            if (jsonResult.captura.declaracion.interes.secciones[row].status !="TERMINADO")   {
+                terminado=false;
+                return false;
+            }
+        }); 
+    }
+    if (terminado){ $("#btnTerminarDeclaracion").prop("disabled", false); }
+    else{ $("#btnTerminarDeclaracion").prop("disabled", true); }
+}

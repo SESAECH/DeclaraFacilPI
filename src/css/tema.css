@@ -286,6 +286,12 @@ a:hover {
     background-color: #fdf1f6;
 }
 
+.custom-control-input:checked~.custom-control-label::before {
+  color: #fff;
+  border-color: #ad1f59;
+  background-color: #ad1f59 !important;
+}
+
 .swal2-styled.swal2-confirm {
   border: 0;
   border-radius: .25em;
@@ -295,5 +301,15 @@ a:hover {
   font-size: 1.0625em;
 }
 
-
+.fileInput{
+  position: absolute;
+                            top: 0;
+                            right: 0;
+                            margin: 0;
+                            padding: 0;
+                            font-size: 20px;
+                            cursor: pointer;
+                            opacity: 0;
+                            filter: alpha(opacity=0);
+}
 

@@ -3,6 +3,7 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
         let avanceCaptura = JSON.parse(data);
         jsonResult.captura = avanceCaptura.captura;
         jsonResult.declaracion ={};
+        
         Object.keys(avanceCaptura.captura.declaracion.situacionPatrimonial.secciones).forEach(function (index) {
             var item = avanceCaptura.captura.declaracion.situacionPatrimonial.secciones[index];
             if (!jsonResult.declaracion[item.apartado]){jsonResult.declaracion[item.apartado] = {};}
@@ -15,7 +16,7 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
                 $(".status-seccion-" + item.apartado + "-" + item.no).removeClass("indicador-status").addClass("indicador-status-success").text("TERMINADO");
             }            
         });
-
+        validarDeclaracionTerminada();
         $("#modalIniciar").modal("hide");
     } catch(e) {
         alert("El archivo esta dañado, no se puede cargar al sistema."); // error in the above string (in this case, yes)!

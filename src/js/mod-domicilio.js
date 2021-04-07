@@ -29,7 +29,7 @@ window.initDomicilio = function initDomicilio(data){
             //asginar valores predeterminados a catálogos(ayuda al usuario).
             $("#domicilioMX").prop("checked", true);
             $(form + "#domMexico").removeClass("hide");
-            $(form + ".CBOpais").val("MX");
+            //$(form + ".CBOpais").val("MX");
             $(form + ".CBOentidadFederativa").val("07").change();
             $(form + ".btnGuardar").removeClass("hide");
             $(form + ".btnTerminar").removeClass("hide");
@@ -37,14 +37,14 @@ window.initDomicilio = function initDomicilio(data){
         break;
         case "EN_PROCESO":
             //cargar información guardada previamente.
-            window["loadInfo" + seccion.moduloName.replace("modulo","")](); 
+            window["loadInfo" + seccionName](); 
             $(form + ".btnGuardar").removeClass("hide");
             $(form + ".btnTerminar").removeClass("hide");
             $(modulo + ".btnHabilitar").addClass("hide");
             break;
         case "TERMINADO":
             //cargar información guardada previamente.
-            window["loadInfo" + seccion.moduloName.replace("modulo","")]();           
+            window["loadInfo" + seccionName]();           
             $(form + ":input").prop("disabled", true);
 
             $(form + ".btnGuardar").addClass("hide");
@@ -120,7 +120,7 @@ window.guardarFormDomicilio = function guardarFormDomicilio(seccionNo, seccionNa
             root.domicilioExtranjero.codigoPostal = $("#domExtranjero input[name='codigoPostal']").val();
 
             //generales
-            root.aclaracionesObservaciones = $("textarea[name='aclaracionesObservaciones']").val();
+            root.aclaracionesObservaciones = $("#formDomicilio textarea[name='aclaracionesObservaciones']").val().toUpperCase();
         
             //actualiza el status de la sección (en proceso/terminado).
             actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);            

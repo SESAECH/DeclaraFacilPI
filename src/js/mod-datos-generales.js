@@ -82,7 +82,7 @@ window.guardarFormDatosGenerales = function guardarFormDatosGenerales(seccionNo,
             homoClave : { required: true, minlength: 3, maxlength: 3 },
             curp : { required: true, minlength: 18, maxlength: 18, CURP: true },
             personal : { required: true, email: true },
-            casa : { required: true, number: true, minlength: 10, maxlength: 10 },
+            casa : { required: false, number: true, minlength: 10, maxlength: 10 },
             celularPersonal : { required: true, number: true, minlength: 10, maxlength: 10 },
             situacionPersonalEstadoCivil : { required: true },
             regimenMatrimonial : { required: true },
@@ -95,13 +95,15 @@ window.guardarFormDatosGenerales = function guardarFormDatosGenerales(seccionNo,
             rfc : { required: "Ingrese el RFC.", minlength: "El minimo de caracteres es de 10.", maxlength: "El máximo de caracteres es de 10." },
             homoClave : { required: "Ingrese la homoclave.", minlength: "El mínimo de caracteres es de 3.", maxlength: "El máximo de caracteres es de 3." },
             curp : { required: "Ingrese la CURP.", minlength: "El mínimo de caracteres es de 18.", maxlength: "El máximo de caracteres es de 18." },
+            institucional:{ required:"Ingrese el correo electrónico institucional", email:"Ingrese un correo valido."},
             personal : { required: "Ingrese el correo electrónico personal.", email: "El formato del correo electrónico no es válido." },
-            casa : { required: "Ingrese el número telefónico de casa", number: "Solo se permiten caracteres numéricos.", minlength: "El mínimo de caracteres es de 10", maxlength: "El máximo de caracteres es de 10." },
+            casa : { number: "Solo se permiten caracteres numéricos.", minlength: "El mínimo de caracteres es de 10", maxlength: "El máximo de caracteres es de 10." },
             celularPersonal : { required: "Ingrese el número de celular personal.", number: "Solo se permiten caracteres numéricos.", minlength: "El mínimo de caracteres es de 10.", maxlength: "El máximo de caracteres es de 10." },
             situacionPersonalEstadoCivil : { required: "Seleccione el estado civil." },
             regimenMatrimonial : { required: "Seleccione el régimen matrimonial." },
             paisNacimiento : { required: "Selecione el país de nacimiento." },
             nacionalidad : { required: "Seleccione la nacionalidad." }
+            
         },
         // Make sure the form is submitted to the destination defined
         // in the "action" attribute of the form when valid
@@ -113,24 +115,24 @@ window.guardarFormDatosGenerales = function guardarFormDatosGenerales(seccionNo,
             root.curp =             $("#formDatosGenerales input[name='curp']").val();
             root.rfc.rfc =          $("#formDatosGenerales input[name='rfc']").val();
             root.rfc.homoClave =    $("#formDatosGenerales input[name='homoClave']").val();
-            root.correoElectronico.institucional = $("#formDatosGenerales input[name='institucional']").val();
-            root.correoElectronico.personal = $("#formDatosGenerales input[name='personal']").val();
-            root.telefono.casa = $("#formDatosGenerales input[name='casa']").val();
-            root.telefono.celularPersonal = $("#formDatosGenerales input[name='celularPersonal']").val();
+            root.correoElectronico.institucional =  $("#formDatosGenerales input[name='institucional']").val();
+            root.correoElectronico.personal =       $("#formDatosGenerales input[name='personal']").val();
+            root.telefono.casa =                    $("#formDatosGenerales input[name='casa']").val();
+            root.telefono.celularPersonal =         $("#formDatosGenerales input[name='celularPersonal']").val();
             root.situacionPersonalEstadoCivil.clave = $("#formDatosGenerales select[name='situacionPersonalEstadoCivil'] option:selected").val();
             root.situacionPersonalEstadoCivil.valor = $("#formDatosGenerales select[name='situacionPersonalEstadoCivil'] option:selected")[0].innerText;
-            root.regimenMatrimonial.clave = $("#formDatosGenerales select[name='regimenMatrimonial'] option:selected").val();
-            root.regimenMatrimonial.valor = $("#formDatosGenerales select[name='regimenMatrimonial'] option:selected")[0].innerText;
-            root.paisNacimiento.clave = $("#formDatosGenerales select[name='paisNacimiento'] option:selected").val();
-            root.paisNacimiento.valor = $("#formDatosGenerales select[name='paisNacimiento'] option:selected")[0].innerText;
-            root.nacionalidad.clave = $("#formDatosGenerales select[name='nacionalidad'] option:selected").val();
-            root.nacionalidad.valor = $("#formDatosGenerales select[name='nacionalidad'] option:selected")[0].innerText;
-            root.aclaracionesObservaciones = $("#formDatosGenerales textarea[name='aclaracionesObservaciones']").val();
+            root.regimenMatrimonial.clave =         $("#formDatosGenerales select[name='regimenMatrimonial'] option:selected").val();
+            root.regimenMatrimonial.valor =         $("#formDatosGenerales select[name='regimenMatrimonial'] option:selected")[0].innerText;
+            root.paisNacimiento.clave =             $("#formDatosGenerales select[name='paisNacimiento'] option:selected").val();
+            root.paisNacimiento.valor =             $("#formDatosGenerales select[name='paisNacimiento'] option:selected")[0].innerText;
+            root.nacionalidad.clave =               $("#formDatosGenerales select[name='nacionalidad'] option:selected").val();
+            root.nacionalidad.valor =               $("#formDatosGenerales select[name='nacionalidad'] option:selected")[0].innerText;
+            root.aclaracionesObservaciones =        $("#formDatosGenerales textarea[name='aclaracionesObservaciones']").val().toUpperCase();
             //actualiza el status de la sección (en proceso/terminado)."situacion_patrimonial"
             actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);
         }
     });    
-};
+}
 
 window.loadInfoDatosGenerales = function loadInfoDatosGenerales(){
     var infoSeccionGuardada = jsonResult.declaracion.situacionPatrimonial.datosGenerales;
@@ -152,10 +154,4 @@ window.loadInfoDatosGenerales = function loadInfoDatosGenerales(){
             }
         }
     });
-};
-
-/*
-window.initDatosGenerales=initDatosGenerales;
-window.loadInfoDatosGenerales=loadInfoDatosGenerales;
-window.guardarFormDatosGenerales=guardarFormDatosGenerales;
-*/
+}

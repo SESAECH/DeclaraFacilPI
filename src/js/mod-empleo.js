@@ -38,6 +38,7 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
             //asginar valores predeterminados a catálogos(ayuda al usuario).
             $(form + "#domicilioEmpMX").prop("checked", true);
             $(form + "#domEmpMexico").removeClass("hide");
+            $(form + "domEmpExtranjero").addClass("hide");
             $(form + ".CBOpais").val("MX");
             $(form + ".CBOentidadFederativa").val("07").change();
             $(form + ".btnGuardar").removeClass("hide");
@@ -46,7 +47,7 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
         break;
         case "EN_PROCESO":
             //cargar información guardada previamente.
-            window["loadInfo" + seccionName];
+            window["loadInfo" + seccionName](form);
             $(form + ".btnGuardar").removeClass("hide");
             $(form + ".btnTerminar").removeClass("hide");
             $(modulo + ".btnHabilitar").addClass("hide");
@@ -129,13 +130,14 @@ window.guardarFormEmpleoCargoComision = function guardarFormEmpleoCargoComision(
         // in the "action" attribute of the form when valid
         submitHandler: function(form, btn) {
             var root = jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision;
+            let honorarios = $(formulario + "select[name='contratadoPorHonorarios'] option:selected").val() =="false" ? false: true;
             root.tipoOperacion =                $(formulario + "select[name='tipoOperacion'] option:selected").val();
             root.nivelOrdenGobierno =           $(formulario + "select[name='nivelOrdenGobierno'] option:selected").val();
             root.ambitoPublico =                $(formulario + "select[name='ambitoPublico'] option:selected").val();
             root.nombreEntePublico =            $(formulario + "input[name='nombreEntePublico']").val();
             root.areaAdscripcion =              $(formulario + "input[name='areaAdscripcion']").val();
             root.empleoCargoComision =          $(formulario + "input[name='empleoCargoComision']").val();
-            root.contratadoPorHonorarios =      $(formulario + "select[name='contratadoPorHonorarios'] option:selected").val();
+            root.contratadoPorHonorarios =     honorarios;
             root.nivelEmpleoCargoComision =     $(formulario + "input[name='nivelEmpleoCargoComision']").val();
             root.funcionPrincipal =             $(formulario + "input[name='funcionPrincipal']").val();
             root.fechaTomaPosesion =            $(formulario + "input[name='fechaTomaPosesion']").val();
@@ -185,7 +187,7 @@ window.guardarFormEmpleoCargoComision = function guardarFormEmpleoCargoComision(
                 root.domicilioExtranjero.pais = $("#domEmpExtranjero select[name='pais'] option:selected").val();
                 root.domicilioExtranjero.codigoPostal = $("#domEmpExtranjero input[name='codigoPostal']").val();
             }                                            
-            root.aclaracionesObservaciones = $(formulario + "textarea[name='aclaracionesObservaciones']").val();
+            root.aclaracionesObservaciones = $(formulario + "textarea[name='aclaracionesObservaciones']").val().toUpperCase();
             //actualiza el status de la sección (en proceso/terminado).
             actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);
         }
@@ -221,9 +223,9 @@ window.loadInfoEmpleoCargoComision = function loadInfoEmpleoCargoComision(form){
     $("#domEmpMexico input[name='calle']").val(root.domicilioMexico.calle);
     $("#domEmpMexico input[name='numeroExterior']").val(root.domicilioMexico.numeroExterior);
     $("#domEmpMexico input[name='numeroInterior']").val(root.domicilioMexico.numeroInterior);
-    $("#domEmpMexico input[name='coloniaLocalidad']").val(root.domicilioMexico.coloniaLocalidad);
+    $("#domEmpMexico input[name='coloniaLocalidad']").val(root.domicilioMexico.coloniaLocalidad);    
+    $("#domEmpMexico select[name='entidadFederativa']").val(root.domicilioMexico.entidadFederativa.clave).trigger("change");
     $("#domEmpMexico select[name='municipioAlcaldia']").val(root.domicilioMexico.municipioAlcaldia.clave);
-    $("#domEmpMexico select[name='entidadFederativa']").val(root.domicilioMexico.entidadFederativa.clave);
     $("#domEmpMexico input[name='codigoPostal']").val(root.domicilioMexico.codigoPostal);
 
     //domicilio extranjero
