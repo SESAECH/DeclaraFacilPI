@@ -271,7 +271,7 @@ window.jsonResult = {
             "valor": 0,
             "moneda": "MXN"
           },
-          "actividadIndustrialComercialEmpresarial": {
+          "actividadIndustialComercialEmpresarial": {
             "remuneracionTotal": {
               "valor": 0,
               "moneda": "MXN"

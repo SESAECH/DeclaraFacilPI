@@ -139,7 +139,7 @@ label{font-size: 13px; font-weight: 500;}
 /* captura */
 .titulo-declaracion-captura, .titulo1{background-color: #621132 !important; padding:10px; font-size:1rem; width: 100%; color: #fff;}
 .titulo-seccion, .bg-seccion{background-color: #e0e0e0 !important; padding:10px; font-size:15px; margin-bottom: 0px;}
-.subtitulo-seccion{font-size: 80%; font-weight: 400;}
+.subtitulo-seccion{font-size: 100%; font-weight: 400;}
 .list-group-item {padding: 10px 5px;font-size: 0.8rem; background-color: transparent; border:none; border-bottom: 1px solid #e0e0e0 ;}
 .list-group-item.active {background-color: #541533;border-color: #541533;}
 .list-group-item.active:hover {background-color: #541533;border-color: #541533;}

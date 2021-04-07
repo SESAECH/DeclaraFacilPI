@@ -2,7 +2,8 @@
 $("#btnGuardarAvance").on('click',function() {
     //generarPDF();
     //generar file json.
-    let fecha = new Date();    
+    let fecha = new Date();   
+    jsonResult.captura.contralor=$("input[name='nameContralor']").val(); 
     let text = JSON.stringify(jsonResult);
     let filename = $("input[name='curp']").val() + "_" + jsonResult.captura.tipo_declaracion + "_" + fecha.getFullYear() + ".json";                    
     download(filename, text);

@@ -3,7 +3,7 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
         let avanceCaptura = JSON.parse(data);
         jsonResult.captura = avanceCaptura.captura;
         jsonResult.declaracion ={};
-        
+        $("input[name='nameContralor']").val(jsonResult.captura.contralor);
         Object.keys(avanceCaptura.captura.declaracion.situacionPatrimonial.secciones).forEach(function (index) {
             var item = avanceCaptura.captura.declaracion.situacionPatrimonial.secciones[index];
             if (!jsonResult.declaracion[item.apartado]){jsonResult.declaracion[item.apartado] = {};}

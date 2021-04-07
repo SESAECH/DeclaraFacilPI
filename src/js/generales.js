@@ -170,11 +170,17 @@ window.loadCat = function (catalogo, obj){
 //carga los municipios.
 window.loadMunicipios = function loadMunicipios(obj, filtro){
     $(obj).empty();
-    $.each(municipios, function (index, item) {
-        if (item.cve_agee === filtro){
-            $(obj).append('<option value="' + item.cve_agem + '">' + item.nom_agem + '</option>');
-        }                        
+    $.each(municipios[filtro], function (index, item) {
+        $(obj).append('<option value="' + item.clave + '">' + item.valor + '</option>');
     });
+
+    $(obj).append($(obj + " option")
+                              .remove().sort(function(a, b) {
+                var at = $(a).text(),
+                    bt = $(b).text();
+                return (at > bt) ? 1 : ((at < bt) ? -1 : 0);
+    }));
+    $(obj).val("001");
 };
 //window.loadMunicipios = loadMunicipios;
 

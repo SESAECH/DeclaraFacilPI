@@ -8,7 +8,8 @@ window.initIngresos = function initIngresos(data){
     //cargar catalogos.
     loadCat(moneda, ".CBOmoneda");
     loadCat(tipoInstrumento, ".CBOtipoInstrumento");
-        
+    loadCat(tipoBienEnajenacionBienes, ".CBOtipoBienEnajenacionBienes");
+
     //validar status de la sección.
     switch(seccion.status){
         case "SIN_INFO": 
@@ -71,6 +72,40 @@ window.initIngresos = function initIngresos(data){
         $(form + ".CBOmoneda").prop("disabled", true);
         $(form + ".cantidadDisabled").prop("disabled", true);
     });
+
+    //modificación dependiente del tipo de declaración a presentar.
+    switch(jsonResult.captura.tipo_declaracion){
+        case "INICIAL":
+            $(form + ".lblIngresos1").text("I.- REMUNERACIÓN MENSUAL NETA DEL DECLARANTE POR SU CARGO PÚBLICO (POR CONCEPTO DE SUELDOS, HONORARIOS, COMPENSACIONES, BONOS Y OTRAS PRESTACIONES)(CANTIDADES NETAS DESPUÉS DE IMPUESTOS)");
+            $(form + ".lblIngresos2").text("II.- OTROS INGRESOS MENSUALES DEL DECLARANTE (SUMA DEL II.1 AL II.4)");
+            $(form + ".lblIngresos3").text("A.- INGRESO MENSUAL NETO DEL DECLARANTE (SUMA DEL NUMERAL I Y II)");
+            $(form + ".lblIngresos4").text("B.- INGRESO MENSUAL DE LA PAREJA Y/O DEPENDIENTES ECONÓMICOS (DESPUÉS DE IMPUESTOS)");
+            $(form + ".lblIngresos5").text("C.- TOTAL DE INGRESOS MENSUALES NETOS PERCIBIDOS POR EL DECLARANTE, PAREJA Y/O DEPENDIENTES ECONÓMICOS (SUMA DE LOS APARTADOS A Y B)");
+            $(form + ".lblIngresosOtrosIngresos").text("II.4.- OTROS INGRESOS NO CONSIDERADOS A LOS ANTERIORES (DESPUÉS DE IMPUESTOS)");
+            $(form + ".content_ingresos_enajenacion_bienes").addClass("hide");
+            $(form + "#tableEnajenacionBienes").empty();
+            $(form + ".enajenacionBienesRemuneracionTotalCantidad").val("0");
+            break;
+        case "MODIFICACION":
+            $(form + ".lblIngresos1").text("I.- REMUNERACIÓN ANUAL NETA DEL DECLARANTE POR SU CARGO PÚBLICO (POR CONCEPTO DE SUELDOS, HONORARIOS, COMPENSACIONES, BONOS, AGUINALDOS Y OTRAS PRESTACIONES) (CANTIDADES NETAS DESPUÉS DE IMPUESTOS)");
+            $(form + ".lblIngresos2").text("II.- OTROS INGRESOS DEL DECLARANTE (SUMA DEL II.1 AL II.5)");
+            $(form + ".lblIngresos3").text("A.- INGRESO ANUAL NETO DEL DECLARANTE (SUMA DEL NUMERAL I Y II)");
+            $(form + ".lblIngresos4").text("B.- INGRESO ANUAL NETO DE LA PAREJA Y / O DEPENDIENTES ECONÓMICOS (DESPUÉS DE IMPUESTOS");
+            $(form + ".lblIngresos5").text("C.- TOTAL DE INGRESOS ANUALES NETOS PERCIBIDOS POR EL DECLARANTE, PAREJA Y / O DEPENDIENTES ECONÓMICOS (SUMA DE LOS APARTADOS A Y B)");
+            $(form + ".lblIngresosOtrosIngresos").text("II.5 - OTROS INGRESOS NO CONSIDERADOS ANTERIORMENTE (DESPUÉS DE IMPUESTOS)");
+            $(form + ".content_ingresos_enajenacion_bienes").removeClass("hide");
+            break;
+        case "CONCLUSION":
+            $(form + ".lblIngresos1").text("I.- REMUNERACIÓN NETA DEL AÑO EN CURSO A LA FECHA DE CONCLUSIÓN DEL EMPLEO, CARGO O COMISIÓN DEL DECLARANTE POR SU CARGO PÚBLICO (POR CONCEPTO DE SUELDOS, HONORARIOS, COMPENSACIONES, BONOS Y OTRAS PRESTACIONES) (CANTIDADES NETAS DESPUÉS DE IMPUESTOS)");
+            $(form + ".lblIngresos2").text("II.- OTROS INGRESOS DEL DECLARANTE (SUMA DEL II.1 AL II.5)");
+            $(form + ".lblIngresos3").text("A.- INGRESOS DEL DECLARANTE DEL AÑO EN CURSO A LA FECHA DE CONCLUSIÓN DEL EMPLEO, CARGO O COMISIÓN(SUMA DEL NUMERAL I Y II)");
+            $(form + ".lblIngresos4").text("B.- INGRESOS DEL AÑO EN CURSO A LA FECHA DE CONCLUSIÓN DEL EMPLEO, CARGO O COMISIÓN DE LA PAREJA Y / O DEPENDIENTES ECONÓMICOS (DESPUÉS DE IMPUESTOS)");
+            $(form + ".lblIngresos5").text("C.- TOTAL DE INGRESOS NETOS DEL AÑO EN CURSO A LA FECHA DE CONCLUSIÓN DEL EMPLEO, CARGO O COMISIÓN PERCIBIDOS POR EL DECLARANTE, PAREJA Y / O DEPENDIENTES ECONÓMICOS (SUMA DE LOS APARTADOS A Y B)");
+            $(form + ".lblIngresosOtrosIngresos").text("II.5 - OTROS INGRESOS NO CONSIDERADOS A LOS ANTERIORES (DESPUÉS DE IMPUESTOS)");
+            $(form + ".content_ingresos_enajenacion_bienes").removeClass("hide");
+            break;
+    } 
+
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
 }
@@ -121,20 +156,56 @@ window.guardarFormIngresos = function guardarFormIngresos(seccionNo, seccionName
         // in the "action" attribute of the form when valid
         submitHandler: function(form, btn) {
             var nodo = jsonResult.declaracion.situacionPatrimonial.ingresos;
+            switch(jsonResult.captura.tipo_declaracion){
+                case "INICIAL":
+                    nodo.remuneracionMensualCargoPublico.valor =    parseInt($("input[name='remuneracionMensualCargoPublicoCantidad']").val());
+                    nodo.remuneracionMensualCargoPublico.moneda =   $("select[name='remuneracionMensualCargoPublicoMoneda'] option:selected").val();
+                    
+                    nodo.otrosIngresosMensualesTotal.valor =        parseInt($("input[name='otrosIngresosMensualesTotalCantidad']").val());
+                    nodo.otrosIngresosMensualesTotal.moneda =       $("select[name='otrosIngresosMensualesTotalMoneda'] option:selected").val();
 
-            nodo.remuneracionMensualCargoPublico.valor =    parseInt($("input[name='remuneracionMensualCargoPublicoCantidad']").val());
-            nodo.remuneracionMensualCargoPublico.moneda =   $("select[name='remuneracionMensualCargoPublicoMoneda'] option:selected").val();
-            nodo.otrosIngresosMensualesTotal.valor =        parseInt($("input[name='otrosIngresosMensualesTotalCantidad']").val());
-            nodo.otrosIngresosMensualesTotal.moneda =       $("select[name='otrosIngresosMensualesTotalMoneda'] option:selected").val();
+                    nodo.ingresoMensualNetoDeclarante.valor =    parseInt($("input[name='ingresoMensualNetoDeclaranteCantidad']").val());
+                    nodo.ingresoMensualNetoDeclarante.moneda =   $("select[name='ingresoMensualNetoDeclaranteMoneda'] option:selected").val();
 
-            nodo.ingresoMensualNetoDeclarante.valor =    parseInt($("input[name='ingresoMensualNetoDeclaranteCantidad']").val());
-            nodo.ingresoMensualNetoDeclarante.moneda =   $("select[name='ingresoMensualNetoDeclaranteMoneda'] option:selected").val();
+                    nodo.ingresoMensualNetoParejaDependiente.valor =    parseInt($("input[name='ingresoMensualNetoParejaDependienteCantidad']").val());
+                    nodo.ingresoMensualNetoParejaDependiente.moneda =   $("select[name='ingresoMensualNetoParejaDependienteMoneda'] option:selected").val();
 
-            nodo.ingresoMensualNetoParejaDependiente.valor =    parseInt($("input[name='ingresoMensualNetoParejaDependienteCantidad']").val());
-            nodo.ingresoMensualNetoParejaDependiente.moneda =   $("select[name='ingresoMensualNetoParejaDependienteMoneda'] option:selected").val();
+                    nodo.totalIngresosMensualesNetos.valor =    parseInt($("input[name='totalIngresosMensualesNetosCantidad']").val());
+                    nodo.totalIngresosMensualesNetos.moneda =   $("select[name='totalIngresosMensualesNetosMoneda'] option:selected").val();
+                    break;
+                case "MODIFICACION":
+                    nodo.remuneracionAnualCargoPublico.valor =    parseInt($("input[name='remuneracionMensualCargoPublicoCantidad']").val());
+                    nodo.remuneracionAnualCargoPublico.moneda =   $("select[name='remuneracionMensualCargoPublicoMoneda'] option:selected").val();
+                    
+                    nodo.otrosIngresosAnualesTotal.valor =        parseInt($("input[name='otrosIngresosMensualesTotalCantidad']").val());
+                    nodo.otrosIngresosAnualesTotal.moneda =       $("select[name='otrosIngresosMensualesTotalMoneda'] option:selected").val();
 
-            nodo.totalIngresosMensualesNetos.valor =    parseInt($("input[name='totalIngresosMensualesNetosCantidad']").val());
-            nodo.totalIngresosMensualesNetos.moneda =   $("select[name='totalIngresosMensualesNetosMoneda'] option:selected").val();
+                    nodo.ingresoAnualNetoDeclarante.valor =    parseInt($("input[name='ingresoMensualNetoDeclaranteCantidad']").val());
+                    nodo.ingresoAnualNetoDeclarante.moneda =   $("select[name='ingresoMensualNetoDeclaranteMoneda'] option:selected").val();
+
+                    nodo.ingresoAnualNetoParejaDependiente.valor =    parseInt($("input[name='ingresoMensualNetoParejaDependienteCantidad']").val());
+                    nodo.ingresoAnualNetoParejaDependiente.moneda =   $("select[name='ingresoMensualNetoParejaDependienteMoneda'] option:selected").val();
+
+                    nodo.totalIngresosAnualesNetos.valor =    parseInt($("input[name='totalIngresosMensualesNetosCantidad']").val());
+                    nodo.totalIngresosAnualesNetos.moneda =   $("select[name='totalIngresosMensualesNetosMoneda'] option:selected").val();
+                    break;
+                case "CONCLUSION":
+                    nodo.remuneracionConclusionCargoPublico.valor =    parseInt($("input[name='remuneracionMensualCargoPublicoCantidad']").val());
+                    nodo.remuneracionConclusionCargoPublico.moneda =   $("select[name='remuneracionMensualCargoPublicoMoneda'] option:selected").val();
+                    
+                    nodo.otrosIngresosConclusionTotal.valor =        parseInt($("input[name='otrosIngresosMensualesTotalCantidad']").val());
+                    nodo.otrosIngresosConclusionTotal.moneda =       $("select[name='otrosIngresosMensualesTotalMoneda'] option:selected").val();
+
+                    nodo.ingresoConclusionNetoDeclarante.valor =    parseInt($("input[name='ingresoMensualNetoDeclaranteCantidad']").val());
+                    nodo.ingresoConclusionNetoDeclarante.moneda =   $("select[name='ingresoMensualNetoDeclaranteMoneda'] option:selected").val();
+
+                    nodo.ingresoConclusionNetoParejaDependiente.valor =    parseInt($("input[name='ingresoMensualNetoParejaDependienteCantidad']").val());
+                    nodo.ingresoConclusionNetoParejaDependiente.moneda =   $("select[name='ingresoMensualNetoParejaDependienteMoneda'] option:selected").val();
+
+                    nodo.totalIngresosConclusionNetos.valor =    parseInt($("input[name='totalIngresosMensualesNetosCantidad']").val());
+                    nodo.totalIngresosConclusionNetos.moneda =   $("select[name='totalIngresosMensualesNetosMoneda'] option:selected").val();
+                    break;
+            }            
 
             nodo.aclaracionesObservaciones =   $("#formIngresos textarea[name='aclaracionesObservaciones']").val();
             //actualiza el status de la sección (en proceso/terminado)."situacion_patrimonial"
@@ -399,6 +470,87 @@ function eliminarServiciosProfesionales(data){
 }
 
 /* -------------------------------------------------------------- */
+/* EnajenacionBienes */
+function agregarEnajenacionBienes(){
+    if($("#formIngresos input[name='enajenacionBienesRemuneracionCantidad']").val().length == 0){ mensajeSwal("Aviso","Ingrese la REMUNERACIÓN","error");}
+    else{ 
+        if ($("#formIngresos .btnAgregarEnajenacionBienes")[0].dataset.uuid){
+            uuidItem = $("#formIngresos .btnAgregarEnajenacionBienes")[0].dataset.uuid;
+        }
+        else{
+            uuidItem= generarUUID();
+        }    
+        guardarEnajenacionBienes(uuidItem);
+    }
+}
+
+function guardarEnajenacionBienes(uuidItem){
+    jsonResult.declaracion.situacionPatrimonial.ingresos.enajenacionBienes.bienes[uuidItem] = {
+        "uuid":uuidItem,
+        "remuneracion": {
+          "valor":  parseInt($("#formIngresos input[name='enajenacionBienesRemuneracionCantidad']").val()),
+          "moneda": $("#formIngresos select[name='enajenacionBienesRemuneracionMoneda'] option:selected").val()
+        },
+        "tipoBienEnajenado": $("#formIngresos select[name='tipoBienEnajenado'] option:selected").val()
+      };
+      //limpiar inputs
+      $("#formIngresos input[name='enajenacionBienesRemuneracionCantidad']").val("");
+      $("#formIngresos input[name='tipoIngreso']").val("");
+      $("#formIngresos .btnAgregarEnajenacionBienes").html('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">\
+                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>\
+                                                </svg>\
+                                                Agregar').attr("data-uuid","");
+      pintarTablaEnajenacionBienes();
+}
+
+function pintarTablaEnajenacionBienes(){
+    let html="", remuneracionTotal=0;
+    let lista = jsonResult.declaracion.situacionPatrimonial.ingresos.enajenacionBienes.bienes;
+    Object.keys(lista).forEach(function (row) {
+        var params = { uuid: lista[row].uuid, tipoBienEnajenado: lista[row].tipoBienEnajenado, remuneracion: lista[row].remuneracion.valor, moneda: lista[row].remuneracion.moneda};
+        remuneracionTotal+=lista[row].remuneracion.valor;
+        html+="<tr id='" + lista[row].uuid + "'>";
+        html+=" <td class='text-left'  style='width:40%;'>" + lista[row].tipoBienEnajenado +"</td>";
+        html+=" <td class='text-right' style='width:10%;'>" + lista[row].remuneracion.valor + " " + lista[row].remuneracion.moneda + "</td>";
+        html+=" <td class='text-right' style='width:20%;'>";
+        html+="     <button type='button' class='btn btn-sm btn-warning btnEditar' onclick='editarEnajenacionBienes(\"" + btoa(JSON.stringify(params)) + "\");'>Editar</button>";
+        html+="     <button type='button' class='btn btn-sm btn-danger btnEliminar' onclick='eliminarEnajenacionBienes(\"" + btoa(JSON.stringify(params)) + "\");'>Eliminar</button>";              
+        html+=" </td>";
+        html+="</tr>";
+    });
+    $("#formIngresos #tableEnajenacionBienes").empty().append(html);
+
+    jsonResult.declaracion.situacionPatrimonial.ingresos.enajenacionBienes.remuneracionTotal.valor = remuneracionTotal;
+    jsonResult.declaracion.situacionPatrimonial.ingresos.enajenacionBienes.remuneracionTotal.moneda = "MXN";
+    $("#formIngresos input[name='enajenacionBienesRemuneracionTotalCantidad']").val(remuneracionTotal);
+    sumaOtrosIngresos();
+}
+
+function editarEnajenacionBienes(data){
+    let item = JSON.parse(atob(data));
+    $("#formIngresos select[name='tipoBienEnajenado']").val(item.tipoBienEnajenado);
+    $("#formIngresos input[name='enajenacionBienesRemuneracionCantidad']").val(item.remuneracion);
+    $("#formIngresos .btnAgregarEnajenacionBienes").html('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">\
+                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>\
+                                                </svg>\
+                                                Actualizar').attr("data-uuid",item.uuid);
+}
+
+function eliminarEnajenacionBienes(data){
+    let remuneracionTotal=0;
+    let item = JSON.parse(atob(data));
+    //elimina item en object json y tabla.
+    delete jsonResult.declaracion.situacionPatrimonial.ingresos.enajenacionBienes.bienes[item.uuid];
+    $("#" + item.uuid).remove();
+    Object.keys(jsonResult.declaracion.situacionPatrimonial.ingresos.enajenacionBienes.bienes).forEach(function (row) {
+        remuneracionTotal+=jsonResult.declaracion.situacionPatrimonial.ingresos.enajenacionBienes.bienes[row].remuneracion.valor;        
+    });
+    jsonResult.declaracion.situacionPatrimonial.ingresos.enajenacionBienes.remuneracionTotal.valor = remuneracionTotal;
+    $("#formIngresos input[name='enajenacionBienesRemuneracionTotalCantidad']").val(remuneracionTotal);
+    sumaOtrosIngresos();
+}
+
+/* -------------------------------------------------------------- */
 /* OtrosIngresos */
 function agregarOtrosIngresos(){
     if($("input[name='tipoIngreso']").val().length == 0){ mensajeSwal("Aviso","Ingrese el TIPO DE INGRESO","error");}
@@ -487,6 +639,8 @@ function sumaOtrosIngresos(){
     total += nodo.actividadFinanciera.remuneracionTotal.valor;
     total += nodo.otrosIngresos.remuneracionTotal.valor;
     total += nodo.serviciosProfesionales.remuneracionTotal.valor;
+    if (jsonResult.captura.tipo_declaracion !="INICIAL"){ total += nodo.enajenacionBienes.remuneracionTotal.valor; }
+
     $("input[name='otrosIngresosMensualesTotalCantidad']").val(total);
 
     let i = $("input[name='remuneracionMensualCargoPublicoCantidad']").val();
