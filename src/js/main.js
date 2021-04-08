@@ -1,4 +1,4 @@
-console.log ("Iniciando Carga del Sistema....")
+console.log ("Iniciando Carga del Sistema....");
 
 /*
  global require ('catalogos-muns.js');
@@ -20,11 +20,11 @@ window.$ = jQuery;
 global.$ = $;
 import 'bootstrap';
 import 'jquery-validation';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 window.swal = swal;
 
 import  jsPDF from 'jspdf';
-
+window.jspdf = jsPDF;
 import 'jspdf-autotable';
 
 //window.jsPDF = window.jspdf = jsPDF;
