@@ -5,6 +5,7 @@ window.iniciarModulo = function iniciarModulo(data){
     $(".lnk" + seccion.moduloName).addClass("active");
     $(".titulo-seccion").text(seccion.no + ". " + seccion.titulo.toUpperCase());
     $("#" + seccion.moduloName + " .help").html(seccion.help);
+// console.log ("init" + JSON.stringify(seccion.moduloName) + " => " + JSON.stringify(item)); //debug
     window["init" + seccion.moduloName.replace("modulo","")](btoa(JSON.stringify(item)));
 };
 

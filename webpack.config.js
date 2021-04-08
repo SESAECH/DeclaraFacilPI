@@ -14,11 +14,11 @@ module.exports = {
 	path: `${__dirname}/dist`,
 	filename: 'bundle.js',
   },
-  mode:'development',
+  mode:'production',
   target:'web',
   performance: {
-    maxAssetSize: 10485760,  //10Mb
-    maxEntrypointSize: 7340032, //7 Mb
+    maxAssetSize: 20971520,  //20 Mb
+    maxEntrypointSize: 10485760, // 10 Mb
     hints: 'warning'
   },
   devServer: {
@@ -33,7 +33,7 @@ module.exports = {
   devtool:'inline-source-map',
   plugins:[ 
     new webpack.ProvidePlugin({ $: "jquery", jQuery: 'jquery','window.jQuery': 'jquery'}),
-//    new webpack.optimize.LimitChunkCountPlugin({maxChunks:1,}),
+    new webpack.optimize.LimitChunkCountPlugin({maxChunks:1,}),
     new HtmlWebpackPlugin({inject:true,template:'./src/declaraFacilPI.html', filename:'Declarafacil.html'}),
     //new MiniCssExtractPlugin(),
     //new BundleAnalyzerPlugin(),

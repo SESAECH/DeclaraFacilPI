@@ -1,3 +1,4 @@
+console.log ("Iniciando Carga del Sistema....")
 
 /*
  global require ('catalogos-muns.js');
@@ -46,11 +47,13 @@ window.captura=captura;
 import './catalogos.js';
 import './catalogos-muns.js';
 import './config.js';
-import './guardar-avance.js'; 
+//import './guardar-avance.js'; 
 import './config-cargar-file.js';
 import './mod-init.js';
 import './generales.js';
 import './config-estructura.js';
+import './config-guardar-avance.js';
+import './mideclaracion.js';
 /* import './estructura-declaracion-inicial.js'; */
 
 import './mod-datos-generales.js';
@@ -59,6 +62,10 @@ import './mod-cv.js';
 import './mod-empleo.js';
 import './mod-experiencia-laboral.js';
 import './mod-participacion-empresas.js';
+import './mod-datosPareja.js';
+import './mod-DependientesEconomicos.js';
+import './mod-DesempenoServidorPublico.js';
+import './mod-ingresos.js';
 
 import './config-pdf.js';
 
@@ -66,4 +73,4 @@ import './config-pdf.js';
 
 console.log ('CSS y JS cargados...');
 //if (module.hot) {module.hot.accept( './generales.js',function(){console.log ('Aceptando cambios'); window.loadCat=loadCat;})}
-module.hot.accept();
+//module.hot.accept();

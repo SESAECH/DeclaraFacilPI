@@ -1,7 +1,7 @@
 //alertar del cerrado, y forzar mayusculas
 $(document).ready(function() {
                 console.log( "ready!" );
-                moment.locale('es-mx'); 
+                //moment.locale('es-mx'); 
                 $("#contentSelectTipoDeclaracion").removeClass("hide");
                 window.onbeforeunload = function () {
                     return 'Are you really want to perform the action?';
