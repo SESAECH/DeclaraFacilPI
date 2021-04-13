@@ -21,7 +21,7 @@ global.$ = $;
 import 'bootstrap';
 import 'jquery-validation';
 import swal from 'sweetalert2';
-window.swal = swal;
+window.swal = window.Swal = swal;
 
 import  jsPDF from 'jspdf';
 window.jspdf = jsPDF;

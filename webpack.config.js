@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-//const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
+const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 //const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 //const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -30,14 +30,14 @@ module.exports = {
     hotOnly: true,
     watchContentBase:true,
   },
-  devtool:'inline-source-map',
+  //devtool:'inline-source-map',
   plugins:[ 
     new webpack.ProvidePlugin({ $: "jquery", jQuery: 'jquery','window.jQuery': 'jquery'}),
     new webpack.optimize.LimitChunkCountPlugin({maxChunks:1,}),
-    new HtmlWebpackPlugin({inject:true,template:'./src/declaraFacilPI.html', filename:'Declarafacil.html'}),
+    new HtmlWebpackPlugin({inject:'body',template:'./src/declaraFacilPI.html', filename:'Declarafacil.html'}),
     //new MiniCssExtractPlugin(),
     //new BundleAnalyzerPlugin(),
-    //new InlineChunkHtmlPlugin(HtmlWebpackPlugin,[/bundle/])
+    new InlineChunkHtmlPlugin(HtmlWebpackPlugin,[/bundle/])
   ],
   module:{
   	rules:[{
@@ -53,7 +53,8 @@ module.exports = {
   },
   optimization:{
   	minimize:true,
-    minimizer: [new TerserPlugin({extractComments:false,}), //new OptimizeCssAssetsPlugin(),
-    ]
+    minimizer: [new TerserPlugin({extractComments:'all',}), //new OptimizeCssAssetsPlugin(),
+    ],
+    splitChunks:false,
   }
 }

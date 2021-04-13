@@ -1,6 +1,6 @@
 //alertar del cerrado, y forzar mayusculas
 $(document).ready(function() {
-                console.log( "ready!" );
+                console.log( "Listo!" );
                 //moment.locale('es-mx'); 
                 $("#contentSelectTipoDeclaracion").removeClass("hide");
                 window.onbeforeunload = function () {
