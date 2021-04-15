@@ -115,40 +115,40 @@ window.jsonResult = {
         "datosPareja": {
           "ninguno": false,
           "tipoOperacion": "AGREGAR",
-          "nombre": "Ariana",
-          "primerApellido": "Moreno",
-          "segundoApellido": "Gomez",
-          "fechaNacimiento": "1990-12-01",
-          "rfc": "MOGO901201B21",
-          "relacionConDeclarante": "CONYUGE",
+          "nombre": "",
+          "primerApellido": "",
+          "segundoApellido": "",
+          "fechaNacimiento": "",
+          "rfc": "",
+          "relacionConDeclarante": "",
           "ciudadanoExtranjero": false,
-          "curp": "MOGO901201HVZRVR03",
+          "curp": "",
           "esDependienteEconomico": true,
           "habitaDomicilioDeclarante": true,
-          "lugarDondeReside": "EXTRANJERO",
+          "lugarDondeReside": "MEXICO",
           "domicilioMexico": {
-            "calle": "Av. Siempre Viva",
-            "numeroExterior": "123",
-            "numeroInterior": "1",
-            "coloniaLocalidad": "Del Valle",
+            "calle": "",
+            "numeroExterior": "",
+            "numeroInterior": "",
+            "coloniaLocalidad": "",
             "municipioAlcaldia": {
-              "clave": "001",
-              "valor": "Benito Juarez"
+              "clave": "",
+              "valor": ""
             },
             "entidadFederativa": {
-              "clave": "01",
-              "valor": "Aguascalientes"
+              "clave": "",
+              "valor": ""
             },
-            "codigoPostal": "03100"
+            "codigoPostal": ""
           },
           "domicilioExtranjero": {
-            "calle": "Evergreen Terrace",
-            "numeroExterior": "742",
-            "numeroInterior": "12",
-            "ciudadLocalidad": "Springfield",
-            "estadoProvincia": "North Takoma",
+            "calle": "",
+            "numeroExterior": "",
+            "numeroInterior": "",
+            "ciudadLocalidad": "",
+            "estadoProvincia": "",
             "pais": "MX",
-            "codigoPostal": "01234"
+            "codigoPostal": ""
           },
           "actividadLaboral": {
             "clave": "PUB",
@@ -157,110 +157,37 @@ window.jsonResult = {
           "actividadLaboralSectorPublico": {
             "nivelOrdenGobierno": "FEDERAL",
             "ambitoPublico": "ORGANO_AUTONOMO",
-            "nombreEntePublico": "Secretaría de Comunicaciones y Transportes",
-            "areaAdscripcion": "Unidad de Asuntos Jurídicos",
-            "empleoCargoComision": "Titular de unidad",
-            "funcionPrincipal": "Dirigir, coordinar, etc.",
+            "nombreEntePublico": "",
+            "areaAdscripcion": "",
+            "empleoCargoComision": "",
+            "funcionPrincipal": "",
             "salarioMensualNeto": {
-              "valor": 20000,
+              "valor": 0,
               "moneda": "MXN"
             },
-            "fechaIngreso": "2010-01-01"
+            "fechaIngreso": ""
           },
           "actividadLaboralSectorPrivadoOtro": {
-            "nombreEmpresaSociedadAsociacion": "Patito SA de CV",
-            "empleoCargoComision": "Reclutador",
-            "rfc": "IFD130924CX1",
-            "fechaIngreso": "2011-01-01",
+            "nombreEmpresaSociedadAsociacion": "",
+            "empleoCargoComision": "",
+            "rfc": "",
+            "fechaIngreso": "",
             "sector": {
               "clave": "AGRI",
               "valor": "AGRICULTURA"
             },
             "salarioMensualNeto": {
-              "valor": 20000,
+              "valor": 0,
               "moneda": "MXN"
             },
-            "proveedorContratistaGobierno": true
+            "proveedorContratistaGobierno": false
           },
-          "aclaracionesObservaciones": "Observaciones"
+          "aclaracionesObservaciones": ""
         },
         "datosDependienteEconomico": {
           "ninguno": false,
-          "dependienteEconomico": [
-            {
-              "tipoOperacion": "AGREGAR",
-              "nombre": "Ana",
-              "primerApellido": "Ana",
-              "segundoApellido": "Ana",
-              "fechaNacimiento": "2010-07-26",
-              "rfc": "CYUW1234IK90",
-              "parentescoRelacion": {
-                "clave": "HER",
-                "valor": "HERMANO"
-              },
-              "extranjero": false,
-              "curp": "BEML920313HMCLNS09",
-              "habitaDomicilioDeclarante": false,
-              "lugarDondeReside": "MEXICO",
-              "domicilioMexico": {
-                "calle": "Av. Siempre Viva",
-                "numeroExterior": "123",
-                "numeroInterior": "1",
-                "coloniaLocalidad": "Del Valle",
-                "municipioAlcaldia": {
-                  "clave": "001",
-                  "valor": "Benito Juarez"
-                },
-                "entidadFederativa": {
-                  "clave": "01",
-                  "valor": "Aguascalientes"
-                },
-                "codigoPostal": "03100"
-              },
-              "domicilioExtranjero": {
-                "calle": "Evergreen Terrace",
-                "numeroExterior": "742",
-                "numeroInterior": "12",
-                "ciudadLocalidad": "Springfield",
-                "estadoProvincia": "North Takoma",
-                "pais": "MX",
-                "codigoPostal": "01234"
-              },
-              "actividadLaboral": {
-                "clave": "PUB",
-                "valor": "PÚBLICO"
-              },
-              "actividadLaboralSectorPublico": {
-                "nivelOrdenGobierno": "FEDERAL",
-                "ambitoPublico": "ORGANO_AUTONOMO",
-                "nombreEntePublico": "INSTITUTO NACIONAL ELECTORAL",
-                "areaAdscripcion": "Dirección de recursos financieros",
-                "empleoCargoComision": "Jefe de departamento de indicadores",
-                "funcionPrincipal": "Generar indicadores de desempeño",
-                "salarioMensualNeto": {
-                  "valor": 20000,
-                  "moneda": "MXN"
-                },
-                "fechaIngreso": "2010-07-26"
-              },
-              "actividadLaboralSectorPrivadoOtro": {
-                "nombreEmpresaSociedadAsociacion": "La empresa S.A",
-                "rfc": "CYUW1234IK90",
-                "empleoCargo": "Administrador de recursos",
-                "fechaIngreso": "2010-07-26",
-                "salarioMensualNeto": {
-                  "valor": 20000,
-                  "moneda": "MXN"
-                }
-              },
-              "proveedorContratistaGobierno": false,
-              "sector": {
-                "clave": "AGRI",
-                "valor": "AGRICULTURA"
-              }
-            }
-          ],
-          "aclaracionesObservaciones": "Observaciones"
+          "dependienteEconomico": {},
+          "aclaracionesObservaciones": ""
         },
         "ingresos": {
           "remuneracionMensualCargoPublico": {
@@ -376,88 +303,7 @@ window.jsonResult = {
         },
         "bienesInmuebles": {
           "ninguno": false,
-          "bienInmueble": [
-            {
-              "tipoOperacion": "AGREGAR",
-              "tipoInmueble": {
-                "clave": "CASA",
-                "valor": "CASA"
-              },
-              "titular": [
-                {
-                  "clave": "DEC",
-                  "valor": "DECLARANTE"
-                }
-              ],
-              "porcentajePropiedad": 50,
-              "superficieTerreno": {
-                "valor": 120,
-                "unidad": "m2"
-              },
-              "superficieConstruccion": {
-                "valor": 120,
-                "unidad": "m2"
-              },
-              "tercero": [
-                {
-                  "tipoPersona": "FISICA",
-                  "nombreRazonSocial": "Jesús López",
-                  "rfc": "ABC680524P76"
-                }
-              ],
-              "transmisor": [
-                {
-                  "tipoPersona": "FISICA",
-                  "nombreRazonSocial": "Juan López Pérez",
-                  "rfc": "CYUW1234IK90",
-                  "relacion": {
-                    "clave": "HER",
-                    "valor": "HERMANO"
-                  }
-                }
-              ],
-              "formaAdquisicion": {
-                "clave": "CPV",
-                "valor": "COMPRAVENTA"
-              },
-              "formaPago": "CONTADO",
-              "valorAdquisicion": {
-                "valor": 20000,
-                "moneda": "MXN"
-              },
-              "fechaAdquisicion": "2010-07-26",
-              "datoIdentificacion": "F2019345",
-              "valorConformeA": "ESCRITURA PÚBLICA",
-              "domicilioMexico": {
-                "calle": "Av. Siempre Viva",
-                "numeroExterior": "123",
-                "numeroInterior": "1",
-                "coloniaLocalidad": "Del Valle",
-                "municipioAlcaldia": {
-                  "clave": "001",
-                  "valor": "Benito Juarez"
-                },
-                "entidadFederativa": {
-                  "clave": "01",
-                  "valor": "Aguascalientes"
-                },
-                "codigoPostal": "03100"
-              },
-              "domicilioExtranjero": {
-                "calle": "Evergreen Terrace",
-                "numeroExterior": "742",
-                "numeroInterior": "12",
-                "ciudadLocalidad": "Springfield",
-                "estadoProvincia": "North Takoma",
-                "pais": "MX",
-                "codigoPostal": "01234"
-              },
-              "motivoBaja": {
-                "clave": "VNT",
-                "valor": "VENTA"
-              }
-            }
-          ],
+          "bienInmueble": {},
           "aclaracionesObservaciones": "Observaciones"
         },
         "vehiculos": {
@@ -616,308 +462,50 @@ window.jsonResult = {
         },
         "adeudos": {
           "ninguno": false,
-          "adeudo": [
-            {
-              "tipoOperacion": "AGREGAR",
-              "titular": [
-                {
-                  "clave": "DEC",
-                  "valor": "DECLARANTE"
-                }
-              ],
-              "tipoAdeudo": {
-                "clave": "CAUT",
-                "valor": "CRÉDITO AUTOMOTRIZ"
-              },
-              "numeroCuentaContrato": "abcd1234",
-              "fechaAdquisicion": "2010-12-01",
-              "montoOriginal": {
-                "valor": 20000,
-                "moneda": "MXN"
-              },
-              "saldoInsolutoSituacionActual": {
-                "valor": 20000,
-                "moneda": "MXN"
-              },
-              "tercero": [
-                {
-                  "tipoPersona": "FISICA",
-                  "nombreRazonSocial": "Jesús López",
-                  "rfc": "ABC680524P76"
-                }
-              ],
-              "otorganteCredito": {
-                "tipoPersona": "FISICA",
-                "nombreInstitucion": "Secretaría de la Función Pública",
-                "rfc": "ABC680524P76"
-              },
-              "localizacionAdeudo": {
-                "pais": "MX"
-              }
-            }
-          ],
-          "aclaracionesObservaciones": "Observaciones"
+          "adeudo": {},
+          "aclaracionesObservaciones": ""
         },
         "prestamoOComodato": {
           "ninguno": false,
-          "prestamo": [
-            {
-              "tipoOperacion": "AGREGAR",
-              "tipoBien": {
-                "inmueble": {
-                  "tipoInmueble": {
-                    "clave": "CASA",
-                    "valor": "CASA"
-                  },
-                  "domicilioMexico": {
-                    "calle": "Av. Siempre Viva",
-                    "numeroExterior": "123",
-                    "numeroInterior": "1",
-                    "coloniaLocalidad": "Del Valle",
-                    "municipioAlcaldia": {
-                      "clave": "001",
-                      "valor": "Benito Juarez"
-                    },
-                    "entidadFederativa": {
-                      "clave": "01",
-                      "valor": "Aguascalientes"
-                    },
-                    "codigoPostal": "03100"
-                  },
-                  "domicilioExtranjero": {
-                    "calle": "Evergreen Terrace",
-                    "numeroExterior": "742",
-                    "numeroInterior": "12",
-                    "ciudadLocalidad": "Springfield",
-                    "estadoProvincia": "North Takoma",
-                    "pais": "MX",
-                    "codigoPostal": "01234"
-                  }
-                },
-                "vehiculo": {
-                  "tipo": {
-                    "clave": "AUMOT",
-                    "valor": "AUTOMÓVIL/MOTOCICLETA"
-                  },
-                  "marca": "Seat",
-                  "modelo": "Ibiza",
-                  "anio": 2010,
-                  "numeroSerieRegistro": "AA24309TMN8",
-                  "lugarRegistro": {
-                    "pais": "MX",
-                    "entidadFederativa": {
-                      "clave": "01",
-                      "valor": "Aguascalientes"
-                    }
-                  }
-                }
-              },
-              "duenoTitular": {
-                "tipoDuenoTitular": "FISICA",
-                "nombreTitular": "Max Power",
-                "rfc": "ABC680524P76",
-                "relacionConTitular": "Amigo"
-              }
-            }
-          ],
-          "aclaracionesObservaciones": "Observaciones"
+          "prestamo": {},
+          "aclaracionesObservaciones": ""
         }
       },
       "interes": {
         "participacion": {
           "ninguno": false,
           "participacion": [],
-          "aclaracionesObservaciones": "Observaciones"
+          "aclaracionesObservaciones": ""
         },
         "participacionTomaDecisiones": {
           "ninguno": false,
-          "participacion": [
-            {
-              "tipoOperacion": "AGREGAR",
-              "tipoRelacion": "DECLARANTE",
-              "tipoInstitucion": {
-                "clave": "OSC",
-                "valor": "ORGANIZACIONES DE LA SOCIEDAD CIVIL"
-              },
-              "nombreInstitucion": "Institución",
-              "rfc": "PEVB123654",
-              "puestoRol": "rol",
-              "fechaInicioParticipacion": "2019-12-01",
-              "recibeRemuneracion": true,
-              "montoMensual": {
-                "valor": 20000,
-                "moneda": "MXN"
-              },
-              "ubicacion": {
-                "pais": "MX",
-                "entidadFederativa": {
-                  "clave": "01",
-                  "valor": "Aguascalientes"
-                }
-              }
-            }
-          ],
-          "aclaracionesObservaciones": "Observaciones"
+          "participacion": {},
+          "aclaracionesObservaciones": ""
         },
         "apoyos": {
           "ninguno": false,
-          "apoyo": [
-            {
-              "tipoOperacion": "AGREGAR",
-              "tipoPersona": "FISICA",
-              "beneficiarioPrograma": {
-                "clave": "DC",
-                "valor": "DECLARANTE"
-              },
-              "nombrePrograma": "Nombre del programa",
-              "institucionOtorgante": "Institución que otorga el apoyo",
-              "nivelOrdenGobierno": "FEDERAL",
-              "tipoApoyo": {
-                "clave": "SUB",
-                "valor": "SUBSIDIO"
-              },
-              "formaRecepcion": "MONETARIO",
-              "montoApoyoMensual": {
-                "valor": 20000,
-                "moneda": "MXN"
-              },
-              "especifiqueApoyo": "información del apoyo"
-            }
-          ],
-          "aclaracionesObservaciones": "Observaciones"
+          "apoyo":{},
+          "aclaracionesObservaciones": ""
         },
         "representacion": {
           "ninguno": false,
-          "representacion": [
-            {
-              "tipoOperacion": "AGREGAR",
-              "tipoRelacion": "DECLARANTE",
-              "tipoRepresentacion": "REPRESENTANTE",
-              "fechaInicioRepresentacion": "2019-12-01",
-              "tipoPersona": "FISICA",
-              "nombreRazonSocial": "Anastacio",
-              "rfc": "ASDF14587896",
-              "recibeRemuneracion": true,
-              "montoMensual": {
-                "valor": 20000,
-                "moneda": "MXN"
-              },
-              "ubicacion": {
-                "pais": "MX",
-                "entidadFederativa": {
-                  "clave": "01",
-                  "valor": "Aguascalientes"
-                }
-              },
-              "sector": {
-                "clave": "AGRI",
-                "valor": "AGRICULTURA"
-              }
-            }
-          ],
-          "aclaracionesObservaciones": "Observaciones"
+          "representacion": {},
+          "aclaracionesObservaciones": ""
         },
         "clientesPrincipales": {
           "ninguno": false,
-          "cliente": [
-            {
-              "tipoOperacion": "AGREGAR",
-              "realizaActividadLucrativa": true,
-              "tipoRelacion": "DECLARANTE",
-              "empresa": {
-                "nombreEmpresaServicio": "Nombre de la empresa",
-                "rfc": "WFTC123456"
-              },
-              "clientePrincipal": {
-                "tipoPersona": "FISICA",
-                "nombreRazonSocial": "Nombre del cliente principal",
-                "rfc": "WFTC123456"
-              },
-              "sector": {
-                "clave": "AGRI",
-                "valor": "AGRICULTURA"
-              },
-              "montoAproximadoGanancia": {
-                "valor": 20000,
-                "moneda": "MXN"
-              },
-              "ubicacion": {
-                "pais": "MX",
-                "entidadFederativa": {
-                  "clave": "01",
-                  "valor": "Aguascalientes"
-                }
-              }
-            }
-          ],
-          "aclaracionesObservaciones": "Observaciones"
+          "cliente": {},
+          "aclaracionesObservaciones": ""
         },
         "beneficiosPrivados": {
           "ninguno": false,
-          "beneficio": [
-            {
-              "tipoOperacion": "AGREGAR",
-              "tipoPersona": "FISICA",
-              "tipoBeneficio": {
-                "clave": "S",
-                "valor": "Sorteo"
-              },
-              "beneficiario": [
-                {
-                  "clave": "DC",
-                  "valor": "DECLARANTE"
-                }
-              ],
-              "otorgante": {
-                "tipoPersona": "FISICA",
-                "nombreRazonSocial": "Colorantes mariposa SA de CV",
-                "rfc": "WFRG15789635"
-              },
-              "formaRecepcion": "MONETARIO",
-              "especifiqueBeneficio": "especifique el beneficio",
-              "montoMensualAproximado": {
-                "valor": 20000,
-                "moneda": "MXN"
-              },
-              "sector": {
-                "clave": "AGRI",
-                "valor": "AGRICULTURA"
-              }
-            }
-          ],
-          "aclaracionesObservaciones": "Observaciones"
+          "beneficio": {},
+          "aclaracionesObservaciones": ""
         },
         "fideicomisos": {
           "ninguno": false,
-          "fideicomiso": [
-            {
-              "tipoOperacion": "AGREGAR",
-              "tipoRelacion": "DECLARANTE",
-              "tipoFideicomiso": "PRIVADO",
-              "tipoParticipacion": "FIDEICOMITENTE",
-              "rfcFideicomiso": "RFVS15865846",
-              "fideicomitente": {
-                "tipoPersona": "FISICA",
-                "nombreRazonSocial": "nombre del fideicomitente",
-                "rfc": "EOPD145866"
-              },
-              "fiduciario": {
-                "nombreRazonSocial": "nombre del fiduciario",
-                "rfc": "EMIS1578438"
-              },
-              "fideicomisario": {
-                "tipoPersona": "FISICA",
-                "nombreRazonSocial": "nombre del fideicomisario",
-                "rfc": "ERHG1548798"
-              },
-              "sector": {
-                "clave": "AGRI",
-                "valor": "AGRICULTURA"
-              },
-              "extranjero": "MX"
-            }
-          ],
-          "aclaracionesObservaciones": "Observaciones"
+          "fideicomiso": {},
+          "aclaracionesObservaciones": ""
         }
       }
     }

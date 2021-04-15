@@ -138,3 +138,39 @@ window.trueFalse=[{"clave": true, "valor":"SI"},{"clave": false, "valor":"NO"}];
 
 window.moneda = [{"clave":"MXN","valor":"PESO MEXICANO"},{"clave":"USD","valor":"DÓLAR ESTADOUNIDENSE"},{"clave":"MXV","valor":"UNIDAD DE INVERSIÓN MEXICANA"},{"clave":"EUR","valor":"EURO"}];
 //window.moneda = moneda;
+
+window.titulares=[
+    {"clave":"DEC","valor":"DECLARANTE"},
+    {"clave":"DEC;CYG","valor":"DECLARANTE Y CÓNYUGE"},
+    {"clave":"DEC;CTER","valor":"DECLARANTE EN COPROPIEDAD CON TERCEROS"},
+    {"clave":"DEC;CYG;CTER","valor":"DECLARANTE Y CÓNYUGE EN COPROPIEDAD CON TERCEROS"},
+    {"clave":"DEC;CBN","valor":"DECLARANTE Y CONCUBINA O CONCUBINARIO"},
+    {"clave":"DEC;CBN;CTER","valor":"DECLARANTE Y CONCUBINA O CONCUBINARIO EN COPROPIEDAD CON TERCEROS"},
+    {"clave":"CYG","valor":"CÓNYUGE"},
+    {"clave":"CYG;CTER","valor":"CÓNYUGE EN COPROPIEDAD CON TERCEROS"},
+    {"clave":"CBN","valor":"CONCUBINA O CONCUBINARIO"},
+    {"clave":"CBN;CTER","valor":"CONCUBINA O CONCUBINARIO EN COPROPIEDAD CON TERCEROS"},
+    {"clave":"CVV","valor":"CONVIVIENTE"},
+    {"clave":"DEC;CVV","valor":"DECLARANTE Y CONVIVIENTE"},
+    {"clave":"DEC;CVV;CTER","valor":"DECLARANTE Y CONVIVIENTE EN COPROPIEDAD CON TERCEROS"},
+    {"clave":"CVV;DEN","valor":"CONVIVIENTE Y DEPENDIENTE ECONÓMICO"},
+    {"clave":"CVV;DEN;CTER","valor":"CONVIVIENTE Y DEPENDIENTE ECONÓMICO EN COPROPIEDAD CON TERCEROS"},
+    {"clave":"DEN","valor":"DEPENDIENTE ECONÓMICO"},
+    {"clave":"DEC;DEN","valor":"DECLARANTE Y DEPENDIENTE ECONÓMICO"},
+    {"clave":"DEC;DEN;CTER","valor":"DECLARANTE Y DEPENDIENTE ECONÓMICO EN COPROPIEDAD CON TERCEROS"},
+    {"clave":"DEN;CTER","valor":"DEPENDIENTE ECONÓMICO EN COPROPIEDAD CON TERCEROS"},
+    {"clave":"DEC;CYG;DEN","valor":"DECLARANTE, CÓNYUGE Y DEPENDIENTE ECONÓMICO"},
+    {"clave":"DEC;CBN;DEN","valor":"DECLARANTE, CONCUBINA O CONCUBINARIO Y DEPENDIENTE ECONÓMICO"},
+    {"clave":"CYG;DEN","valor":"CÓNYUGE Y DEPENDIENTE ECONÓMICO"},
+    {"clave":"CBN;DEN","valor":"CONCUBINA O CONCUBINARIO Y DEPENDIENTE ECONÓMICO"},
+    {"clave":"CYG;DEN;CTER","valor":"CÓNYUGE Y DEPENDIENTE ECONÓMICO EN COPROPIEDAD CON TERCEROS"},
+    {"clave":"CBN;DEN;CTER","valor":"CONCUBINA O CONCUBINARIO Y DEPENDIENTE ECONÓMICO EN COPROPIEDAD CON TERCEROS"}];
+
+    
+window.titularesApoyo=[];
+titularesApoyo["DEC"] = {"clave":"DEC","valor":"DECLARANTE"};
+titularesApoyo["CYG"] = {"clave":"CYG","valor":"CÓNYUGE"},
+titularesApoyo["CBN"] = {"clave":"CBN","valor":"CONCUBINA O CONCUBINARIO"},
+titularesApoyo["CVV"] = {"clave":"CVV","valor":"CONVIVIENTE"},
+titularesApoyo["DEN"] = {"clave":"DEN","valor":"DEPENDIENTE ECONÓMICO"},
+titularesApoyo["CTER"]= {"clave":"CTER","valor":"COPROPIEDAD CON TERCEROS"};

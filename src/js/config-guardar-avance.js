@@ -1,14 +1,12 @@
 //funcionalidad a controles de guardado.
 $("#btnGuardarAvance").on('click',function() {
-    //generarPDF();
-    //generar file json.
-    let fecha = new Date();   
-    jsonResult.captura.contralor=$("input[name='nameContralor']").val(); 
+    let fecha = new Date();
+    jsonResult.captura.contralor=$("input[name='nameContralor']").val();    
     let text = JSON.stringify(jsonResult);
-    let filename = $("input[name='curp']").val() + "_" + jsonResult.captura.tipo_declaracion + "_" + fecha.getFullYear() + ".json";                    
+    let filename = jsonResult.declaracion.situacionPatrimonial.datosGenerales.curp + "_" + jsonResult.captura.tipo_declaracion + "_" + fecha.getFullYear() + ".dec";
     download(filename, text);
 
-    Swal.fire({
+    swal.fire({
         title: "Aviso",
         text:"¿Desea continuar con la captura?",
         showCancelButton: true,
@@ -24,7 +22,7 @@ $("#btnGuardarAvance").on('click',function() {
         else if (result.isDismissed){
             regresarAlInicio();
         }
-      });               
+      });
 });
 
 window.download = function download(filename, text) {

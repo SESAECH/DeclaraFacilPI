@@ -55,6 +55,7 @@ window.setVaribleGlobal =  function setVaribleGlobal(campo, valor){
 };
 //window.setVaribleGlobal=setVaribleGlobal;
 
+
 $(".chkNinguno").on("change",function() {
     var btnAgregar = "#modulo" + this.dataset.form + " .btnAgregar";
     var btnTerminar = "#modulo" + this.dataset.form + " .btnTerminar";
@@ -119,7 +120,7 @@ $(".chkNinguno").on("change",function() {
                                 $(btnTerminar).removeClass("hide");
                             } 
                             else if (result.isDenied) {
-                                $(".chkNinguno")[0].checked=false;
+                                $("#moduloDependientesEconomicos .chkNinguno")[0].checked=false;
                                 $(btnAgregar).removeClass("hide");
                                 $(tabla).removeClass("hide");
                                 $(btnTerminar).removeClass("hide");
@@ -141,6 +142,356 @@ $(".chkNinguno").on("change",function() {
                 $("#formPareja .btnGuardar").prop("disabled", false);
                 $("#formPareja .btnTerminar").prop("disabled", false);
                 break;
+            case "BienesInmuebles":
+                if (Object.keys(jsonResult.declaracion.situacionPatrimonial.bienesInmuebles.bienInmueble).length>0){
+                    Swal.fire({
+                        title: 'Aviso',
+                        text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "Continuar",
+                        denyButtonText: "Cancelar",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                //borrar info del jsonResult y de la tabla.
+                                jsonResult.declaracion.situacionPatrimonial.bienesInmuebles.bienInmueble=[];
+                                jsonResult.declaracion.situacionPatrimonial.bienesInmuebles.ninguno=true;
+                                $(tabla + " tbody").empty();
+                                //inhabilitar controles.
+                                $(btnAgregar).addClass("hide");
+                                $(tabla).addClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            } 
+                            else if (result.isDenied) {
+                                $("#moduloBienesInmuebles .chkNinguno")[0].checked=false;
+                                $(btnAgregar).removeClass("hide");
+                                $(tabla).removeClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            }
+                    });
+                }
+                else{
+                    $(btnAgregar).addClass("hide");
+                    $(tabla).addClass("hide");
+                    $(btnTerminar).removeClass("hide");
+                }                 
+                break;
+            case "Adeudos": 
+                if (Object.keys(jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo).length>0){
+                    Swal.fire({
+                        title: 'Aviso',
+                        text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "Continuar",
+                        denyButtonText: "Cancelar",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                //borrar info del jsonResult y de la tabla.
+                                jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo=[];
+                                jsonResult.declaracion.situacionPatrimonial.adeudos.ninguno=true;
+                                $(tabla + " tbody").empty();
+                                //inhabilitar controles.
+                                $(btnAgregar).addClass("hide");
+                                $(tabla).addClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            } 
+                            else if (result.isDenied) {
+                                $("#moduloAdeudos .chkNinguno")[0].checked=false;
+                                $(btnAgregar).removeClass("hide");
+                                $(tabla).removeClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            }
+                    });
+                }
+                else{
+                    $(btnAgregar).addClass("hide");
+                    $(tabla).addClass("hide");
+                    $(btnTerminar).removeClass("hide");
+                }
+            break;
+            case "PrestamoOComodato": 
+                if (Object.keys(jsonResult.declaracion.situacionPatrimonial.prestamoOComodato.prestamo).length>0){
+                    Swal.fire({
+                        title: 'Aviso',
+                        text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "Continuar",
+                        denyButtonText: "Cancelar",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                //borrar info del jsonResult y de la tabla.
+                                jsonResult.declaracion.situacionPatrimonial.prestamoOComodato.prestamo=[];
+                                jsonResult.declaracion.situacionPatrimonial.prestamoOComodato.ninguno=true;
+                                $(tabla + " tbody").empty();
+                                //inhabilitar controles.
+                                $(btnAgregar).addClass("hide");
+                                $(tabla).addClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            } 
+                            else if (result.isDenied) {
+                                $("#moduloPrestamoOComodato .chkNinguno")[0].checked=false;
+                                $(btnAgregar).removeClass("hide");
+                                $(tabla).removeClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            }
+                    });
+                }
+                else{
+                    $(btnAgregar).addClass("hide");
+                    $(tabla).addClass("hide");
+                    $(btnTerminar).removeClass("hide");
+                }
+            break;            
+            case "ParticipacionEmpresas":
+                if (Object.keys(jsonResult.declaracion.interes.participacion.participacion).length>0){
+                    Swal.fire({
+                        title: 'Aviso',
+                        text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "Continuar",
+                        denyButtonText: "Cancelar",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                //borrar info del jsonResult y de la tabla.
+                                jsonResult.declaracion.interes.participacion.participacion=[];
+                                jsonResult.declaracion.interes.participacion.ninguno=true;
+                                $(tabla + " tbody").empty();
+                                //inhabilitar controles.
+                                $(btnAgregar).addClass("hide");
+                                $(tabla).addClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            } 
+                            else if (result.isDenied) {
+                                $("#moduloParticipacionEmpresas .chkNinguno")[0].checked=false;
+                                $(btnAgregar).removeClass("hide");
+                                $(tabla).removeClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            }
+                    });
+                }
+                else{
+                    $(btnAgregar).addClass("hide");
+                    $(tabla).addClass("hide");
+                    $(btnTerminar).removeClass("hide");
+                }
+            break;
+            case "ParticipacionInstituciones":
+                if (Object.keys(jsonResult.declaracion.interes.participacionTomaDecisiones.participacion).length>0){
+                    Swal.fire({
+                        title: 'Aviso',
+                        text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "Continuar",
+                        denyButtonText: "Cancelar",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                //borrar info del jsonResult y de la tabla.
+                                jsonResult.declaracion.interes.participacionTomaDecisiones.participacion=[];
+                                jsonResult.declaracion.interes.participacionTomaDecisiones.ninguno=true;
+                                $(tabla + " tbody").empty();
+                                //inhabilitar controles.
+                                $(btnAgregar).addClass("hide");
+                                $(tabla).addClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            } 
+                            else if (result.isDenied) {
+                                $("#moduloParticipacionInstituciones .chkNinguno")[0].checked=false;
+                                $(btnAgregar).removeClass("hide");
+                                $(tabla).removeClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            }
+                    });
+                }
+                else{
+                    $(btnAgregar).addClass("hide");
+                    $(tabla).addClass("hide");
+                    $(btnTerminar).removeClass("hide");
+                }
+            break;
+            case "ApoyosPublicos":
+                if (Object.keys(jsonResult.declaracion.interes.apoyos.apoyo).length>0){
+                    Swal.fire({
+                        title: 'Aviso',
+                        text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "Continuar",
+                        denyButtonText: "Cancelar",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                //borrar info del jsonResult y de la tabla.
+                                jsonResult.declaracion.interes.apoyos.apoyo=[];
+                                jsonResult.declaracion.interes.apoyos.ninguno=true;
+                                $(tabla + " tbody").empty();
+                                //inhabilitar controles.
+                                $(btnAgregar).addClass("hide");
+                                $(tabla).addClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            } 
+                            else if (result.isDenied) {
+                                $("#moduloApoyosPublico .chkNinguno")[0].checked=false;
+                                $(btnAgregar).removeClass("hide");
+                                $(tabla).removeClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            }
+                    });
+                }
+                else{
+                    $(btnAgregar).addClass("hide");
+                    $(tabla).addClass("hide");
+                    $(btnTerminar).removeClass("hide");
+                }
+            break; 
+            case "Representacion":
+                if (Object.keys(jsonResult.declaracion.interes.representacion.representacion).length>0){
+                    Swal.fire({
+                        title: 'Aviso',
+                        text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "Continuar",
+                        denyButtonText: "Cancelar",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                //borrar info del jsonResult y de la tabla.
+                                jsonResult.declaracion.interes.representacion.representacion=[];
+                                jsonResult.declaracion.interes.representacion.ninguno=true;
+                                $(tabla + " tbody").empty();
+                                //inhabilitar controles.
+                                $(btnAgregar).addClass("hide");
+                                $(tabla).addClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            } 
+                            else if (result.isDenied) {
+                                $("#moduloRepresentacion .chkNinguno")[0].checked=false;
+                                $(btnAgregar).removeClass("hide");
+                                $(tabla).removeClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            }
+                    });
+                }
+                else{
+                    $(btnAgregar).addClass("hide");
+                    $(tabla).addClass("hide");
+                    $(btnTerminar).removeClass("hide");
+                }
+            break;  
+            case "ClientesPrincipales":
+                if (Object.keys(jsonResult.declaracion.interes.clientesPrincipales.cliente).length>0){
+                    Swal.fire({
+                        title: 'Aviso',
+                        text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "Continuar",
+                        denyButtonText: "Cancelar",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                //borrar info del jsonResult y de la tabla.
+                                jsonResult.declaracion.interes.clientesPrincipales.cliente=[];
+                                jsonResult.declaracion.interes.clientesPrincipales.ninguno=true;
+                                $(tabla + " tbody").empty();
+                                //inhabilitar controles.
+                                $(btnAgregar).addClass("hide");
+                                $(tabla).addClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            } 
+                            else if (result.isDenied) {
+                                $("#moduloClientesPrincipales .chkNinguno")[0].checked=false;
+                                $(btnAgregar).removeClass("hide");
+                                $(tabla).removeClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            }
+                    });
+                }
+                else{
+                    $(btnAgregar).addClass("hide");
+                    $(tabla).addClass("hide");
+                    $(btnTerminar).removeClass("hide");
+                }
+            break;           
+            case "BeneficiosPrivados":
+                if (Object.keys(jsonResult.declaracion.interes.beneficiosPrivados.beneficio).length>0){
+                    Swal.fire({
+                        title: 'Aviso',
+                        text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "Continuar",
+                        denyButtonText: "Cancelar",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                //borrar info del jsonResult y de la tabla.
+                                jsonResult.declaracion.interes.beneficiosPrivados.beneficio=[];
+                                jsonResult.declaracion.interes.beneficiosPrivados.ninguno=true;
+                                $(tabla + " tbody").empty();
+                                //inhabilitar controles.
+                                $(btnAgregar).addClass("hide");
+                                $(tabla).addClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            } 
+                            else if (result.isDenied) {
+                                $("#moduloBeneficiosPrivados .chkNinguno")[0].checked=false;
+                                $(btnAgregar).removeClass("hide");
+                                $(tabla).removeClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            }
+                    });
+                }
+                else{
+                    $(btnAgregar).addClass("hide");
+                    $(tabla).addClass("hide");
+                    $(btnTerminar).removeClass("hide");
+                }
+            break;
+            case "Fideicomisos":
+                if (Object.keys(jsonResult.declaracion.interes.fideicomisos.fideicomiso).length>0){
+                    Swal.fire({
+                        title: 'Aviso',
+                        text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "Continuar",
+                        denyButtonText: "Cancelar",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                //borrar info del jsonResult y de la tabla.
+                                jsonResult.declaracion.interes.fideicomisos.fideicomiso=[];
+                                jsonResult.declaracion.interes.fideicomisos.ninguno=true;
+                                $(tabla + " tbody").empty();
+                                //inhabilitar controles.
+                                $(btnAgregar).addClass("hide");
+                                $(tabla).addClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            } 
+                            else if (result.isDenied) {
+                                $("#moduloFideicomisos .chkNinguno")[0].checked=false;
+                                $(btnAgregar).removeClass("hide");
+                                $(tabla).removeClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            }
+                    });
+                }
+                else{
+                    $(btnAgregar).addClass("hide");
+                    $(tabla).addClass("hide");
+                    $(btnTerminar).removeClass("hide");
+                }
+            break;
         }
     }
     else{
@@ -149,8 +500,6 @@ $(".chkNinguno").on("change",function() {
         $(btnTerminar).addClass("hide");
     }
 });
-
-
 
 //carga los catalogos(arrays)
 window.loadCat = function (catalogo, obj){
@@ -248,10 +597,6 @@ window.oderByColumn = function oderByColumn(arreglo, COLUMN, orden) {
 $(".numeric").keypress(function (e) {
     //if the letter is not digit then display error and don't type anything
     if (e.which !== 8 && e.which !== 0 && (e.which < 48 || e.which > 57)) {
-        //display error message
-        //show_alert("#msg_numeric", "warning", "<p>Solo Numer</p>");
-
-        //$("#msg_pago").html("Digits Only").show().fadeOut("slow");
         return false;
     }
 });
