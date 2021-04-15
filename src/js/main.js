@@ -66,6 +66,16 @@ import './mod-datosPareja.js';
 import './mod-DependientesEconomicos.js';
 import './mod-DesempenoServidorPublico.js';
 import './mod-ingresos.js';
+import './mod-adeudos.js';
+import './mod-PrestamoOComodato.js';
+import './mod-ParticipacionEmpresas.js';
+import './mod-ParticipacionInstituciones.js';
+import './mod-ApoyosPublicos.js';
+import './mod-Representacion.js';
+import './mod-BeneficiosPrivados.js';
+import './mod-ClientesPrincipales.js';
+import './mod-Fideicomisos';
+
 
 import './config-pdf.js';
 
