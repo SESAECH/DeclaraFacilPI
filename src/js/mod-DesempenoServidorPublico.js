@@ -1,4 +1,3 @@
-var form="#formDesempenoServidorPublico ";
 
 window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data){
     var seccion = JSON.parse(atob(data));
@@ -17,6 +16,8 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
             //asginar valores predeterminados a catálogos(ayuda al usuario).
             jsonResult.declaracion[seccion.apartado][seccion.seccion].servidorPublicoAnioAnterior=false;
             $("#chkNingunoDesempenoServidorPublico").prop("disabled", false);
+            $("#chkNingunoDesempenoServidorPublico")[0].checked=false;
+            $("#chkNingunoDesempenoServidorPublico").trigger("change");
              //asginar valores predeterminados a catálogos(ayuda al usuario).
              $(form + ".CBOmoneda").val("MXN");  
              $(form + ".cantidad").val("0");
@@ -50,9 +51,9 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
             break;
         case "TERMINADO":
             $("#chkNingunoDesempenoServidorPublico").prop("disabled", true);
-            if (jsonResult.declaracion[seccion.apartado][seccion.seccion].ninguno){
+            if (!jsonResult.declaracion[seccion.apartado][seccion.seccion].ninguno){
                 $("#chkNingunoDesempenoServidorPublico")[0].checked=true;
-                
+                $("#chkNingunoDesempenoServidorPublico").trigger("change");
                 $(modulo + "textarea[name='aclaracionesObservaciones']").val(jsonResult.declaracion[seccion.apartado][seccion.seccion].aclaracionesObservaciones).prop("disabled", true);
             }
             else{
@@ -98,6 +99,7 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
 
         jsonResult.captura.declaracion[seccion.apartado].secciones[seccion.no].status= "EN_PROCESO";
         $(".status-seccion-" + seccion.apartado + "-" + seccion.no).removeClass("indicador-status indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
+        validarDeclaracionTerminada();
     });
 
     $(".content_seccion").addClass("hide");
@@ -105,7 +107,8 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
 }
 
 window.loadInfoDesempenoServidorPublico = function loadInfoDesempenoServidorPublico(){
-    var nodo = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
+    let form="#formDesempenoServidorPublico ";
+    let nodo = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
 
     $(form + "input[name='fechaIngreso']").val(nodo.fechaIngreso);
     $(form + "input[name='fechaConclusion']").val(nodo.fechaConclusion);
@@ -145,6 +148,7 @@ window.loadInfoDesempenoServidorPublico = function loadInfoDesempenoServidorPubl
 
 
 window.guardarFormDesempenoServidorPublico = function guardarFormDesempenoServidorPublico(seccionNo, seccionName, seccionApartado){   
+    let form="#formDesempenoServidorPublico ";
     if ($("#chkNingunoDesempenoServidorPublico")[0].checked){
         jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior={
             "servidorPublicoAnioAnterior": false,
@@ -277,7 +281,8 @@ $("#chkNingunoDesempenoServidorPublico").on("change",function() {
 
 /* -------------------------------------------------------------- */
 /* ActividadIndustrial */
-function agregarActividadIndustrial_aaa(){    
+function agregarActividadIndustrial_aaa(){ 
+    let form="#formDesempenoServidorPublico ";   
     if($(form + "input[name='actividadIndustrialNombreRazonSocial']").val().length == 0){ mensajeSwal("Aviso","Ingrese el NOMBRE O RAZÓN SOCIAL","error");}
     else if($(form + "input[name='actividadIndustrialTipoNegocio']").val().length == 0){ mensajeSwal("Aviso","Ingrese el TIPO DE NEGOCIO","error");}
     else if($(form + "input[name='actividadIndustrialRemuneracionCantidad']").val().length == 0){ mensajeSwal("Aviso","Ingrese la REMUNERACIÓN","error");}
@@ -293,6 +298,7 @@ function agregarActividadIndustrial_aaa(){
 }
 
 function guardarActividadIndustrial_aaa(uuidItem){
+    let form="#formDesempenoServidorPublico ";
     jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.actividadIndustialComercialEmpresarial.actividades[uuidItem] = {
         "uuid":uuidItem,
         "remuneracion": {
@@ -314,6 +320,7 @@ function guardarActividadIndustrial_aaa(uuidItem){
 }
 
 function pintarTablaActividadIndustrial_aaa(){
+    let form="#formDesempenoServidorPublico ";
     let html="",remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.actividadIndustialComercialEmpresarial.actividades;
     Object.keys(lista).forEach(function (row) {
@@ -338,6 +345,7 @@ function pintarTablaActividadIndustrial_aaa(){
 }
 
 function editarActividadIndustrial_aaa(data){
+    let form="#formDesempenoServidorPublico ";
     let item = JSON.parse(atob(data));
     $(form + "input[name='actividadIndustrialNombreRazonSocial']").val(item.nombreRazonSocial);
     $(form + "input[name='actividadIndustrialTipoNegocio']").val(item.tipoNegocio);
@@ -349,6 +357,7 @@ function editarActividadIndustrial_aaa(data){
 }
 
 function eliminarActividadIndustrial_aaa(data){
+    let form="#formDesempenoServidorPublico ";
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
@@ -365,6 +374,7 @@ function eliminarActividadIndustrial_aaa(data){
 /* -------------------------------------------------------------- */
 /* ActividadFinanciera */
 function agregarActividadFinanciera_aaa(){
+    let form="#formDesempenoServidorPublico ";
     if($(form + "input[name='actividadFinancieraRemuneracionCantidad']").val().length == 0){ mensajeSwal("Aviso","Ingrese la REMUNERACIÓN","error");}
     else{ 
         if ($(form + ".btnAgregarActividadFinanciera")[0].dataset.uuid){
@@ -378,6 +388,7 @@ function agregarActividadFinanciera_aaa(){
 }
 
 function guardarActividadFinanciera_aaa(uuidItem){
+    let form="#formDesempenoServidorPublico ";
     jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.actividadFinanciera.actividades[uuidItem] = {
         "uuid":uuidItem,
         "remuneracion": {
@@ -400,6 +411,7 @@ function guardarActividadFinanciera_aaa(uuidItem){
 }
 
 function pintarTablaActividadFinanciera_aaa(){
+    let form="#formDesempenoServidorPublico ";
     let html="",remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.actividadFinanciera.actividades;
     Object.keys(lista).forEach(function (row) {
@@ -423,6 +435,7 @@ function pintarTablaActividadFinanciera_aaa(){
 }
 
 function editarActividadFinanciera_aaa(data){
+    let form="#formDesempenoServidorPublico ";
     let item = JSON.parse(atob(data));
     $(form + "select[name='tipoInstrumento']").val(item.tipoInstrumento);
     $(form + "input[name='actividadFinancieraRemuneracionCantidad']").val(item.remuneracion);
@@ -433,6 +446,7 @@ function editarActividadFinanciera_aaa(data){
 }
 
 function eliminarActividadFinanciera_aaa(data){
+    let form="#formDesempenoServidorPublico ";
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
@@ -449,6 +463,7 @@ function eliminarActividadFinanciera_aaa(data){
 /* -------------------------------------------------------------- */
 /* ServiciosProfesionales */
 function agregarServiciosProfesionales_aaa(){
+    let form="#formDesempenoServidorPublico ";
     if($(form + "input[name='tipoServicio']").val().length == 0){ mensajeSwal("Aviso","Ingrese el TIPO DE SERVICIO PRESTADO","error");}
     else if($(form + "input[name='serviciosProfesionalesRemuneracionCantidad']").val().length == 0){ mensajeSwal("Aviso","Ingrese la REMUNERACIÓN","error");}
     else{
@@ -463,6 +478,7 @@ function agregarServiciosProfesionales_aaa(){
 }
 
 function guardarServiciosProfesionales_aaa(uuidItem){
+    let form="#formDesempenoServidorPublico ";
     jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.serviciosProfesionales.servicios[uuidItem] = {
         "uuid":uuidItem,
         "remuneracion": {
@@ -482,6 +498,7 @@ function guardarServiciosProfesionales_aaa(uuidItem){
 }
 
 function pintarTablaServiciosProfesionales_aaa(){
+    let form="#formDesempenoServidorPublico ";
     let html="",remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.serviciosProfesionales.servicios;
     Object.keys(lista).forEach(function (row) {
@@ -505,6 +522,7 @@ function pintarTablaServiciosProfesionales_aaa(){
 }
 
 function editarServiciosProfesionales_aaa(data){
+    let form="#formDesempenoServidorPublico ";
     let item = JSON.parse(atob(data));
     $(form + "input[name='tipoServicio']").val(item.tipoServicio);
     $(form + "input[name='serviciosProfesionalesRemuneracionCantidad']").val(item.remuneracion);
@@ -515,6 +533,7 @@ function editarServiciosProfesionales_aaa(data){
 }
 
 function eliminarServiciosProfesionales_aaa(data){
+    let form="#formDesempenoServidorPublico ";
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
@@ -532,6 +551,7 @@ function eliminarServiciosProfesionales_aaa(data){
 /* -------------------------------------------------------------- */
 /* EnajenacionBienes */
 function agregarEnajenacionBienes_aaa(){
+    let form="#formDesempenoServidorPublico ";
     if($(form + "input[name='enajenacionBienesRemuneracionCantidad']").val().length == 0){ mensajeSwal("Aviso","Ingrese la REMUNERACIÓN","error");}
     else{ 
         if ($(form + ".btnAgregarEnajenacionBienes")[0].dataset.uuid){
@@ -545,6 +565,7 @@ function agregarEnajenacionBienes_aaa(){
 }
 
 function guardarEnajenacionBienes_aaa(uuidItem){
+    let form="#formDesempenoServidorPublico ";
     jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.enajenacionBienes.bienes[uuidItem] = {
         "uuid":uuidItem,
         "remuneracion": {
@@ -564,6 +585,7 @@ function guardarEnajenacionBienes_aaa(uuidItem){
 }
 
 function pintarTablaEnajenacionBienes_aaa(){
+    let form="#formDesempenoServidorPublico ";
     let html="", remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.enajenacionBienes.bienes;
     Object.keys(lista).forEach(function (row) {
@@ -587,6 +609,7 @@ function pintarTablaEnajenacionBienes_aaa(){
 }
 
 function editarEnajenacionBienes_aaa(data){
+    let form="#formDesempenoServidorPublico ";
     let item = JSON.parse(atob(data));
     $(form + "select[name='tipoBienEnajenado']").val(item.tipoBienEnajenado);
     $(form + "input[name='enajenacionBienesRemuneracionCantidad']").val(item.remuneracion);
@@ -597,6 +620,7 @@ function editarEnajenacionBienes_aaa(data){
 }
 
 function eliminarEnajenacionBienes_aaa(data){
+    let form="#formDesempenoServidorPublico ";
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
@@ -613,6 +637,7 @@ function eliminarEnajenacionBienes_aaa(data){
 /* -------------------------------------------------------------- */
 /* OtrosIngresos */
 function agregarOtrosIngresos_aaa(){
+    let form="#formDesempenoServidorPublico ";
     if($(form + "input[name='tipoIngreso']").val().length == 0){ mensajeSwal("Aviso","Ingrese el TIPO DE INGRESO","error");}
     else if($(form + "input[name='otrosIngresosRemuneracionCantidad']").val().length == 0){ mensajeSwal("Aviso","Ingrese la REMUNERACIÓN","error");}
     else{
@@ -627,6 +652,7 @@ function agregarOtrosIngresos_aaa(){
 }
 
 function guardarOtrosIngresos_aaa(uuidItem){
+    let form="#formDesempenoServidorPublico ";
     jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.otrosIngresos.ingresos[uuidItem] = {
         "uuid":uuidItem,
         "remuneracion": {
@@ -646,6 +672,7 @@ function guardarOtrosIngresos_aaa(uuidItem){
 }
 
 function pintarTablaOtrosIngresos_aaa(){
+    let form="#formDesempenoServidorPublico ";
     let html="", remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.otrosIngresos.ingresos;
     Object.keys(lista).forEach(function (row) {
@@ -669,6 +696,7 @@ function pintarTablaOtrosIngresos_aaa(){
 }
 
 function editarOtrosIngresos_aaa(data){
+    let form="#formDesempenoServidorPublico ";
     let item = JSON.parse(atob(data));
     $(form + "input[name='tipoIngreso']").val(item.tipoIngreso);
     $(form + "input[name='otrosIngresosRemuneracionCantidad']").val(item.remuneracion);
@@ -679,6 +707,7 @@ function editarOtrosIngresos_aaa(data){
 }
 
 function eliminarOtrosIngresos_aaa(data){
+    let form="#formDesempenoServidorPublico ";
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
@@ -696,6 +725,7 @@ function eliminarOtrosIngresos_aaa(data){
 /* -------------------------------------------------------------- */
 
 function sumaOtrosIngresos_aaa(){
+    let form="#formDesempenoServidorPublico ";
     let total =0;
     let nodo = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
     total += nodo.actividadIndustialComercialEmpresarial.remuneracionTotal.valor;
@@ -715,7 +745,8 @@ function sumaOtrosIngresos_aaa(){
     $(form + "input[name='totalIngresosNetosCantidad']").val(parseInt(a)+ parseInt(b));
 }
 
-$(form + "input[name='remuneracionNetaCargoPublicoCantidad']").change(function() { 
+$("#formDesempenoServidorPublico input[name='remuneracionNetaCargoPublicoCantidad']").change(function() {
+    let form="#formDesempenoServidorPublico "; 
     let i = $(form + "input[name='remuneracionNetaCargoPublicoCantidad']").val();
     let ii = $(form + "input[name='otrosIngresosTotalCantidad']").val();
     $(form + "input[name='ingresoNetoDeclaranteCantidad']").val(parseInt(i)+ parseInt(ii));
@@ -725,7 +756,8 @@ $(form + "input[name='remuneracionNetaCargoPublicoCantidad']").change(function()
     $(form + "input[name='totalIngresosNetosCantidad']").val(parseInt(a)+ parseInt(b));
 });
 
-$(form + "input[name='ingresoNetoParejaDependienteCantidad']").change(function() { 
+$("#formDesempenoServidorPublico input[name='ingresoNetoParejaDependienteCantidad']").change(function() { 
+    let form="#formDesempenoServidorPublico ";
     let a = $(form + "input[name='ingresoNetoDeclaranteCantidad']").val();
     let b = $(form + "input[name='ingresoNetoParejaDependienteCantidad']").val();
     $(form + "input[name='totalIngresosNetosCantidad']").val(parseInt(a)+ parseInt(b));

@@ -10,6 +10,7 @@ window.initClientesPrincipales = function initApoyosPublicos(data){
             //asginar valores predeterminados a catálogos(ayuda al usuario).
             jsonResult.declaracion.interes.clientesPrincipales.ninguno=true;
             $(modulo + ".chkNinguno").prop("disabled", false);
+            $(modulo + ".chkNinguno")[0].checked=false;
             $(modulo + "textarea[name='aclaracionesObservaciones']").val("");
             $(modulo + ".btnAgregar").removeClass("hide");
             $(modulo + ".btnTerminar").addClass("hide");
@@ -114,13 +115,13 @@ window.funcionalidadGuardarRegistroClientesPrincipales = function funcionalidadG
     }
 
     //catalogos que se usan en el modulo.
-    loadCat(tipoOperacion, ".CBOtipoOperacion");
-    loadCat(tipoRelacion, ".CBOtipoRelacion");
-    loadCat(paises, ".CBOpais");
-    loadCat(entidadFederativa, ".CBOentidadFederativa"); 
-    loadCat(moneda, ".CBOmoneda");
-    loadCat(sector, ".CBOsector");
-    loadCat(tipoPersona, ".CBOtipoPersona");
+    loadCat(tipoOperacion, form + ".CBOtipoOperacion");
+    loadCat(tipoRelacion, form + ".CBOtipoRelacion");
+    loadCat(paises, form + ".CBOpais");
+    loadCat(entidadFederativa, form + ".CBOentidadFederativa"); 
+    loadCat(moneda, form + ".CBOmoneda");
+    loadCat(sector, form + ".CBOsector");
+    loadCat(tipoPersona, form + ".CBOtipoPersona");
  
     $(form + ":input[type='text']").val("");
 

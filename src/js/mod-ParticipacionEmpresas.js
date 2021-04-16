@@ -11,6 +11,7 @@ window.initParticipacionEmpresas = function initParticipacionEmpresas(data){
             //asginar valores predeterminados a catálogos(ayuda al usuario).
             jsonResult.declaracion.interes.participacion.ninguno=true;
             $(modulo + ".chkNinguno").prop("disabled", false);
+            $(modulo + ".chkNinguno")[0].checked=false;
             $(modulo + "textarea[name='aclaracionesObservaciones']").val("");
             $(modulo + ".btnAgregar").removeClass("hide");
             $(modulo + ".btnTerminar").addClass("hide");
@@ -116,13 +117,13 @@ window.funcionalidadGuardarRegistroParticipacionEmpresas = function funcionalida
     }
 
     //catalogos que se usan en el modulo.
-    loadCat(tipoOperacion, ".CBOtipoOperacion");
-    loadCat(tipoRelacion, ".CBOtipoRelacion");
-    loadCat(tipoParticipacion, ".CBOtipoParticipacion");
-    loadCat(paises, ".CBOpais");
-    loadCat(entidadFederativa, ".CBOentidadFederativa"); 
-    loadCat(sector, ".CBOsector");
-    loadCat(moneda, ".CBOmoneda");
+    loadCat(tipoOperacion, form + ".CBOtipoOperacion");
+    loadCat(tipoRelacion, form + ".CBOtipoRelacion");
+    loadCat(tipoParticipacion, form + ".CBOtipoParticipacion");
+    loadCat(paises, form + ".CBOpais");
+    loadCat(entidadFederativa, form + ".CBOentidadFederativa"); 
+    loadCat(sector, form + ".CBOsector");
+    loadCat(moneda, form + ".CBOmoneda");
 
     $(form + ":input[type='text']").val("");
 

@@ -10,6 +10,7 @@ window.initApoyosPublicos = function initApoyosPublicos(data){
             //asginar valores predeterminados a catálogos(ayuda al usuario).
             jsonResult.declaracion.interes.apoyos.ninguno=true;
             $(modulo + ".chkNinguno").prop("disabled", false);
+            $(modulo + ".chkNinguno")[0].checked=false;
             $(modulo + "textarea[name='aclaracionesObservaciones']").val("");
             $(modulo + ".btnAgregar").removeClass("hide");
             $(modulo + ".btnTerminar").addClass("hide");
@@ -114,14 +115,14 @@ window.funcionalidadGuardarRegistroApoyosPublicos = function funcionalidadGuarda
     }
 
     //catalogos que se usan en el modulo.
-    loadCat(tipoOperacion, ".CBOtipoOperacion");
-    loadCat(tipoPersona, ".CBOtipoPersona");
-    loadCat(beneficiariosPrograma, ".CBObeneficiarioPrograma");
-    loadCat(nivelOrdenGobierno, ".CBOnivelOrdenGobierno");
-    loadCat(tipoApoyo, ".CBOtipoApoyo");
-    loadCat(formaRecepcion, ".CBOformaRecepcion");
-    loadCat(entidadFederativa, ".CBOentidadFederativa"); 
-    loadCat(moneda, ".CBOmoneda");
+    loadCat(tipoOperacion, form + ".CBOtipoOperacion");
+    loadCat(tipoPersona, form + ".CBOtipoPersona");
+    loadCat(beneficiariosPrograma, form + ".CBObeneficiarioPrograma");
+    loadCat(nivelOrdenGobierno, form + ".CBOnivelOrdenGobierno");
+    loadCat(tipoApoyo, form + ".CBOtipoApoyo");
+    loadCat(formaRecepcion, form + ".CBOformaRecepcion");
+    loadCat(entidadFederativa, form + ".CBOentidadFederativa"); 
+    loadCat(moneda, form + ".CBOmoneda");
 
     $(form + ":input[type='text']").val("");
 

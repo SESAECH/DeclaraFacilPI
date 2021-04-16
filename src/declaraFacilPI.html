@@ -1362,14 +1362,14 @@
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label>R.F.C.</label>
-                                                    <input type="text" name="rfc" class="form-control" required>
+                                                    <label>RFC</label>
+                                                    <input type="text" name="rfc" class="form-control" maxlength="13" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label>C.U.R.P.</label>
-                                                    <input type="text" name="curp" class="form-control" required>
+                                                    <label>CURP</label>
+                                                    <input type="text" name="curp" class="form-control" maxlength="18" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
@@ -1643,7 +1643,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <label>R.F.C.</label>
+                                                            <label>RFC</label>
                                                             <input type="text" name="rfc" class="form-control" required>
                                                         </div>
                                                     </div>
@@ -1823,8 +1823,10 @@
                                     <table class="table tblBienesInmuebles">
                                         <thead>
                                             <tr class="">
-                                                <th style="width: 40%;">Tipo</th>
-                                                <th style="width: 45%;">Titular</th>
+                                                <th style="width: 25%;">Titular</th>
+                                                <th style="width: 25%;">Inmueble</th>
+                                                <th style="width: 20%;">Conforme a</th>
+                                                <th style="width: 15%;">Valor</th>
                                                 <th style="width: 15%;" class="text-right">Acciones</th>
                                             </tr>
                                         </thead>
@@ -1857,7 +1859,7 @@
                                 <div class="formSecundario">
                                     <form action="" id="formBienesInmuebles">
                                         <h5 class="titulo-seccion"></h5>
-                                        <div class="row p10">
+                                        <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label>TIPO DE OPERACIÓN</label>
@@ -1877,21 +1879,120 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row p10">
-                                            <div class="col-lg-4">
+                                        <div class="row">
+                                            <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <label>TITULAR DEL INMUEBLE</label>
                                                     <select name="titular" class="form-control CBOtitular" required></select>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-8">
-                                                <div class="form-group">
-                                                    <label>PORCENTAJE DE PROPIEDAD CONFORME A ESCRITURACIÓN O CONTRATO</label>
-                                                    <input type="text" name="porcentajePropiedad" class="form-control numeric" required>
-                                                </div>
-                                            </div>
                                         </div>
-                                        <div class="row p10">
+                                        <div class="row p10 hide content_terceros">
+                                            <div class="col-lg-12 bg-seccion">
+                                                <h6 class="border-bottom">TERCEROS</h6>
+                                                <table class="table tblTerceros">
+                                                    <thead>
+                                                        <th style="width: 20%;">Tipo</th>
+                                                        <th style="width: 40%;">Nombre/Institución o Razón Social</th>
+                                                        <th style="width: 20%;">RFC</th>
+                                                        <th style="width: 20%;" class="text-right">Acciones</th>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div class="row content_terceros_nuevo">
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>TIPO PERSONA</label>
+                                                            <select name="tipoPersona" class="form-control CBOtipoPersona"></select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5">
+                                                        <div class="form-group">
+                                                            <label>NOMBRE / INSTITUCIÓN O RAZÓN SOCIAL</label>
+                                                            <input type="text" name="nombreRazonSocial" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>RFC</label>
+                                                            <input type="text" name="rfc" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label class="text-white"> &nbsp;</label>
+                                                            <div class="input-group">
+                                                                <button type="button" class="btn btn-light btnAgregarTercero">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                                                    </svg>
+                                                                    Agregar
+                                                                </button>
+                                                            </div>                                                            
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        <div class="row p10 content_transmisor">
+                                            <div class="col-lg-12 bg-seccion">
+                                                <h6 class="border-bottom">TRANSMISORES</h6>
+                                                <table class="table tblTransmisores">
+                                                    <thead>
+                                                        <th style="width: 15%;">Tipo</th>
+                                                        <th style="width: 35%;">Nombre/Institución o Razón Social</th>
+                                                        <th style="width: 20%;">RFC</th>
+                                                        <th style="width: 20%;">RELACIÓN</th>
+                                                        <th style="width: 10%;" class="text-right">Acciones</th>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div class="row content_transmisor_nuevo">
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>TIPO PERSONA</label>
+                                                            <select name="transmisor_tipoPersona" class="form-control CBOtipoPersona"></select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label>NOMBRE / INSTITUCIÓN O RAZÓN SOCIAL</label>
+                                                            <input type="text" name="transmisor_nombreRazonSocial" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>RFC</label>
+                                                            <input type="text" name="transmisor_rfc" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>RELACIÓN C/TITULAR</label>
+                                                            <select name="transmisor_relacion" class="form-control CBOparentescoRelacion" required></select>
+                                                        </div>
+                                                        <div class="form-group content_transmisor_relacion_especifique hide">
+                                                            <label>ESPECIFIQUE</label>
+                                                            <input type="text" name="transmisor_relacion_especifique" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label class="text-white"> &nbsp;</label>
+                                                            <div class="input-group">
+                                                                <button type="button" class="btn btn-light btnAgregarTransmisor">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                                                    </svg>
+                                                                    Agregar
+                                                                </button>
+                                                            </div>                                                            
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        <div class="row">
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label>SUPERFICIE DEL TERRENO</label>
@@ -1927,118 +2028,69 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <h6 class="border-bottom">TRANSMISOR</h6>
-                                        <div class="row p10">
+                                        <div class="row">
                                             <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label>TRANSMISOR</label>
-                                                    <select name="transmisor_tipoPersona" class="form-control CBOtipoPersona" required>
-                                                        <option value="FISICA">FISICA</option>
-                                                        <option value="MORAL">MORAL</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label>NOMBRE O RAZÓN SOCIAL DEL TRANSMISOR</label>
-                                                    <input type="text" name="transmisor_nombreRazonSocial" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label>R.F.C.</label>
-                                                    <input type="text" name="transmisor_rfc" class="form-control" maxlength="13" minlength="12" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row p10">
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label>RELACIÓN DEL TRANSMISOR DEL MUEBLE CON EL TITULAR</label>
-                                                    <select name="relacion" class="form-control CBOrelacion" required></select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 content_relacion_transmisor_especifique hide">
-                                                <div class="form-group">
-                                                    <label>ESPECIFIQUE</label>
-                                                    <input type="text" name="especifique" class="form-control" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h6 class="border-bottom">TERCERO</h6>
-                                        <div class="row p10">
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label>TERCERO</label>
-                                                    <select name="tercero_tipoPersona" class="form-control CBOtipoPersona" required>
-                                                        <option value="FISICA">FISICA</option>
-                                                        <option value="MORAL">MORAL</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label>NOMBRE DEL TERCERO O TERCEROS</label>
-                                                    <input type="text" name="tercero_nombreRazonSocial" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label>RFC</label>
-                                                    <input type="text" name="tercero_rfc" class="form-control" maxlength="13" minlength="12" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row p10">
-                                            <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>FORMA DE ADQUISICIÓN</label>
                                                     <select name="formaAdquisicion" class="form-control CBOformaAdquisicion" required></select>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label>FORMA DE PAGO</label>
                                                     <select name="formaPago" class="form-control CBOformaPago" required></select>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>PORCENTAJE DE PROPIEDAD CONFORME A ESCRITURACIÓN O CONTRATO</label>
+                                                    <input type="text" name="porcentajePropiedad" class="form-control numeric" required>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="row p10">
+                                        <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label>VALOR DE ADQUISICIÓN</label>
-                                                    <input type="text" name="valorAdquisicion" class="form-control numeric" required>
+                                                    <div class="input-group">
+                                                        <input type="text" name="valorAdquisicion" class="form-control numeric text-right" required>
+                                                        <select name="moneda" class="form-control CBOmoneda" required></select>
+                                                    </div>                                                    
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="form-group">
-                                                    <label>TIPO DE MONEDA</label>
-                                                    <select name="moneda" class="form-control CBOmoneda" required></select>
-                                                </div>
-                                            </div>
+                                            </div>                                            
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label>FECHA DE ADQUISICIÓN DEL INMUEBLE</label>
                                                     <input type="date" name="fechaAdquisicion" class="form-control" required>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row p10">
-                                            <div class="col-lg-7">
+                                            <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label>DATOS DEL REGISTRO PÚBLICO DE LA PROPIEDAD: </label>
+                                                    <label>DATOS DEL REG. PÚBLICO DE LA PROPIEDAD: </label>
                                                     <input type="text" name="datoIdentificacion" class="form-control" placeholder="FOLIO REAL U OTRO DATO QUE PERMITA SU IDENTIFICACIÓN" required>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">                                            
                                             <div class="col-lg-5">
                                                 <div class="form-group">
                                                     <label>¿EL VALOR DE ADQUISICIÓN DEL INMUEBLE ES CONFORME A?</label>
                                                     <select name="valorConformeA" class="form-control CBOvalorConformeA" required></select>
                                                 </div>
+                                            </div>                                            
+                                            <div class="col-lg-5">
+                                                <div class="form-group">
+                                                    <label>EN CASO DE BAJA DEL VEHÍCULO INCLUIR MOTIVO</label>
+                                                    <select name="motivoBaja" class="form-control CBOmotivoBaja" required></select>
+                                                </div>
+                                                <div class="form-group content_motivoBaja_especifique hide">
+                                                    <label>ESPECIFIQUE</label>
+                                                    <input type="text" name="motivoBaja_especifique" class="form-control" required>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="row p10">                                            
-                                            <div class="col-lg-4">
+                                        <div class="row">
+                                            <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label>UBICACIÓN DEL INMUEBLE</label>
                                                     <select name="ubicacionInmueble" class="form-control CBOubicacionInmueble" required>
@@ -2150,23 +2202,6 @@
                                                 </div>
                                             </div>
                                         </div>                                        
-
-
-                                        <div class="row p10">
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label>EN CASO DE BAJA DEL INMUEBLE INCLUIR MOTIVO</label>
-                                                    <select name="motivoBaja" class="form-control CBOmotivoBaja" required></select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 content_motivoBaja_especifique hide">
-                                                <div class="form-group">
-                                                    <label>ESPECIFIQUE</label>
-                                                    <input type="text" name="motivoBaja_especifique" class="form-control" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="row p10">
                                             <div class="col-lg-12 text-right">
                                                 <button type="button" class="btn btn-light btnAgregar">
@@ -2786,6 +2821,768 @@
                                 </div>       
                             </div>
 
+                             <!-- 12. modulo Vehiculos -->
+                             <div class="content_seccion hide" id="moduloVehiculos">
+                                <h5 class="titulo-seccion"></h5>
+                                <div class="alert alert-warning subtitulo-seccion help"></div>
+                                <div class="formPrincipal">
+                                    <div class="row mt10">
+                                        <div class="col-lg-6">
+                                            <div class="form-group form-check ml10">
+                                                <input type="checkbox" class="form-check-input chkNinguno" data-form="Vehiculos">
+                                                <label class="form-check-label">No tengo información que reportar.</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 text-right">
+                                            <button class="btn btn-light mr10 mb10 btnAgregar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                </svg>
+                                                Agregar
+                                            </button>
+                                        </div>
+                                    </div>                                    
+                                    <table class="table tblVehiculos">
+                                        <thead>
+                                            <tr class="">
+                                                <th style="width: 25%;">Titular</th>
+                                                <th style="width: 25%;">Tipo Vehículo</th>
+                                                <th style="width: 20%;">Marca/Modelo</th>
+                                                <th style="width: 15%;">Valor del Vehículo</th>                                                
+                                                <th style="width: 15%;" class="text-right">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>  
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>ACLARACIONES/OBSERVACIONES</label>
+                                                <textarea name="aclaracionesObservaciones" class="form-control text-uppercase" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 text-right">
+                                            <button class="btn btn-dark mb10 btnTerminar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16">
+                                                    <path d="M8.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14l.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/>
+                                                </svg>
+                                                Terminar
+                                            </button>
+                                            <button type="submit" class="btn btn-light pull-rigth mr10 btnHabilitar hide">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                                                    <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                                                </svg>
+                                                Habilitar
+                                            </button>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="formSecundario">
+                                    <form action="" id="formVehiculos">
+                                        <h5 class="titulo-seccion mb10"></h5>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>TIPO DE OPERACIÓN</label>
+                                                    <select name="tipoOperacion" class="form-control CBOtipoOperacion"></select>
+                                                </div>
+                                            </div>                                             
+                                        </div>
+                                        <div class="row">                                            
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <label>TIPO DE VEHICULO</label>
+                                                    <select name="tipoVehiculo" class="form-control CBOtipoVehiculo" required></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 content_tipoVehiculo_especifique hide">
+                                                <div class="form-group">
+                                                    <label>Especifique</label>
+                                                    <input type="text" name="tipoVehiculo_especifique" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>MARCA</label>
+                                                    <input type="text" name="marca" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>MODELO</label>
+                                                    <input type="text" name="modelo" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <label>AÑO</label>
+                                                    <input type="text" name="anio" maxlength="4" minlength="4" class="form-control numeric" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>NÚMERO DE SERIE O REGISTRO</label>
+                                                    <input type="text" name="numeroSerieRegistro" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>¿DÓNDE SE ENCUENTRA REGISTRADO?</label>
+                                                    <select name="pais" class="form-control CBOpais" required></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 ent_fed hide">
+                                                <div class="form-group">
+                                                    <label>ENTIDAD FEDERATIVA</label>
+                                                    <select name="entidadFederativa" class="form-control CBOentidadFederativa" required></select>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                        <div class="row">                                            
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>FORMA DE ADQUISICIÓN</label>
+                                                    <select name="formaAdquisicion" class="form-control CBOformaAdquisicion" required></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>FORMA DE PAGO</label>
+                                                    <select name="formaPago" class="form-control CBOformaPago" required></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>VALOR DE ADQUISICIÓN</label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="valorAdquisicion" class="form-control numeric text-right" required>
+                                                        <select name="moneda" class="form-control CBOmoneda" required></select>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>FECHA DE ADQUISICIÓN</label>
+                                                    <input type="date" name="fechaAdquisicion" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">                                            
+                                            <div class="col-lg-5">
+                                                <div class="form-group">
+                                                    <label>EN CASO DE BAJA DEL VEHÍCULO INCLUIR MOTIVO</label>
+                                                    <select name="motivoBaja" class="form-control CBOmotivoBaja" required></select>
+                                                </div>
+                                                <div class="form-group content_motivoBaja_especifique hide">
+                                                    <label>ESPECIFIQUE</label>
+                                                    <input type="text" name="motivoBaja_especifique" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>                                    
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <label>TITULAR DEL VEHÍCULO</label>
+                                                    <select name="titular" class="form-control CBOtitularBien" required></select>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="row p10 hide content_terceros">
+                                            <div class="col-lg-12 bg-seccion">
+                                                <h6 class="border-bottom">TERCEROS</h6>
+                                                <table class="table tblTerceros">
+                                                    <thead>
+                                                        <th style="width: 20%;">Tipo</th>
+                                                        <th style="width: 40%;">Nombre/Institución o Razón Social</th>
+                                                        <th style="width: 20%;">RFC</th>
+                                                        <th style="width: 20%;" class="text-right">Acciones</th>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div class="row content_terceros_nuevo">
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>TIPO PERSONA</label>
+                                                            <select name="tipoPersona" class="form-control CBOtipoPersona"></select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5">
+                                                        <div class="form-group">
+                                                            <label>NOMBRE / INSTITUCIÓN O RAZÓN SOCIAL</label>
+                                                            <input type="text" name="nombreRazonSocial" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>RFC</label>
+                                                            <input type="text" name="rfc" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label class="text-white"> &nbsp;</label>
+                                                            <div class="input-group">
+                                                                <button type="button" class="btn btn-light btnAgregarTercero">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                                                    </svg>
+                                                                    Agregar
+                                                                </button>
+                                                            </div>                                                            
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        <div class="row p10 content_transmisor">
+                                            <div class="col-lg-12 bg-seccion">
+                                                <h6 class="border-bottom">TRANSMISORES</h6>
+                                                <table class="table tblTransmisores">
+                                                    <thead>
+                                                        <th style="width: 15%;">Tipo</th>
+                                                        <th style="width: 35%;">Nombre/Institución o Razón Social</th>
+                                                        <th style="width: 20%;">RFC</th>
+                                                        <th style="width: 20%;">RELACIÓN</th>
+                                                        <th style="width: 10%;" class="text-right">Acciones</th>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div class="row content_transmisor_nuevo">
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>TIPO PERSONA</label>
+                                                            <select name="transmisor_tipoPersona" class="form-control CBOtipoPersona"></select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label>NOMBRE / INSTITUCIÓN O RAZÓN SOCIAL</label>
+                                                            <input type="text" name="transmisor_nombreRazonSocial" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>RFC</label>
+                                                            <input type="text" name="transmisor_rfc" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>RELACIÓN C/TITULAR</label>
+                                                            <select name="transmisor_relacion" class="form-control CBOparentescoRelacion" required></select>
+                                                        </div>
+                                                        <div class="form-group content_transmisor_relacion_especifique hide">
+                                                            <label>ESPECIFIQUE</label>
+                                                            <input type="text" name="transmisor_relacion_especifique" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label class="text-white"> &nbsp;</label>
+                                                            <div class="input-group">
+                                                                <button type="button" class="btn btn-light btnAgregarTransmisor">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                                                    </svg>
+                                                                    Agregar
+                                                                </button>
+                                                            </div>                                                            
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        <div class="row p10">
+                                            <div class="col-lg-12 text-right">
+                                                <button type="button" class="btn btn-light btnAgregar">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                                    </svg>
+                                                    Agregar
+                                                </button>
+                                                <button type="button" class="btn btn-secondary btnCerrar" data-uuid="">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>
+                                                    Cerrar
+                                                </button>
+                                            </div>
+                                        </div>                                                                    
+                                    </form>
+                                </div>
+                            </div> 
+                            
+                            <!-- 12. modulo BienesMuebles -->
+                            <div class="content_seccion hide" id="moduloBienesMuebles">
+                                <h5 class="titulo-seccion"></h5>
+                                <div class="alert alert-warning subtitulo-seccion help"></div>
+                                <div class="formPrincipal">
+                                    <div class="row mt10">
+                                        <div class="col-lg-6">
+                                            <div class="form-group form-check ml10">
+                                                <input type="checkbox" class="form-check-input chkNinguno" data-form="BienesMuebles">
+                                                <label class="form-check-label">No tengo información que reportar.</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 text-right">
+                                            <button class="btn btn-light mr10 mb10 btnAgregar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                </svg>
+                                                Agregar
+                                            </button>
+                                        </div>
+                                    </div>                                    
+                                    <table class="table tblBienesMuebles">
+                                        <thead>
+                                            <tr class="">
+                                                <th style="width: 25%;">Titular</th>
+                                                <th style="width: 25%;">Tipo Bien</th>
+                                                <th style="width: 20%;">Valor del Mueble</th>
+                                                <th style="width: 15%;">Fecha Adquisición</th>
+                                                <th style="width: 15%;" class="text-right">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>  
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>ACLARACIONES/OBSERVACIONES</label>
+                                                <textarea name="aclaracionesObservaciones" class="form-control text-uppercase" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 text-right">
+                                            <button class="btn btn-dark mb10 btnTerminar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16">
+                                                    <path d="M8.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14l.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/>
+                                                </svg>
+                                                Terminar
+                                            </button>
+                                            <button type="submit" class="btn btn-light pull-rigth mr10 btnHabilitar hide">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                                                    <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                                                </svg>
+                                                Habilitar
+                                            </button>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="formSecundario">
+                                    <form action="" id="formBienesMuebles">
+                                        <h5 class="titulo-seccion mb10"></h5>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>TIPO DE OPERACIÓN</label>
+                                                    <select name="tipoOperacion" class="form-control CBOtipoOperacion"></select>
+                                                </div>
+                                            </div>                                             
+                                        </div>
+                                        <div class="row">                                            
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <label>TIPO DEL BIEN</label>
+                                                    <select name="tipoBien" class="form-control CBOtipoBien" required></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 content_tipoBien_especifique hide">
+                                                <div class="form-group">
+                                                    <label>Especifique</label>
+                                                    <input type="text" name="tipoBien_especifique" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>DESCRIPCIÓN GENERAL DEL BIEN</label>
+                                                    <input type="text" name="descripcionGeneralBien" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>FORMA DE ADQUISICIÓN</label>
+                                                    <select name="formaAdquisicion" class="form-control CBOformaAdquisicion" required></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>FORMA DE PAGO</label>
+                                                    <select name="formaPago" class="form-control CBOformaPago" required></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>VALOR DE ADQUISICIÓN DEL MUEBLE</label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="valorAdquisicion" class="form-control numeric text-right" required>
+                                                        <select name="moneda" class="form-control CBOmoneda" required></select>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>FECHA DE ADQUISICIÓN</label>
+                                                    <input type="date" name="fechaAdquisicion" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="form-group">
+                                                    <label>EN CASO DE BAJA DEL MUEBLE INCLUIR MOTIVO</label>
+                                                    <select name="motivoBaja" class="form-control CBOmotivoBaja" required></select>
+                                                </div>
+                                                <div class="form-group content_motivoBaja_especifique hide">
+                                                    <label>ESPECIFIQUE</label>
+                                                    <input type="text" name="motivoBaja_especifique" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>                                    
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <label>TITULAR DEL BIEN</label>
+                                                    <select name="titular" class="form-control CBOtitularBien" required></select>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="row p10 hide content_terceros">
+                                            <div class="col-lg-12 bg-seccion">
+                                                <h6 class="border-bottom">TERCEROS</h6>
+                                                <table class="table tblTerceros">
+                                                    <thead>
+                                                        <th style="width: 20%;">Tipo</th>
+                                                        <th style="width: 40%;">Nombre/Institución o Razón Social</th>
+                                                        <th style="width: 20%;">RFC</th>
+                                                        <th style="width: 20%;" class="text-right">Acciones</th>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div class="row content_terceros_nuevo">
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>TIPO PERSONA</label>
+                                                            <select name="tipoPersona" class="form-control CBOtipoPersona"></select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5">
+                                                        <div class="form-group">
+                                                            <label>NOMBRE / INSTITUCIÓN O RAZÓN SOCIAL</label>
+                                                            <input type="text" name="nombreRazonSocial" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>RFC</label>
+                                                            <input type="text" name="rfc" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label class="text-white"> &nbsp;</label>
+                                                            <div class="input-group">
+                                                                <button type="button" class="btn btn-light btnAgregarTercero">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                                                    </svg>
+                                                                    Agregar
+                                                                </button>
+                                                            </div>                                                            
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        <div class="row p10 content_transmisor">
+                                            <div class="col-lg-12 bg-seccion">
+                                                <h6 class="border-bottom">TRANSMISORES</h6>
+                                                <table class="table tblTransmisores">
+                                                    <thead>
+                                                        <th style="width: 15%;">Tipo</th>
+                                                        <th style="width: 35%;">Nombre/Institución o Razón Social</th>
+                                                        <th style="width: 20%;">RFC</th>
+                                                        <th style="width: 20%;">RELACIÓN</th>
+                                                        <th style="width: 10%;" class="text-right">Acciones</th>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div class="row content_transmisor_nuevo">
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>TIPO PERSONA</label>
+                                                            <select name="transmisor_tipoPersona" class="form-control CBOtipoPersona"></select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label>NOMBRE / INSTITUCIÓN O RAZÓN SOCIAL</label>
+                                                            <input type="text" name="transmisor_nombreRazonSocial" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>RFC</label>
+                                                            <input type="text" name="transmisor_rfc" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>RELACIÓN C/TITULAR</label>
+                                                            <select name="transmisor_relacion" class="form-control CBOparentescoRelacion" required></select>
+                                                        </div>
+                                                        <div class="form-group content_transmisor_relacion_especifique hide">
+                                                            <label>ESPECIFIQUE</label>
+                                                            <input type="text" name="transmisor_relacion_especifique" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label class="text-white"> &nbsp;</label>
+                                                            <div class="input-group">
+                                                                <button type="button" class="btn btn-light btnAgregarTransmisor">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                                                    </svg>
+                                                                    Agregar
+                                                                </button>
+                                                            </div>                                                            
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        <div class="row p10">
+                                            <div class="col-lg-12 text-right">
+                                                <button type="button" class="btn btn-light btnAgregar">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                                    </svg>
+                                                    Agregar
+                                                </button>
+                                                <button type="button" class="btn btn-secondary btnCerrar" data-uuid="">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>
+                                                    Cerrar
+                                                </button>
+                                            </div>
+                                        </div>                                                                    
+                                    </form>
+                                </div>
+                            </div> 
+
+                            <!-- modulo inversiones -->
+                            <div class="content_seccion hide" id="moduloInversiones">
+                                <h5 class="titulo-seccion"></h5>
+                                <div class="alert alert-warning subtitulo-seccion help"></div>
+                                <div class="formPrincipal">
+                                    <div class="row mt10">
+                                        <div class="col-lg-6">
+                                            <div class="form-group form-check ml10">
+                                                <input type="checkbox" class="form-check-input chkNinguno" data-form="Inversiones">
+                                                <label class="form-check-label">No tengo información que reportar.</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 text-right">
+                                            <button class="btn btn-light mr10 mb10 btnAgregar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                </svg>
+                                                Agregar
+                                            </button>
+                                        </div>
+                                    </div>                                    
+                                    <table class="table tblInversiones">
+                                        <thead>
+                                            <tr class="">
+                                                <th style="width: 25%;">Titular</th>
+                                                <th style="width: 25%;">Tipo Inversión</th>
+                                                <th style="width: 25%;">SubTipo Inversión</th>
+                                                <th style="width: 10%;">Saldo</th>
+                                                <th style="width: 15%;" class="text-right">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>  
+                                    <div class="row p10">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>ACLARACIONES/OBSERVACIONES</label>
+                                                <textarea name="aclaracionesObservaciones" class="form-control text-uppercase" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 text-right">
+                                            <button class="btn btn-dark mb10 btnTerminar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16">
+                                                    <path d="M8.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14l.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/>
+                                                </svg>
+                                                Terminar
+                                            </button>
+                                            <button type="submit" class="btn btn-light pull-rigth mr10 btnHabilitar hide">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                                                    <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                                                </svg>
+                                                Habilitar
+                                            </button>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="formSecundario">
+                                    <form action="" id="formInversiones">
+                                        <h5 class="titulo-seccion mb10"></h5>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>TIPO DE OPERACIÓN</label>
+                                                    <select name="tipoOperacion" class="form-control CBOtipoOperacion"></select>
+                                                </div>
+                                            </div> 
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>TIPO DE INVERSIÓN/ACTIVO</label>
+                                                    <select name="tipoInversion" class="form-control CBOtipoInversion" required></select>
+                                                </div>
+                                            </div>                                            
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>SUBTIPO INVERSIÓN</label>
+                                                    <select name="subTipoInversion" class="form-control CBOsubTipoInversion" required></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label>TITULAR DE LA INVERSIÓN/CUENTA BANCARIA/OTROS</label>
+                                                    <select name="titularBien" class="form-control CBOtitularInversion" required></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row p10 hide content_terceros">
+                                            <div class="col-lg-12 bg-seccion">
+                                                <h6 class="border-bottom">TERCEROS</h6>
+                                                <table class="table tblTerceros">
+                                                    <thead>
+                                                        <th style="width: 20%;">Tipo</th>
+                                                        <th style="width: 40%;">Nombre/Institución o Razón Social</th>
+                                                        <th style="width: 20%;">RFC</th>
+                                                        <th style="width: 20%;" class="text-right">Acciones</th>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div class="row content_terceros_nuevo">
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>TIPO PERSONA</label>
+                                                            <select name="tipoPersona" class="form-control CBOtipoPersona"></select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5">
+                                                        <div class="form-group">
+                                                            <label>NOMBRE / INSTITUCIÓN O RAZÓN SOCIAL</label>
+                                                            <input type="text" name="nombreRazonSocial" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>RFC</label>
+                                                            <input type="text" name="rfc" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label class="text-white"> &nbsp;</label>
+                                                            <div class="input-group">
+                                                                <button type="button" class="btn btn-light btnAgregarTercero">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                                                    </svg>
+                                                                    Agregar
+                                                                </button>
+                                                            </div>                                                            
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>NÚMERO DE CUENTA, CONTRATO O PÓLIZA</label>
+                                                    <input type="text" name="numeroCuentaContrato" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <label>¿DÓNDE SE LOCALIZA LA INVERSIÓN, CUENTA BANCARIA Y OTRO TIPO DE VALORES / ACTIVOS ?</label>
+                                                    <select name="pais" class="form-control CBOpais" required></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-9">
+                                                <div class="form-group">
+                                                    <label>INSTITUCIÓN O RAZÓN SOCIAL</label>
+                                                    <input type="text" name="institucionRazonSocial" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>RFC</label>
+                                                    <input type="text" name="institucionRazonSocial_rfc" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-5">
+                                                <div class="form-group">
+                                                    <label class="adeudos_saldolbl">SALDO A LA FECHA (SITUACIÓN ACTUAL)</label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="saldoSituacionActual" class="form-control numeric text-right " required>
+                                                        <select name="saldoSituacionActual_moneda" class="form-control CBOmoneda" required></select>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 content_porcentajeIncrementoDecremento hide">
+                                                <div class="form-group">
+                                                    <label>PORCENTAJE DE INCREMENTO/DECREMENTO DEL SALDO</label>
+                                                    <div class="input-group">
+                                                        <select name="porcentajeIncrementoDecremento_simbolo" class="form-control" required>
+                                                            <option value="+">+</option>
+                                                            <option value="-">-</option>
+                                                        </select>
+                                                        <input type="text" name="porcentajeIncrementoDecremento" class="form-control numeric text-right" min="0" max="100" maxlength="3" required>                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="row p10">
+                                            <div class="col-lg-12 text-right">
+                                                <button type="button" class="btn btn-light btnAgregar">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                                    </svg>
+                                                    Agregar
+                                                </button>
+                                                <button type="button" class="btn btn-secondary btnCerrar" data-uuid="">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>
+                                                    Cerrar
+                                                </button>
+                                            </div>
+                                        </div>                                      
+                                    </form>
+                                </div>
+                            </div>   
+
                             <!-- modulo adeudos -->
                             <div class="content_seccion hide" id="moduloAdeudos">
                                 <h5 class="titulo-seccion"></h5>
@@ -2861,7 +3658,7 @@
                                                 </div>
                                             </div>                                         
                                         </div>                                        
-                                        <div class="row p10 content_terceros">
+                                        <div class="row hide p10 content_terceros">
                                             <div class="col-lg-12 bg-seccion">
                                                 <h6 class="border-bottom">TERCEROS</h6>
                                                 <table class="table tblTerceros">
@@ -2889,7 +3686,7 @@
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>RFC</label>
-                                                            <input type="text" name="rfc" class="form-control" maxlength="13" minlength="12">
+                                                            <input type="text" name="rfc" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-2">
@@ -2934,31 +3731,43 @@
                                                     <label>FECHA DE ADQUISICIÓN DEL ADEUDO/PASIVO</label>
                                                     <input type="date" name="fechaAdquisicion" class="form-control" required>
                                                 </div>
-                                            </div>                                            
+                                            </div> 
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>¿DÓNDE SE LOCALIZA EL ADEUDO?</label>
+                                                    <select name="pais" class="form-control CBOpais" required></select>
+                                                </div>
+                                            </div>                                           
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label>MONTO ORIGINAL DEL ADEUDO/PASIVO</label>
                                                     <div class="input-group">
-                                                        <input type="text" name="montoOriginal" class="form-control numeric" maxlength="20" required>
+                                                        <input type="text" name="montoOriginal" class="form-control numeric text-right " maxlength="20" required>
                                                         <select name="montoOriginal_moneda" class="form-control CBOmoneda" required></select>
                                                     </div>                                                    
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label>SALDO INSOLUTO (SITUACIÓN ACTUAL)</label>
+                                                    <label class="adeudos_saldolbl">SALDO INSOLUTO (SITUACIÓN ACTUAL)</label>
                                                     <div class="input-group">
-                                                        <input type="text" name="saldoInsolutoSituacionActual" class="form-control numeric" maxlength="20" required>
+                                                        <input type="text" name="saldoInsolutoSituacionActual" class="form-control numeric text-right" maxlength="20" required>
                                                         <select name="saldoInsolutoSituacionActual_moneda" class="form-control CBOmoneda" required></select>
                                                     </div>                                            
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-4 content_porcentajeIncrementoDecremento hide">
                                                 <div class="form-group">
-                                                    <label>¿DÓNDE SE LOCALIZA EL ADEUDO?</label>
-                                                    <select name="pais" class="form-control CBOpais" required></select>
+                                                    <label>PORCENTAJE DE INCREMENTO/DECREMENTO DEL SALDO</label>
+                                                    <div class="input-group">
+                                                        <select name="porcentajeIncrementoDecremento_simbolo" class="form-control" required>
+                                                            <option value="+">+</option>
+                                                            <option value="-">-</option>
+                                                        </select>
+                                                        <input type="text" name="porcentajeIncrementoDecremento" class="form-control numeric text-right" min="0" max="100" maxlength="3" required>                                                        
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -2979,7 +3788,7 @@
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label>RFC</label>
-                                                    <input type="text" name="otorganteCredito_rfc" class="form-control" maxlength="13" minlength="12" required>
+                                                    <input type="text" name="otorganteCredito_rfc" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -3146,7 +3955,7 @@
                                                         <div class="col-lg-2">
                                                             <div class="form-group">
                                                                 <label>CÓDIGO POSTAL</label>
-                                                                <input type="text" name="codigoPostal" class="form-control numeric" maxlength="5" required>
+                                                                <input type="text" name="codigoPostal" class="form-control numeric" minlength="5" maxlength="5" required>
                                                             </div>
                                                         </div> 
                                                     </div>                               
@@ -3196,7 +4005,7 @@
                                                         <div class="col-lg-2">
                                                             <div class="form-group">
                                                                 <label>CÓDIGO POSTAL</label>
-                                                                <input type="text" name="codigoPostal" class="form-control numeric" maxlength="5" required>
+                                                                <input type="text" name="codigoPostal" class="form-control numeric" minlength="5" maxlength="5" required>
                                                             </div>
                                                         </div>                    
                                                     </div>
@@ -3272,8 +4081,8 @@
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label>R.F.C.</label>
-                                                    <input type="text" name="rfc" class="form-control" maxlength="13" minlength="12" required>
+                                                    <label>RFC</label>
+                                                    <input type="text" name="rfc" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
@@ -4867,32 +5676,40 @@
                                             </tbody>
                                         </table>
 
-                                        <table  style="width: 100%; font-size: 14px" id="pdfTitulo5">
-                                            <thead>
-                                                <tr><th style="background-color: #621132; color: #fff;">5. EXPERIENCIA LABORAL</th></tr>
-                                            </thead>
-                                        </table>
                                         <table class="table table-bordered" style="width: 100%;font-size: 10px; background-color: #fff;" id="pdfMiDeclaracion_experienciaLaboral">
                                             <tbody>
                                             </tbody>
                                         </table>
-
-                                        <table  style="width: 100%; font-size: 14px" id="pdfTitulo6">
-                                            <thead>
-                                                <tr><th style="background-color: #621132; color: #fff;">6. INGRESOS NETOS DEL DECLARANTE, PAREJA Y/O DEPENDIENTES ECONÓMICOS</th></tr>
-                                            </thead>
+                                        <table class="table table-bordered" style="width: 100%;font-size: 10px; background-color: #fff;" id="pdfMiDeclaracion_datos_pareja">
+                                            <tbody>
+                                            </tbody>
                                         </table>
-                                        <table class="table table-bordered" style="width: 100%;font-size: 10px; background-color: #fff;" id="pdfMiDeclaracion_ingresos">
+                                        <table class="table table-bordered" style="width: 100%;font-size: 10px; background-color: #fff;" id="pdfMiDeclaracion_datos_dependiente_eco">
                                             <tbody>
                                             </tbody>
                                         </table>
 
-                                        <table  style="width: 100%; font-size: 14px" id="pdfTitulo7">
-                                            <thead>
-                                                <tr><th style="background-color: #621132; color: #fff;">7.¿TE DESEMPEÑASTE COMO SERVIDOR PÚBLICO EL AÑO INMEDIATO ANTERIOR?</th></tr>
-                                            </thead>
+                                        <table class="table table-bordered" style="width: 100%;font-size: 10px; background-color: #fff;" id="pdfMiDeclaracion_ingresos">
+                                            <tbody>
+                                            </tbody>
                                         </table>
                                         <table class="table table-bordered" style="width: 100%;font-size: 10px; background-color: #fff;" id="pdfMiDeclaracion_desempenoServidorPublico">
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-bordered" style="width: 100%;font-size: 10px; background-color: #fff;" id="pdfMiDeclaracion_bienes_inmuebles">
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-bordered" style="width: 100%;font-size: 10px; background-color: #fff;" id="pdfMiDeclaracion_vehiculos">
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-bordered" style="width: 100%;font-size: 10px; background-color: #fff;" id="pdfMiDeclaracion_bienes_muebles">
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-bordered" style="width: 100%;font-size: 10px; background-color: #fff;" id="pdfMiDeclaracion_inversiones">
                                             <tbody>
                                             </tbody>
                                         </table>
@@ -4904,12 +5721,12 @@
                                             <tbody>
                                             </tbody>
                                         </table>
-                                        
+                                
+
                                         <table class="table table-bordered" style="width: 100%;font-size: 10px; background-color: #fff;" id="pdfMiDeclaracion_interes_titulo">
                                             <tbody>
                                             </tbody>
                                         </table>
-
 
                                         <table class="table table-bordered" style="width: 100%;font-size: 10px; background-color: #fff;" id="pdfMiDeclaracion_participacion">
                                             <tbody>

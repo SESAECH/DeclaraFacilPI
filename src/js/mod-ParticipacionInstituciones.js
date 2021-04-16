@@ -10,6 +10,7 @@ window.initParticipacionInstituciones = function initParticipacionInstituciones(
             //asginar valores predeterminados a catálogos(ayuda al usuario).
             jsonResult.declaracion.interes.participacionTomaDecisiones.ninguno=true;
             $(modulo + ".chkNinguno").prop("disabled", false);
+            $(modulo + ".chkNinguno")[0].checked=false;
             $(modulo + "textarea[name='aclaracionesObservaciones']").val("");
             $(modulo + ".btnAgregar").removeClass("hide");
             $(modulo + ".btnTerminar").addClass("hide");
@@ -115,12 +116,12 @@ window.funcionalidadGuardarRegistroParticipacionInstituciones = function funcion
     }
 
     //catalogos que se usan en el modulo.
-    loadCat(tipoOperacion, ".CBOtipoOperacion");
-    loadCat(tipoRelacion, ".CBOtipoRelacion");
-    loadCat(tipoInstitucion, ".CBOtipoInstitucion");
-    loadCat(paises, ".CBOpais");
-    loadCat(entidadFederativa, ".CBOentidadFederativa"); 
-    loadCat(moneda, ".CBOmoneda");
+    loadCat(tipoOperacion, form + ".CBOtipoOperacion");
+    loadCat(tipoRelacion, form + ".CBOtipoRelacion");
+    loadCat(tipoInstitucion, form + ".CBOtipoInstitucion");
+    loadCat(paises, form + ".CBOpais");
+    loadCat(entidadFederativa, form + ".CBOentidadFederativa"); 
+    loadCat(moneda, form + ".CBOmoneda");
 
     $(form + ":input[type='text']").val("");
 

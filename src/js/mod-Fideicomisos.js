@@ -10,6 +10,7 @@ window.initFideicomisos = function initFideicomisos(data){
             //asginar valores predeterminados a catálogos(ayuda al usuario).
             jsonResult.declaracion.interes.fideicomisos.ninguno=true;
             $(modulo + ".chkNinguno").prop("disabled", false);
+            $(modulo + ".chkNinguno")[0].checked=false;
             $(modulo + "textarea[name='aclaracionesObservaciones']").val("");
             $(modulo + ".btnAgregar").removeClass("hide");
             $(modulo + ".btnTerminar").addClass("hide");
@@ -113,12 +114,12 @@ window.funcionalidadGuardarRegistroFideicomisos = function funcionalidadGuardarR
     }
 
     //catalogos que se usan en el modulo.
-    loadCat(tipoOperacion, ".CBOtipoOperacion");
-    loadCat(tipoFideicomiso, ".CBOtipoFideicomiso");
-    loadCat(tipoRelacion, ".CBOtipoRelacion");
-    loadCat(tipoParticipacionFideicomiso, ".CBOtipoParticipacionFideicomiso");
-    loadCat(tipoPersona, ".CBOtipoPersona");
-    loadCat(sector, ".CBOsector");
+    loadCat(tipoOperacion, form + ".CBOtipoOperacion");
+    loadCat(tipoFideicomiso, form + ".CBOtipoFideicomiso");
+    loadCat(tipoRelacion, form + ".CBOtipoRelacion");
+    loadCat(tipoParticipacionFideicomiso, form + ".CBOtipoParticipacionFideicomiso");
+    loadCat(tipoPersona, form + ".CBOtipoPersona");
+    loadCat(sector, form + ".CBOsector");
 
     $(form + ":input[type='text']").val("");
 

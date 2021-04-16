@@ -1,6 +1,135 @@
+var form="#formPareja ";
 
+window.initPareja = function initPareja(data){
+    var seccion = JSON.parse(atob(data));
+    var seccionName = seccion.moduloName.replace("modulo","");
+    var form = "#form" + seccion.moduloName.replace("modulo", "")+ " ";
+    var modulo = "#" + seccion.moduloName + " ";
 
-window.funcionalidadPareja = function funcionalidadPareja(seccionNo, seccionName, seccionStatus){
+    //cargar catalogos.    
+    loadCat(relacionConDeclarante, form + ".CBOrelacionConDeclarante");
+    loadCat(entidadFederativa, form + ".CBOentidadFederativa");    
+    loadCat(paises, form + ".CBOpais");
+    loadCat(nivelOrdenGobierno, form + ".CBOnivelOrdenGobierno");
+    loadCat(ambitoPublico, form + ".CBOambitoPublico");
+    loadCat(sector, form + ".CBOsector");
+    loadCat(moneda, form + ".CBOmoneda");
+    loadCat(lugarDondeReside, form + ".CBOlugarDondeReside");
+    loadCat(actividadLaboral, form + ".CBOactividadLaboral");
+    loadCat(tipoOperacion, form + ".CBOtipoOperacion");
+
+    $(form + ".CBOentidadFederativa").on('change', function() {
+        loadMunicipios(form + ".CBOmunicipioAlcaldia", this.value);
+    });
+    if(jsonResult.captura.tipo_declaracion == "INICIAL"){
+        $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
+    }
+    //validar en que proceso se encuentra el modulo seleccionado.
+    $(form + '.CBOlugarDondeReside').on('change', function() {
+        $(form + ".contentDomPareja").addClass("hide");
+        if(this.value == "MÉXICO"){
+            $("#domParejaMxContent").removeClass("hide");
+        }
+        else if(this.value == "EXTRANJERO"){
+            $("#domParejaExContent").removeClass("hide");
+        }
+    });
+
+    $(form + '.CBOactividadLaboral').on('change', function() {        
+        if(this.value == "PUB"){                                            
+            $("#laboralParejaPubContent").removeClass("hide");
+            $("#laboralParejaPriContent").addClass("hide");
+        }
+        else if(this.value == "PRI"){                                            
+            $("#laboralParejaPubContent").addClass("hide");
+            $("#laboralParejaPriContent").removeClass("hide");
+        }
+        else{
+            $("#laboralParejaPubContent").addClass("hide");
+            $("#laboralParejaPriContent").addClass("hide");
+        }
+    });
+
+    //validar status de la sección.
+    switch(seccion.status){
+        case "SIN_INFO":
+            //asginar valores predeterminados a catálogos(ayuda al usuario).
+            jsonResult.declaracion[seccion.apartado][seccion.seccion].ninguno=false;
+            $("#chkNingunoPareja").prop("disabled", false);
+            $("#chkNingunoPareja")[0].checked=false;
+            $("#chkNingunoPareja").trigger("change");
+             //asginar valores predeterminados a catálogos(ayuda al usuario).
+             $(form +'.CBOlugarDondeReside').val("MÉXICO").change();
+             $(form +'.CBOactividadLaboral').val("NIN").change();
+             $(form +".CBOentidadFederativa").val("07").change();
+             $(form +".CBOmoneda").val("MXN");
+ 
+             $(form + ".btnGuardar").removeClass("hide");
+             $(form + ".btnTerminar").removeClass("hide");
+             $(modulo + ".btnHabilitar").addClass("hide");
+        break;
+        case "EN_PROCESO":
+            window["loadInfo" + seccionName](seccionName);            
+            $(".btnGuardar, .btnTerminar").removeClass("hide");
+            $(".btnHabilitar").addClass("hide");           
+            break;
+        case "TERMINADO":
+            window["loadInfo" + seccionName](seccionName);     
+            $("#form" + seccionName +" :input").prop("disabled", true);
+            $("#chkNingunoPareja").prop("disabled", true);        
+            $(modulo + ".btnGuardar").addClass("hide");
+            $(modulo + ".btnTerminar").addClass("hide");
+            $(modulo + ".btnHabilitar").removeClass("hide").prop("disabled", false);;
+        break;
+    }
+
+    $(form + ".btnGuardar").unbind("click");
+    $(form + ".btnTerminar").unbind("click");
+    $(modulo + ".btnHabilitar").unbind("click");
+
+    $(form + ".btnGuardar").on('click',function() {
+        window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
+    });
+
+    $(modulo + ".btnTerminar").on('click',function() {        
+        window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
+    });
+    
+    $(modulo + ".btnHabilitar").on("click",function() {
+
+        habilitarSeccion(seccion.apartado, seccion.no, seccionName);
+        $("#chkNingunoPareja").prop("disabled", false);
+        $(form +" :input").prop("disabled", false);
+        $(modulo + "textarea[name='aclaracionesObservaciones']").prop("disabled", false);
+        if ($("#chkNingunoPareja")[0].checked){
+            $(form + ".btnGuardar").addClass("hide");
+        }
+        else{
+            $(form + ".btnGuardar").removeClass("hide");
+        }
+        
+    });
+
+    $(".content_seccion").addClass("hide");
+    $("#" + seccion.moduloName).removeClass("hide");
+}
+
+$("#chkNingunoPareja").on("change",function() {
+    if(this.checked){
+        $("#parejaContent").addClass("hide");
+        $(form + ".btnGuardar").addClass("hide");
+        $(form + ".btnTerminar").removeClass("hide");
+    }
+    else{
+        $("#parejaContent").removeClass("hide");
+        $(form + ".btnGuardar").removeClass("hide");
+        $(form + ".btnTerminar").removeClass("hide");
+    }
+});
+
+//--------------------------------------------------------------//
+
+function f11uncionalidadPareja(seccionNo, seccionName, seccionStatus){
     document.forms["form" + seccionName].getElementsByClassName("btnGuardar")[0].dataset.seccion_no = seccionNo; ;
     document.forms["form" + seccionName].getElementsByClassName("btnGuardar")[0].dataset.seccion_name = seccionName; ;
     //cargar catalogos.    
@@ -82,17 +211,94 @@ window.funcionalidadPareja = function funcionalidadPareja(seccionNo, seccionName
     $(".btnHabilitar").on("click",function() {
         habilitarSeccion("situacion_patrimonial", seccionNo, seccionName);
     });    
-};
+}
 
-window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName){
-    $.validator.addMethod("RFC", function (value, element) {
+function guardarFormPareja(seccionNo, seccionName, seccionApartado){
+    if ($("#chkNingunoPareja")[0].checked){
+        $("#chkNingunoPareja").prop("disabled", true);
+        jsonResult.declaracion[seccionApartado].datosPareja= {
+            "ninguno": true,
+            "tipoOperacion": "AGREGAR",
+            "nombre": "",
+            "primerApellido": "",
+            "segundoApellido": "",
+            "fechaNacimiento": "",
+            "rfc": "",
+            "relacionConDeclarante": "",
+            "ciudadanoExtranjero": false,
+            "curp": "",
+            "esDependienteEconomico": false,
+            "habitaDomicilioDeclarante": false,
+            "lugarDondeReside": "NINGUNO",
+            "domicilioMexico": {
+              "calle": "",
+              "numeroExterior": "",
+              "numeroInterior": "",
+              "coloniaLocalidad": "",
+              "municipioAlcaldia": {
+                "clave": "",
+                "valor": ""
+              },
+              "entidadFederativa": {
+                "clave": "",
+                "valor": ""
+              },
+              "codigoPostal": ""
+            },
+            "domicilioExtranjero": {
+              "calle": "",
+              "numeroExterior": "",
+              "numeroInterior": "",
+              "ciudadLocalidad": "",
+              "estadoProvincia": "",
+              "pais": "MX",
+              "codigoPostal": ""
+            },
+            "actividadLaboral": {
+              "clave": "NIN ",
+              "valor": "NINGUNO"
+            },
+            "actividadLaboralSectorPublico": {
+              "nivelOrdenGobierno": "",
+              "ambitoPublico": "",
+              "nombreEntePublico": "",
+              "areaAdscripcion": "",
+              "empleoCargoComision": "",
+              "funcionPrincipal": "",
+              "salarioMensualNeto": {
+                "valor": 0,
+                "moneda": "MXN"
+              },
+              "fechaIngreso": ""
+            },
+            "actividadLaboralSectorPrivadoOtro": {
+              "nombreEmpresaSociedadAsociacion": "",
+              "empleoCargoComision": "",
+              "rfc": "",
+              "fechaIngreso": "",
+              "sector": {
+                "clave": "AGRI",
+                "valor": "AGRICULTURA"
+              },
+              "salarioMensualNeto": {
+                "valor": 0,
+                "moneda": "MXN"
+              },
+              "proveedorContratistaGobierno": false
+            },
+            "aclaracionesObservaciones": $("#form" + seccionName + " textarea[name='aclaracionesObservaciones']").val()
+          };
+          actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, "TERMINADO"); 
+    }
+    else{
+    /* $.validator.addMethod("RFC", function (value, element) {
         if ( value !== '' ) {
             var patt = new RegExp("^[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?$");
             return patt.test(value);
         } else {
             return false;
         }
-    }, "Ingrese un RFC válido.");
+    }, "Ingrese un RFC válido."); */
     $.validator.addMethod("CURP", function (value, element) {
         if (value !== '') {
             var patt = new RegExp("^[A-Z][A,E,I,O,U,X][A-Z]{2}[0-9]{2}[0-1][0-9][0-3][0-9][M,H][A-Z]{2}[B,C,D,F,G,H,J,K,L,M,N,Ñ,P,Q,R,S,T,V,W,X,Y,Z]{3}[0-9,A-Z][0-9]$");
@@ -107,7 +313,7 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName){
             nombre : { required: true, maxlength: 50 },
             primerApellido : { required: true },
             fechaNacimiento : { required: true },
-            rfc : { required: true, minlength: 12, maxlength: 13, RFC: true },
+            /* rfc : { required: true, minlength: 12, maxlength: 13 }, */
             curp : { required: true, minlength: 18, maxlength: 18, CURP: true },
             relacionConDeclarante : { required: true },
             esDependienteEconomico : { required: true },
@@ -135,7 +341,7 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName){
             fechaIngreso : { required: true },
             nombreEmpresaSociedadAsociacion : { required: true },
             // empleoCargoComision : { required: true },
-            rfc : { required: true, minlength: 10, maxlength: 10, RFC: true },
+            /* rfc : { required: true, minlength: 10, maxlength: 10, RFC: true }, */
             // fechaIngreso : { required: true },
             sector : { required: true },
             // salarioMensualNeto : { required: true, number: true },
@@ -146,7 +352,7 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName){
             nombre : { required: "Ingrese el nombre.", maxlength: "El máximo de caracteres es de 50." },
             primerApellido : { required: "Ingrese el primer apellido." },
             fechaNacimiento : { required: "Ingrese la fecha de nacimmiento." },
-            rfc : { required: "Ingrese el RFC.", minlength: "El minimo de caracteres es de 12.", maxlength: "El máximo de caracteres es de 13." },
+           /*  rfc : { required: "Ingrese el RFC.", minlength: "El minimo de caracteres es de 12.", maxlength: "El máximo de caracteres es de 13." }, */
             curp : { required: "Ingrese la CURP.", minlength: "El mínimo de caracteres es de 18.", maxlength: "El máximo de caracteres es de 18." },
             relacionConDeclarante : { required: "Seleccione la relación con el declarante." },
             esDependienteEconomico : { required: "Seleccione si es dependiente económico." },
@@ -185,7 +391,7 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName){
         submitHandler: function(form, btn) {
             var root = jsonResult.declaracion.situacionPatrimonial.datosPareja;
 
-            root.ninguno =                  $("#checkNingunaPareja")[0].checked;
+            root.ninguno =                  $("#chkNingunoPareja")[0].checked;
             root.tipoOperacion =            $("#form" + seccionName + " select[name='tipoOperacion']").val();
             root.nombre =                   $("#form" + seccionName + " input[name='nombre']").val();
             root.primerApellido =           $("#form" + seccionName + " input[name='primerApellido']").val();
@@ -200,7 +406,7 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName){
             root.habitaDomicilioDeclarante = $("#form" + seccionName + " input[type='radio'][name='habitaDomicilioDeclarante']:checked").val().toLowerCase() == 'true' ? true : false;
 
             root.lugarDondeReside =         $("#form" + seccionName + " select[name='lugarDondeReside'] option:selected").val();
-
+            
             //domicilio mexico.
             root.domicilioMexico.calle =                    $("#domParejaMxContent input[name='calle']").val();
             root.domicilioMexico.numeroExterior =           $("#domParejaMxContent input[name='numeroExterior']").val();
@@ -247,18 +453,21 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName){
             root.aclaracionesObservaciones = $("#form" + seccionName + " textarea[name='aclaracionesObservaciones']").val();
         
             //actualiza el status de la sección (en proceso/terminado).
-            actualizarStatusSeccion("situacion_patrimonial", seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);            
+            actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);            
         }
     });
-};
+    }
+}
 
-window.loadInfoPareja = function loadInfoPareja(seccionName){
+function loadInfoPareja(seccionName){
     var root = jsonResult.declaracion.situacionPatrimonial.datosPareja;
     if (root.ninguno){
-        $("#checkNingunaPareja")[0].checked=true;
+        $("#chkNingunoPareja")[0].checked=true;
+        $("#chkNingunoPareja").trigger("change");
     }
     else{
-        $("#checkNingunaPareja")[0].checked=false;
+        $("#chkNingunoPareja")[0].checked=false;
+        $("#chkNingunoPareja").trigger("change");
         $("#form" + seccionName + " select[name='tipoOperacion']").val(root.tipoOperacion);
         $("#form" + seccionName + " input[name='nombre']").val(root.nombre);
         $("#form" + seccionName + " input[name='primerApellido']").val(root.primerApellido);
@@ -315,4 +524,4 @@ window.loadInfoPareja = function loadInfoPareja(seccionName){
         //generales
         $("#form" + seccionName + " textarea[name='aclaracionesObservaciones']").val(root.aclaracionesObservaciones);        
     }  
-};
+}

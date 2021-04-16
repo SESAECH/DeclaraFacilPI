@@ -1,5 +1,5 @@
 var tercerosTemp={};
-window.initAdeudos = function initAdeudos(data){
+window.initInversiones = function initInversiones(data){
     var seccion = JSON.parse(atob(data));
     var seccionName = seccion.moduloName.replace("modulo","");
     //var form = "#form" + seccion.moduloName.replace("modulo", "")+ " ";
@@ -9,7 +9,7 @@ window.initAdeudos = function initAdeudos(data){
     switch(seccion.status){
         case "SIN_INFO":
             //asginar valores predeterminados a catálogos(ayuda al usuario).
-            jsonResult.declaracion.situacionPatrimonial.adeudos.ninguno=true;
+            jsonResult.declaracion.situacionPatrimonial.inversiones.ninguno=true;
             $(modulo + ".chkNinguno").prop("disabled", false);
             $(modulo + ".chkNinguno")[0].checked=false;
             $(modulo + "textarea[name='aclaracionesObservaciones']").val("");
@@ -23,7 +23,7 @@ window.initAdeudos = function initAdeudos(data){
             $(modulo + ".btnAgregar").removeClass("hide");
             $(modulo + ".btnHabilitar").addClass("hide");
             $(modulo + ".btnTerminar").removeClass("hide");
-            if (Object.keys(jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo).length > 0){
+            if (Object.keys(jsonResult.declaracion.situacionPatrimonial.inversiones.inversion).length > 0){
                 $(modulo + ".btnAgregar").removeClass("hide");
             }
             else{
@@ -33,10 +33,10 @@ window.initAdeudos = function initAdeudos(data){
         case "TERMINADO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
             $(modulo + ".chkNinguno").prop("disabled", true);
-            if (jsonResult.declaracion.situacionPatrimonial.adeudos.ninguno){
+            if (jsonResult.declaracion.situacionPatrimonial.inversiones.ninguno){
                 $(modulo + ".chkNinguno")[0].checked=true;                
             }
-            $(modulo + "textarea[name='aclaracionesObservaciones']").val(jsonResult.declaracion.situacionPatrimonial.adeudos.aclaracionesObservaciones).prop("disabled", true);
+            $(modulo + "textarea[name='aclaracionesObservaciones']").val(jsonResult.declaracion.situacionPatrimonial.inversiones.aclaracionesObservaciones).prop("disabled", true);
             $(modulo + ".btnEditar").addClass("hide");
             $(modulo + ".btnEliminar").addClass("hide");
             $(modulo + ".btnAgregar").addClass("hide");
@@ -54,7 +54,7 @@ window.initAdeudos = function initAdeudos(data){
     });
 
     $(modulo + ".btnTerminar").on('click',function() {
-        jsonResult.declaracion.situacionPatrimonial.adeudos.aclaracionesObservaciones =  $(modulo + "textarea[name='aclaracionesObservaciones']").val().toUpperCase();
+        jsonResult.declaracion.situacionPatrimonial.inversiones.aclaracionesObservaciones =  $(modulo + "textarea[name='aclaracionesObservaciones']").val().toUpperCase();
         $(modulo + "textarea[name='aclaracionesObservaciones']").prop("disabled", true);
         //inhabilitar controles del modulo.
         $(modulo + ".chkNinguno").prop("disabled", true);
@@ -97,7 +97,7 @@ window.initAdeudos = function initAdeudos(data){
     $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut");
 }
 
-window.funcionalidadGuardarRegistroAdeudos = function funcionalidadGuardarRegistroAdeudos(seccionNo, seccionName, modulo, accion, uuid=null){
+window.funcionalidadGuardarRegistroInversiones = function funcionalidadGuardarRegistroInversiones(seccionNo, seccionName, modulo, accion, uuid=null){
     var form = "#form" + seccionName + " ";
 
     $(modulo + ".formPrincipal").addClass("animated fadeOut").addClass("hide");                      
@@ -114,54 +114,54 @@ window.funcionalidadGuardarRegistroAdeudos = function funcionalidadGuardarRegist
     }
 
     loadCat(tipoOperacion, form + ".CBOtipoOperacion");
-    loadCat(tipoAdeudo, form + ".CBOtipoAdeudo");
-    loadCat(titulares, form + ".CBOtitularAdeudo");        
+    loadCat(tipoInversion, form + ".CBOtipoInversion");
+    loadCat(titulares, form + ".CBOtitularInversion");        
     loadCat(moneda, form + ".CBOmoneda");
     loadCat(paises, form + ".CBOpais");
     loadCat(tipoPersona, form + ".CBOtipoPersona");
-    /* loadCat(tipoInmueble, ".CBOtipoInmueble"); */
-    
-    $(form + '.CBOtipoAdeudo').on('change', function() {
-        $(form + ".tipoAdeudo_especifique").addClass("hide");
-        $(form + ".tipoAdeudo_especifique input[name='especifique']").val($(form + '.CBOtipoAdeudo option:selected')[0].innerText);
-        if(this.value == "OTRO"){
-            $(form + ".tipoAdeudo_especifique").removeClass("hide");
-            $(form + ".tipoAdeudo_especifique input[name='especifique']").val("");
-        }        
-    });      
-    
-    $(form + '.CBOtitularAdeudo').on('change', function() {
+
+    $(form + '.CBOtipoInversion').on('change', function() {
+        $(form + ".CBOsubTipoInversion").empty();
+        let clave= this.value;
+        $.each(subTipoInversion, function (index, item) {
+            if (item.tipoInversion == clave){
+                $(form + ".CBOsubTipoInversion").append('<option value="' + item.clave + '">' + item.valor + '</option>');
+            }            
+        });         
+    });
+
+    $(form + '.CBOtitularInversion').on('change', function() {
         $(".content_terceros").addClass("hide");
-        let split = $(form + ".CBOtitularAdeudo option:selected").val().split(";");
+        let split = $(form + ".CBOtitularInversion option:selected").val().split(";");
         if (split.length>1 || split[0] != "DEC"){
             $(".content_terceros").removeClass("hide");
         }                 
     });  
 
     $(form + ":input[type='text']").val("");
+
     switch(jsonResult.captura.tipo_declaracion){
         case "INICIAL":
             $("#form" + seccionName + " select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
-            $(form + ".adeudos_saldolbl").text("SALDO INSOLUTO (SITUACIÓN ACTUAL)");
+            $(form + ".adeudos_saldolbl").text("SALDO A LA FECHA (SITUACIÓN ACTUAL)");
             $(form + ".content_porcentajeIncrementoDecremento").addClass("hide");
         break;
         case "MODIFICACION": 
-        $(form + ".adeudos_saldolbl").text("SALDO INSOLUTO AL 31 DE DICIEMBRE DEL AÑO INMEDIATO ANTERIOR");
+        $(form + ".adeudos_saldolbl").text("SALDO AL 31 DE DICIEMBRE DEL AÑO INMEDIATO ANTERIOR");
             $(form + ".content_porcentajeIncrementoDecremento").removeClass("hide");
         break;
         case "CONCLUSION": 
-        $(form + ".adeudos_saldolbl").text("SALDO INSOLUTO A LA FECHA DE CONCLUSIÓN DEL EMPLEO");
+        $(form + ".adeudos_saldolbl").text("SALDO A LA FECHA (SITUACIÓN ACTUAL)");
             $(form + ".content_porcentajeIncrementoDecremento").removeClass("hide");
         break;
     }
-    
-    $(form + '.CBOtipoAdeudo').val("CHIP").trigger("change");
+    $(form + '.CBOtipoInversion').val("BANC").trigger("change");
     $(form + '.CBOmoneda').val("MXN");
-    $(form + '.CBOtitularAdeudo').val("DEC").trigger("change");
+    $(form + '.CBOtitularInversion').val("DEC").trigger("change");
     $(form + '.CBOpais').val("MX");
-    
+
     tercerosTemp={};
-    $("#formAdeudos .tblTerceros tbody").empty();
+    $("#formInversiones .tblTerceros tbody").empty();
 
     $("#form" + seccionName).validate().resetForm();
 
@@ -173,15 +173,13 @@ window.funcionalidadGuardarRegistroAdeudos = function funcionalidadGuardarRegist
      $(form + ".btnCerrar").on('click',function() {
         $(modulo + ".formSecundario").addClass("hide");
         $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut");
-    }); 
-    //validate
-    
+    });     
 
     //btn guardar.
     $(form + ".btnAgregar").on('click',function() {
         if( $("#form" + seccionName).valid()) {
             let guardar=false;
-            let split = $(form + ".CBOtitularAdeudo option:selected").val().split(";");
+            let split = $(form + ".CBOtitularInversion option:selected").val().split(";");
             if (split.length==1){ 
                 if (split[0]=="DEC"){ tercerosTemp=[]; guardar=true;}
                 else{
@@ -222,67 +220,62 @@ window.funcionalidadGuardarRegistroAdeudos = function funcionalidadGuardarRegist
             };
             $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val("");
             $(form + ".content_terceros_nuevo input[name='rfc']").val("");
-            pintarTablaAdeudosTerceros();
+            pintarTablaInversionesTerceros();
         }
     });
-
 }
 
-window.guardarRegistroAdeudos = function guardarRegistroAdeudos(uuidItem, seccionNo, seccionName, modulo){    
+window.guardarRegistroInversiones = function guardarRegistroInversiones(uuidItem, seccionNo, seccionName, modulo){    
     var form="#form" + seccionName + " ";
-    jsonResult.declaracion.situacionPatrimonial.adeudos.ninguno=false;
-    jsonResult.declaracion.situacionPatrimonial.adeudos.aclaracionesObservaciones =  $(modulo + " textarea[name='aclaracionesObservaciones']").val();
-    let split = $(form + ".CBOtitularAdeudo option:selected").val().split(";");
+    jsonResult.declaracion.situacionPatrimonial.inversiones.ninguno=false;
+    jsonResult.declaracion.situacionPatrimonial.inversiones.aclaracionesObservaciones =  $(modulo + " textarea[name='aclaracionesObservaciones']").val();
+    let split = $(form + ".CBOtitularInversion option:selected").val().split(";");
     let titulares=[];
     $(split).each(function(index, item) {
         titulares.push({clave: titularesApoyo[item].clave,valor:titularesApoyo[item].valor });
     });
 
-    jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo[uuidItem] = {
+    jsonResult.declaracion.situacionPatrimonial.inversiones.inversion[uuidItem] = {
         "uuid":uuidItem,
-        "tipoOperacion": $(form + "select[name='tipoOperacion'] option:selected").val(),
+        "tipoOperacion": $(form + "select[name='tipoOperacion'] option:selected").val(),        
+        "tipoInversion": {
+          "clave": $(form + "select[name='tipoInversion'] option:selected").val(),
+          "valor": $(form + "select[name='tipoInversion'] option:selected")[0].innerText,
+        },
+        "subTipoInversion": {
+            "clave": $(form + "select[name='subTipoInversion'] option:selected").val(),
+            "valor": $(form + "select[name='subTipoInversion'] option:selected")[0].innerText,
+        },
         "titular": titulares,
-        "tipoAdeudo": {
-          "clave": $(form + "select[name='tipoAdeudo'] option:selected").val(),
-          "valor": $(form + "input[name='especifique']").val(),
-        },
-        "numeroCuentaContrato": $(form + "input[name='numeroCuentaContrato']").val(),
-        "fechaAdquisicion":     $(form + "input[name='fechaAdquisicion']").val(),
-        "montoOriginal": {
-          "valor":  parseInt($(form + "input[name='montoOriginal']").val()),
-          "moneda": $(form + "select[name='montoOriginal_moneda'] option:selected").val(),
-        },
-        "otorganteCredito": {
-          "tipoPersona":        $(form + "select[name='tipoPersona'] option:selected").val(),
-          "nombreInstitucion":  $(form + "input[name='nombreInstitucion']").val(),
-          "rfc":                $(form + "input[name='otorganteCredito_rfc']").val(),
-        },
         "tercero": tercerosTemp,
-        "localizacionAdeudo": {
-          "pais": $(form + "select[name='pais'] option:selected").val(),
+        "numeroCuentaContrato": $(form + "input[name='numeroCuentaContrato']").val(),
+        "localizacionInversion": {
+          "pais":                   $(form + "select[name='pais'] option:selected").val(),
+          "institucionRazonSocial": $(form + "input[name='institucionRazonSocial']").val(),
+          "rfc":                    $(form + "input[name='institucionRazonSocial_rfc']").val(),
         }
       };
 
     switch(jsonResult.captura.tipo_declaracion){
         case "INICIAL": 
-            jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo[uuidItem].saldoInsolutoSituacionActual= {
-                    "valor":  parseInt($(form + "input[name='saldoInsolutoSituacionActual']").val()),
-                    "moneda": $(form + "select[name='saldoInsolutoSituacionActual_moneda'] option:selected").val(),
+            jsonResult.declaracion.situacionPatrimonial.inversiones.inversion[uuidItem].saldoSituacionActual= {
+                "valor":  parseInt($(form + "input[name='saldoSituacionActual']").val()),
+                "moneda": $(form + "select[name='saldoSituacionActual_moneda'] option:selected").val(),
             };
         break;
         case "MODIFICACION": 
-            jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo[uuidItem].saldoInsolutoDiciembreAnterior = {
-                    "valor":  parseInt($(form + "input[name='saldoInsolutoSituacionActual']").val()),
-                    "moneda": $(form + "select[name='saldoInsolutoSituacionActual_moneda'] option:selected").val(),
-                };
-            jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo[uuidItem].porcentajeIncrementoDecremento = parseInt($(form + "select[name='porcentajeIncrementoDecremento_simbolo'] option:selected").val() + $(form + "input[name='porcentajeIncrementoDecremento']").val());
+            jsonResult.declaracion.situacionPatrimonial.inversiones.inversion[uuidItem].saldoDiciembreAnterior = {
+                "valor":  parseInt($(form + "input[name='saldoSituacionActual']").val()),
+                "moneda": $(form + "select[name='saldoSituacionActual_moneda'] option:selected").val(),
+            };
+            jsonResult.declaracion.situacionPatrimonial.inversiones.inversion[uuidItem].porcentajeIncrementoDecremento = parseInt($(form + "select[name='porcentajeIncrementoDecremento_simbolo'] option:selected").val() + $(form + "input[name='porcentajeIncrementoDecremento']").val());
         break;
         case "CONCLUSION": 
-            jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo[uuidItem].saldoInsolutoFechaConclusion = {
-                    "valor":  parseInt($(form + "input[name='saldoInsolutoSituacionActual']").val()),
-                    "moneda": $(form + "select[name='saldoInsolutoSituacionActual_moneda'] option:selected").val(),
-                };
-            jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo[uuidItem].porcentajeIncrementoDecremento = parseInt($(form + "select[name='porcentajeIncrementoDecremento_simbolo'] option:selected").val() + $(form + "input[name='porcentajeIncrementoDecremento']").val());            
+            jsonResult.declaracion.situacionPatrimonial.inversiones.inversion[uuidItem].saldoFechaConclusion = {
+                "valor":  parseInt($(form + "input[name='saldoSituacionActual']").val()),
+                "moneda": $(form + "select[name='saldoSituacionActual_moneda'] option:selected").val(),
+            };
+            jsonResult.declaracion.situacionPatrimonial.inversiones.inversion[uuidItem].porcentajeIncrementoDecremento = parseInt($(form + "select[name='porcentajeIncrementoDecremento_simbolo'] option:selected").val() + $(form + "input[name='porcentajeIncrementoDecremento']").val());
         break;
     }
     //cambiar status a captura.
@@ -290,9 +283,9 @@ window.guardarRegistroAdeudos = function guardarRegistroAdeudos(uuidItem, seccio
     $(".status-seccion-" + jsonResult.captura.declaracion.situacionPatrimonial.secciones[seccionNo].apartado + "-" + seccionNo).removeClass("indicador-status indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
 }
 
-window.pintarTablaAdeudos = function pintarTablaAdeudos(seccionNo, seccionName){
+window.pintarTablaInversiones = function pintarTablaInversiones(seccionNo, seccionName){
     let html="";
-    let lista = jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo;
+    let lista = jsonResult.declaracion.situacionPatrimonial.inversiones.inversion;
     Object.keys(lista).forEach(function (row) {
         var params = { uuid: lista[row].uuid, seccionNo: seccionNo, seccionName: seccionName };
         let datos=lista[row];
@@ -301,72 +294,66 @@ window.pintarTablaAdeudos = function pintarTablaAdeudos(seccionNo, seccionName){
 
         switch(jsonResult.captura.tipo_declaracion){
             case "INICIAL": 
-                saldo = format(datos.saldoInsolutoSituacionActual.valor);
-                saldoMoneda = datos.saldoInsolutoSituacionActual.moneda;
+                saldo = format(datos.saldoSituacionActual.valor);
+                saldoMoneda = datos.saldoSituacionActual.moneda;
                 break;
             case "MODIFICACION": 
-                saldo = format(datos.saldoInsolutoDiciembreAnterior.valor);
-                saldoMoneda = datos.saldoInsolutoDiciembreAnterior.moneda;
+                saldo = format(datos.saldoDiciembreAnterior.valor);
+                saldoMoneda = datos.saldoDiciembreAnterior.moneda;
                 break;
             case "CONCLUSION": 
-                saldo = format(datos.saldoInsolutoFechaConclusion.valor);
-                saldoMoneda = datos.saldoInsolutoFechaConclusion.moneda;
+                saldo = format(datos.saldoFechaConclusion.valor);
+                saldoMoneda = datos.saldoFechaConclusion.moneda;
                 break;
         }
 
         html+="<tr id='" + lista[row].uuid + "'>";
         html+=" <td>" + titulares.slice(0, -1) +"</td>";
-        html+=" <td>" + datos.tipoAdeudo.valor +"</td>";
-        html+=" <td>" + datos.otorganteCredito.nombreInstitucion +"</td>";        
-        html+=" <td>" + format(datos.montoOriginal.valor) + datos.montoOriginal.moneda + "</td>";        
-        html+=" <td>" + saldo + saldoMoneda + "</td>";        
+        html+=" <td>" + datos.tipoInversion.valor +"</td>";
+        html+=" <td>" + datos.subTipoInversion.valor +"</td>";            
+        html+=" <td class='text-right'>" + saldo + saldoMoneda + "</td>";        
         html+=" <td class='text-right'>";
-        html+="     <button class='btn btn-sm btn-warning btnEditar' onclick='editarAdeudos(\"" + btoa(JSON.stringify(params)) + "\");'>Editar</button>";
-        html+="     <button class='btn btn-sm btn-danger btnEliminar' onclick='eliminarAdeudos(\"" + btoa(JSON.stringify(params)) + "\");'>Eliminar</button>";              
+        html+="     <button class='btn btn-sm btn-warning btnEditar' onclick='editarInversiones(\"" + btoa(JSON.stringify(params)) + "\");'>Editar</button>";
+        html+="     <button class='btn btn-sm btn-danger btnEliminar' onclick='eliminarInversiones(\"" + btoa(JSON.stringify(params)) + "\");'>Eliminar</button>";              
         html+=" </td>";
         html+="</tr>";
     });
     $(".tbl" + seccionName + " tbody").empty().append(html);
 }
 
-window.editarAdeudos = function editarAdeudos(data){
+window.editarInversiones = function editarInversiones(data){
     let item = JSON.parse(atob(data));
     let form = "#form" + item.seccionName  + " ";
     let modulo = "#modulo" + item.seccionName  + " ";
     window["funcionalidadGuardarRegistro" + item.seccionName](item.seccionNo, item.seccionName, modulo, "EDITAR", item.uuid);
     
     //cargar información del row seleccionado para editar.
-    let nodo = jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo[item.uuid];
+    let nodo = jsonResult.declaracion.situacionPatrimonial.inversiones.inversion[item.uuid];
     let titular="";
     $(nodo.titular).each(function(index, item) { titular+= item.clave + ";"; });    
     $(form + "select[name='tipoOperacion']").val(nodo.tipoOperacion);
     $(form + "select[name='titularBien']").val(titular.slice(0, -1)).trigger("change");    
     if(titular.slice(0,-1) !="DEC"){ 
         tercerosTemp = nodo.tercero; 
-        pintarTablaAdeudosTerceros(); 
+        pintarTablaInversionesTerceros(); 
     }
 
-    $(form + "select[name='tipoAdeudo']").val(nodo.tipoAdeudo.clave).trigger("change");
+    $(form + "select[name='tipoInversion']").val(nodo.tipoInversion.clave).trigger("change");
+    $(form + "select[name='subTipoInversion']").val(nodo.subTipoInversion.clave)
     $(form + "input[name='numeroCuentaContrato']").val(nodo.numeroCuentaContrato);
-    $(form + "input[name='fechaAdquisicion']").val(nodo.fechaAdquisicion);
-    $(form + "input[name='montoOriginal']").val(nodo.montoOriginal.valor);
-    $(form + "select[name='montoOriginal_moneda']").val(nodo.montoOriginal.moneda);
-    //$(form + "input[name='saldoInsolutoSituacionActual']").val(nodo.saldoInsolutoSituacionActual.valor);
-    //$(form + "select[name='saldoInsolutoSituacionActual_moneda']").val(nodo.saldoInsolutoSituacionActual.moneda);
-    $(form + "select[name='tipoPersona']").val(nodo.otorganteCredito.tipoPersona);
-    $(form + "input[name='nombreInstitucion']").val(nodo.otorganteCredito.nombreInstitucion);
-    $(form + "input[name='otorganteCredito_rfc']").val(nodo.otorganteCredito.rfc);
-    $(form + "select[name='pais']").val(nodo.localizacionAdeudo.pais);
+    $(form + "input[name='institucionRazonSocial']").val(nodo.localizacionInversion.institucionRazonSocial);
+    $(form + "input[name='institucionRazonSocial_rfc']").val(nodo.localizacionInversion.rfc);
+    $(form + "select[name='pais']").val(nodo.localizacionInversion.pais);
     
     switch(jsonResult.captura.tipo_declaracion){        
         case "INICIAL": 
-            $(form + "input[name='saldoInsolutoSituacionActual']").val(nodo.saldoInsolutoSituacionActual.valor);
-            $(form + "select[name='saldoInsolutoSituacionActual_moneda']").val(nodo.saldoInsolutoSituacionActual.moneda);
+            $(form + "input[name='saldoSituacionActual']").val(nodo.saldoSituacionActual.valor);
+            $(form + "select[name='saldoSituacionActual_moneda']").val(nodo.saldoSituacionActual.moneda);
             $(form + ".content_porcentajeIncrementoDecremento").addClass("hide");
         break;
         case "MODIFICACION": 
-            $(form + "input[name='saldoInsolutoSituacionActual']").val(nodo.saldoInsolutoDiciembreAnterior.valor); 
-            $(form + "select[name='saldoInsolutoSituacionActual_moneda']").val(nodo.saldoInsolutoDiciembreAnterior.moneda);
+            $(form + "input[name='saldoSituacionActual']").val(nodo.saldoDiciembreAnterior.valor); 
+            $(form + "select[name='saldoSituacionActual_moneda']").val(nodo.saldoDiciembreAnterior.moneda);
             if (nodo.porcentajeIncrementoDecremento<0) {
                 $(form + "select[name='porcentajeIncrementoDecremento_simbolo']").val("-");
                 $(form + "input[name='porcentajeIncrementoDecremento']").val(nodo.porcentajeIncrementoDecremento);
@@ -378,8 +365,8 @@ window.editarAdeudos = function editarAdeudos(data){
             $(form + ".content_porcentajeIncrementoDecremento").removeClass("hide");
             break;
         case "CONCLUSION": 
-            $(form + "input[name='saldoInsolutoSituacionActual']").val(nodo.saldoInsolutoFechaConclusion.valor);
-            $(form + "select[name='saldoInsolutoSituacionActual_moneda']").val(nodo.saldoInsolutoFechaConclusion.moneda);
+            $(form + "input[name='saldoSituacionActual']").val(nodo.saldoFechaConclusion.valor);
+            $(form + "select[name='saldoSituacionActual_moneda']").val(nodo.saldoFechaConclusion.moneda);
             if (nodo.porcentajeIncrementoDecremento<0) {
                 $(form + "select[name='porcentajeIncrementoDecremento_simbolo']").val("-");
                 $(form + "input[name='porcentajeIncrementoDecremento']").val(nodo.porcentajeIncrementoDecremento);
@@ -394,20 +381,19 @@ window.editarAdeudos = function editarAdeudos(data){
 
 }
 
-window.eliminarAdeudos = function eliminarAdeudos(data){
+window.eliminarInversiones = function eliminarInversiones(data){
     var item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
-    delete jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo[item.uuid];
+    delete jsonResult.declaracion.situacionPatrimonial.inversiones.inversion[item.uuid];
     $("#" + item.uuid).remove();
-    if (Object.keys(jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo).length==0){
+    if (Object.keys(jsonResult.declaracion.situacionPatrimonial.inversiones.inversion).length==0){
         $("#modulo" + item.seccionName + " .btnTerminar").addClass("hide");
     }
 }
 
 
 
-
-window.pintarTablaAdeudosTerceros = function pintarTablaAdeudosTerceros(){
+window.pintarTablaInversionesTerceros = function pintarTablaInversionesTerceros(){
     let html="";
     Object.keys(tercerosTemp).forEach(function (row) {        
         let datos = tercerosTemp[row];
@@ -417,14 +403,14 @@ window.pintarTablaAdeudosTerceros = function pintarTablaAdeudosTerceros(){
         html+=" <td>" + datos.rfc + "</td>";        
         html+=" <td class='text-right'>";
         //html+="     <button class='btn btn-sm btn-warning btnEditar' onclick='editarPrestamoOComodato(\"" + btoa(JSON.stringify(datos)) + "\");'>Editar</button>";
-        html+="     <button class='btn btn-sm btn-danger btnEliminar' onclick='eliminarAdeudosTerceros(\"" + btoa(JSON.stringify(datos)) + "\");'>Eliminar</button>";              
+        html+="     <button class='btn btn-sm btn-danger btnEliminar' onclick='eliminarInversionesTerceros(\"" + btoa(JSON.stringify(datos)) + "\");'>Eliminar</button>";              
         html+=" </td>";
         html+="</tr>";
     });
-    $("#formAdeudos .tblTerceros tbody").empty().append(html);
+    $("#formInversiones .tblTerceros tbody").empty().append(html);
 }
 
-window.eliminarAdeudosTerceros = function eliminarAdeudosTerceros(data){
+window.eliminarInversionesTerceros = function eliminarInversionesTerceros(data){
     var item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
     delete tercerosTemp[item.uuid];

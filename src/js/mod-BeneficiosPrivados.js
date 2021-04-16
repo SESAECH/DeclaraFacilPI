@@ -10,6 +10,7 @@ window.initBeneficiosPrivados = function initBeneficiosPrivados(data){
             //asginar valores predeterminados a catálogos(ayuda al usuario).
             jsonResult.declaracion.interes.beneficiosPrivados.ninguno=true;
             $(modulo + ".chkNinguno").prop("disabled", false);
+            $(modulo + ".chkNinguno")[0].checked=false;
             $(modulo + "textarea[name='aclaracionesObservaciones']").val("");
             $(modulo + ".btnAgregar").removeClass("hide");
             $(modulo + ".btnTerminar").addClass("hide");
@@ -114,13 +115,13 @@ window.funcionalidadGuardarRegistroBeneficiosPrivados = function funcionalidadGu
     }
 
     //catalogos que se usan en el modulo.
-    loadCat(tipoOperacion, ".CBOtipoOperacion");
-    loadCat(tipoBeneficio, ".CBOtipoBeneficio");
-    loadCat(beneficiariosPrograma, ".CBObeneficiario");
-    loadCat(tipoPersona, ".CBOtipoPersona");
-    loadCat(formaRecepcion, ".CBOformaRecepcion");
-    loadCat(sector, ".CBOsector");
-    loadCat(moneda, ".CBOmoneda");
+    loadCat(tipoOperacion, form + ".CBOtipoOperacion");
+    loadCat(tipoBeneficio, form + ".CBOtipoBeneficio");
+    loadCat(beneficiariosPrograma, form + ".CBObeneficiario");
+    loadCat(tipoPersona, form + ".CBOtipoPersona");
+    loadCat(formaRecepcion, form + ".CBOformaRecepcion");
+    loadCat(sector, form + ".CBOsector");
+    loadCat(moneda, form + ".CBOmoneda");
 
     $(form + ":input[type='text']").val("");
 

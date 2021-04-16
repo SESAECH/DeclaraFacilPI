@@ -10,6 +10,7 @@ window.initRepresentacion = function initRepresentacion(data){
             //asginar valores predeterminados a catálogos(ayuda al usuario).
             jsonResult.declaracion.interes.representacion.ninguno=true;
             $(modulo + ".chkNinguno").prop("disabled", false);
+            $(modulo + ".chkNinguno")[0].checked=false;
             $(modulo + "textarea[name='aclaracionesObservaciones']").val("");
             $(modulo + ".btnAgregar").removeClass("hide");
             $(modulo + ".btnTerminar").addClass("hide");
@@ -113,15 +114,15 @@ window.funcionalidadGuardarRegistroRepresentacion = function funcionalidadGuarda
     }
 
     //catalogos que se usan en el modulo.
-    loadCat(tipoOperacion, ".CBOtipoOperacion");
-    loadCat(tipoRepresentacion, ".CBOtipoRepresentacion");
-    loadCat(tipoRelacion, ".CBOtipoRelacion");
-    loadCat(tipoPersona, ".CBOtipoPersona");
-    loadCat(tipoPersona, ".CBOtipoPersona");
-    loadCat(paises, ".CBOpais");
-    loadCat(entidadFederativa, ".CBOentidadFederativa"); 
-    loadCat(sector, ".CBOsector");
-    loadCat(moneda, ".CBOmoneda");
+    loadCat(tipoOperacion, form + ".CBOtipoOperacion");
+    loadCat(tipoRepresentacion, form + ".CBOtipoRepresentacion");
+    loadCat(tipoRelacion, form + ".CBOtipoRelacion");
+    loadCat(tipoPersona, form + ".CBOtipoPersona");
+    loadCat(tipoPersona, form + ".CBOtipoPersona");
+    loadCat(paises, form + ".CBOpais");
+    loadCat(entidadFederativa, form + ".CBOentidadFederativa"); 
+    loadCat(sector, form + ".CBOsector");
+    loadCat(moneda, form + ".CBOmoneda");
 
     $(form + ":input[type='text']").val("");
 
