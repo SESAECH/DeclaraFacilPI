@@ -213,7 +213,7 @@ function f11uncionalidadPareja(seccionNo, seccionName, seccionStatus){
     });    
 }
 
-function guardarFormPareja(seccionNo, seccionName, seccionApartado){
+window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, seccionApartado){
     if ($("#chkNingunoPareja")[0].checked){
         $("#chkNingunoPareja").prop("disabled", true);
         jsonResult.declaracion[seccionApartado].datosPareja= {

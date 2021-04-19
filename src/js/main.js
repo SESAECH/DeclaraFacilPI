@@ -1,5 +1,5 @@
 console.log ("Iniciando Carga del Sistema....");
-
+console.log ("Declarafacil PI v.0.9.1a")
 /*
  global require ('catalogos-muns.js');
  global require ('catalogos.js');
@@ -61,21 +61,25 @@ import './mod-domicilio.js';
 import './mod-cv.js';
 import './mod-empleo.js';
 import './mod-experiencia-laboral.js';
-import './mod-participacion-empresas.js';
-import './mod-datosPareja.js';
-import './mod-DependientesEconomicos.js';
-import './mod-DesempenoServidorPublico.js';
 import './mod-ingresos.js';
+import './mod-DesempenoServidorPublico.js';
+
+import './mod-datosPareja.js';
+import './mod-datosDependienteEconomico.js';
+import './mod-BienesInmuebles.js';
+import './mod-Vehiculos.js';
+import './mod-BienesMuebles.js';
+import './mod-Inversiones.js';
 import './mod-adeudos.js';
 import './mod-PrestamoOComodato.js';
+
 import './mod-ParticipacionEmpresas.js';
 import './mod-ParticipacionInstituciones.js';
 import './mod-ApoyosPublicos.js';
 import './mod-Representacion.js';
-import './mod-BeneficiosPrivados.js';
 import './mod-ClientesPrincipales.js';
+import './mod-BeneficiosPrivados.js';
 import './mod-Fideicomisos';
-
 
 import './config-pdf.js';
 
