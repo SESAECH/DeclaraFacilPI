@@ -179,6 +179,111 @@ $(".chkNinguno").on("change",function() {
                     $(btnTerminar).removeClass("hide");
                 }                 
                 break;
+            case "Vehiculos": 
+                if (Object.keys(jsonResult.declaracion.situacionPatrimonial.vehiculos.vehiculo).length>0){
+                    Swal.fire({
+                        title: 'Aviso',
+                        text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "Continuar",
+                        denyButtonText: "Cancelar",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                //borrar info del jsonResult y de la tabla.
+                                jsonResult.declaracion.situacionPatrimonial.vehiculos.vehiculo=[];
+                                jsonResult.declaracion.situacionPatrimonial.vehiculos.ninguno=true;
+                                $(tabla + " tbody").empty();
+                                //inhabilitar controles.
+                                $(btnAgregar).addClass("hide");
+                                $(tabla).addClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            } 
+                            else if (result.isDenied) {
+                                $("#moduloVehiculos .chkNinguno")[0].checked=false;
+                                $(btnAgregar).removeClass("hide");
+                                $(tabla).removeClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            }
+                    });
+                }
+                else{
+                    $(btnAgregar).addClass("hide");
+                    $(tabla).addClass("hide");
+                    $(btnTerminar).removeClass("hide");
+                }
+            break;
+            case "BienesMuebles": 
+                if (Object.keys(jsonResult.declaracion.situacionPatrimonial.bienesMuebles.bienMueble).length>0){
+                    Swal.fire({
+                        title: 'Aviso',
+                        text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "Continuar",
+                        denyButtonText: "Cancelar",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                //borrar info del jsonResult y de la tabla.
+                                jsonResult.declaracion.situacionPatrimonial.bienesMuebles.bienMueble=[];
+                                jsonResult.declaracion.situacionPatrimonial.bienesMuebles.ninguno=true;
+                                $(tabla + " tbody").empty();
+                                //inhabilitar controles.
+                                $(btnAgregar).addClass("hide");
+                                $(tabla).addClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            } 
+                            else if (result.isDenied) {
+                                $("#moduloBienesMuebles .chkNinguno")[0].checked=false;
+                                $(btnAgregar).removeClass("hide");
+                                $(tabla).removeClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            }
+                    });
+                }
+                else{
+                    $(btnAgregar).addClass("hide");
+                    $(tabla).addClass("hide");
+                    $(btnTerminar).removeClass("hide");
+                }
+            break;            
+            case "Inversiones": 
+                if (Object.keys(jsonResult.declaracion.situacionPatrimonial.inversiones.inversion).length>0){
+                    Swal.fire({
+                        title: 'Aviso',
+                        text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "Continuar",
+                        denyButtonText: "Cancelar",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                //borrar info del jsonResult y de la tabla.
+                                jsonResult.declaracion.situacionPatrimonial.inversiones.inversion=[];
+                                jsonResult.declaracion.situacionPatrimonial.inversiones.ninguno=true;
+                                $(tabla + " tbody").empty();
+                                //inhabilitar controles.
+                                $(btnAgregar).addClass("hide");
+                                $(tabla).addClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            } 
+                            else if (result.isDenied) {
+                                $("#moduloInversiones .chkNinguno")[0].checked=false;
+                                $(btnAgregar).removeClass("hide");
+                                $(tabla).removeClass("hide");
+                                $(btnTerminar).removeClass("hide");
+                            }
+                    });
+                }
+                else{
+                    $(btnAgregar).addClass("hide");
+                    $(tabla).addClass("hide");
+                    $(btnTerminar).removeClass("hide");
+                }
+            break;            
             case "Adeudos": 
                 if (Object.keys(jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo).length>0){
                     Swal.fire({
