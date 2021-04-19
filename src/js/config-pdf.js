@@ -21,7 +21,7 @@ window.generarPDF = function generarPDF(){
 //------------------------------------------------------//
 
 function gerarPdfDecSimplificada(){
-    var doc = new jsPDF();//'p', 'pt', 'letter');
+    var doc = new jspdf();//'p', 'pt', 'letter');
     doc.setProperties({
         title: 'Declaracion Patrimonial y de Intereses',
         subject: 'This is the subject',
