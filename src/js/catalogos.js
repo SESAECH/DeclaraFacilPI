@@ -46,7 +46,7 @@ window.formaRecepcion = ["MONETARIO","ESPECIE"];
 window.lugarDondeReside = ["MÉXICO","EXTRANJERO","SE_DESCONOCE"];
 //window.lugarDondeReside =lugarDondeReside;
 
-window.motivoBaja = [{"clave":"VNT","valor":"VENTA"},{"clave":"DNC","valor":"DONACIÓN"},{"clave":"SNT","valor":"SINIESTRO"},{"clave":"OTRO","valor":"OTRO(ESPECIFIQUE)"}];
+window.motivoBaja = [{"clave":"NA","valor":"NO APLICA"},{"clave":"VNT","valor":"VENTA"},{"clave":"DNC","valor":"DONACIÓN"},{"clave":"SNT","valor":"SINIESTRO"},{"clave":"OTRO","valor":"OTRO(ESPECIFIQUE)"}];
 //window.motivoBaja =motivoBaja;
 
 window.nivel = [{"clave":"PRI","valor":"PRIMARIA"},{"clave":"SEC","valor":"SECUNDARIA"},{"clave":"BCH","valor":"BACHILLERATO"},{"clave":"CTC","valor":"CARRERA TÉCNICA O COMERCIAL"},{"clave":"LIC","valor":"LICENCIATURA"},{"clave":"ESP","valor":"ESPECIALIDAD"},{"clave":"MAE","valor":"MAESTRÍA"},{"clave":"DOC","valor":"DOCTORADO"}];

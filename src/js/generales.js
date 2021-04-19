@@ -57,6 +57,8 @@ window.setVaribleGlobal =  function setVaribleGlobal(campo, valor){
 
 
 $(".chkNinguno").on("change",function() {
+    console.log ("onchange de chkNinguno");
+    console.log (this.dataset.form);
     var btnAgregar = "#modulo" + this.dataset.form + " .btnAgregar";
     var btnTerminar = "#modulo" + this.dataset.form + " .btnTerminar";
     var tabla = "#modulo" + this.dataset.form + " .tbl" + this.dataset.form;

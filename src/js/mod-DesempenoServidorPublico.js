@@ -366,7 +366,7 @@ window.eliminarActividadIndustrial_aaa = function eliminarActividadIndustrial_aa
     Object.keys(jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.actividadIndustialComercialEmpresarial.actividades).forEach(function (row) {
         remuneracionTotal+=jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.actividadIndustialComercialEmpresarial.actividades[row].remuneracion.valor;        
     });
-    jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.actividadIndustrialComercialEmpresarial.remuneracionTotal.valor = remuneracionTotal;
+    jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.actividadIndustialComercialEmpresarial.remuneracionTotal.valor = remuneracionTotal;
     $(form + "input[name='actividadIndustrialRemuneracionTotalCantidad']").val(remuneracionTotal);
     sumaOtrosIngresos_aaa();
 }

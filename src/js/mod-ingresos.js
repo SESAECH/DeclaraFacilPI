@@ -119,7 +119,7 @@ window.loadInfoIngresos = function loadInfoIngresos(){
     $("input[name='otrosIngresosMensualesTotalMoneda']").val(nodo.otrosIngresosMensualesTotal.moneda);
 
     pintarTablaActividadIndustrial();
-    $("input[name='actividadIndustrialRemuneracionTotalCantidad']").val(nodo.actividadIndustrialComercialEmpresarial.remuneracionTotal.valor);
+    $("input[name='actividadIndustrialRemuneracionTotalCantidad']").val(nodo.actividadIndustialComercialEmpresarial.remuneracionTotal.valor);
 
     pintarTablaActividadFinanciera();
     $("input[name='actividadFinancieraRemuneracionTotalCantidad']").val(nodo.actividadFinanciera.remuneracionTotal.valor);
@@ -218,6 +218,7 @@ window.guardarFormIngresos = function guardarFormIngresos(seccionNo, seccionName
 /* -------------------------------------------------------------- */
 /* ActividadIndustrial */
 window.agregarActividadIndustrial = function agregarActividadIndustrial(){
+//console.log ("inicio agregarActividadIndustrial");
     //PENDIENTE --> VALIDAR CAMPOS.
     if($("input[name='actividadIndustrialNombreRazonSocial']").val().length == 0){ mensajeSwal("Aviso","Ingrese el NOMBRE O RAZÓN SOCIAL","error");}
     else if($("input[name='actividadIndustrialTipoNegocio']").val().length == 0){ mensajeSwal("Aviso","Ingrese el TIPO DE NEGOCIO","error");}
@@ -232,9 +233,10 @@ window.agregarActividadIndustrial = function agregarActividadIndustrial(){
         guardarActividadIndustrial(uuidItem);
     }
 }
+//console.log ("se agrego agregarActividadIndustrial");
 
 window.guardarActividadIndustrial = function guardarActividadIndustrial(uuidItem){
-    jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustrialComercialEmpresarial.actividades[uuidItem] = {
+    jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustialComercialEmpresarial.actividades[uuidItem] = {
         "uuid":uuidItem,
         "remuneracion": {
           "valor":  parseInt($("input[name='actividadIndustrialRemuneracionCantidad']").val()),
@@ -256,7 +258,7 @@ window.guardarActividadIndustrial = function guardarActividadIndustrial(uuidItem
 
 window.pintarTablaActividadIndustrial = function pintarTablaActividadIndustrial(){
     let html="",remuneracionTotal=0;
-    let lista = jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustrialComercialEmpresarial.actividades;
+    let lista = jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustialComercialEmpresarial.actividades;
     Object.keys(lista).forEach(function (row) {
         var params = { uuid: lista[row].uuid, nombreRazonSocial: lista[row].nombreRazonSocial, tipoNegocio: lista[row].tipoNegocio, remuneracion: lista[row].remuneracion.valor, moneda: lista[row].remuneracion.moneda};
         remuneracionTotal+=lista[row].remuneracion.valor;
@@ -272,8 +274,8 @@ window.pintarTablaActividadIndustrial = function pintarTablaActividadIndustrial(
     });
     $("#tableActividadIndustrial").empty().append(html);
 
-    jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustrialComercialEmpresarial.remuneracionTotal.valor = remuneracionTotal;
-    jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustrialComercialEmpresarial.remuneracionTotal.moneda = "MXN";
+    jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustialComercialEmpresarial.remuneracionTotal.valor = remuneracionTotal;
+    jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustialComercialEmpresarial.remuneracionTotal.moneda = "MXN";
     $("input[name='actividadIndustrialRemuneracionTotalCantidad']").val(remuneracionTotal);
     sumaOtrosIngresos();
 }
@@ -293,12 +295,12 @@ window.eliminarActividadIndustrial = function eliminarActividadIndustrial(data){
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
-    delete jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustrialComercialEmpresarial.actividades[item.uuid];
+    delete jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustialComercialEmpresarial.actividades[item.uuid];
     $("#" + item.uuid).remove();
-    Object.keys(jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustrialComercialEmpresarial.actividades).forEach(function (row) {
-        remuneracionTotal+=jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustrialComercialEmpresarial.actividades[row].remuneracion.valor;        
+    Object.keys(jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustialComercialEmpresarial.actividades).forEach(function (row) {
+        remuneracionTotal+=jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustialComercialEmpresarial.actividades[row].remuneracion.valor;        
     });
-    jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustrialComercialEmpresarial.remuneracionTotal.valor = remuneracionTotal;
+    jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustialComercialEmpresarial.remuneracionTotal.valor = remuneracionTotal;
     $("input[name='actividadIndustrialRemuneracionTotalCantidad']").val(remuneracionTotal);
     sumaOtrosIngresos();
 }
@@ -635,7 +637,7 @@ window.eliminarOtrosIngresos = function eliminarOtrosIngresos(data){
 window.sumaOtrosIngresos = function sumaOtrosIngresos(){
     let total =0;
     let nodo = jsonResult.declaracion.situacionPatrimonial.ingresos;
-    total += nodo.actividadIndustrialComercialEmpresarial.remuneracionTotal.valor;
+    total += nodo.actividadIndustialComercialEmpresarial.remuneracionTotal.valor;
     total += nodo.actividadFinanciera.remuneracionTotal.valor;
     total += nodo.otrosIngresos.remuneracionTotal.valor;
     total += nodo.serviciosProfesionales.remuneracionTotal.valor;
