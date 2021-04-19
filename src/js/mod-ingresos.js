@@ -217,7 +217,7 @@ window.guardarFormIngresos = function guardarFormIngresos(seccionNo, seccionName
 
 /* -------------------------------------------------------------- */
 /* ActividadIndustrial */
-function agregarActividadIndustrial(){
+window.agregarActividadIndustrial = function agregarActividadIndustrial(){
     //PENDIENTE --> VALIDAR CAMPOS.
     if($("input[name='actividadIndustrialNombreRazonSocial']").val().length == 0){ mensajeSwal("Aviso","Ingrese el NOMBRE O RAZÓN SOCIAL","error");}
     else if($("input[name='actividadIndustrialTipoNegocio']").val().length == 0){ mensajeSwal("Aviso","Ingrese el TIPO DE NEGOCIO","error");}
@@ -233,7 +233,7 @@ function agregarActividadIndustrial(){
     }
 }
 
-function guardarActividadIndustrial(uuidItem){
+window.guardarActividadIndustrial = function guardarActividadIndustrial(uuidItem){
     jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustrialComercialEmpresarial.actividades[uuidItem] = {
         "uuid":uuidItem,
         "remuneracion": {
@@ -254,7 +254,7 @@ function guardarActividadIndustrial(uuidItem){
       pintarTablaActividadIndustrial();
 }
 
-function pintarTablaActividadIndustrial(){
+window.pintarTablaActividadIndustrial = function pintarTablaActividadIndustrial(){
     let html="",remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.ingresos.actividadIndustrialComercialEmpresarial.actividades;
     Object.keys(lista).forEach(function (row) {
@@ -278,7 +278,7 @@ function pintarTablaActividadIndustrial(){
     sumaOtrosIngresos();
 }
 
-function editarActividadIndustrial(data){
+window.editarActividadIndustrial = function editarActividadIndustrial(data){
     let item = JSON.parse(atob(data));
     $("input[name='actividadIndustrialNombreRazonSocial']").val(item.nombreRazonSocial);
     $("input[name='actividadIndustrialTipoNegocio']").val(item.tipoNegocio);
@@ -289,7 +289,7 @@ function editarActividadIndustrial(data){
                                                 Actualizar').attr("data-uuid",item.uuid);
 }
 
-function eliminarActividadIndustrial(data){
+window.eliminarActividadIndustrial = function eliminarActividadIndustrial(data){
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
@@ -305,7 +305,7 @@ function eliminarActividadIndustrial(data){
 
 /* -------------------------------------------------------------- */
 /* ActividadFinanciera */
-function agregarActividadFinanciera(){
+window.agregarActividadFinanciera = function agregarActividadFinanciera(){
     if($("input[name='actividadFinancieraRemuneracionCantidad']").val().length == 0){ mensajeSwal("Aviso","Ingrese la REMUNERACIÓN","error");}
     else{    
         if ($(".btnAgregarActividadFinanciera")[0].dataset.uuid){
@@ -318,7 +318,7 @@ function agregarActividadFinanciera(){
     }
 }
 
-function guardarActividadFinanciera(uuidItem){
+window.guardarActividadFinanciera = function guardarActividadFinanciera(uuidItem){
     jsonResult.declaracion.situacionPatrimonial.ingresos.actividadFinanciera.actividades[uuidItem] = {
         "uuid":uuidItem,
         "remuneracion": {
@@ -340,7 +340,7 @@ function guardarActividadFinanciera(uuidItem){
       pintarTablaActividadFinanciera();
 }
 
-function pintarTablaActividadFinanciera(){
+window.pintarTablaActividadFinanciera = function pintarTablaActividadFinanciera(){
     let html="",remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.ingresos.actividadFinanciera.actividades;
     Object.keys(lista).forEach(function (row) {
@@ -363,7 +363,7 @@ function pintarTablaActividadFinanciera(){
     sumaOtrosIngresos();
 }
 
-function editarActividadFinanciera(data){
+window.editarActividadFinanciera = function editarActividadFinanciera(data){
     let item = JSON.parse(atob(data));
     $("select[name='tipoInstrumento']").val(item.tipoInstrumento);
     $("input[name='actividadFinancieraRemuneracionCantidad']").val(item.remuneracion);
@@ -373,7 +373,7 @@ function editarActividadFinanciera(data){
                                                 Actualizar').attr("data-uuid",item.uuid);
 }
 
-function eliminarActividadFinanciera(data){
+window.eliminarActividadFinanciera = function eliminarActividadFinanciera(data){
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
@@ -389,7 +389,7 @@ function eliminarActividadFinanciera(data){
 }
 /* -------------------------------------------------------------- */
 /* ServiciosProfesionales */
-function agregarServiciosProfesionales(){
+window.agregarServiciosProfesionales = function agregarServiciosProfesionales(){
     if($("input[name='tipoServicio']").val().length == 0){ mensajeSwal("Aviso","Ingrese el TIPO DE SERVICIO PRESTADO","error");}
     else if($("input[name='serviciosProfesionalesRemuneracionCantidad']").val().length == 0){ mensajeSwal("Aviso","Ingrese la REMUNERACIÓN","error");}
     else{
@@ -403,7 +403,7 @@ function agregarServiciosProfesionales(){
     }
 }
 
-function guardarServiciosProfesionales(uuidItem){
+window.guardarServiciosProfesionales = function guardarServiciosProfesionales(uuidItem){
     jsonResult.declaracion.situacionPatrimonial.ingresos.serviciosProfesionales.servicios[uuidItem] = {
         "uuid":uuidItem,
         "remuneracion": {
@@ -422,7 +422,7 @@ function guardarServiciosProfesionales(uuidItem){
       pintarTablaServiciosProfesionales();
 }
 
-function pintarTablaServiciosProfesionales(){
+window.pintarTablaServiciosProfesionales = function pintarTablaServiciosProfesionales(){
     let html="",remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.ingresos.serviciosProfesionales.servicios;
     Object.keys(lista).forEach(function (row) {
@@ -445,7 +445,7 @@ function pintarTablaServiciosProfesionales(){
     sumaOtrosIngresos();
 }
 
-function editarServiciosProfesionales(data){
+window.editarServiciosProfesionales = function editarServiciosProfesionales(data){
     let item = JSON.parse(atob(data));
     $("input[name='tipoServicio']").val(item.tipoServicio);
     $("input[name='serviciosProfesionalesRemuneracionCantidad']").val(item.remuneracion);
@@ -455,7 +455,7 @@ function editarServiciosProfesionales(data){
                                                 Actualizar').attr("data-uuid",item.uuid);
 }
 
-function eliminarServiciosProfesionales(data){
+window.eliminarServiciosProfesionales = function eliminarServiciosProfesionales(data){
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
@@ -471,7 +471,7 @@ function eliminarServiciosProfesionales(data){
 
 /* -------------------------------------------------------------- */
 /* EnajenacionBienes */
-function agregarEnajenacionBienes(){
+window.agregarEnajenacionBienes = function agregarEnajenacionBienes(){
     if($("#formIngresos input[name='enajenacionBienesRemuneracionCantidad']").val().length == 0){ mensajeSwal("Aviso","Ingrese la REMUNERACIÓN","error");}
     else{ 
         if ($("#formIngresos .btnAgregarEnajenacionBienes")[0].dataset.uuid){
@@ -484,7 +484,7 @@ function agregarEnajenacionBienes(){
     }
 }
 
-function guardarEnajenacionBienes(uuidItem){
+window.guardarEnajenacionBienes = function guardarEnajenacionBienes(uuidItem){
     jsonResult.declaracion.situacionPatrimonial.ingresos.enajenacionBienes.bienes[uuidItem] = {
         "uuid":uuidItem,
         "remuneracion": {
@@ -503,7 +503,7 @@ function guardarEnajenacionBienes(uuidItem){
       pintarTablaEnajenacionBienes();
 }
 
-function pintarTablaEnajenacionBienes(){
+window.pintarTablaEnajenacionBienes = function pintarTablaEnajenacionBienes(){
     let html="", remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.ingresos.enajenacionBienes.bienes;
     Object.keys(lista).forEach(function (row) {
@@ -526,7 +526,7 @@ function pintarTablaEnajenacionBienes(){
     sumaOtrosIngresos();
 }
 
-function editarEnajenacionBienes(data){
+window.editarEnajenacionBienes = function editarEnajenacionBienes(data){
     let item = JSON.parse(atob(data));
     $("#formIngresos select[name='tipoBienEnajenado']").val(item.tipoBienEnajenado);
     $("#formIngresos input[name='enajenacionBienesRemuneracionCantidad']").val(item.remuneracion);
@@ -536,7 +536,7 @@ function editarEnajenacionBienes(data){
                                                 Actualizar').attr("data-uuid",item.uuid);
 }
 
-function eliminarEnajenacionBienes(data){
+window.eliminarEnajenacionBienes = function eliminarEnajenacionBienes(data){
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
@@ -552,7 +552,7 @@ function eliminarEnajenacionBienes(data){
 
 /* -------------------------------------------------------------- */
 /* OtrosIngresos */
-function agregarOtrosIngresos(){
+window.agregarOtrosIngresos = function agregarOtrosIngresos(){
     if($("input[name='tipoIngreso']").val().length == 0){ mensajeSwal("Aviso","Ingrese el TIPO DE INGRESO","error");}
     else if($("input[name='otrosIngresosRemuneracionCantidad']").val().length == 0){ mensajeSwal("Aviso","Ingrese la REMUNERACIÓN","error");}
     else{
@@ -566,7 +566,7 @@ function agregarOtrosIngresos(){
     }
 }
 
-function guardarOtrosIngresos(uuidItem){
+window.guardarOtrosIngresos = function guardarOtrosIngresos(uuidItem){
     jsonResult.declaracion.situacionPatrimonial.ingresos.otrosIngresos.ingresos[uuidItem] = {
         "uuid":uuidItem,
         "remuneracion": {
@@ -585,7 +585,7 @@ function guardarOtrosIngresos(uuidItem){
       pintarTablaOtrosIngresos();
 }
 
-function pintarTablaOtrosIngresos(){
+window.pintarTablaOtrosIngresos = function pintarTablaOtrosIngresos(){
     let html="", remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.ingresos.otrosIngresos.ingresos;
     Object.keys(lista).forEach(function (row) {
@@ -608,7 +608,7 @@ function pintarTablaOtrosIngresos(){
     sumaOtrosIngresos();
 }
 
-function editarOtrosIngresos(data){
+window.editarOtrosIngresos = function editarOtrosIngresos(data){
     let item = JSON.parse(atob(data));
     $("input[name='tipoIngreso']").val(item.tipoIngreso);
     $("input[name='otrosIngresosRemuneracionCantidad']").val(item.remuneracion);
@@ -618,7 +618,7 @@ function editarOtrosIngresos(data){
                                                 Actualizar').attr("data-uuid",item.uuid);
 }
 
-function eliminarOtrosIngresos(data){
+window.eliminarOtrosIngresos = function eliminarOtrosIngresos(data){
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
     //elimina item en object json y tabla.
@@ -632,7 +632,7 @@ function eliminarOtrosIngresos(data){
     sumaOtrosIngresos();
 }
 
-function sumaOtrosIngresos(){
+window.sumaOtrosIngresos = function sumaOtrosIngresos(){
     let total =0;
     let nodo = jsonResult.declaracion.situacionPatrimonial.ingresos;
     total += nodo.actividadIndustrialComercialEmpresarial.remuneracionTotal.valor;

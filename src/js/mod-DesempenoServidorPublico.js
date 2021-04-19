@@ -281,7 +281,7 @@ $("#chkNingunoDesempenoServidorPublico").on("change",function() {
 
 /* -------------------------------------------------------------- */
 /* ActividadIndustrial */
-function agregarActividadIndustrial_aaa(){ 
+window.agregarActividadIndustrial_aaa = function agregarActividadIndustrial_aaa(){ 
     let form="#formDesempenoServidorPublico ";   
     if($(form + "input[name='actividadIndustrialNombreRazonSocial']").val().length == 0){ mensajeSwal("Aviso","Ingrese el NOMBRE O RAZÓN SOCIAL","error");}
     else if($(form + "input[name='actividadIndustrialTipoNegocio']").val().length == 0){ mensajeSwal("Aviso","Ingrese el TIPO DE NEGOCIO","error");}
@@ -297,7 +297,7 @@ function agregarActividadIndustrial_aaa(){
     }
 }
 
-function guardarActividadIndustrial_aaa(uuidItem){
+window.guardarActividadIndustrial_aaa = function guardarActividadIndustrial_aaa(uuidItem){
     let form="#formDesempenoServidorPublico ";
     jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.actividadIndustialComercialEmpresarial.actividades[uuidItem] = {
         "uuid":uuidItem,
@@ -319,7 +319,7 @@ function guardarActividadIndustrial_aaa(uuidItem){
       pintarTablaActividadIndustrial_aaa();
 }
 
-function pintarTablaActividadIndustrial_aaa(){
+window.pintarTablaActividadIndustrial_aaa = function pintarTablaActividadIndustrial_aaa(){
     let form="#formDesempenoServidorPublico ";
     let html="",remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.actividadIndustialComercialEmpresarial.actividades;
@@ -344,7 +344,7 @@ function pintarTablaActividadIndustrial_aaa(){
     sumaOtrosIngresos_aaa();
 }
 
-function editarActividadIndustrial_aaa(data){
+window.editarActividadIndustrial_aaa = function editarActividadIndustrial_aaa(data){
     let form="#formDesempenoServidorPublico ";
     let item = JSON.parse(atob(data));
     $(form + "input[name='actividadIndustrialNombreRazonSocial']").val(item.nombreRazonSocial);
@@ -356,7 +356,7 @@ function editarActividadIndustrial_aaa(data){
                                                 Actualizar').attr("data-uuid",item.uuid);
 }
 
-function eliminarActividadIndustrial_aaa(data){
+window.eliminarActividadIndustrial_aaa = function eliminarActividadIndustrial_aaa(data){
     let form="#formDesempenoServidorPublico ";
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
@@ -373,7 +373,7 @@ function eliminarActividadIndustrial_aaa(data){
 
 /* -------------------------------------------------------------- */
 /* ActividadFinanciera */
-function agregarActividadFinanciera_aaa(){
+window.agregarActividadFinanciera_aaa = function agregarActividadFinanciera_aaa(){
     let form="#formDesempenoServidorPublico ";
     if($(form + "input[name='actividadFinancieraRemuneracionCantidad']").val().length == 0){ mensajeSwal("Aviso","Ingrese la REMUNERACIÓN","error");}
     else{ 
@@ -387,7 +387,7 @@ function agregarActividadFinanciera_aaa(){
     }
 }
 
-function guardarActividadFinanciera_aaa(uuidItem){
+window.guardarActividadFinanciera_aaa = function guardarActividadFinanciera_aaa(uuidItem){
     let form="#formDesempenoServidorPublico ";
     jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.actividadFinanciera.actividades[uuidItem] = {
         "uuid":uuidItem,
@@ -410,7 +410,7 @@ function guardarActividadFinanciera_aaa(uuidItem){
       pintarTablaActividadFinanciera_aaa();
 }
 
-function pintarTablaActividadFinanciera_aaa(){
+window.pintarTablaActividadFinanciera_aaa = function pintarTablaActividadFinanciera_aaa(){
     let form="#formDesempenoServidorPublico ";
     let html="",remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.actividadFinanciera.actividades;
@@ -434,7 +434,7 @@ function pintarTablaActividadFinanciera_aaa(){
     sumaOtrosIngresos_aaa();
 }
 
-function editarActividadFinanciera_aaa(data){
+window.editarActividadFinanciera_aaa = function editarActividadFinanciera_aaa(data){
     let form="#formDesempenoServidorPublico ";
     let item = JSON.parse(atob(data));
     $(form + "select[name='tipoInstrumento']").val(item.tipoInstrumento);
@@ -445,7 +445,7 @@ function editarActividadFinanciera_aaa(data){
                                                 Actualizar').attr("data-uuid",item.uuid);
 }
 
-function eliminarActividadFinanciera_aaa(data){
+window.eliminarActividadFinanciera_aaa = function eliminarActividadFinanciera_aaa(data){
     let form="#formDesempenoServidorPublico ";
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
@@ -462,7 +462,7 @@ function eliminarActividadFinanciera_aaa(data){
 
 /* -------------------------------------------------------------- */
 /* ServiciosProfesionales */
-function agregarServiciosProfesionales_aaa(){
+window.agregarServiciosProfesionales_aaa = function agregarServiciosProfesionales_aaa(){
     let form="#formDesempenoServidorPublico ";
     if($(form + "input[name='tipoServicio']").val().length == 0){ mensajeSwal("Aviso","Ingrese el TIPO DE SERVICIO PRESTADO","error");}
     else if($(form + "input[name='serviciosProfesionalesRemuneracionCantidad']").val().length == 0){ mensajeSwal("Aviso","Ingrese la REMUNERACIÓN","error");}
@@ -477,7 +477,7 @@ function agregarServiciosProfesionales_aaa(){
     }
 }
 
-function guardarServiciosProfesionales_aaa(uuidItem){
+window.guardarServiciosProfesionales_aaa = function guardarServiciosProfesionales_aaa(uuidItem){
     let form="#formDesempenoServidorPublico ";
     jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.serviciosProfesionales.servicios[uuidItem] = {
         "uuid":uuidItem,
@@ -497,7 +497,7 @@ function guardarServiciosProfesionales_aaa(uuidItem){
       pintarTablaServiciosProfesionales_aaa();
 }
 
-function pintarTablaServiciosProfesionales_aaa(){
+window.pintarTablaServiciosProfesionales_aaa = function pintarTablaServiciosProfesionales_aaa(){
     let form="#formDesempenoServidorPublico ";
     let html="",remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.serviciosProfesionales.servicios;
@@ -521,7 +521,7 @@ function pintarTablaServiciosProfesionales_aaa(){
     sumaOtrosIngresos_aaa();
 }
 
-function editarServiciosProfesionales_aaa(data){
+window.editarServiciosProfesionales_aaa = function editarServiciosProfesionales_aaa(data){
     let form="#formDesempenoServidorPublico ";
     let item = JSON.parse(atob(data));
     $(form + "input[name='tipoServicio']").val(item.tipoServicio);
@@ -532,7 +532,7 @@ function editarServiciosProfesionales_aaa(data){
                                                 Actualizar').attr("data-uuid",item.uuid);
 }
 
-function eliminarServiciosProfesionales_aaa(data){
+window.eliminarServiciosProfesionales_aaa = function eliminarServiciosProfesionales_aaa(data){
     let form="#formDesempenoServidorPublico ";
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
@@ -550,7 +550,7 @@ function eliminarServiciosProfesionales_aaa(data){
 
 /* -------------------------------------------------------------- */
 /* EnajenacionBienes */
-function agregarEnajenacionBienes_aaa(){
+window.agregarEnajenacionBienes_aaa = function agregarEnajenacionBienes_aaa(){
     let form="#formDesempenoServidorPublico ";
     if($(form + "input[name='enajenacionBienesRemuneracionCantidad']").val().length == 0){ mensajeSwal("Aviso","Ingrese la REMUNERACIÓN","error");}
     else{ 
@@ -564,7 +564,7 @@ function agregarEnajenacionBienes_aaa(){
     }
 }
 
-function guardarEnajenacionBienes_aaa(uuidItem){
+window.guardarEnajenacionBienes_aaa = function guardarEnajenacionBienes_aaa(uuidItem){
     let form="#formDesempenoServidorPublico ";
     jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.enajenacionBienes.bienes[uuidItem] = {
         "uuid":uuidItem,
@@ -584,7 +584,7 @@ function guardarEnajenacionBienes_aaa(uuidItem){
       pintarTablaEnajenacionBienes_aaa();
 }
 
-function pintarTablaEnajenacionBienes_aaa(){
+window.pintarTablaEnajenacionBienes_aaa = function pintarTablaEnajenacionBienes_aaa(){
     let form="#formDesempenoServidorPublico ";
     let html="", remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.enajenacionBienes.bienes;
@@ -608,7 +608,7 @@ function pintarTablaEnajenacionBienes_aaa(){
     sumaOtrosIngresos_aaa();
 }
 
-function editarEnajenacionBienes_aaa(data){
+window.editarEnajenacionBienes_aaa = function editarEnajenacionBienes_aaa(data){
     let form="#formDesempenoServidorPublico ";
     let item = JSON.parse(atob(data));
     $(form + "select[name='tipoBienEnajenado']").val(item.tipoBienEnajenado);
@@ -619,7 +619,7 @@ function editarEnajenacionBienes_aaa(data){
                                                 Actualizar').attr("data-uuid",item.uuid);
 }
 
-function eliminarEnajenacionBienes_aaa(data){
+window.eliminarEnajenacionBienes_aaa = function eliminarEnajenacionBienes_aaa(data){
     let form="#formDesempenoServidorPublico ";
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
@@ -636,7 +636,7 @@ function eliminarEnajenacionBienes_aaa(data){
 
 /* -------------------------------------------------------------- */
 /* OtrosIngresos */
-function agregarOtrosIngresos_aaa(){
+window.agregarOtrosIngresos_aaa = function agregarOtrosIngresos_aaa(){
     let form="#formDesempenoServidorPublico ";
     if($(form + "input[name='tipoIngreso']").val().length == 0){ mensajeSwal("Aviso","Ingrese el TIPO DE INGRESO","error");}
     else if($(form + "input[name='otrosIngresosRemuneracionCantidad']").val().length == 0){ mensajeSwal("Aviso","Ingrese la REMUNERACIÓN","error");}
@@ -651,7 +651,7 @@ function agregarOtrosIngresos_aaa(){
     }
 }
 
-function guardarOtrosIngresos_aaa(uuidItem){
+window.guardarOtrosIngresos_aaa = function guardarOtrosIngresos_aaa(uuidItem){
     let form="#formDesempenoServidorPublico ";
     jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.otrosIngresos.ingresos[uuidItem] = {
         "uuid":uuidItem,
@@ -671,7 +671,7 @@ function guardarOtrosIngresos_aaa(uuidItem){
       pintarTablaOtrosIngresos_aaa();
 }
 
-function pintarTablaOtrosIngresos_aaa(){
+window.pintarTablaOtrosIngresos_aaa = function pintarTablaOtrosIngresos_aaa(){
     let form="#formDesempenoServidorPublico ";
     let html="", remuneracionTotal=0;
     let lista = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.otrosIngresos.ingresos;
@@ -695,7 +695,7 @@ function pintarTablaOtrosIngresos_aaa(){
     sumaOtrosIngresos_aaa();
 }
 
-function editarOtrosIngresos_aaa(data){
+window.editarOtrosIngresos_aaa = function editarOtrosIngresos_aaa(data){
     let form="#formDesempenoServidorPublico ";
     let item = JSON.parse(atob(data));
     $(form + "input[name='tipoIngreso']").val(item.tipoIngreso);
@@ -706,7 +706,7 @@ function editarOtrosIngresos_aaa(data){
                                                 Actualizar').attr("data-uuid",item.uuid);
 }
 
-function eliminarOtrosIngresos_aaa(data){
+window.eliminarOtrosIngresos_aaa = function eliminarOtrosIngresos_aaa(data){
     let form="#formDesempenoServidorPublico ";
     let remuneracionTotal=0;
     let item = JSON.parse(atob(data));
@@ -724,7 +724,7 @@ function eliminarOtrosIngresos_aaa(data){
 
 /* -------------------------------------------------------------- */
 
-function sumaOtrosIngresos_aaa(){
+window.sumaOtrosIngresos_aaa = function sumaOtrosIngresos_aaa(){
     let form="#formDesempenoServidorPublico ";
     let total =0;
     let nodo = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
