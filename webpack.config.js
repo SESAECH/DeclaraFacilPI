@@ -6,6 +6,7 @@ const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 //const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const version= '0.9.1e';
 
 
 module.exports = {
@@ -34,7 +35,7 @@ module.exports = {
   plugins:[ 
     new webpack.ProvidePlugin({ $: "jquery", jQuery: 'jquery','window.jQuery': 'jquery'}),
     new webpack.optimize.LimitChunkCountPlugin({maxChunks:1,}),
-    new HtmlWebpackPlugin({inject:'body',template:'./src/declaraFacilPI.html', filename:'Declarafacil.html'}),
+    new HtmlWebpackPlugin({inject:'body',template:'./src/declaraFacilPI.html', filename:'DeclaraFacilPI'+version+'.html'}),
     //new MiniCssExtractPlugin(),
     //new BundleAnalyzerPlugin(),
     new InlineChunkHtmlPlugin(HtmlWebpackPlugin,[/bundle/])
