@@ -459,7 +459,7 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
     }
 }
 
-function loadInfoPareja(seccionName){
+window.loadInfoPareja = function loadInfoPareja(seccionName){
     var root = jsonResult.declaracion.situacionPatrimonial.datosPareja;
     if (root.ninguno){
         $("#chkNingunoPareja")[0].checked=true;
