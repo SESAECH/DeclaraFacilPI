@@ -102,7 +102,7 @@ function gerarPdfDecSimplificada(){
 }
 
 function gerarPdfDecCompleta(){
-    var doc = new jspdf.jsPDF();//'p', 'pt', 'letter');
+    var doc = new jsPDF();//'p', 'pt', 'letter');
     doc.setProperties({
         title: 'Declaracion Patrimonial y de Intereses',
         subject: 'This is the subject',
@@ -693,92 +693,94 @@ function tblDependienteEco(titulo){
     let html="";
     html +='<tr><td colspan="3" style="background-color: #621132; color: #fff; font-size:14px;">' + titulo + '</td></tr>';
     if(!jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.ninguno){
-        var nodo = jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico;
+        Object.keys(jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.vehiculo).forEach(function (index) {
+            var nodo = jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.dependienteEconomico[index];
+            //var nodo = jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico;
            
-        html+="<tr style='background-color: #dee2e6;'>";
-        html+=" <td>NOMBRE(S)</td>";
-        html+=" <td>PRIMER APELLIDO</td>";
-        html+=" <td>SEGUNDO APELLIDO</td>";
-        html+="</tr>";
-        html+="<tr>";
-        html+=" <td>" + nodo.nombre + "</td>";
-        html+=" <td>" + nodo.primerApellido + "</td>";
-        html+=" <td>" + nodo.segundoApellido + "</td>";
-        html+="</tr>";
+            html+="<tr style='background-color: #dee2e6;'>";
+            html+=" <td>NOMBRE(S)</td>";
+            html+=" <td>PRIMER APELLIDO</td>";
+            html+=" <td>SEGUNDO APELLIDO</td>";
+            html+="</tr>";
+            html+="<tr>";
+            html+=" <td>" + nodo.nombre + "</td>";
+            html+=" <td>" + nodo.primerApellido + "</td>";
+            html+=" <td>" + nodo.segundoApellido + "</td>";
+            html+="</tr>";
 
-        html+="<tr style='background-color: #dee2e6;'>";
-        html+=" <td>FECHA DE NACIMIENTO</td>";
-        html+=" <td>RFC</td>";
-        html+=" <td>CURP</td>";
-        html+="</tr>";
-        html+="<tr>";
-        html+=" <td>" + nodo.fechaNacimiento + "</td>";
-        html+=" <td>" + nodo.rfc + "</td>";
-        html+=" <td>" + nodo.curp + "</td>";
-        html+="</tr>";
+            html+="<tr style='background-color: #dee2e6;'>";
+            html+=" <td>FECHA DE NACIMIENTO</td>";
+            html+=" <td>RFC</td>";
+            html+=" <td>CURP</td>";
+            html+="</tr>";
+            html+="<tr>";
+            html+=" <td>" + nodo.fechaNacimiento + "</td>";
+            html+=" <td>" + nodo.rfc + "</td>";
+            html+=" <td>" + nodo.curp + "</td>";
+            html+="</tr>";
                 
-        html+="<tr style='background-color: #dee2e6;'>";
-        html+=" <td>PARENTESCO O RELACIÓN CON EL DECLARANTE</td>";
-        html+=" <td>¿ES CIUDADANO EXTRANJERO?</td>";
-        html+=" <td>¿HABITA EN EL DOMICILIO DEL DECLARANTE?</td>";
-        html+="</tr>";
-        html+="<tr>";
-        html+=" <td>" + nodo.parentescoRelacion.valor + "</td>";
-        html+=" <td>" + nodo.ciudadanoExtranjero + "</td>";
-        html+=" <td>" + nodo.habitaDomicilioDeclarante + "</td>";
-        html+="</tr>";
+            html+="<tr style='background-color: #dee2e6;'>";
+            html+=" <td>PARENTESCO O RELACIÓN CON EL DECLARANTE</td>";
+            html+=" <td>¿ES CIUDADANO EXTRANJERO?</td>";
+            html+=" <td>¿HABITA EN EL DOMICILIO DEL DECLARANTE?</td>";
+            html+="</tr>";
+            html+="<tr>";
+            html+=" <td>" + nodo.parentescoRelacion.valor + "</td>";
+            html+=" <td>" + nodo.ciudadanoExtranjero + "</td>";
+            html+=" <td>" + nodo.habitaDomicilioDeclarante + "</td>";
+            html+="</tr>";
 
-        if (nodo.lugarDondeReside=="MÉXICO"){
-            html+='<tr style="background-color: #dee2e6;">\
-                        <td style="width: 33%;">CALLE</td>\
-                        <td style="width: 33%;">NUMERO EXTERIOR</td>\
-                        <td style="width: 33%;">NUMERO INTERIOR</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="calle">' + nodo.domicilioMexico.calle + '</td>\
-                        <td class="numeroExterior">' + nodo.domicilioMexico.numeroExterior + '</td>\
-                        <td class="numeroInterior">' + nodo.domicilioMexico.numeroInterior + '</td>\
-                    </tr>\
-                    <tr style="background-color: #dee2e6;">\
-                        <td>COLONIA/LOCALIDAD</td>\
-                        <td>MUNICIPIO/ALCALDÍA</td>\
-                        <td>ENTIDAD FEDERATIVA</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="coloniaLocalidad">' + nodo.domicilioMexico.coloniaLocalidad + '</td>\
-                        <td class="municipioAlcaldia">' + nodo.domicilioMexico.municipioAlcaldia.valor + '</td>\
-                        <td class="entidadFederativa">' + nodo.domicilioMexico.entidadFederativa.valor + '</td>\
-                    </tr>\
-                    <tr style="background-color: #dee2e6;">\
-                        <td colspan="3">CODIGO POSTAL</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="codigoPostal" colspan="3" >' + nodo.domicilioMexico.codigoPostal + '</td>\
-                    </tr>';
-        }
-        else if (nodo.lugarDondeReside=="EXTRANJERO"){
-            html+='<tr style="background-color: #dee2e6;">\
-                        <td style="width: 33%;">CALLE</td>\
-                        <td style="width: 33%;">NUMERO EXTERIOR</td>\
-                        <td style="width: 33%;">NUMERO INTERIOR</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="calle">' + nodo.domicilioExtranjero.calle + '</td>\
-                        <td class="numeroExterior">' + nodo.domicilioExtranjero.numeroExterior + '</td>\
-                        <td class="numeroInterior">' + nodo.domicilioExtranjero.numeroInterior + '</td>\
-                    </tr>\
-                    <tr style="background-color: #dee2e6;">\
-                        <td>CIUDAD/LOCALIDAD</td>\
-                        <td>ESTADO/PROVINCIA/PAIS</td>\
-                        <td>CÓDIGO POSTAL</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="ciudadLocalidad">' + nodo.domicilioExtranjero.ciudadLocalidad + '</td>\
-                        <td class="estadoProvincia">' + nodo.domicilioExtranjero.estadoProvincia + " / " + nodo.domicilioExtranjero.pais + '</td>\
-                        <td class="codigoPostal">' + nodo.domicilioExtranjero.codigoPostal + '</td>\
-                    </tr>';
-        }
-
+            if (nodo.lugarDondeReside=="MÉXICO"){
+                html+='<tr style="background-color: #dee2e6;">\
+                            <td style="width: 33%;">CALLE</td>\
+                            <td style="width: 33%;">NUMERO EXTERIOR</td>\
+                            <td style="width: 33%;">NUMERO INTERIOR</td>\
+                        </tr>\
+                        <tr>\
+                            <td class="calle">' + nodo.domicilioMexico.calle + '</td>\
+                            <td class="numeroExterior">' + nodo.domicilioMexico.numeroExterior + '</td>\
+                            <td class="numeroInterior">' + nodo.domicilioMexico.numeroInterior + '</td>\
+                        </tr>\
+                        <tr style="background-color: #dee2e6;">\
+                            <td>COLONIA/LOCALIDAD</td>\
+                            <td>MUNICIPIO/ALCALDÍA</td>\
+                            <td>ENTIDAD FEDERATIVA</td>\
+                        </tr>\
+                        <tr>\
+                            <td class="coloniaLocalidad">' + nodo.domicilioMexico.coloniaLocalidad + '</td>\
+                            <td class="municipioAlcaldia">' + nodo.domicilioMexico.municipioAlcaldia.valor + '</td>\
+                            <td class="entidadFederativa">' + nodo.domicilioMexico.entidadFederativa.valor + '</td>\
+                        </tr>\
+                        <tr style="background-color: #dee2e6;">\
+                            <td colspan="3">CODIGO POSTAL</td>\
+                        </tr>\
+                        <tr>\
+                            <td class="codigoPostal" colspan="3" >' + nodo.domicilioMexico.codigoPostal + '</td>\
+                        </tr>';
+            }
+            else if (nodo.lugarDondeReside=="EXTRANJERO"){
+                html+='<tr style="background-color: #dee2e6;">\
+                            <td style="width: 33%;">CALLE</td>\
+                            <td style="width: 33%;">NUMERO EXTERIOR</td>\
+                            <td style="width: 33%;">NUMERO INTERIOR</td>\
+                        </tr>\
+                        <tr>\
+                            <td class="calle">' + nodo.domicilioExtranjero.calle + '</td>\
+                            <td class="numeroExterior">' + nodo.domicilioExtranjero.numeroExterior + '</td>\
+                            <td class="numeroInterior">' + nodo.domicilioExtranjero.numeroInterior + '</td>\
+                        </tr>\
+                        <tr style="background-color: #dee2e6;">\
+                            <td>CIUDAD/LOCALIDAD</td>\
+                            <td>ESTADO/PROVINCIA/PAIS</td>\
+                            <td>CÓDIGO POSTAL</td>\
+                        </tr>\
+                        <tr>\
+                            <td class="ciudadLocalidad">' + nodo.domicilioExtranjero.ciudadLocalidad + '</td>\
+                            <td class="estadoProvincia">' + nodo.domicilioExtranjero.estadoProvincia + " / " + nodo.domicilioExtranjero.pais + '</td>\
+                            <td class="codigoPostal">' + nodo.domicilioExtranjero.codigoPostal + '</td>\
+                        </tr>';
+            }
+        });
         html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.aclaracionesObservaciones + '</td>\

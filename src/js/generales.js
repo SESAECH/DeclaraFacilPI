@@ -95,6 +95,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.situacionPatrimonial.experienciaLaboral.ninguno=true;
                     $(btnAgregar).addClass("hide");                
                     $(btnTerminar).removeClass("hide");
                     $(tabla).addClass("hide");
@@ -130,6 +131,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.ninguno=true;
                     $(btnAgregar).addClass("hide");
                     $(tabla).addClass("hide");
                     $(btnTerminar).removeClass("hide");
@@ -174,6 +176,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.situacionPatrimonial.bienesInmuebles.ninguno=true;
                     $(btnAgregar).addClass("hide");
                     $(tabla).addClass("hide");
                     $(btnTerminar).removeClass("hide");
@@ -209,6 +212,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.situacionPatrimonial.vehiculos.ninguno=true;
                     $(btnAgregar).addClass("hide");
                     $(tabla).addClass("hide");
                     $(btnTerminar).removeClass("hide");
@@ -244,6 +248,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.situacionPatrimonial.bienesMuebles.ninguno=true;
                     $(btnAgregar).addClass("hide");
                     $(tabla).addClass("hide");
                     $(btnTerminar).removeClass("hide");
@@ -279,6 +284,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.situacionPatrimonial.inversiones.ninguno=true;
                     $(btnAgregar).addClass("hide");
                     $(tabla).addClass("hide");
                     $(btnTerminar).removeClass("hide");
@@ -314,6 +320,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.situacionPatrimonial.adeudos.ninguno=true;
                     $(btnAgregar).addClass("hide");
                     $(tabla).addClass("hide");
                     $(btnTerminar).removeClass("hide");
@@ -349,6 +356,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.situacionPatrimonial.prestamoOComodato.ninguno=true;
                     $(btnAgregar).addClass("hide");
                     $(tabla).addClass("hide");
                     $(btnTerminar).removeClass("hide");
@@ -384,6 +392,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.interes.participacion.ninguno=true;
                     $(btnAgregar).addClass("hide");
                     $(tabla).addClass("hide");
                     $(btnTerminar).removeClass("hide");
@@ -419,6 +428,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.interes.participacionTomaDecisiones.ninguno=true;
                     $(btnAgregar).addClass("hide");
                     $(tabla).addClass("hide");
                     $(btnTerminar).removeClass("hide");
@@ -454,6 +464,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.interes.apoyos.ninguno=true;
                     $(btnAgregar).addClass("hide");
                     $(tabla).addClass("hide");
                     $(btnTerminar).removeClass("hide");
@@ -489,6 +500,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.interes.representacion.ninguno=true;
                     $(btnAgregar).addClass("hide");
                     $(tabla).addClass("hide");
                     $(btnTerminar).removeClass("hide");
@@ -524,6 +536,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.interes.clientesPrincipales.ninguno=true;
                     $(btnAgregar).addClass("hide");
                     $(tabla).addClass("hide");
                     $(btnTerminar).removeClass("hide");
@@ -559,6 +572,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.interes.beneficiosPrivados.ninguno=true;
                     $(btnAgregar).addClass("hide");
                     $(tabla).addClass("hide");
                     $(btnTerminar).removeClass("hide");
@@ -594,6 +608,7 @@ $(".chkNinguno").on("change",function() {
                     });
                 }
                 else{
+                    jsonResult.declaracion.interes.fideicomisos.ninguno=true;
                     $(btnAgregar).addClass("hide");
                     $(tabla).addClass("hide");
                     $(btnTerminar).removeClass("hide");

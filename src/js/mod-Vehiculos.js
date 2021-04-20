@@ -54,7 +54,7 @@ window.initVehiculos = function initVehiculos(data){
     });
 
     $(modulo + ".btnTerminar").on('click',function() {
-        jsonResult.declaracion.situacionPatrimonial.vehiculos.aclaracionesObservaciones =  $(modulo + "textarea[name='aclaracionesObservaciones']").val().toUpperCase();
+        jsonResult.declaracion.situacionPatrimonial.vehiculos.aclaracionesObservaciones =  $(modulo + "textarea[name='aclaracionesObservaciones']").val().toUpperCase();        
         $(modulo + "textarea[name='aclaracionesObservaciones']").prop("disabled", true);
         //inhabilitar controles del modulo.
         $(modulo + ".chkNinguno").prop("disabled", true);
