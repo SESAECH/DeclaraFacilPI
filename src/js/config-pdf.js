@@ -693,9 +693,8 @@ function tblDependienteEco(titulo){
     let html="";
     html +='<tr><td colspan="3" style="background-color: #621132; color: #fff; font-size:14px;">' + titulo + '</td></tr>';
     if(!jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.ninguno){
-        Object.keys(jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.vehiculo).forEach(function (index) {
-            var nodo = jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.dependienteEconomico[index];
-            //var nodo = jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico;
+        Object.keys(jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.dependienteEconomico).forEach(function (index) {
+            var nodo = jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.dependienteEconomico[index];            
            
             html+="<tr style='background-color: #dee2e6;'>";
             html+=" <td>NOMBRE(S)</td>";
