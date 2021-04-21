@@ -143,6 +143,8 @@ window.initCV = function initCV(data){
 
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
+    $(modulo + ".formSecundario").html("").addClass("hide");
+    $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut");
 }
 
 window.pintarTablaCV = function pintarTablaCV(seccionNo, seccionName){

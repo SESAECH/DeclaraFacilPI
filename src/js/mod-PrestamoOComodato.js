@@ -230,8 +230,8 @@ window.guardarRegistroPrestamoOComodato = function guardarRegistroPrestamoOComod
         "tipoOperacion":        $(form + "select[name='tipoOperacion'] option:selected").val(),
         "duenoTitular": {
           "tipoDuenoTitular":   $(form + "select[name='tipoDuenoTitular'] option:selected").val(),
-          "nombreTitular":      $(form + "input[name='nombreTitular'] ").val(),
-          "rfc":                $(form + "input[name='rfc']").val(),
+          "nombreTitular":      $(form + "input[name='nombreTitular'] ").val().toUpperCase(),
+          "rfc":                $(form + "input[name='rfc']").val().toUpperCase(),
           "relacionConTitular": $(form + "input[name='relacionConTitular']").val(),
         }
       };
@@ -245,10 +245,10 @@ window.guardarRegistroPrestamoOComodato = function guardarRegistroPrestamoOComod
                       "valor": $(form + "#contentPrestamoOComodato_tipoBien_inmueble select[name='tipoInmueble'] option:selected")[0].innerText,
                     },
                     "domicilioMexico": {
-                      "calle":              $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico input[name='calle']").val(),
+                      "calle":              $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico input[name='calle']").val().toUpperCase(),
                       "numeroExterior":     $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico input[name='numeroExterior']").val(),
                       "numeroInterior":     $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico input[name='numeroInterior']").val(),
-                      "coloniaLocalidad":   $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico input[name='coloniaLocalidad']").val(),
+                      "coloniaLocalidad":   $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico input[name='coloniaLocalidad']").val().toUpperCase(),
                       "municipioAlcaldia": {
                         "clave":            $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico select[name='municipioAlcaldia'] option:selected").val(),
                         "valor":            $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico select[name='municipioAlcaldia'] option:selected")[0].innerText,
@@ -270,11 +270,11 @@ window.guardarRegistroPrestamoOComodato = function guardarRegistroPrestamoOComod
                         "valor": $(form + "#contentPrestamoOComodato_tipoBien_inmueble select[name='tipoInmueble'] option:selected")[0].innerText,
                     },
                     "domicilioExtranjero": {
-                      "calle":              $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domExtranjero input[name='calle']").val(),
+                      "calle":              $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domExtranjero input[name='calle']").val().toUpperCase(),
                       "numeroExterior":     $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domExtranjero input[name='numeroExterior']").val(),
                       "numeroInterior":     $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domExtranjero input[name='numeroInterior']").val(),
-                      "ciudadLocalidad":    $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domExtranjero input[name='ciudadLocalidad']").val(),
-                      "estadoProvincia":    $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domExtranjero input[name='estadoProvincia']").val(),
+                      "ciudadLocalidad":    $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domExtranjero input[name='ciudadLocalidad']").val().toUpperCase(),
+                      "estadoProvincia":    $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domExtranjero input[name='estadoProvincia']").val().toUpperCase(),
                       "pais":               $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domExtranjero select[name='pais'] option:selected").val(),
                       "codigoPostal":       $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domExtranjero input[name='codigoPostal']").val(),
                     }
@@ -289,10 +289,10 @@ window.guardarRegistroPrestamoOComodato = function guardarRegistroPrestamoOComod
                   "clave": $(form + "#contentPrestamoOComodato_tipoBien_vehiculo select[name='tipo'] option:selected").val(),
                   "valor": $(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='especifique']").val(),
                 },
-                "marca":    $(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='marca']").val(),
-                "modelo":   $(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='modelo']").val(),
+                "marca":    $(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='marca']").val().toUpperCase(),
+                "modelo":   $(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='modelo']").val().toUpperCase(),
                 "anio":     $(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='anio']").val(),
-                "numeroSerieRegistro":$(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='numeroSerieRegistro']").val(),
+                "numeroSerieRegistro":$(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='numeroSerieRegistro']").val().toUpperCase(),
                 "lugarRegistro": {
                   "pais":   $(form + "#contentPrestamoOComodato_tipoBien_vehiculo select[name='pais'] option:selected").val(),
                   "entidadFederativa": {

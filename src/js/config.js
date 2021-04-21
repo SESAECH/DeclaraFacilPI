@@ -26,6 +26,8 @@ jQuery.extend(jQuery.validator.messages, {
 //button seleccionar tipo de declaración
 $('.btnSelectTipoDeclaracion').on('click',function() {
     jsonResult.captura.tipo_declaracion = this.dataset.tipo;
+    if (jsonResult.captura.tipo_declaracion =="INTERESES"){ $(".btnSimplificada").addClass("hide");}
+    else{ $(".btnSimplificada").removeClass("hide");}
     $("#contentSelectFormatoDeclaracion").removeClass("hide");
 });
 
@@ -43,9 +45,16 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
     jsonResult.captura.declaracion =  declaraciones[jsonResult.captura.formato.toLowerCase()];    
     jsonResult.captura.status_gral = "EN_PROCESO";
 
-    //configurar jsonResult.
-    if (jsonResult.captura.formato =="SIMPLIFICADA"){
-        delete jsonResult.declaracion.interes;
+    if (jsonResult.captura.tipo_declaracion =="INTERESES"){
+      var obj = {a: 3, b: 5, c: 3, d: 4, e: 5 };
+
+      [3,5,6,7,8,9,10,11,12,13,14,15].forEach(e => delete delete jsonResult.captura.declaracion.situacionPatrimonial.secciones[e]);
+
+        delete jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante;
+        delete jsonResult.declaracion.situacionPatrimonial.experienciaLaboral;
+        delete jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
+        delete jsonResult.declaracion.situacionPatrimonial.ingresos;
+
         delete jsonResult.declaracion.situacionPatrimonial.vehiculos;
         delete jsonResult.declaracion.situacionPatrimonial.prestamoOComodato;
         delete jsonResult.declaracion.situacionPatrimonial.inversiones;
@@ -54,504 +63,518 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
         delete jsonResult.declaracion.situacionPatrimonial.bienesInmuebles;
         delete jsonResult.declaracion.situacionPatrimonial.bienesMuebles;
         delete jsonResult.declaracion.situacionPatrimonial.adeudos;
-
-        switch(jsonResult.captura.tipo_declaracion){
-            case "INICIAL":
-                if (!jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"]){
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"] = {};
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].no = 7;
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].titulo       = "¿Te desempeñaste como servidor público el año inmediato anterior?";
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].moduloName   = "moduloDesempenoServidorPublico";
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].status       = "SIN_INFO";
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].apartado     = "situacionPatrimonial"; 
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].seccion      = "actividadAnualAnterior"; 
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].help         = "ayuda de moduloDesempenoServidorPublico";
-                }
-                jsonResult.declaracion.situacionPatrimonial.ingresos={
-                    "remuneracionMensualCargoPublico": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "otrosIngresosMensualesTotal": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "actividadIndustialComercialEmpresarial": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "actividades": {}
-                    },
-                    "actividadFinanciera": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "actividades": {}
-                    },
-                    "serviciosProfesionales": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "servicios": {}
-                    },
-                    "otrosIngresos": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "ingresos": {}
-                    },
-                    "ingresoMensualNetoDeclarante": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "ingresoMensualNetoParejaDependiente": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "totalIngresosMensualesNetos": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "aclaracionesObservaciones": ""
-                };
-                jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior={
-                    "servidorPublicoAnioAnterior": false,
-                    "fechaIngreso": "",
-                    "fechaConclusion": "",
-                    "remuneracionNetaCargoPublico": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "otrosIngresosTotal": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "actividadIndustialComercialEmpresarial": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "actividades": {}
-                    },
-                    "actividadFinanciera": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "actividades": {}
-                    },
-                    "serviciosProfesionales": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "servicios": {}
-                    },
-                    "enajenacionBienes": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "bienes": {}
-                    },
-                    "otrosIngresos": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "ingresos": {}
-                    },
-                    "ingresoNetoAnualDeclarante": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "ingresoNetoAnualParejaDependiente": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "totalIngresosNetosAnuales": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "aclaracionesObservaciones": ""
-                };
-                  break;
-            case "MODIFICACION":
-                delete jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
-                delete jsonResult.captura.declaracion.situacionPatrimonial.secciones[7];//actividadAnualAnterior
-                jsonResult.declaracion.situacionPatrimonial.ingresos={
-                    "remuneracionAnualCargoPublico": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "otrosIngresosAnualesTotal": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "actividadIndustialComercialEmpresarial": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "actividades": {}
-                    },
-                    "actividadFinanciera": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "actividades": {}
-                    },
-                    "serviciosProfesionales": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "servicios": {}
-                    },
-                    "enajenacionBienes": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "bienes": {}
-                    },
-                    "otrosIngresos": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "ingresos": {}
-                    },
-                    "ingresoAnualNetoDeclarante": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "ingresoAnualNetoParejaDependiente": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "totalIngresosAnualesNetos": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "aclaracionesObservaciones": ""
-                  };
-                break;
-            case "CONCLUSION":
-                if (!jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"]){
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"] = {};
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].no = 7;
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].titulo       = "¿Te desempeñaste como servidor público el año inmediato anterior?";
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].moduloName   = "moduloDesempenoServidorPublico";
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].status       = "SIN_INFO";
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].apartado     = "situacionPatrimonial"; 
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].seccion      = "actividadAnualAnterior"; 
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].help         = "ayuda de moduloDesempenoServidorPublico";
-                }
-                jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior={
-                    "servidorPublicoAnioAnterior": false,
-                    "fechaIngreso": "",
-                    "fechaConclusion": "",
-                    "remuneracionNetaCargoPublico": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "otrosIngresosTotal": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "actividadIndustialComercialEmpresarial": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "actividades": {}
-                    },
-                    "actividadFinanciera": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "actividades": {}
-                    },
-                    "serviciosProfesionales": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "servicios": {}
-                    },
-                    "enajenacionBienes": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "bienes": {}
-                    },
-                    "otrosIngresos": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "ingresos": {}
-                    },
-                    "ingresoNetoAnualDeclarante": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "ingresoNetoAnualParejaDependiente": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "totalIngresosNetosAnuales": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "aclaracionesObservaciones": ""
-                };
-                jsonResult.declaracion.situacionPatrimonial.ingresos={
-                    "remuneracionConclusionCargoPublico": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "otrosIngresosConclusionTotal": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "actividadIndustialComercialEmpresarial": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "actividades": {}
-                    },
-                    "actividadFinanciera": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "actividades": {}
-                    },
-                    "serviciosProfesionales": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "servicios": {}
-                    },
-                    "enajenacionBienes": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "bienes": {}
-                    },
-                    "otrosIngresos": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "ingresos": {}
-                    },
-                    "ingresoConclusionNetoDeclarante": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "ingresoConclusionNetoParejaDependiente": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "totalIngresosConclusionNetos": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "aclaracionesObservaciones": ""
-                };
-                break;
-        }
     }
-    else{      
-      switch(jsonResult.captura.tipo_declaracion){
-            case "INICIAL":
-                jsonResult.declaracion.situacionPatrimonial.ingresos={
-                    "remuneracionMensualCargoPublico": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "otrosIngresosMensualesTotal": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "actividadIndustialComercialEmpresarial": {
-                      "remuneracionTotal": {
+    else{
+      //configurar jsonResult.
+      if (jsonResult.captura.formato =="SIMPLIFICADA"){
+          delete jsonResult.declaracion.interes;
+          delete jsonResult.declaracion.situacionPatrimonial.vehiculos;
+          delete jsonResult.declaracion.situacionPatrimonial.prestamoOComodato;
+          delete jsonResult.declaracion.situacionPatrimonial.inversiones;
+          delete jsonResult.declaracion.situacionPatrimonial.datosPareja;
+          delete jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico;
+          delete jsonResult.declaracion.situacionPatrimonial.bienesInmuebles;
+          delete jsonResult.declaracion.situacionPatrimonial.bienesMuebles;
+          delete jsonResult.declaracion.situacionPatrimonial.adeudos;
+
+          switch(jsonResult.captura.tipo_declaracion){
+              case "INICIAL":
+                  if (!jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"]){
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"] = {};
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].no = 7;
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].titulo       = "¿Te desempeñaste como servidor público el año inmediato anterior?";
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].moduloName   = "moduloDesempenoServidorPublico";
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].status       = "SIN_INFO";
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].apartado     = "situacionPatrimonial"; 
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].seccion      = "actividadAnualAnterior"; 
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].help         = "ayuda de moduloDesempenoServidorPublico";
+                  }
+                  jsonResult.declaracion.situacionPatrimonial.ingresos={
+                      "remuneracionMensualCargoPublico": {
                         "valor": 0,
                         "moneda": "MXN"
                       },
-                      "actividades": {}
-                    },
-                    "actividadFinanciera": {
-                      "remuneracionTotal": {
+                      "otrosIngresosMensualesTotal": {
                         "valor": 0,
                         "moneda": "MXN"
                       },
-                      "actividades": {}
-                    },
-                    "serviciosProfesionales": {
-                      "remuneracionTotal": {
+                      "actividadIndustialComercialEmpresarial": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "actividadFinanciera": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "serviciosProfesionales": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "servicios": {}
+                      },
+                      "otrosIngresos": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "ingresos": {}
+                      },
+                      "ingresoMensualNetoDeclarante": {
                         "valor": 0,
                         "moneda": "MXN"
                       },
-                      "servicios": {}
-                    },
-                    "otrosIngresos": {
-                      "remuneracionTotal": {
+                      "ingresoMensualNetoParejaDependiente": {
                         "valor": 0,
                         "moneda": "MXN"
                       },
-                      "ingresos": {}
-                    },
-                    "ingresoMensualNetoDeclarante": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "ingresoMensualNetoParejaDependiente": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "totalIngresosMensualesNetos": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "aclaracionesObservaciones": ""
-                };
-                break;
-            case "MODIFICACION":
-                delete jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
-                jsonResult.captura.declaracion.situacionPatrimonial.secciones[9].status="TERMINADO";
-                jsonResult.declaracion.situacionPatrimonial.ingresos={
-                    "remuneracionAnualCargoPublico": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "otrosIngresosAnualesTotal": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "actividadIndustialComercialEmpresarial": {
-                      "remuneracionTotal": {
+                      "totalIngresosMensualesNetos": {
                         "valor": 0,
                         "moneda": "MXN"
                       },
-                      "actividades": {}
-                    },
-                    "actividadFinanciera": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "actividades": {}
-                    },
-                    "serviciosProfesionales": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "servicios": {}
-                    },
-                    "enajenacionBienes": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "bienes": {}
-                    },
-                    "otrosIngresos": {
-                      "remuneracionTotal": {
-                        "valor": 0,
-                        "moneda": "MXN"
-                      },
-                      "ingresos": {}
-                    },
-                    "ingresoAnualNetoDeclarante": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "ingresoAnualNetoParejaDependiente": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "totalIngresosAnualesNetos": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "aclaracionesObservaciones": ""
+                      "aclaracionesObservaciones": ""
                   };
-                break;
-            case "CONCLUSION":
-                jsonResult.declaracion.situacionPatrimonial.ingresos={
-                    "remuneracionConclusionCargoPublico": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "otrosIngresosConclusionTotal": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "actividadIndustialComercialEmpresarial": {
-                      "remuneracionTotal": {
+                  jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior={
+                      "servidorPublicoAnioAnterior": false,
+                      "fechaIngreso": "",
+                      "fechaConclusion": "",
+                      "remuneracionNetaCargoPublico": {
                         "valor": 0,
                         "moneda": "MXN"
                       },
-                      "actividades": {}
-                    },
-                    "actividadFinanciera": {
-                      "remuneracionTotal": {
+                      "otrosIngresosTotal": {
                         "valor": 0,
                         "moneda": "MXN"
                       },
-                      "actividades": {}
-                    },
-                    "serviciosProfesionales": {
-                      "remuneracionTotal": {
+                      "actividadIndustialComercialEmpresarial": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "actividadFinanciera": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "serviciosProfesionales": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "servicios": {}
+                      },
+                      "enajenacionBienes": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "bienes": {}
+                      },
+                      "otrosIngresos": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "ingresos": {}
+                      },
+                      "ingresoNetoAnualDeclarante": {
                         "valor": 0,
                         "moneda": "MXN"
                       },
-                      "servicios": {}
-                    },
-                    "enajenacionBienes": {
-                      "remuneracionTotal": {
+                      "ingresoNetoAnualParejaDependiente": {
                         "valor": 0,
                         "moneda": "MXN"
                       },
-                      "bienes": {}
-                    },
-                    "otrosIngresos": {
-                      "remuneracionTotal": {
+                      "totalIngresosNetosAnuales": {
                         "valor": 0,
                         "moneda": "MXN"
                       },
-                      "ingresos": {}
-                    },
-                    "ingresoConclusionNetoDeclarante": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "ingresoConclusionNetoParejaDependiente": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "totalIngresosConclusionNetos": {
-                      "valor": 0,
-                      "moneda": "MXN"
-                    },
-                    "aclaracionesObservaciones": ""
-                };
-                break;
+                      "aclaracionesObservaciones": ""
+                  };
+                    break;
+              case "MODIFICACION":
+                  delete jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
+                  delete jsonResult.captura.declaracion.situacionPatrimonial.secciones[7];//actividadAnualAnterior
+                  jsonResult.declaracion.situacionPatrimonial.ingresos={
+                      "remuneracionAnualCargoPublico": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "otrosIngresosAnualesTotal": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "actividadIndustialComercialEmpresarial": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "actividadFinanciera": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "serviciosProfesionales": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "servicios": {}
+                      },
+                      "enajenacionBienes": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "bienes": {}
+                      },
+                      "otrosIngresos": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "ingresos": {}
+                      },
+                      "ingresoAnualNetoDeclarante": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "ingresoAnualNetoParejaDependiente": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "totalIngresosAnualesNetos": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "aclaracionesObservaciones": ""
+                    };
+                  break;
+              case "CONCLUSION":
+                  if (!jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"]){
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"] = {};
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].no = 7;
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].titulo       = "¿Te desempeñaste como servidor público el año inmediato anterior?";
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].moduloName   = "moduloDesempenoServidorPublico";
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].status       = "SIN_INFO";
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].apartado     = "situacionPatrimonial"; 
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].seccion      = "actividadAnualAnterior"; 
+                      jsonResult.captura.declaracion.situacionPatrimonial.secciones["7"].help         = "ayuda de moduloDesempenoServidorPublico";
+                  }
+                  jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior={
+                      "servidorPublicoAnioAnterior": false,
+                      "fechaIngreso": "",
+                      "fechaConclusion": "",
+                      "remuneracionNetaCargoPublico": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "otrosIngresosTotal": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "actividadIndustialComercialEmpresarial": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "actividadFinanciera": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "serviciosProfesionales": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "servicios": {}
+                      },
+                      "enajenacionBienes": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "bienes": {}
+                      },
+                      "otrosIngresos": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "ingresos": {}
+                      },
+                      "ingresoNetoAnualDeclarante": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "ingresoNetoAnualParejaDependiente": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "totalIngresosNetosAnuales": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "aclaracionesObservaciones": ""
+                  };
+                  jsonResult.declaracion.situacionPatrimonial.ingresos={
+                      "remuneracionConclusionCargoPublico": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "otrosIngresosConclusionTotal": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "actividadIndustialComercialEmpresarial": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "actividadFinanciera": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "serviciosProfesionales": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "servicios": {}
+                      },
+                      "enajenacionBienes": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "bienes": {}
+                      },
+                      "otrosIngresos": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "ingresos": {}
+                      },
+                      "ingresoConclusionNetoDeclarante": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "ingresoConclusionNetoParejaDependiente": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "totalIngresosConclusionNetos": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "aclaracionesObservaciones": ""
+                  };
+                  break;
+          }
+      }
+      else{      
+        switch(jsonResult.captura.tipo_declaracion){
+              case "INICIAL":
+                  jsonResult.declaracion.situacionPatrimonial.ingresos={
+                      "remuneracionMensualCargoPublico": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "otrosIngresosMensualesTotal": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "actividadIndustialComercialEmpresarial": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "actividadFinanciera": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "serviciosProfesionales": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "servicios": {}
+                      },
+                      "otrosIngresos": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "ingresos": {}
+                      },
+                      "ingresoMensualNetoDeclarante": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "ingresoMensualNetoParejaDependiente": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "totalIngresosMensualesNetos": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "aclaracionesObservaciones": ""
+                  };
+                  break;
+              case "MODIFICACION":
+                  delete jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
+                  jsonResult.captura.declaracion.situacionPatrimonial.secciones[9].status="TERMINADO";
+                  jsonResult.declaracion.situacionPatrimonial.ingresos={
+                      "remuneracionAnualCargoPublico": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "otrosIngresosAnualesTotal": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "actividadIndustialComercialEmpresarial": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "actividadFinanciera": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "serviciosProfesionales": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "servicios": {}
+                      },
+                      "enajenacionBienes": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "bienes": {}
+                      },
+                      "otrosIngresos": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "ingresos": {}
+                      },
+                      "ingresoAnualNetoDeclarante": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "ingresoAnualNetoParejaDependiente": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "totalIngresosAnualesNetos": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "aclaracionesObservaciones": ""
+                    };
+                  break;
+              case "CONCLUSION":
+                  jsonResult.declaracion.situacionPatrimonial.ingresos={
+                      "remuneracionConclusionCargoPublico": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "otrosIngresosConclusionTotal": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "actividadIndustialComercialEmpresarial": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "actividadFinanciera": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "actividades": {}
+                      },
+                      "serviciosProfesionales": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "servicios": {}
+                      },
+                      "enajenacionBienes": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "bienes": {}
+                      },
+                      "otrosIngresos": {
+                        "remuneracionTotal": {
+                          "valor": 0,
+                          "moneda": "MXN"
+                        },
+                        "ingresos": {}
+                      },
+                      "ingresoConclusionNetoDeclarante": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "ingresoConclusionNetoParejaDependiente": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "totalIngresosConclusionNetos": {
+                        "valor": 0,
+                        "moneda": "MXN"
+                      },
+                      "aclaracionesObservaciones": ""
+                  };
+                  break;
+        }
       }
     }
     
@@ -639,6 +662,7 @@ window.regresarAlInicio = function regresarAlInicio(){
     jsonResult.captura.formato = "";
     jsonResult.captura.declaracion =  [];
     jsonResult.captura.status_gral = ""; */    
+    declaraciones = JSON.parse(JSON.stringify(declaracionesResp));
     jsonResult = JSON.parse(JSON.stringify(jsonResultResp));
     
     $("#sidebarMenu").addClass("hide");
@@ -975,3 +999,5 @@ window.declaraciones={
         }
     }
 };
+
+window.declaracionesResp = JSON.parse(JSON.stringify(declaraciones));

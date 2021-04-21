@@ -246,7 +246,7 @@ window.guardarRegistroAdeudos = function guardarRegistroAdeudos(uuidItem, seccio
           "clave": $(form + "select[name='tipoAdeudo'] option:selected").val(),
           "valor": $(form + "input[name='especifique']").val(),
         },
-        "numeroCuentaContrato": $(form + "input[name='numeroCuentaContrato']").val(),
+        "numeroCuentaContrato": $(form + "input[name='numeroCuentaContrato']").val().toUpperCase(),
         "fechaAdquisicion":     $(form + "input[name='fechaAdquisicion']").val(),
         "montoOriginal": {
           "valor":  parseInt($(form + "input[name='montoOriginal']").val()),
@@ -254,8 +254,8 @@ window.guardarRegistroAdeudos = function guardarRegistroAdeudos(uuidItem, seccio
         },
         "otorganteCredito": {
           "tipoPersona":        $(form + "select[name='tipoPersona'] option:selected").val(),
-          "nombreInstitucion":  $(form + "input[name='nombreInstitucion']").val(),
-          "rfc":                $(form + "input[name='otorganteCredito_rfc']").val(),
+          "nombreInstitucion":  $(form + "input[name='nombreInstitucion']").val().toUpperCase(),
+          "rfc":                $(form + "input[name='otorganteCredito_rfc']").val().toUpperCase(),
         },
         "tercero": tercerosTemp,
         "localizacionAdeudo": {

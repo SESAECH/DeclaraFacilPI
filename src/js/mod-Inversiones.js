@@ -251,8 +251,8 @@ window.guardarRegistroInversiones = function guardarRegistroInversiones(uuidItem
         "numeroCuentaContrato": $(form + "input[name='numeroCuentaContrato']").val(),
         "localizacionInversion": {
           "pais":                   $(form + "select[name='pais'] option:selected").val(),
-          "institucionRazonSocial": $(form + "input[name='institucionRazonSocial']").val(),
-          "rfc":                    $(form + "input[name='institucionRazonSocial_rfc']").val(),
+          "institucionRazonSocial": $(form + "input[name='institucionRazonSocial']").val().toUpperCase(),
+          "rfc":                    $(form + "input[name='institucionRazonSocial_rfc']").val().toUpperCase(),
         }
       };
 

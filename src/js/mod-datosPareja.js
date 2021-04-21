@@ -393,13 +393,13 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
 
             root.ninguno =                  $("#chkNingunoPareja")[0].checked;
             root.tipoOperacion =            $("#form" + seccionName + " select[name='tipoOperacion']").val();
-            root.nombre =                   $("#form" + seccionName + " input[name='nombre']").val();
-            root.primerApellido =           $("#form" + seccionName + " input[name='primerApellido']").val();
-            root.segundoApellido =          $("#form" + seccionName + " input[name='segundoApellido']").val();
+            root.nombre =                   $("#form" + seccionName + " input[name='nombre']").val().toUpperCase();
+            root.primerApellido =           $("#form" + seccionName + " input[name='primerApellido']").val().toUpperCase();
+            root.segundoApellido =          $("#form" + seccionName + " input[name='segundoApellido']").val().toUpperCase();
             root.fechaNacimiento =          $("#form" + seccionName + " input[name='fechaNacimiento']").val();
-            root.rfc =                      $("#form" + seccionName + " input[name='rfc']").val();
+            root.rfc =                      $("#form" + seccionName + " input[name='rfc']").val().toUpperCase();
             root.relacionConDeclarante =    $("#form" + seccionName + " select[name='relacionConDeclarante'] option:selected").val();            
-            root.curp =                     $("#form" + seccionName + " input[name='curp']").val();
+            root.curp =                     $("#form" + seccionName + " input[name='curp']").val().toUpperCase();;
 
             root.esDependienteEconomico =   $("#form" + seccionName + " input[type='radio'][name='esDependienteEconomico']:checked").val().toLowerCase() == 'true' ? true : false;
             root.ciudadanoExtranjero =      $("#form" + seccionName + " input[type='radio'][name='ciudadanoExtranjero']:checked").val().toLowerCase() == 'true' ? true : false;
@@ -408,10 +408,10 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
             root.lugarDondeReside =         $("#form" + seccionName + " select[name='lugarDondeReside'] option:selected").val();
             
             //domicilio mexico.
-            root.domicilioMexico.calle =                    $("#domParejaMxContent input[name='calle']").val();
+            root.domicilioMexico.calle =                    $("#domParejaMxContent input[name='calle']").val().toUpperCase();
             root.domicilioMexico.numeroExterior =           $("#domParejaMxContent input[name='numeroExterior']").val();
             root.domicilioMexico.numeroInterior =           $("#domParejaMxContent input[name='numeroInterior']").val();
-            root.domicilioMexico.coloniaLocalidad =         $("#domParejaMxContent input[name='coloniaLocalidad']").val();
+            root.domicilioMexico.coloniaLocalidad =         $("#domParejaMxContent input[name='coloniaLocalidad']").val().toUpperCase();
             root.domicilioMexico.municipioAlcaldia.clave =  $("#domParejaMxContent select[name='municipioAlcaldia'] option:selected").val();
             root.domicilioMexico.municipioAlcaldia.valor =  $("#domParejaMxContent select[name='municipioAlcaldia'] option:selected")[0].innerText;
             root.domicilioMexico.entidadFederativa.clave =  $("#domParejaMxContent select[name='entidadFederativa'] option:selected").val();
@@ -419,11 +419,11 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
             root.domicilioMexico.codigoPostal =             $("#domParejaMxContent input[name='codigoPostal']").val();
             
             //domicilio extranjero
-            root.domicilioExtranjero.calle =                $("#domParejaExContent input[name='calle']").val();
+            root.domicilioExtranjero.calle =                $("#domParejaExContent input[name='calle']").val().toUpperCase();
             root.domicilioExtranjero.numeroExterior =       $("#domParejaExContent input[name='numeroExterior']").val();
             root.domicilioExtranjero.numeroInterior =       $("#domParejaExContent input[name='numeroInterior']").val();
-            root.domicilioExtranjero.ciudadLocalidad =      $("#domParejaExContent input[name='ciudadLocalidad']").val();
-            root.domicilioExtranjero.estadoProvincia =      $("#domParejaExContent input[name='estadoProvincia']").val();
+            root.domicilioExtranjero.ciudadLocalidad =      $("#domParejaExContent input[name='ciudadLocalidad']").val().toUpperCase();
+            root.domicilioExtranjero.estadoProvincia =      $("#domParejaExContent input[name='estadoProvincia']").val().toUpperCase();
             root.domicilioExtranjero.pais =                 $("#domParejaExContent select[name='pais'] option:selected").val();
             root.domicilioExtranjero.codigoPostal =         $("#domParejaExContent input[name='codigoPostal']").val();
 
@@ -432,17 +432,17 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
             
             root.actividadLaboralSectorPublico.nivelOrdenGobierno =         $("#laboralParejaPubContent select[name='nivelOrdenGobierno'] option:selected").val();
             root.actividadLaboralSectorPublico.ambitoPublico =              $("#laboralParejaPubContent select[name='ambitoPublico'] option:selected").val();
-            root.actividadLaboralSectorPublico.nombreEntePublico =          $("#laboralParejaPubContent input[name='nombreEntePublico']").val();
-            root.actividadLaboralSectorPublico.areaAdscripcion =            $("#laboralParejaPubContent input[name='areaAdscripcion']").val();
-            root.actividadLaboralSectorPublico.empleoCargoComision =        $("#laboralParejaPubContent input[name='empleoCargoComision']").val();
-            root.actividadLaboralSectorPublico.funcionPrincipal =           $("#laboralParejaPubContent input[name='funcionPrincipal']").val();
+            root.actividadLaboralSectorPublico.nombreEntePublico =          $("#laboralParejaPubContent input[name='nombreEntePublico']").val().toUpperCase();
+            root.actividadLaboralSectorPublico.areaAdscripcion =            $("#laboralParejaPubContent input[name='areaAdscripcion']").val().toUpperCase();
+            root.actividadLaboralSectorPublico.empleoCargoComision =        $("#laboralParejaPubContent input[name='empleoCargoComision']").val().toUpperCase();
+            root.actividadLaboralSectorPublico.funcionPrincipal =           $("#laboralParejaPubContent input[name='funcionPrincipal']").val().toUpperCase();
             root.actividadLaboralSectorPublico.salarioMensualNeto.valor =   $("#laboralParejaPubContent input[name='valor']").val();
             root.actividadLaboralSectorPublico.salarioMensualNeto.moneda =  $("#laboralParejaPubContent select[name='moneda'] option:selected").val();
             root.actividadLaboralSectorPublico.fechaIngreso =               $("#laboralParejaPubContent input[name='fechaIngreso']").val();
 
-            root.actividadLaboralSectorPrivadoOtro.nombreEmpresaSociedadAsociacion =    $("#laboralParejaPriContent input[name='nombreEmpresaSociedadAsociacion']").val();
-            root.actividadLaboralSectorPrivadoOtro.empleoCargoComision =                $("#laboralParejaPriContent input[name='empleoCargoComision']").val();
-            root.actividadLaboralSectorPrivadoOtro.rfc =                                $("#laboralParejaPriContent input[name='rfc']").val();
+            root.actividadLaboralSectorPrivadoOtro.nombreEmpresaSociedadAsociacion =    $("#laboralParejaPriContent input[name='nombreEmpresaSociedadAsociacion']").val().toUpperCase();
+            root.actividadLaboralSectorPrivadoOtro.empleoCargoComision =                $("#laboralParejaPriContent input[name='empleoCargoComision']").val().toUpperCase();
+            root.actividadLaboralSectorPrivadoOtro.rfc =                                $("#laboralParejaPriContent input[name='rfc']").val().toUpperCase();
             root.actividadLaboralSectorPrivadoOtro.fechaIngreso =                       $("#laboralParejaPriContent input[name='fechaIngreso']").val();
             root.actividadLaboralSectorPrivadoOtro.sector.clave =                       $("#laboralParejaPriContent select[name='sector'] option:selected").val();
             root.actividadLaboralSectorPrivadoOtro.sector.valor =                       $("#laboralParejaPriContent select[name='sector'] option:selected")[0].innerText;
@@ -450,7 +450,7 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
             root.actividadLaboralSectorPrivadoOtro.salarioMensualNeto.moneda =          $("#laboralParejaPriContent select[name='moneda'] option:selected").val();
             root.actividadLaboralSectorPrivadoOtro.proveedorContratistaGobierno =       $("#laboralParejaPriContent input[type='radio'][name='proveedorContratistaGobierno']:checked").val().toLowerCase() == 'true' ? true : false;
             //generales
-            root.aclaracionesObservaciones = $("#form" + seccionName + " textarea[name='aclaracionesObservaciones']").val();
+            root.aclaracionesObservaciones = $("#form" + seccionName + " textarea[name='aclaracionesObservaciones']").val().toUpperCase();;
         
             //actualiza el status de la sección (en proceso/terminado).
             actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);            

@@ -229,8 +229,8 @@ window.funcionalidadGuardarRegistroBienesMuebles = function funcionalidadGuardar
             tercerosTemp[uuid]={
                 "uuid":                 uuid,
                 "tipoPersona":          $(form + ".content_terceros_nuevo select[name='tipoPersona'] option:selected").val(),
-                "nombreRazonSocial":    $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val(),
-                "rfc":                  $(form + ".content_terceros_nuevo input[name='rfc']").val(),
+                "nombreRazonSocial":    $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val().toUpperCase(),
+                "rfc":                  $(form + ".content_terceros_nuevo input[name='rfc']").val().toUpperCase(),
             };
             $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val("");
             $(form + ".content_terceros_nuevo input[name='rfc']").val("");
@@ -246,8 +246,8 @@ window.funcionalidadGuardarRegistroBienesMuebles = function funcionalidadGuardar
             transmisoresTemp[uuid]={
                 "uuid":                 uuid,
                 "tipoPersona":          $(form + ".content_transmisor_nuevo select[name='transmisor_tipoPersona'] option:selected").val(),
-                "nombreRazonSocial":    $(form + ".content_transmisor_nuevo input[name='transmisor_nombreRazonSocial']").val(),
-                "rfc":                  $(form + ".content_transmisor_nuevo input[name='transmisor_rfc']").val(),
+                "nombreRazonSocial":    $(form + ".content_transmisor_nuevo input[name='transmisor_nombreRazonSocial']").val().toUpperCase(),
+                "rfc":                  $(form + ".content_transmisor_nuevo input[name='transmisor_rfc']").val().toUpperCase(),
                 "relacion": {
                     "clave": $(form + ".content_transmisor_nuevo select[name='transmisor_relacion'] option:selected").val(),
                     "valor": $(form + ".content_transmisor_nuevo input[name='transmisor_relacion_especifique']").val()
@@ -282,7 +282,7 @@ window.guardarRegistroBienesMuebles = function guardarRegistroBienesMuebles(uuid
         },
         "transmisor": transmisoresTemp,
         "tercero": tercerosTemp,
-        "descripcionGeneralBien": $(form + "input[name='descripcionGeneralBien']").val(),
+        "descripcionGeneralBien": $(form + "input[name='descripcionGeneralBien']").val().toUpperCase(),
         "formaAdquisicion": {
           "clave": $(form + "select[name='formaAdquisicion'] option:selected").val(),
           "valor": $(form + "select[name='formaAdquisicion'] option:selected")[0].innerText,

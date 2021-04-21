@@ -134,22 +134,22 @@ window.guardarFormEmpleoCargoComision = function guardarFormEmpleoCargoComision(
             root.tipoOperacion =                $(formulario + "select[name='tipoOperacion'] option:selected").val();
             root.nivelOrdenGobierno =           $(formulario + "select[name='nivelOrdenGobierno'] option:selected").val();
             root.ambitoPublico =                $(formulario + "select[name='ambitoPublico'] option:selected").val();
-            root.nombreEntePublico =            $(formulario + "input[name='nombreEntePublico']").val();
-            root.areaAdscripcion =              $(formulario + "input[name='areaAdscripcion']").val();
-            root.empleoCargoComision =          $(formulario + "input[name='empleoCargoComision']").val();
+            root.nombreEntePublico =            $(formulario + "input[name='nombreEntePublico']").val().toUpperCase();
+            root.areaAdscripcion =              $(formulario + "input[name='areaAdscripcion']").val().toUpperCase();
+            root.empleoCargoComision =          $(formulario + "input[name='empleoCargoComision']").val().toUpperCase();
             root.contratadoPorHonorarios =     honorarios;
-            root.nivelEmpleoCargoComision =     $(formulario + "input[name='nivelEmpleoCargoComision']").val();
-            root.funcionPrincipal =             $(formulario + "input[name='funcionPrincipal']").val();
+            root.nivelEmpleoCargoComision =     $(formulario + "input[name='nivelEmpleoCargoComision']").val().toUpperCase();
+            root.funcionPrincipal =             $(formulario + "input[name='funcionPrincipal']").val().toUpperCase();
             root.fechaTomaPosesion =            $(formulario + "input[name='fechaTomaPosesion']").val();
             root.telefonoOficina.telefono =     $(formulario + "input[name='telefono'] ").val();
             root.telefonoOficina.extension =    $(formulario + "input[name='extension']").val();
 
             if (jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.domicilio =="MX"){
                 //domicilio mexico.
-                root.domicilioMexico.calle = $("#domEmpMexico input[name='calle']").val();
+                root.domicilioMexico.calle = $("#domEmpMexico input[name='calle']").val().toUpperCase();
                 root.domicilioMexico.numeroExterior = $("#domEmpMexico input[name='numeroExterior']").val();
                 root.domicilioMexico.numeroInterior = $("#domEmpMexico input[name='numeroInterior']").val();
-                root.domicilioMexico.coloniaLocalidad = $("#domEmpMexico input[name='coloniaLocalidad']").val();
+                root.domicilioMexico.coloniaLocalidad = $("#domEmpMexico input[name='coloniaLocalidad']").val().toUpperCase();
                 root.domicilioMexico.municipioAlcaldia.clave = $("#domEmpMexico select[name='municipioAlcaldia'] option:selected").val();
                 root.domicilioMexico.municipioAlcaldia.valor = $("#domEmpMexico select[name='municipioAlcaldia'] option:selected")[0].innerText;
                 root.domicilioMexico.entidadFederativa.clave = $("#domEmpMexico select[name='entidadFederativa'] option:selected").val();
@@ -179,11 +179,11 @@ window.guardarFormEmpleoCargoComision = function guardarFormEmpleoCargoComision(
                 root.domicilioMexico.codigoPostal = "";
 
                 //domicilio extranjero
-                root.domicilioExtranjero.calle = $("#domEmpExtranjero input[name='calle']").val();
+                root.domicilioExtranjero.calle = $("#domEmpExtranjero input[name='calle']").val().toUpperCase();
                 root.domicilioExtranjero.numeroExterior = $("#domEmpExtranjero input[name='numeroExterior']").val();
                 root.domicilioExtranjero.numeroInterior = $("#domEmpExtranjero input[name='numeroInterior']").val();
-                root.domicilioExtranjero.ciudadLocalidad = $("#domEmpExtranjero input[name='ciudadLocalidad']").val();
-                root.domicilioExtranjero.estadoProvincia = $("#domEmpExtranjero input[name='estadoProvincia']").val();
+                root.domicilioExtranjero.ciudadLocalidad = $("#domEmpExtranjero input[name='ciudadLocalidad']").val().toUpperCase();
+                root.domicilioExtranjero.estadoProvincia = $("#domEmpExtranjero input[name='estadoProvincia']").val().toUpperCase();
                 root.domicilioExtranjero.pais = $("#domEmpExtranjero select[name='pais'] option:selected").val();
                 root.domicilioExtranjero.codigoPostal = $("#domEmpExtranjero input[name='codigoPostal']").val();
             }                                            

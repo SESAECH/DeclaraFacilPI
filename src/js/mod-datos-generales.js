@@ -109,12 +109,12 @@ window.guardarFormDatosGenerales = function guardarFormDatosGenerales(seccionNo,
         // in the "action" attribute of the form when valid
         submitHandler: function(form, btn) {
             var root = jsonResult.declaracion.situacionPatrimonial.datosGenerales;
-            root.nombre =           $("#formDatosGenerales input[name='nombre']").val();
-            root.primerApellido =   $("#formDatosGenerales input[name='primerApellido']").val();
-            root.segundoApellido =  $("#formDatosGenerales input[name='segundoApellido']").val();
-            root.curp =             $("#formDatosGenerales input[name='curp']").val();
-            root.rfc.rfc =          $("#formDatosGenerales input[name='rfc']").val();
-            root.rfc.homoClave =    $("#formDatosGenerales input[name='homoClave']").val();
+            root.nombre =           $("#formDatosGenerales input[name='nombre']").val().toUpperCase();
+            root.primerApellido =   $("#formDatosGenerales input[name='primerApellido']").val().toUpperCase();
+            root.segundoApellido =  $("#formDatosGenerales input[name='segundoApellido']").val().toUpperCase();
+            root.curp =             $("#formDatosGenerales input[name='curp']").val().toUpperCase();
+            root.rfc.rfc =          $("#formDatosGenerales input[name='rfc']").val().toUpperCase();
+            root.rfc.homoClave =    $("#formDatosGenerales input[name='homoClave']").val().toUpperCase();
             root.correoElectronico.institucional =  $("#formDatosGenerales input[name='institucional']").val();
             root.correoElectronico.personal =       $("#formDatosGenerales input[name='personal']").val();
             root.telefono.casa =                    $("#formDatosGenerales input[name='casa']").val();

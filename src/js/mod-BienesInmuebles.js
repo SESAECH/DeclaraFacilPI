@@ -257,7 +257,7 @@ window.funcionalidadGuardarRegistroBienesInmuebles = function funcionalidadGuard
             tercerosTemp[uuid]={
                 "uuid":                 uuid,
                 "tipoPersona":          $(form + ".content_terceros_nuevo select[name='tipoPersona'] option:selected").val(),
-                "nombreRazonSocial":    $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val(),
+                "nombreRazonSocial":    $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val().toUpperCase(),
                 "rfc":                  $(form + ".content_terceros_nuevo input[name='rfc']").val(),
             };
             $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val("");
@@ -274,8 +274,8 @@ window.funcionalidadGuardarRegistroBienesInmuebles = function funcionalidadGuard
             transmisoresTemp[uuid]={
                 "uuid":                 uuid,
                 "tipoPersona":          $(form + ".content_transmisor_nuevo select[name='transmisor_tipoPersona'] option:selected").val(),
-                "nombreRazonSocial":    $(form + ".content_transmisor_nuevo input[name='transmisor_nombreRazonSocial']").val(),
-                "rfc":                  $(form + ".content_transmisor_nuevo input[name='transmisor_rfc']").val(),
+                "nombreRazonSocial":    $(form + ".content_transmisor_nuevo input[name='transmisor_nombreRazonSocial']").val().toUpperCase(),
+                "rfc":                  $(form + ".content_transmisor_nuevo input[name='transmisor_rfc']").val().toUpperCase(),
                 "relacion": {
                     "clave": $(form + ".content_transmisor_nuevo select[name='transmisor_relacion'] option:selected").val(),
                     "valor": $(form + ".content_transmisor_nuevo input[name='transmisor_relacion_especifique']").val()
