@@ -12,6 +12,12 @@ jQuery.extend(jQuery.validator.messages, {
   min: jQuery.validator.format("Por favor, escribe un valor mayor o igual a {0}.")
 });
 
+$("#contentSelectTipoDeclaracion").removeClass("hide");
+$("input[type=text]").keyup(function () {  
+        $(this).val($(this).val().toUpperCase());  
+        console.log ('mayusculizado');
+    });
+
 //------------------------------------------------------------------------------------------//
 //varibles globales.
 //arreglo con valores de la captura del usuario.

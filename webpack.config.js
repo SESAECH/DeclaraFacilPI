@@ -6,7 +6,7 @@ const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 //const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const version= '_0.9.2';
+const version= '_0.9.9d';
 
 
 module.exports = {

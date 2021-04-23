@@ -15,7 +15,7 @@ window.formCV = '<form action="" id="formCV">\
     </div> \
     <div class="col-lg-8">\
         <div class="form-group">\
-            <label>NOMBRE</label>\
+            <label>NOMBRE DE LA INSTITUCI&Oacute;N EDUCATIVA</label>\
             <input type="text" name="nombre" class="form-control" required>\
         </div>\
     </div>\
