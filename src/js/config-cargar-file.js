@@ -1,6 +1,6 @@
 window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
     try {
-        let avanceCaptura = JSON.parse(data);
+        let avanceCaptura = JSON.parse(atob(data));
         jsonResult.captura = avanceCaptura.captura;
         jsonResult.declaracion ={};
         $("input[name='nameContralor']").val(jsonResult.captura.contralor);

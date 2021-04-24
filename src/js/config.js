@@ -1,6 +1,7 @@
+
 //configuración de sistema.
 document.title = "DeclaraFácil | Gobierno del Estado de Chiapas";
-$(".sistemaTitulo").html("Versión Portable | <small>1.0.0</small>");
+$(".sistemaTitulo").html("Versión Portable | <small>" + VERSION + "</small>");
 $(".sistemaPiePagina1").text("Secretaría Ejecutiva del Sistema Anticorrupción del Estado de Chiapas");
 
 $("#sidebarMenu").addClass("hide");
@@ -52,10 +53,16 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
     jsonResult.captura.status_gral = "EN_PROCESO";
 
     if (jsonResult.captura.tipo_declaracion =="INTERESES"){
-      var obj = {a: 3, b: 5, c: 3, d: 4, e: 5 };
+      [2,3,4,5,6,7,8,9,10,11,12,13,14,15].forEach(e => delete delete jsonResult.captura.declaracion.situacionPatrimonial.secciones[e]);
 
-      [3,5,6,7,8,9,10,11,12,13,14,15].forEach(e => delete delete jsonResult.captura.declaracion.situacionPatrimonial.secciones[e]);
-
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"] = {};
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].no = 2;
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].titulo       = "Datos del empleo, cargo o comisión";
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].moduloName   = "moduloEmpleoCargoComision";
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].status       = "SIN_INFO";
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].apartado     = "situacionPatrimonial"; 
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].seccion      = "datosEmpleoCargoComision"; 
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].help         = "Deberá reportar el empleo, cargo o comisión actual.";
         delete jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante;
         delete jsonResult.declaracion.situacionPatrimonial.experienciaLaboral;
         delete jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
@@ -826,7 +833,7 @@ window.declaraciones={
               "status": "SIN_INFO",
               "apartado": "situacionPatrimonial",
               "seccion": "inversiones",
-              "help": "El Declarante reportara toda la información relacionada con sus inversiones, cuentas bancarias o algún otro tipo de valor que forme parte de sus activos."
+              "help": "El Declarante reporta toda la información relacionada con las inversiones, cuentas bancarias o algún otro tipo de valor del declarante, pareja y/o dependientes econ&oacute;micos."
             },
             "14": {
               "no": 14,
@@ -936,7 +943,7 @@ window.declaraciones={
                 "status": "SIN_INFO",
                 "apartado": "situacionPatrimonial",
                 "seccion": "datosGenerales",
-                "help": "ayuda de moduloDatosGenerales"
+                "help": ""
               },
               "2": {
                 "no": 2,

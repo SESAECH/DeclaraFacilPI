@@ -4,6 +4,7 @@ $("#btnGuardarAvance").on('click',function() {
     jsonResult.captura.contralor=$("input[name='nameContralor']").val();    
     let text = JSON.stringify(jsonResult);
     let filename = jsonResult.declaracion.situacionPatrimonial.datosGenerales.curp + "_" + jsonResult.captura.tipo_declaracion + "_" + fecha.getFullYear() + ".dec";
+    text = btoa(text);
     download(filename, text);
 
     swal.fire({

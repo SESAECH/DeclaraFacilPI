@@ -6,7 +6,8 @@ const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 //const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const version= '_0.9.9d';
+var PACKAGE = require('./package.json');
+//const version= '_0.9.9f';
 
 
 module.exports = {
@@ -33,9 +34,10 @@ module.exports = {
   },
   //devtool:'inline-source-map',
   plugins:[ 
+    new webpack.DefinePlugin({ VERSION: JSON.stringify(PACKAGE.version),}),
     new webpack.ProvidePlugin({ $: "jquery", jQuery: 'jquery','window.jQuery': 'jquery'}),
     new webpack.optimize.LimitChunkCountPlugin({maxChunks:1,}),
-    new HtmlWebpackPlugin({inject:'body',template:'./src/declaraFacilPI.html', filename:'DeclaraFacilPI'+version+'.html'}),
+    new HtmlWebpackPlugin({inject:'body',template:'./src/declaraFacilPI.html', filename:'DeclaraFacilPI'+PACKAGE.version+'.html'}),
     //new MiniCssExtractPlugin(),
     //new BundleAnalyzerPlugin(),
     new InlineChunkHtmlPlugin(HtmlWebpackPlugin,[/bundle/])

@@ -1,5 +1,7 @@
 console.log ("Iniciando Carga del Sistema....");
-console.log ("Declarafacil PI v.0.9.1a")
+//PACKAGE=require('../../package.json');
+window.version = VERSION;
+console.log ('Declarafacil PI v' + VERSION );
 /*
  global require ('catalogos-muns.js');
  global require ('catalogos.js');
