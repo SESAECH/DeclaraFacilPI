@@ -102,6 +102,14 @@ function gerarPdfDecSimplificada(){
         doc.autoTable({ html: '#pdfMiDeclaracion_desempenoServidorPublico', columnStyles: { 0: {cellWidth: 158}, 1: {cellWidth: 30 } }, margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });
     }
 
+    //FISCAL TITULO
+    finalY = doc.lastAutoTable.finalY;
+    doc.autoTable({ html: '#pdfMiDeclaracion_fiscal_titulo', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });
+       
+    //CONSTANCIA FISCAL
+    finalY = doc.lastAutoTable.finalY;
+    doc.autoTable({ html: '#pdfMiDeclaracion_constanciaFiscal', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });    
+     
     headeFooter(doc);
     descargar(doc);        
 }
@@ -248,7 +256,15 @@ function gerarPdfDecCompleta(){
     //FIDEICOMISOS
     finalY = doc.lastAutoTable.finalY;
     doc.autoTable({ html: '#pdfMiDeclaracion_fideicomisos', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });    
-    
+
+    //FISCAL TITULO
+    finalY = doc.lastAutoTable.finalY;
+    doc.autoTable({ html: '#pdfMiDeclaracion_fiscal_titulo', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });
+       
+    //CONSTANCIA FISCAL
+    finalY = doc.lastAutoTable.finalY;
+    doc.autoTable({ html: '#pdfMiDeclaracion_constanciaFiscal', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });    
+     
     headeFooter(doc);
     descargar(doc);
 }
@@ -405,6 +421,7 @@ function llenarPDF(){
         tblClientes();
         tblBeneficios();
         tblFideicomisos();
+        tblConstanciaFiscal();
     }
     else{
         if(jsonResult.captura.formato =="SIMPLIFICADA"){
@@ -415,6 +432,7 @@ function llenarPDF(){
             tblCV();
             tblIngresos("6. INGRESOS NETOS DEL DECLARANTE, PAREJA Y/O DEPENDIENTES ECONÓMICOS");
             if (jsonResult.captura.tipo_declaracion !="MODIFICACION"){tblDesempenoServidorPublico("7. ¿TE DESEMPEÑASTE COMO SERVIDOR PÚBLICO EL AÑO INMEDIATO ANTERIOR?");}        
+            tblConstanciaFiscal();
         }
         else{
             if (jsonResult.captura.tipo_declaracion =="MODIFICACION"){
@@ -441,6 +459,7 @@ function llenarPDF(){
                 tblClientes();
                 tblBeneficios();
                 tblFideicomisos();
+                tblConstanciaFiscal();
             }
             else{
                 tblDatosGenerales();
@@ -467,6 +486,7 @@ function llenarPDF(){
                 tblClientes();
                 tblBeneficios();
                 tblFideicomisos();
+                tblConstanciaFiscal();
             }    
         } 
     }    
@@ -2377,6 +2397,23 @@ function tblFideicomisos(){
     $("#pdfMiDeclaracion_fideicomisos>tbody").empty().append(html);
 }
 
+function tblConstanciaFiscal(){
+    let html="";
+    html ='<tr><td colspan="3" style="color: #621132; border-bottom:1px solid #621132; font-size:14px;">DECLARACIÓN FISCAL</td></tr>';
+    $("#pdfMiDeclaracion_fiscal_titulo>tbody").empty().append(html);    
+    html ='<tr><td colspan="3" style="background-color: #621132; color: #fff; font-size:14px;">1. CONSTANCIA DE DECLARACIÓN FISCAL</td></tr>';
+    if(jsonResult.declaracion.fiscal.constanciaFiscal.constancia){
+        html +='<tr><td colspan="3">SI PRESENTÓ DECLARACIÓN FISCAL.</td></tr>';
+    }
+    else{
+        html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>';
+    }
+    html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+            <tr>\
+                <td colspan="3">' + jsonResult.declaracion.fiscal.constanciaFiscal.aclaracionesObservaciones + '</td>\
+            </tr>';
+    $("#pdfMiDeclaracion_constanciaFiscal>tbody").empty().append(html);
+}
 
 function getDateTime(){
     var today = new Date();

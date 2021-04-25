@@ -33,7 +33,119 @@ $("input[type=text]").keyup(function () {
 //button seleccionar tipo de declaración
 $('.btnSelectTipoDeclaracion').on('click',function() {
     jsonResult.captura.tipo_declaracion = this.dataset.tipo;
-    if (jsonResult.captura.tipo_declaracion =="INTERESES"){ $(".btnSimplificada").addClass("hide");}
+    if (jsonResult.captura.tipo_declaracion =="INTERESES"){ 
+      //$(".btnSimplificada").addClass("hide");
+      let htmlSecciones = "";
+
+      $("#sidebarMenu").removeClass("hide");
+      $("#contentMain").removeClass("col-12").addClass("col-md-9 col-lg-9");
+  
+      jsonResult.captura.formato = "COMPLETA";
+      jsonResult.captura.declaracion =  declaraciones[jsonResult.captura.formato.toLowerCase()];    
+      jsonResult.captura.status_gral = "EN_PROCESO";
+
+      [2,3,4,5,6,7,8,9,10,11,12,13,14,15].forEach(e => delete delete jsonResult.captura.declaracion.situacionPatrimonial.secciones[e]);
+
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"] = {};
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].no = 2;
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].titulo       = "Datos del empleo, cargo o comisión";
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].moduloName   = "moduloEmpleoCargoComision";
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].status       = "SIN_INFO";
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].apartado     = "situacionPatrimonial"; 
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].seccion      = "datosEmpleoCargoComision"; 
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].help         = "";
+
+      delete jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante;
+      delete jsonResult.declaracion.situacionPatrimonial.experienciaLaboral;
+      delete jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
+      delete jsonResult.declaracion.situacionPatrimonial.ingresos;
+
+      delete jsonResult.declaracion.situacionPatrimonial.vehiculos;
+      delete jsonResult.declaracion.situacionPatrimonial.prestamoOComodato;
+      delete jsonResult.declaracion.situacionPatrimonial.inversiones;
+      delete jsonResult.declaracion.situacionPatrimonial.datosPareja;
+      delete jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico;
+      delete jsonResult.declaracion.situacionPatrimonial.bienesInmuebles;
+      delete jsonResult.declaracion.situacionPatrimonial.bienesMuebles;
+      delete jsonResult.declaracion.situacionPatrimonial.adeudos; 
+
+      //variables de apoyo en json.
+      jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio="MX";
+      jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.domicilio="MX";
+
+      //titulo del formulario de captura.
+      $(".titulo-declaracion-captura").text("DECLARACIÓN " + jsonResult.captura.tipo_declaracion + " | " + jsonResult.captura.formato);
+
+      //pintar secciones.
+      htmlSecciones+='<h6 class="text-muted p10">Situación Patrimonial</h6>';
+      $.each(jsonResult.captura.declaracion.situacionPatrimonial.secciones, function(index, item){
+          if(item.no !=9){
+            htmlSecciones+='<li class="nav-item">\
+                              <a class="nav-link lnk' + item.moduloName + '" href="javascript:void(0);" onclick="iniciarModulo(\'' + btoa(JSON.stringify(item)) + '\');">\
+                                  <span class="indicador">' + item.no + '</span>\
+                                  <span>' + item.titulo + '</span>\
+                                  <span class="indicador-status status-seccion-'+ item.apartado + '-' + item.no +' float-right">PENDIENTE</span>\
+                              </a>\
+                          </li>';  
+          }
+          else{
+            if (jsonResult.captura.formato =="COMPLETA"){
+              if (jsonResult.captura.tipo_declaracion=="MODIFICACION"){
+                htmlSecciones+='<li class="nav-item">\
+                                  <label class="nav-link lnk' + item.moduloName + '">\
+                                      <span class="indicador">' + item.no + '</span>\
+                                      <span>' + item.titulo + '</span>\
+                                      <span class="indicador-status-success float-right">NO APLICA</span>\
+                                  </label>\
+                              </li>';              
+              }
+              else{
+                htmlSecciones+='<li class="nav-item">\
+                                  <a class="nav-link lnk' + item.moduloName + '" href="javascript:void(0);" onclick="iniciarModulo(\'' + btoa(JSON.stringify(item)) + '\');">\
+                                      <span class="indicador">' + item.no + '</span>\
+                                      <span>' + item.titulo + '</span>\
+                                      <span class="indicador-status status-seccion-'+ item.apartado + '-' + item.no +' float-right">PENDIENTE</span>\
+                                  </a>\
+                              </li>';
+              }
+            }
+          }
+      });
+      if (Object.keys(jsonResult.captura.declaracion.interes.secciones).length > 0){
+          htmlSecciones+='<h6 class="text-muted p10">Intereses</h6>';
+          $.each(jsonResult.captura.declaracion.interes.secciones, function(index, item){
+              htmlSecciones+='<li class="nav-item">\
+                              <a class="nav-link lnk' + item.moduloName + '" href="javascript:void(0);" onclick="iniciarModulo(\'' + btoa(JSON.stringify(item)) + '\');">\
+                                  <span class="indicador">' + item.no + '</span>\
+                                  <span>' + item.titulo + '</span>\
+                                  <span class="indicador-status status-seccion-'+ item.apartado + '-' + item.no +' float-right">PENDIENTE</span>\
+                              </a>\
+                          </li>';
+          });
+      }
+      if (Object.keys(jsonResult.captura.declaracion.fiscal.secciones).length > 0){
+        htmlSecciones+='<h6 class="text-muted p10">Intereses</h6>';
+        $.each(jsonResult.captura.declaracion.fiscal.secciones, function(index, item){
+            htmlSecciones+='<li class="nav-item">\
+                            <a class="nav-link lnk' + item.moduloName + '" href="javascript:void(0);" onclick="iniciarModulo(\'' + btoa(JSON.stringify(item)) + '\');">\
+                                <span class="indicador">' + item.no + '</span>\
+                                <span>' + item.titulo + '</span>\
+                                <span class="indicador-status status-seccion-'+ item.apartado + '-' + item.no +' float-right">PENDIENTE</span>\
+                            </a>\
+                        </li>';
+        });
+      }
+
+      $("#menuSecciones").empty().append(htmlSecciones);  
+      //ocultar/mostrar controles base.
+      $("#contentSelectTipoDeclaracion").addClass("hide");
+      $("#contentHeaderDeclaracion").removeClass("hide");
+
+      $("#btnGuardarAvance").removeClass("hide");
+      $("#btnTerminarDeclaracion").removeClass("hide");
+      $("#modalIniciar").modal("show");
+      
+    }
     else{ $(".btnSimplificada").removeClass("hide");}
     $("#contentSelectFormatoDeclaracion").removeClass("hide");
 });
@@ -645,6 +757,18 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
                         </li>';
         });
     }
+    if (Object.keys(jsonResult.captura.declaracion.fiscal.secciones).length > 0){
+      htmlSecciones+='<h6 class="text-muted p10">Intereses</h6>';
+      $.each(jsonResult.captura.declaracion.fiscal.secciones, function(index, item){
+          htmlSecciones+='<li class="nav-item">\
+                          <a class="nav-link lnk' + item.moduloName + '" href="javascript:void(0);" onclick="iniciarModulo(\'' + btoa(JSON.stringify(item)) + '\');">\
+                              <span class="indicador">' + item.no + '</span>\
+                              <span>' + item.titulo + '</span>\
+                              <span class="indicador-status status-seccion-'+ item.apartado + '-' + item.no +' float-right">PENDIENTE</span>\
+                          </a>\
+                      </li>';
+      });
+    }
 
     $("#menuSecciones").empty().append(htmlSecciones);  
     //ocultar/mostrar controles base.
@@ -931,6 +1055,19 @@ window.declaraciones={
                       del consejo técnico. Deberá reportar hasta los últimos dos años. </br> Todos los datos de participación en fideicomisos de la pareja o dependientes económicos no serán públicos."
             }
           }
+        },
+        "fiscal":{
+          "secciones": {
+            "1": {
+              "no": 1,
+              "titulo": "Constancia de declaración fiscal",
+              "moduloName": "moduloConstanciaFiscal",
+              "status": "SIN_INFO",
+              "apartado": "fiscal",
+              "seccion": "constanciaFiscal",
+              "help": "El Declarante deberá indicar si presentó su declaración fiscal, en caso afirmativo deberá entregar copia del <b>Acuse</b> al Contralor Interno, junto con su declaración."
+            }
+          }
         }
     },
     "simplificada":{
@@ -1009,6 +1146,19 @@ window.declaraciones={
           },
         "interes":{
             "secciones":{}
+        },
+        "fiscal":{
+          "secciones": {
+            "1": {
+              "no": 1,
+              "titulo": "Constancia de declaración fiscal",
+              "moduloName": "moduloConstanciaFiscal",
+              "status": "SIN_INFO",
+              "apartado": "fiscal",
+              "seccion": "constanciaFiscal",
+              "help": "El Declarante deberá indicar si presentó su declaración fiscal, en caso afirmativo deberá entregar copia del <b>Acuse</b> al Contralor Interno, junto con su declaración."
+            }
+          }
         }
     }
 };

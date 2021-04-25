@@ -369,6 +369,12 @@ window.jsonResult = {
             "fideicomiso": {},
             "aclaracionesObservaciones": ""
           }
+        },
+        "fiscal":{
+          "constanciaFiscal": {
+            "constancia":false,
+            "aclaracionesObservaciones": ""
+          }
         }
       }
 };

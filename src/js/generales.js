@@ -750,3 +750,70 @@ window.validarDeclaracionTerminada = function validarDeclaracionTerminada(){
     if (terminado){ $("#btnTerminarDeclaracion").prop("disabled", false); }
     else{ $("#btnTerminarDeclaracion").prop("disabled", true); }
 }
+
+
+window.initConstanciaFiscal = function initConstanciaFiscal(data){
+    var seccion = JSON.parse(atob(data));
+    var seccionName = seccion.moduloName.replace("modulo","");
+    var form = "#form" + seccion.moduloName.replace("modulo", "")+ " ";
+    var modulo = "#" + seccion.moduloName + " ";
+
+    switch(seccion.status){
+        case "SIN_INFO":
+            //asginar valores predeterminados a catálogos(ayuda al usuario).
+            jsonResult.declaracion.fiscal.constanciaFiscal.constancia=true;
+            $(modulo + "#constanciaFiscalSI")[0].checked=true;
+            $(modulo + ".rdConstanciaFiscal").prop("disabled", false);
+            $(modulo + "textarea[name='aclaracionesObservaciones']").val("");
+            $(modulo + ".btnTerminar").removeClass("hide");
+            $(modulo + ".btnHabilitar").addClass("hide");       
+        break;
+        case "EN_PROCESO":
+            $(modulo + ".btnHabilitar").addClass("hide");
+            $(modulo + ".btnTerminar").removeClass("hide");
+            break;
+        case "TERMINADO":
+            if (jsonResult.declaracion.fiscal.constanciaFiscal.constancia){$(modulo + "#constanciaFiscalSI")[0].checked=true;}
+            else{ $(modulo + "#constanciaFiscalNO")[0].checked=true;}                       
+            $(modulo + "textarea[name='aclaracionesObservaciones']").val(jsonResult.declaracion.fiscal.constanciaFiscal.aclaracionesObservaciones).prop("disabled", true);
+            $(modulo + ".rdConstanciaFiscal").prop("disabled", true);
+            $(modulo + ".btnTerminar").addClass("hide");
+            $(modulo + ".btnHabilitar").removeClass("hide");
+        break;
+    }
+
+    $(modulo + ".btnTerminar").unbind("click");
+    $(modulo + ".btnHabilitar").unbind("click");
+
+    $(modulo + ".btnTerminar").on('click',function() {
+        jsonResult.declaracion.fiscal.constanciaFiscal.aclaracionesObservaciones =  $(modulo + "textarea[name='aclaracionesObservaciones']").val().toUpperCase();
+        jsonResult.declaracion.fiscal.constanciaFiscal.constancia = $(modulo + " input[type='radio'][name='rdConstanciaFiscal']:checked")[0].id == 'constanciaFiscalSI' ? true : false;
+        $(modulo + "textarea[name='aclaracionesObservaciones']").prop("disabled", true);
+        //inhabilitar controles del modulo.
+        $(modulo + ".rdConstanciaFiscal").prop("disabled", true);
+        $(modulo + ".btnTerminar").addClass("hide");
+        //cambiar status.
+        $(modulo + ".btnHabilitar").removeClass("hide");
+        jsonResult.captura.declaracion[seccion.apartado].secciones[seccion.no].status= "TERMINADO";
+        $(".status-seccion-" + seccion.apartado + "-" + seccion.no).removeClass("indicador-status indicador-status-process").addClass("indicador-status-success").text("TERMINADO");
+        mensajeSwal("Aviso","Sección terminada con exito.", "success");
+        validarDeclaracionTerminada();
+    });
+    
+    $(modulo + ".btnHabilitar").on("click",function() {
+        $(modulo + " input[type='radio'][name='rdConstanciaFiscal']").val(jsonResult.declaracion.fiscal.constanciaFiscal.constancia);
+        $(modulo + ".rdConstanciaFiscal").prop("disabled", false);
+        $(modulo + ".btnTerminar").removeClass("hide");
+        $(modulo + "textarea[name='aclaracionesObservaciones']").prop("disabled", false);
+        $(modulo + ".btnHabilitar").addClass("hide");
+
+        jsonResult.captura.declaracion[seccion.apartado].secciones[seccion.no].status= "EN_PROCESO";
+        $(".status-seccion-" + seccion.apartado + "-" + seccion.no).removeClass("indicador-status indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
+        validarDeclaracionTerminada();
+    });
+    
+    $(".content_seccion").addClass("hide");
+    $("#" + seccion.moduloName).removeClass("hide");
+    $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut");
+
+}
