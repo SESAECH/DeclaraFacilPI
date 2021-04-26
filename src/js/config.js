@@ -1,7 +1,7 @@
 
 //configuración de sistema.
 document.title = "DeclaraFácil | Gobierno del Estado de Chiapas";
-$(".sistemaTitulo").html('<table width="200"><tr><td colspan="2"><a href="javascript:void(0)" class="nav-link" id="BtnAvisoPrivacidad">Aviso de Privacidad </a></td> <tr> <td > <a href="javascript:void(0)" class="nav-link" id="BtnAcercade" >Acerca de... </a></td><td> | V ' + VERSION + '</td></tr>' );
+$(".sistemaTitulo").html('<div width="200" ><a style="color:white !important; padding: 0 !important;" href="javascript:void(0)" class="nav-link" id="BtnAvisoPrivacidad">Aviso de Privacidad </a> <a style="color:white !important; padding: 0 !important;" href="javascript:void(0)" class="nav-link" id="BtnAcercade" >Acerca de... | V ' + VERSION + ' &nbsp;</a> </div>' );
 
 $("#BtnAvisoPrivacidad"). on('click', function() {$("#modalAvisoPrivacidad").modal("show");})     
 
