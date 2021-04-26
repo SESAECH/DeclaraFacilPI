@@ -1,7 +1,12 @@
 
 //configuración de sistema.
 document.title = "DeclaraFácil | Gobierno del Estado de Chiapas";
-$(".sistemaTitulo").html("Versión Portable | <small>" + VERSION + "</small>");
+$(".sistemaTitulo").html('<table width="200"><tr><td colspan="2"><a href="javascript:void(0)" class="nav-link" id="BtnAvisoPrivacidad">Aviso de Privacidad </a></td> <tr> <td > <a href="javascript:void(0)" class="nav-link" id="BtnAcercade" >Acerca de... </a></td><td> | V ' + VERSION + '</td></tr>' );
+
+$("#BtnAvisoPrivacidad"). on('click', function() {$("#modalAvisoPrivacidad").modal("show");})     
+
+$("#BtnAcercade"). on('click', function() {$("#modalAcercade").modal("show");})   
+
 $(".sistemaPiePagina1").text("Secretaría Ejecutiva del Sistema Anticorrupción del Estado de Chiapas");
 
 $("#sidebarMenu").addClass("hide");
@@ -41,6 +46,7 @@ $('.btnSelectTipoDeclaracion').on('click',function() {
       $("#contentMain").removeClass("col-12").addClass("col-md-9 col-lg-9");
   
       jsonResult.captura.formato = "COMPLETA";
+      //jsonResult.captura.formato="";
       jsonResult.captura.declaracion =  declaraciones[jsonResult.captura.formato.toLowerCase()];    
       jsonResult.captura.status_gral = "EN_PROCESO";
 
@@ -53,7 +59,7 @@ $('.btnSelectTipoDeclaracion').on('click',function() {
       jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].status       = "SIN_INFO";
       jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].apartado     = "situacionPatrimonial"; 
       jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].seccion      = "datosEmpleoCargoComision"; 
-      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].help         = "";
+      jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].help         = "Deberá reportar el empleo, cargo o comisión actual.";
 
       delete jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante;
       delete jsonResult.declaracion.situacionPatrimonial.experienciaLaboral;
@@ -74,7 +80,7 @@ $('.btnSelectTipoDeclaracion').on('click',function() {
       jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.domicilio="MX";
 
       //titulo del formulario de captura.
-      $(".titulo-declaracion-captura").text("DECLARACIÓN " + jsonResult.captura.tipo_declaracion + " | " + jsonResult.captura.formato);
+      $(".titulo-declaracion-captura").text("DECLARACIÓN " + jsonResult.captura.tipo_declaracion );
 
       //pintar secciones.
       htmlSecciones+='<h6 class="text-muted p10">Situación Patrimonial</h6>';
@@ -124,7 +130,7 @@ $('.btnSelectTipoDeclaracion').on('click',function() {
           });
       }
       if (Object.keys(jsonResult.captura.declaracion.fiscal.secciones).length > 0){
-        htmlSecciones+='<h6 class="text-muted p10">Intereses</h6>';
+        htmlSecciones+='<h6 class="text-muted p10">Presentaci&oacute;n de Declaraci&oacute;n Fiscal</h6>';
         $.each(jsonResult.captura.declaracion.fiscal.secciones, function(index, item){
             htmlSecciones+='<li class="nav-item">\
                             <a class="nav-link lnk' + item.moduloName + '" href="javascript:void(0);" onclick="iniciarModulo(\'' + btoa(JSON.stringify(item)) + '\');">\
@@ -175,6 +181,7 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
       jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].apartado     = "situacionPatrimonial"; 
       jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].seccion      = "datosEmpleoCargoComision"; 
       jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].help         = "Deberá reportar el empleo, cargo o comisión actual.";
+     // jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].tipoOperacion = "SIN_CAMBIOS";
         delete jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante;
         delete jsonResult.declaracion.situacionPatrimonial.experienciaLaboral;
         delete jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
@@ -758,7 +765,7 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
         });
     }
     if (Object.keys(jsonResult.captura.declaracion.fiscal.secciones).length > 0){
-      htmlSecciones+='<h6 class="text-muted p10">Intereses</h6>';
+      htmlSecciones+='<h6 class="text-muted p10">Presentaci&oacute;n de Declaraci&oacute;n Fiscal</h6>';
       $.each(jsonResult.captura.declaracion.fiscal.secciones, function(index, item){
           htmlSecciones+='<li class="nav-item">\
                           <a class="nav-link lnk' + item.moduloName + '" href="javascript:void(0);" onclick="iniciarModulo(\'' + btoa(JSON.stringify(item)) + '\');">\
@@ -792,6 +799,11 @@ document.getElementById('inputfile')
             fr.readAsText(this.files[0]);
             this.value="";
         });
+
+window.cerrarModal = function cerrarModal(){
+  $("#modalAcercade").modal("hide");
+  $("#modalAvisoPrivacidad").modal("hide");
+}
 
 window.regresarAlInicio = function regresarAlInicio(){
 
@@ -834,7 +846,7 @@ window.declaraciones={
               "status": "SIN_INFO",
               "apartado": "situacionPatrimonial",
               "seccion": "datosGenerales",
-              "help": ""
+              "help": "Introduzca sus datos generales."
             },
             "2": {
               "no": 2,
@@ -843,7 +855,7 @@ window.declaraciones={
               "status": "SIN_INFO",
               "apartado": "situacionPatrimonial",
               "seccion": "domicilioDeclarante",
-              "help": "Proporcionar los datos relativos al lugar en el que reside actualmente, seleccionando si es en México o el extranjero"
+              "help": "Proporcionar los datos relativos al lugar en el que reside actualmente, seleccionando si es en México o el extranjero."
             },
             "3": {
               "no": 3,
@@ -888,10 +900,7 @@ window.declaraciones={
               "status": "SIN_INFO",
               "apartado": "situacionPatrimonial",
               "seccion": "datosDependienteEconomico",
-              "help": "Proporcionar los datos de los dependientes económicos, que son aquellas personas,\
-                      familiares o no, cuya manutención depende principalmente de los ingresos del Declarante.\
-                      Llenar toda la información por cada una de las personas que dependan económicamente\
-                      del Declarante."
+              "help": "Proporcionar los datos de los dependientes económicos, que son aquellas personas, familiares o no, cuya manutención depende principalmente de los ingresos del Declarante. Llenar toda la información por cada una de las personas que dependan económicamente del Declarante."
             },
             "8": {
               "no": 8,
@@ -900,13 +909,7 @@ window.declaraciones={
               "status": "SIN_INFO",
               "apartado": "situacionPatrimonial",
               "seccion": "ingresos",
-              "help": "Para la declaración de inicio los ingresos a reportar son mensuales.</br>\
-                      Para la declaración de modificación los ingresos a reportar son los del año inmediato\
-                      anterior. (del 1 de enero al 31 de diciembre del año inmediato anterior).</br>\
-                      Para la declaración de conclusión los ingresos a reportar son los que recibió durante el año\
-                      hasta la fecha de la conclusión del empleo, cargo o comisión.</br>\
-                      Es necesario capturar cantidades después de impuestos, sin comas, sin puntos, sin\
-                      centavos y sin ceros a la izquierda."
+              "help": "Para la declaración de inicio los ingresos a reportar son mensuales.</br> Para la declaración de modificación los ingresos a reportar son los del año inmediato anterior. (del 1 de enero al 31 de diciembre del año inmediato anterior).</br> Para la declaración de conclusión los ingresos a reportar son los que recibió durante el año hasta la fecha de la conclusión del empleo, cargo o comisión.</br> Es necesario capturar cantidades después de impuestos, sin comas, sin puntos, sin centavos y sin ceros a la izquierda."
             },
             "9": {
               "no": 9,
@@ -915,7 +918,7 @@ window.declaraciones={
               "status": "SIN_INFO",
               "apartado": "situacionPatrimonial",
               "seccion": "actividadAnualAnterior",
-              "help": ""
+              "help": "Capturar el período del año inmediato anterior durante el cual fue servidor p&uacute;blico."
             },
             "10": {
               "no": 10,
@@ -942,13 +945,7 @@ window.declaraciones={
               "status": "SIN_INFO",
               "apartado": "situacionPatrimonial",
               "seccion": "bienesMuebles",
-              "help": "Se refiere a la información que el Declarante reportará sobre bienes que conforme a la\
-                      normatividad aplicable se consideran muebles, que por su naturaleza de manera individual\
-                      o en conjunto representan una parte considerable del patrimonio del servidor público de\
-                      acuerdo con su situación socioeconómica y que para efectos de referencia el monto de su\
-                      valor comercial sea mayor a 1200 Unidades de Medida y Actualización (UMA) por lo que se\
-                      refiere al conjunto de menaje. En el caso de los demás bienes dicho valor será en lo\
-                      individual."
+              "help": "Se refiere a la información que el Declarante reportará sobre bienes que conforme a la normatividad aplicable se consideran muebles, que por su naturaleza de manera individual o en conjunto representan una parte considerable del patrimonio del servidor público de acuerdo con su situación socioeconómica y que para efectos de referencia el monto de su valor comercial sea mayor a 1200 Unidades de Medida y Actualización (UMA) por lo que se refiere al conjunto de menaje. En el caso de los demás bienes dicho valor será en lo individual."
             },
             "13": {
               "no": 13,
@@ -988,9 +985,7 @@ window.declaraciones={
               "status": "SIN_INFO",
               "apartado": "interes",
               "seccion": "participacion",
-              "help": "El Declarante deberá señalar si tiene o no participación en empresas, sociedades o\
-                      asociaciones, tales como socio, accionista, comisario, representante, apoderado,\
-                      colaborador, beneficiario u otro, especifique. Deberá reportar hasta los últimos dos años.</br>Todos los datos de la participación en empresas, sociedades o asociaciones de la pareja o dependientes económicos no serán públicos."
+              "help": "El Declarante deberá señalar si tiene o no participación en empresas, sociedades o asociaciones, tales como socio, accionista, comisario, representante, apoderado, colaborador, beneficiario u otro, especifique. Deberá reportar hasta los últimos dos años.</br>Todos los datos de la participación en empresas, sociedades o asociaciones de la pareja o dependientes económicos no serán públicos."
             },
             "2": {
               "no": 2,
@@ -999,8 +994,7 @@ window.declaraciones={
               "status": "SIN_INFO",
               "apartado": "interes",
               "seccion": "participacionTomaDecisiones",
-              "help": "Refiere a la condición de pertenencia formal del Declarante a alguna institución y que\
-                      cuente con poder de decisión en ella. Deberá reportar hasta los últimos dos años.</br>Todos los datos de la participación en alguna de estas instituciones de la pareja o dependientes económicos no serán públicos."
+              "help": "Refiere a la condición de pertenencia formal del Declarante a alguna institución y que cuente con poder de decisión en ella. Deberá reportar hasta los últimos dos años.</br>Todos los datos de la participación en alguna de estas instituciones de la pareja o dependientes económicos no serán públicos."
             },
             "3": {
               "no": 3,
@@ -1009,10 +1003,7 @@ window.declaraciones={
               "status": "SIN_INFO",
               "apartado": "interes",
               "seccion": "apoyos",
-              "help": "Es la contribución monetaria o en especie que otorga un Ente Público al Declarante,\
-                      cónyuge o Pareja y/o dependiente económico. El apoyo en especie refiere a cualquier\
-                      contribución, utilizando bienes, servicios o beneficios de naturaleza diferente al dinero.\
-                      Deberá reportar hasta los últimos dos años."
+              "help": "Es la contribución monetaria o en especie que otorga un Ente Público al Declarante, cónyuge o Pareja y/o dependiente económico. El apoyo en especie refiere a cualquier contribución, utilizando bienes, servicios o beneficios de naturaleza diferente al dinero. Deberá reportar hasta los últimos dos años."
             },
             "4": {
               "no": 4,
@@ -1021,9 +1012,7 @@ window.declaraciones={
               "status": "SIN_INFO",
               "apartado": "interes",
               "seccion": "representacion",
-              "help": "Es cuando el Declarante actúa a nombre de otra persona física o moral (representante)\
-                      o cuando una persona actúa a nombre del Declarante (representado). Deberá reportar\
-                      hasta los últimos dos años.</br>Todos los datos de representación de la pareja o dependientes económicos no serán públicos."
+              "help": "Es cuando el Declarante actúa a nombre de otra persona física o moral (representante) o cuando una persona actúa a nombre del Declarante (representado). Deberá reportar hasta los últimos dos años.</br>Todos los datos de representación de la pareja o dependientes económicos no serán públicos."
             },
             "5": {
               "no": 5,
@@ -1050,9 +1039,7 @@ window.declaraciones={
               "status": "SIN_INFO",
               "apartado": "interes",
               "seccion": "fideicomisos",
-              "help": "Este apartado solo lo llenaran las personas servidoras públicas que tengan participación en\
-                      un fideicomiso, ya sea en el carácter de fideicomitente, fiduciario, fideicomisario o dentro\
-                      del consejo técnico. Deberá reportar hasta los últimos dos años. </br> Todos los datos de participación en fideicomisos de la pareja o dependientes económicos no serán públicos."
+              "help": "Este apartado solo lo llenaran las personas servidoras públicas que tengan participación en un fideicomiso, ya sea en el carácter de fideicomitente, fiduciario, fideicomisario o dentro del consejo técnico. Deberá reportar hasta los últimos dos años. </br> Todos los datos de participación en fideicomisos de la pareja o dependientes económicos no serán públicos."
             }
           }
         },
@@ -1080,7 +1067,7 @@ window.declaraciones={
                 "status": "SIN_INFO",
                 "apartado": "situacionPatrimonial",
                 "seccion": "datosGenerales",
-                "help": ""
+                "help": "Introduzca sus datos generales."
               },
               "2": {
                 "no": 2,
@@ -1089,7 +1076,7 @@ window.declaraciones={
                 "status": "SIN_INFO",
                 "apartado": "situacionPatrimonial",
                 "seccion": "domicilioDeclarante",
-                "help": "Proporcionar los datos relativos al lugar en el que reside actualmente, seleccionando si es en México o el extranjero"
+                "help": "Proporcionar los datos relativos al lugar en el que reside actualmente, seleccionando si es en México o el extranjero."
               },
               "3": {
                 "no": 3,
@@ -1140,7 +1127,7 @@ window.declaraciones={
                 "status": "SIN_INFO",
                 "apartado": "situacionPatrimonial",
                 "seccion": "actividadAnualAnterior",
-                "help": ""
+                "help": "Capturar el período del año inmediato anterior durante el cual fue servidor p&uacute;blico."
               }
             }
           },

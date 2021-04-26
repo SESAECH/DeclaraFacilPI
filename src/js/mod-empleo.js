@@ -16,8 +16,11 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
     $(form + ".CBOentidadFederativa").on('change', function() {
         loadMunicipios(form + ".CBOmunicipioAlcaldia", this.value);
     });
-    if(jsonResult.captura.tipo_declaracion == "INICIAL"){
-        $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
+        if(jsonResult.captura.tipo_declaracion == "INICIAL"){
+            $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
+        }
+        if(jsonResult.captura.tipo_declaracion == "INTERESES"){
+        $(form + "select[name='tipoOperacion']").val("SIN_CAMBIOS").prop("disabled", true);
     }
     $(form + '.rdDomicilio').click(function(){
         if(this.id =="domicilioEmpMX"){
