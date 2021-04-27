@@ -6,7 +6,7 @@ $(document).ready(function() {
 });
 
 //configuración de sistema.
-document.title = "DeclaraFácil | Gobierno del Estado de Chiapas";
+document.title = "DeclaraFácil PI v"+VERSION+"  | SESAECH";
 $(".sistemaTitulo").html('<div width="200" ><a href="#" class="nav-link p-0 text-white" id="BtnAvisoPrivacidad">Aviso de Privacidad </a> <a href="#" class="nav-link p-0 text-white" id="BtnAcercade" >Acerca de... | V ' + VERSION + ' &nbsp;</a> </div>' );
 
 $("#BtnAvisoPrivacidad"). on('click', function() {$("#modalAvisoPrivacidad").modal("show");})     
@@ -57,6 +57,8 @@ $('.btnSelectTipoDeclaracion').on('click',function() {
       jsonResult.captura.status_gral = "EN_PROCESO";
 
       [2,3,4,5,6,7,8,9,10,11,12,13,14,15].forEach(e => delete delete jsonResult.captura.declaracion.situacionPatrimonial.secciones[e]);
+      delete jsonResult.captura.declaracion.fiscal;
+
 
       jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"] = {};
       jsonResult.captura.declaracion.situacionPatrimonial.secciones["2"].no = 2;
@@ -80,6 +82,8 @@ $('.btnSelectTipoDeclaracion').on('click',function() {
       delete jsonResult.declaracion.situacionPatrimonial.bienesInmuebles;
       delete jsonResult.declaracion.situacionPatrimonial.bienesMuebles;
       delete jsonResult.declaracion.situacionPatrimonial.adeudos; 
+
+      delete jsonResult.declaracion.fiscal;
 
       //variables de apoyo en json.
       jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio="MX";
@@ -134,7 +138,7 @@ $('.btnSelectTipoDeclaracion').on('click',function() {
                               </a>\
                           </li>';
           });
-      }
+      }/*
       if (Object.keys(jsonResult.captura.declaracion.fiscal.secciones).length > 0){
         htmlSecciones+='<h6 class="text-muted p10">Presentaci&oacute;n de Declaraci&oacute;n Fiscal</h6>';
         $.each(jsonResult.captura.declaracion.fiscal.secciones, function(index, item){
@@ -146,8 +150,9 @@ $('.btnSelectTipoDeclaracion').on('click',function() {
                             </a>\
                         </li>';
         });
-      }
+      }*/
 
+      
       $("#menuSecciones").empty().append(htmlSecciones);  
       //ocultar/mostrar controles base.
       $("#contentSelectTipoDeclaracion").addClass("hide");

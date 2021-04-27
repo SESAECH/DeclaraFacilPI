@@ -55,7 +55,7 @@ function gerarPdfDecSimplificada(){
     doc.line(15, 48, 200, 48);
 
     doc.setFontSize(8);
-    doc.text('C. ' + $("input[name='nameContralor']").val() + ', BAJO PROTESTA DE DECIR VERDAD, PRESENTO A USTED MI DECLARACIÓN DE SITUACIÓN PATRIMONIAL Y DE INTERESES, CONFORME A LO DISPUESTO EN LA LEY GENERAL DE RESPONSABILIDADES ADMINISTRATIVAS, LA LEY GENERAL DEL SISTEMA NACIONAL ANTICORRUPCIÓN Y LA NORMATIVIDAD APLICABLE.', 15, 60, {maxWidth: 180, align: "justify"})
+    doc.text('C. ' + $("input[name='nameContralor']").val().toUpperCase() + ', BAJO PROTESTA DE DECIR VERDAD, PRESENTO A USTED MI DECLARACIÓN DE SITUACIÓN PATRIMONIAL Y DE INTERESES, CONFORME A LO DISPUESTO EN LA LEY GENERAL DE RESPONSABILIDADES ADMINISTRATIVAS, LA LEY GENERAL DEL SISTEMA NACIONAL ANTICORRUPCIÓN Y LA NORMATIVIDAD APLICABLE.', 15, 60, {maxWidth: 180, align: "justify"})
     
     //DATOS GENERALES
     doc.autoTable({ html: '#pdfTitulo1', margin: { top: 25, bottom:0 }, styles: { fontSize: 12 },  startY: 80, useCss: true });  
@@ -120,7 +120,7 @@ function gerarPdfDecCompleta(){
         title: 'Declaracion Patrimonial y de Intereses',
         subject: 'This is the subject',
         author: 'Gobierno del Estado de Chiapas ',
-        keywords: 'declaración, patrimonial, ',
+        keywords: 'declaración, patrimonial, intereses ',
         creator: 'DeclaraFácil PI'
     });
 
@@ -144,7 +144,7 @@ function gerarPdfDecCompleta(){
     doc.line(15, 48, 200, 48);
 
     doc.setFontSize(8);
-    doc.text('C. ' + $("input[name='nameContralor']").val() + ', BAJO PROTESTA DE DECIR VERDAD, PRESENTO A USTED MI DECLARACIÓN DE SITUACIÓN PATRIMONIAL Y DE INTERESES, CONFORME A LO DISPUESTO EN LA LEY GENERAL DE RESPONSABILIDADES ADMINISTRATIVAS, LA LEY GENERAL DEL SISTEMA NACIONAL ANTICORRUPCIÓN Y LA NORMATIVIDAD APLICABLE.', 15, 60, {maxWidth: 180, align: "justify"})
+    doc.text('C. ' + $("input[name='nameContralor']").val().toUpperCase() + ', BAJO PROTESTA DE DECIR VERDAD, PRESENTO A USTED MI DECLARACIÓN DE SITUACIÓN PATRIMONIAL Y DE INTERESES, CONFORME A LO DISPUESTO EN LA LEY GENERAL DE RESPONSABILIDADES ADMINISTRATIVAS, LA LEY GENERAL DEL SISTEMA NACIONAL ANTICORRUPCIÓN Y LA NORMATIVIDAD APLICABLE.', 15, 60, {maxWidth: 180, align: "justify"})
     
     //DATOS GENERALES
     doc.autoTable({ html: '#pdfTitulo1', margin: { top: 25, bottom:0 }, styles: { fontSize: 12 },  startY: 80, useCss: true });  
@@ -272,10 +272,10 @@ function gerarPdfDecCompleta(){
 function gerarPdfDecCompletaINTERESES(){
     var doc = new jspdf();//'p', 'pt', 'letter');
     doc.setProperties({
-        title: 'Declaracion Patrimonial y de Intereses',
+        title: 'Declaracion de Intereses',
         subject: 'This is the subject',
         author: 'Gobierno del Estado de Chiapas ',
-        keywords: 'declaración, patrimonial, ',
+        keywords: 'declaración, patrimonial, intereses, ',
         creator: 'DeclaraFácil PI'
     });
 
@@ -299,24 +299,13 @@ function gerarPdfDecCompletaINTERESES(){
     doc.line(15, 48, 200, 48);
 
     doc.setFontSize(8);
-    doc.text('C. ' + $("input[name='nameContralor']").val() + ', BAJO PROTESTA DE DECIR VERDAD, PRESENTO A USTED MI DECLARACIÓN DE SITUACIÓN PATRIMONIAL Y DE INTERESES, CONFORME A LO DISPUESTO EN LA LEY GENERAL DE RESPONSABILIDADES ADMINISTRATIVAS, LA LEY GENERAL DEL SISTEMA NACIONAL ANTICORRUPCIÓN Y LA NORMATIVIDAD APLICABLE.', 15, 60, {maxWidth: 180, align: "justify"})
+    doc.text('C. ' + $("input[name='nameContralor']").val().toUpperCase() + ', BAJO PROTESTA DE DECIR VERDAD, PRESENTO A USTED MI DECLARACIÓN DE SITUACIÓN PATRIMONIAL Y DE INTERESES, CONFORME A LO DISPUESTO EN LA LEY GENERAL DE RESPONSABILIDADES ADMINISTRATIVAS, LA LEY GENERAL DEL SISTEMA NACIONAL ANTICORRUPCIÓN Y LA NORMATIVIDAD APLICABLE.', 15, 60, {maxWidth: 180, align: "justify"})
     
     //DATOS GENERALES
     doc.autoTable({ html: '#pdfTitulo1', margin: { top: 25, bottom:0 }, styles: { fontSize: 12 },  startY: 80, useCss: true });  
     finalY = doc.lastAutoTable.finalY;
     doc.autoTable({ html: '#pdfMiDeclaracion_datosGenerales', margin: { top: 0, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 1, useCss: true });    
     
-    //DOMICILIO DECLARANTE
-    finalY = doc.lastAutoTable.finalY;
-    doc.autoTable({ html: '#pdfTitulo2', margin: { top: 25, bottom:0 }, styles: { fontSize: 12 }, startY: finalY + 10, useCss: true });  
-    finalY = doc.lastAutoTable.finalY;
-    if(jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio =="MX"){
-        doc.autoTable({ html: '#pdfMiDeclaracion_domicilioDeclarante', margin: { top: 0, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 1, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; } });
-    }
-    else{
-        doc.autoTable({ html: '#pdfMiDeclaracion_domicilioDeclaranteEXT', margin: { top: 0, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 1, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; } });
-    }
-
     //DATOS DEL EMPLEO, CARGO O COMISION.
     finalY = doc.lastAutoTable.finalY;
     doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComision', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });   
@@ -412,7 +401,7 @@ function llenarPDF(){
     $(".pdfDec_entepub").text(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.nombreEntePublico);
     if (jsonResult.captura.tipo_declaracion =="INTERESES"){
         tblDatosGenerales();
-        tblDomicilio();
+       //tblDomicilio();
         tblEmpleo();
         /* intereses */
         tblInteresesTitulo();
@@ -423,7 +412,7 @@ function llenarPDF(){
         tblClientes();
         tblBeneficios();
         tblFideicomisos();
-        tblConstanciaFiscal();
+        //tblConstanciaFiscal();
     }
     else{
         if(jsonResult.captura.formato =="SIMPLIFICADA"){
@@ -736,7 +725,7 @@ function tblPareja(titulo){
         html+=" <td>CURP</td>";
         html+="</tr>";
         html+="<tr>";
-        html+=" <td>" + nodo.fechaNacimiento + "</td>";
+        html+=" <td>" + nodo.fechaNacimiento.split('-')[2] + '/' + nodo.fechaNacimiento.split('-')[1] + '/' +  nodo.fechaNacimiento.split('-')[0]+"</td>";
         html+=" <td>" + nodo.rfc + "</td>";
         html+=" <td>" + nodo.curp + "</td>";
         html+="</tr>";
@@ -849,7 +838,7 @@ function tblDependienteEco(titulo){
             html+=" <td>CURP</td>";
             html+="</tr>";
             html+="<tr>";
-            html+=" <td>" + nodo.fechaNacimiento + "</td>";
+            html+=" <td>" + nodo.fechaNacimiento.split('-')[2] + '/' + nodo.fechaNacimiento.split('-')[1] + '/' +  nodo.fechaNacimiento.split('-')[0]+ "</td>";
             html+=" <td>" + nodo.rfc + "</td>";
             html+=" <td>" + nodo.curp + "</td>";
             html+="</tr>";
