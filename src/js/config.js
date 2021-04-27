@@ -1,7 +1,13 @@
 
+$(document).ready(function() {
+    console.log( "ready! dom cargado..." );
+    $("#contentSelectTipoDeclaracion").removeClass("hide");  
+    window.onbeforeunload = function() { return "Si sale ahora, perderá la información capturada, ¿Realmente desea salir?"; }
+});
+
 //configuración de sistema.
 document.title = "DeclaraFácil | Gobierno del Estado de Chiapas";
-$(".sistemaTitulo").html('<div width="200" ><a style="color:white !important; padding: 0 !important;" href="javascript:void(0)" class="nav-link" id="BtnAvisoPrivacidad">Aviso de Privacidad </a> <a style="color:white !important; padding: 0 !important;" href="javascript:void(0)" class="nav-link" id="BtnAcercade" >Acerca de... | V ' + VERSION + ' &nbsp;</a> </div>' );
+$(".sistemaTitulo").html('<div width="200" ><a href="#" class="nav-link p-0 text-white" id="BtnAvisoPrivacidad">Aviso de Privacidad </a> <a href="#" class="nav-link p-0 text-white" id="BtnAcercade" >Acerca de... | V ' + VERSION + ' &nbsp;</a> </div>' );
 
 $("#BtnAvisoPrivacidad"). on('click', function() {$("#modalAvisoPrivacidad").modal("show");})     
 

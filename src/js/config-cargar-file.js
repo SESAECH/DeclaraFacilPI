@@ -24,9 +24,11 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
                     jsonResult.declaracion.situacionPatrimonial.experienciaLaboral = avanceCaptura.declaracion.situacionPatrimonial.experienciaLaboral;
                     jsonResult.captura.declaracion.situacionPatrimonial.secciones[1].status="TERMINADO";
                     jsonResult.captura.declaracion.situacionPatrimonial.secciones[2].status="TERMINADO";
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones[3].status="TERMINADO";
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones[4].status="TERMINADO";
-                    jsonResult.captura.declaracion.situacionPatrimonial.secciones[5].status="TERMINADO";
+                    if (jsonResult.captura.tipo_declaracion != "INTERESES") {
+                        jsonResult.captura.declaracion.situacionPatrimonial.secciones[3].status="TERMINADO";
+                        jsonResult.captura.declaracion.situacionPatrimonial.secciones[4].status="TERMINADO";
+                        jsonResult.captura.declaracion.situacionPatrimonial.secciones[5].status="TERMINADO";
+                        }
 
                     $("input[name='nameContralor']").val(jsonResult.captura.contralor);
                     Object.keys(avanceCaptura.captura.declaracion.situacionPatrimonial.secciones).forEach(function (index) {

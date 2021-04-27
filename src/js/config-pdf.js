@@ -2,7 +2,7 @@
 $("#btnTerminarDeclaracion").on('click',function() {
     if ($("input[name='nameContralor']").val().length<3){ mensajeSwal("Aviso","Ingrese el nombre del Contralor Interno.","error");}
     else{ 
-        jsonResult.captura.contralor=$("input[name='nameContralor']").val();
+        jsonResult.captura.contralor=$("input[name='nameContralor']").val().toUpperCase();
         generarPDF();
     }    
 });
@@ -392,7 +392,9 @@ function headeFooter(doc){
 function descargar(doc){
     let fecha = new Date();    
     //archivo .dec
+    jsonResult.captura.version=VERSION;   
     let text = JSON.stringify(jsonResult);
+    text = btoa(text);
     let filename = jsonResult.declaracion.situacionPatrimonial.datosGenerales.curp + "_" + jsonResult.captura.tipo_declaracion + "_" + fecha.getFullYear() + ".dec";                    
     download(filename, text);
 
