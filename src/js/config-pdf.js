@@ -310,13 +310,13 @@ function gerarPdfDecCompletaINTERESES(){
     finalY = doc.lastAutoTable.finalY;
     doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComision', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });   
     finalY = doc.lastAutoTable.finalY;
-    if(jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio =="MX"){
+   /* if(jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio =="MX"){
         doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComisionDOMMX', margin: { top: 0, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 1, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto'  });
     }
     else{
         doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT', margin: { top: 0, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 1, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto'  });
     }
-
+*/
     //INTERESES TITULO
     finalY = doc.lastAutoTable.finalY;
     doc.autoTable({ html: '#pdfMiDeclaracion_interes_titulo', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });
@@ -402,7 +402,7 @@ function llenarPDF(){
     if (jsonResult.captura.tipo_declaracion =="INTERESES"){
         tblDatosGenerales();
        //tblDomicilio();
-        tblEmpleo();
+        tblEmpleo("2. DATOS DEL EMPLEO, CARGO O COMISIÓN");
         /* intereses */
         tblInteresesTitulo();
         tblParticipacionEmpresas();
@@ -419,7 +419,7 @@ function llenarPDF(){
             tblDatosGenerales();
             tblDomicilio();
             tblDatosCurriculares();
-            tblEmpleo();
+            tblEmpleo("4. DATOS DEL EMPLEO, CARGO O COMISIÓN");
             tblCV();
             tblIngresos("6. INGRESOS NETOS DEL DECLARANTE, PAREJA Y/O DEPENDIENTES ECONÓMICOS");
             if (jsonResult.captura.tipo_declaracion !="MODIFICACION"){tblDesempenoServidorPublico("7. ¿TE DESEMPEÑASTE COMO SERVIDOR PÚBLICO EL AÑO INMEDIATO ANTERIOR?");}        
@@ -430,7 +430,7 @@ function llenarPDF(){
                 tblDatosGenerales();
                 tblDomicilio();
                 tblDatosCurriculares();
-                tblEmpleo();
+                tblEmpleo("4. DATOS DEL EMPLEO, CARGO O COMISIÓN");
                 tblCV();
                 tblPareja("6. DATOS DE LA PAREJA");
                 tblDependienteEco("7. DATOS DEL DEPENDIENTE ECONÓMICO");
@@ -456,7 +456,7 @@ function llenarPDF(){
                 tblDatosGenerales();
                 tblDomicilio();
                 tblDatosCurriculares();
-                tblEmpleo();
+                tblEmpleo("4. DATOS DEL EMPLEO, CARGO O COMISIÓN");
                 tblCV();
                 tblPareja("6. DATOS DE LA PAREJA");
                 tblDependienteEco("7. DATOS DEL DEPENDIENTE ECONÓMICO");
@@ -569,7 +569,10 @@ function tblDatosCurriculares(){
     $("#pdfMiDeclaracion_datosCurricularesDeclarante>tbody").empty().append(html);
 }
 
-function tblEmpleo(){
+function tblEmpleo(titulo){
+	$("#tituloTblEmpleo").text(titulo);
+
+
     //DATOS DEL EMPLEO, CARGO O COMISIÓN
     let nodo = jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision;
     honorarios = nodo.contratadoPorHonorarios == true ? "SI": "NO";
@@ -749,8 +752,8 @@ function tblPareja(titulo){
         if (nodo.lugarDondeReside=="MÉXICO"){
             html+='<tr style="background-color: #dee2e6;">\
                         <td style="width: 33%;">CALLE</td>\
-                        <td style="width: 33%;">NUMERO EXTERIOR</td>\
-                        <td style="width: 33%;">NUMERO INTERIOR</td>\
+                        <td style="width: 33%;">NÚMERO EXTERIOR</td>\
+                        <td style="width: 33%;">NÚMERO INTERIOR</td>\
                     </tr>\
                     <tr>\
                         <td class="calle">' + nodo.domicilioMexico.calle + '</td>\
@@ -768,7 +771,7 @@ function tblPareja(titulo){
                         <td class="entidadFederativa">' + nodo.domicilioMexico.entidadFederativa.valor + '</td>\
                     </tr>\
                     <tr style="background-color: #dee2e6;">\
-                        <td colspan="3">CODIGO POSTAL</td>\
+                        <td colspan="3">CÓDIGO POSTAL</td>\
                     </tr>\
                     <tr>\
                         <td class="codigoPostal" colspan="3" >' + nodo.domicilioMexico.codigoPostal + '</td>\
@@ -777,8 +780,8 @@ function tblPareja(titulo){
         else{
             html+='<tr style="background-color: #dee2e6;">\
                         <td style="width: 33%;">CALLE</td>\
-                        <td style="width: 33%;">NUMERO EXTERIOR</td>\
-                        <td style="width: 33%;">NUMERO INTERIOR</td>\
+                        <td style="width: 33%;">NÚMERO EXTERIOR</td>\
+                        <td style="width: 33%;">NÚMERO INTERIOR</td>\
                     </tr>\
                     <tr>\
                         <td class="calle">' + nodo.domicilioExtranjero.calle + '</td>\
@@ -857,8 +860,8 @@ function tblDependienteEco(titulo){
             if (nodo.lugarDondeReside=="MÉXICO"){
                 html+='<tr style="background-color: #dee2e6;">\
                             <td style="width: 33%;">CALLE</td>\
-                            <td style="width: 33%;">NUMERO EXTERIOR</td>\
-                            <td style="width: 33%;">NUMERO INTERIOR</td>\
+                            <td style="width: 33%;">NÚMERO EXTERIOR</td>\
+                            <td style="width: 33%;">NÚMERO INTERIOR</td>\
                         </tr>\
                         <tr>\
                             <td class="calle">' + nodo.domicilioMexico.calle + '</td>\
@@ -876,7 +879,7 @@ function tblDependienteEco(titulo){
                             <td class="entidadFederativa">' + nodo.domicilioMexico.entidadFederativa.valor + '</td>\
                         </tr>\
                         <tr style="background-color: #dee2e6;">\
-                            <td colspan="3">CODIGO POSTAL</td>\
+                            <td colspan="3">CÓDIGO POSTAL</td>\
                         </tr>\
                         <tr>\
                             <td class="codigoPostal" colspan="3" >' + nodo.domicilioMexico.codigoPostal + '</td>\
@@ -885,8 +888,8 @@ function tblDependienteEco(titulo){
             else if (nodo.lugarDondeReside=="EXTRANJERO"){
                 html+='<tr style="background-color: #dee2e6;">\
                             <td style="width: 33%;">CALLE</td>\
-                            <td style="width: 33%;">NUMERO EXTERIOR</td>\
-                            <td style="width: 33%;">NUMERO INTERIOR</td>\
+                            <td style="width: 33%;">NÚMERO EXTERIOR</td>\
+                            <td style="width: 33%;">NÚMERO INTERIOR</td>\
                         </tr>\
                         <tr>\
                             <td class="calle">' + nodo.domicilioExtranjero.calle + '</td>\
