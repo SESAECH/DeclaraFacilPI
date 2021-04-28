@@ -51,7 +51,7 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
             break;
         case "TERMINADO":
             $("#chkNingunoDesempenoServidorPublico").prop("disabled", true);
-            if (!jsonResult.declaracion[seccion.apartado][seccion.seccion].ninguno){
+            if (!jsonResult.declaracion[seccion.apartado][seccion.seccion].servidorPublicoAnioAnterior){
                 $("#chkNingunoDesempenoServidorPublico")[0].checked=true;
                 $("#chkNingunoDesempenoServidorPublico").trigger("change");
                 $(modulo + "textarea[name='aclaracionesObservaciones']").val(jsonResult.declaracion[seccion.apartado][seccion.seccion].aclaracionesObservaciones).prop("disabled", true);
@@ -746,6 +746,7 @@ window.sumaOtrosIngresos_aaa = function sumaOtrosIngresos_aaa(){
 }
 
 $("#formDesempenoServidorPublico input[name='remuneracionNetaCargoPublicoCantidad']").change(function() {
+    //console.log("change remuneracionNetaCargoPublicoCantidad");
     let form="#formDesempenoServidorPublico "; 
     let i = $(form + "input[name='remuneracionNetaCargoPublicoCantidad']").val();
     let ii = $(form + "input[name='otrosIngresosTotalCantidad']").val();
@@ -757,6 +758,7 @@ $("#formDesempenoServidorPublico input[name='remuneracionNetaCargoPublicoCantida
 });
 
 $("#formDesempenoServidorPublico input[name='ingresoNetoParejaDependienteCantidad']").change(function() { 
+    //console.log("change ingresoNetoParejaDependienteCantidad");
     let form="#formDesempenoServidorPublico ";
     let a = $(form + "input[name='ingresoNetoDeclaranteCantidad']").val();
     let b = $(form + "input[name='ingresoNetoParejaDependienteCantidad']").val();

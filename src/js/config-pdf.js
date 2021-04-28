@@ -1143,7 +1143,15 @@ function tblDesempenoServidorPublico(titulo){
     let nodo = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior
     let html="";
     html +='<tr><td colspan="2" style="background-color: #621132; color: #fff; font-size:14px;">' + titulo + '</td></tr>';
-    if(jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.ninguno){
+    if(jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.servidorPublicoAnioAnterior){
+    	html +='<tr>\
+                    <td style="background-color: #dee2e6;">FECHA DE INICIO</td>\
+                    <td style="background-color: #dee2e6;">FECHA DE CONCLUSIÓN</td>\
+                </tr>\
+                <tr>\
+                    <td style="text-align: center;">' + nodo.otrosIngresosTotal.fechaIngreso + '</td>\
+                    <td style="text-align: center;">' + nodo.otrosIngresosTotal.fechaConclusion + '</td>\
+                </tr>';
         html +='<tr>\
                     <td style="background-color: #dee2e6;">I.- REMUNERACIÓN NETA DEL DECLARANTE, RECIBIDA DURANTE EL TIEMPO EN EL QUE SE DESEMPEÑÓ COMO SERVIDOR PÚBLICO EN EL AÑO INMEDIATO ANTERIOR (POR CONCEPTO DE SUELDOS, HONORARIOS, COMPENSACIONES, BONOS, AGUINALDOS Y OTRAS PRESTACIONES) (CANTIDADES NETAS DESPUÉS DE IMPUESTOS)</td>\
                     <td style="text-align: right;">' + format(nodo.remuneracionNetaCargoPublico.valor) + " " + nodo.remuneracionNetaCargoPublico.moneda +'</td>\
