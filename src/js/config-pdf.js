@@ -1149,8 +1149,8 @@ function tblDesempenoServidorPublico(titulo){
                     <td style="background-color: #dee2e6;">FECHA DE CONCLUSIÓN</td>\
                 </tr>\
                 <tr>\
-                    <td style="text-align: center;">' + nodo.otrosIngresosTotal.fechaIngreso + '</td>\
-                    <td style="text-align: center;">' + nodo.otrosIngresosTotal.fechaConclusion + '</td>\
+                    <td style="text-align: center;">' + nodo.fechaIngreso + '</td>\
+                    <td style="text-align: center;">' + nodo.fechaConclusion + '</td>\
                 </tr>';
         html +='<tr>\
                     <td style="background-color: #dee2e6;">I.- REMUNERACIÓN NETA DEL DECLARANTE, RECIBIDA DURANTE EL TIEMPO EN EL QUE SE DESEMPEÑÓ COMO SERVIDOR PÚBLICO EN EL AÑO INMEDIATO ANTERIOR (POR CONCEPTO DE SUELDOS, HONORARIOS, COMPENSACIONES, BONOS, AGUINALDOS Y OTRAS PRESTACIONES) (CANTIDADES NETAS DESPUÉS DE IMPUESTOS)</td>\
