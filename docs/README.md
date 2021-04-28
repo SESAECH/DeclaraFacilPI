@@ -5,6 +5,8 @@ Repositorio del Sistema DeclaraFácil PI Portable
  
 <h3 class="text-center">Acerca de DeclaraFácil PI Portable.</h3></p>
 
+<h2><a href="https://github.com/SESAECH/DeclaraFacilPI/raw/main/docs/MANUAL-%20DECLARAFACIL%20PI%20portable.pdf" alt="Manual de Usuario"> MANUAL DE USUARIO </h2>
+</P>
 <strong>Objetivo</strong></p>
 El objetivo de la aplicación DeclaraFácil PI Portable es permitir a las personas servidoras públicas de los entes públicos la integración de la declaración patrimonial y de intereses para simplificar y agilizar la entrega de ésta al Titular de la Contraloría Interna, mediante una herramienta tecnológica de fácil uso, segura, amigable e intuitiva, con un mínimo de requerimientos técnicos mínimos necesarios y que no requiera conexión a internet.
 </p>
