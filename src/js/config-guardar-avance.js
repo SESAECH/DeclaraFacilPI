@@ -1,12 +1,19 @@
 //funcionalidad a controles de guardado.
 $("#btnGuardarAvance").on('click',function() {
     let fecha = new Date();
-    jsonResult.captura.contralor=$("input[name='nameContralor']").val().toUpperCase(); 
-    jsonResult.captura.version=VERSION;   
-    let text = JSON.stringify(jsonResult);
-    let filename = jsonResult.declaracion.situacionPatrimonial.datosGenerales.curp + "_" + jsonResult.captura.tipo_declaracion + "_" + fecha.getFullYear() + ".dec";
-    text = btoa(text);
-    download(filename, text);
+    jsonResult.captura.contralor = $("input[name='nameContralor']").val().toUpperCase(); 
+    jsonResult.captura.version = VERSION;
+    jsonResult.captura.anio = fecha.getFullYear() ; 
+    let filename = jsonResult.declaracion.situacionPatrimonial.datosGenerales.curp + "_" + jsonResult.captura.tipo_declaracion + "_" + jsonResult.captura.anio + ".dec";
+    
+    let zip = pako.gzip(JSON.stringify(jsonResult));
+    //let zip = new TextDecoder().decode (pako.deflate(JSON.stringify(jsonResult)));
+    
+   //download(filename, zip);
+   download(filename, zip,"appligation/gzip");
+   //require("downloadjs");
+   //download(zip,filename,"application/gzip");
+
 
     swal.fire({
         title: "Aviso",

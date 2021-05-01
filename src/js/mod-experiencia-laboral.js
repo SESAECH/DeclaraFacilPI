@@ -63,7 +63,7 @@ window.formExperienciaLaboral='<form action="" id="formExperienciaLaboral">\
                                     <div class="col-lg-6">\
                                         <div class="form-group">\
                                             <label>R.F.C.</label>\
-                                            <input type="text" name="rfc" class="form-control" required>\
+                                            <input type="text" name="rfc" class="form-control" maxlength="13" required>\
                                         </div>\
                                     </div>\
                                     <div class="col-lg-6">\

@@ -399,14 +399,15 @@ window.initDependientesEconomicos = function initDependientesEconomicos(data){
         break;
         case "EN_PROCESO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
-            $(modulo + ".btnAgregar").removeClass("hide");
+            $(modulo + ".btnAgregar").addClass("hide");
             $(modulo + ".btnHabilitar").addClass("hide");
-            $(modulo + ".btnTerminar").removeClass("hide");
+            $(modulo + ".btnTerminar").addClass("hide");
             if (Object.keys(jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.dependienteEconomico).length > 0){
                 $(modulo + ".btnAgregar").removeClass("hide");
+                $(modulo + ".btnTerminar").removeClass("hide");
             }
             else{
-                $(modulo + ".btnAgregar").addClass("hide");
+                $(modulo + ".btnAgregar").removeClass("hide");
             }                     
 
             break;
@@ -726,7 +727,7 @@ window.funcionalidadGuardarRegistroDependientesEconomicos = function funcionalid
     loadFormAmbitoSectorDependientesEconomicos();
     $("#domDependienteMxContent").removeClass("hide");
     $("#domDependienteMxContent select[name='entidadFederativa']").val("07").trigger("change");
-
+    $("#form" + seccionName + " #radioHabitaEnDom1").prop("checked", true);
     $(form + ".btnCerrar").unbind("click");
     $(form + ".btnAgregar").unbind("click");
 

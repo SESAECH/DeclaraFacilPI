@@ -29,6 +29,10 @@ import  jsPDF from 'jspdf';
 window.jspdf = jsPDF;
 import 'jspdf-autotable';
 
+const pako = require('pako');
+window.pako = pako;
+
+
 //window.jsPDF = window.jspdf = jsPDF;
 
 //variables globales

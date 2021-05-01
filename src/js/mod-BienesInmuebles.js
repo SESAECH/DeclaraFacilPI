@@ -159,7 +159,7 @@ window.funcionalidadGuardarRegistroBienesInmuebles = function funcionalidadGuard
         if(this.value == "OTRO"){
             $(form + ".content_transmisor_relacion_especifique").removeClass("hide");
             $(form + ".content_transmisor_relacion_especifique input[name='transmisor_relacion_especifique']").val("");
-            $(form + '.CBOparentescoRelacion').val("ABU").trigger("change");
+            $(form + '.CBOparentescoRelacion').val("NIN").trigger("change");
         }        
     });
 
@@ -193,7 +193,8 @@ window.funcionalidadGuardarRegistroBienesInmuebles = function funcionalidadGuard
     $(form + "#ubicacionInmuebleExContent").addClass("hide");
     $(form + ".CBOentidadFederativa").val("07").trigger("change");     
     $(form + '.CBOmotivoBaja').val("NA").trigger("change");
-    $(form + '.CBOtipoPersona').val("FISICA")
+    $(form + '.CBOtipoPersona').val("FISICA");
+    $(form + '.CBOparentescoRelacion').val("ABU").trigger("change");
     
     if(jsonResult.captura.tipo_declaracion == "INICIAL"){
         $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);

@@ -1,9 +1,24 @@
 window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
-    try {
-        let avanceCaptura = JSON.parse(atob(data));
-        let mismoFormato =true;
-        avanceCaptura.captura.formato == jsonResult.captura.formato ? mismoFormato=true: mismoFormato=false;
-        if (mismoFormato){ avanceCaptura.captura.tipo_declaracion == jsonResult.captura.tipo_declaracion ? mismoFormato=true: mismoFormato=false;}
+        //console.log('d:'+data+':');
+        let avanceCaptura;
+        //console.log($.isNumeric(data.substring(0,1)));
+     try {       
+        if ($.isNumeric(data.substring(0,1))){
+            //console.log(data);
+            let zip = '['+data+']';
+            //console.log(zip);
+            let unzip = pako.inflate(JSON.parse(zip),{to:'string'});
+            //console.log(unzip);
+            avanceCaptura = JSON.parse(unzip);
+            //console.log(avanceCaptura);
+            } else{
+            avanceCaptura = JSON.parse(atob(data));
+            //console.log(avanceCaptura);
+          }
+
+        let mismoFormato = true;
+        avanceCaptura.captura.formato == jsonResult.captura.formato ? mismoFormato = true: mismoFormato = false;
+        if (mismoFormato){ avanceCaptura.captura.tipo_declaracion == jsonResult.captura.tipo_declaracion ? mismoFormato = true: mismoFormato = false;}
 
         if (!mismoFormato){
             swal.fire({

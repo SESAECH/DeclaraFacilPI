@@ -56,7 +56,11 @@ window.initIngresos = function initIngresos(data){
     $(modulo + ".btnHabilitar").unbind("click");
     
     $(form + ".btnGuardar").on('click',function() {
+        if ($(".remuneracionMensualCargoPublicoCantidad").val() > 0){
         window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
+        } else {
+            mensajeSwal('Error','El ingreso de la persona que declara debe ser mayor a 0','error');
+        }
     });
     $(form + ".btnTerminar").on('click',function() {
         window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);

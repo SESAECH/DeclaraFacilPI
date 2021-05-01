@@ -201,11 +201,11 @@ window.guardarRegistroBeneficiosPrivados = function guardarRegistroBeneficiosPri
         "beneficiario": beneficiarios,
         "otorgante": {
           "tipoPersona":        $(form  + " select[name='tipoPersona'] option:selected").val(),
-          "nombreRazonSocial":  $(form  + " input[name='nombreRazonSocial']").val(),
-          "rfc":                $(form  + " input[name='rfc']").val(),
+          "nombreRazonSocial":  $(form  + " input[name='nombreRazonSocial']").val().toUpperCase(),
+          "rfc":                $(form  + " input[name='rfc']").val().toUpperCase(),
         },
         "formaRecepcion":       $(form  + " select[name='formaRecepcion'] option:selected").val(),
-        "especifiqueBeneficio": $(form  + " input[name='especifiqueBeneficio']").val(),
+        "especifiqueBeneficio": $(form  + " input[name='especifiqueBeneficio']").val().toUpperCase(),
         "montoMensualAproximado": {
           "valor":  parseInt($(form  + " input[name='montoMensualAproximado']").val()),
           "moneda": $(form  + " select[name='moneda'] option:selected").val(),

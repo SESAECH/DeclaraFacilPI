@@ -237,7 +237,7 @@ window.funcionalidadGuardarRegistroCV = function funcionalidadGuardarRegistroCV(
         messages: {
             tipoOperacion : { required: "Seleccione el tipo de operación." },
             nivel: { required: "Seleccione el nivel." },
-            nombre : { required: "Ingrese la institución educativa." },
+            nombre : { required: "Ingrese el nombre de la institución educativa." },
             ubicacion : { required: "Seleccione la ubicación." },
             estatus : { required: "Seleccione el estatus." },
             documentoObtenido : { required: "Seleccione el documento obtenido." },

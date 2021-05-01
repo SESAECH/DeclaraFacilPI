@@ -244,7 +244,7 @@ window.editarClientesPrincipales = function editarClientesPrincipales(data){
     var nodo = jsonResult.declaracion.interes.clientesPrincipales.cliente[item.uuid];
 
     $("#form" + item.seccionName + " select[name='tipoOperacion']").val(nodo.tipoOperacion);
-    $("#form" + item.seccionName + " select[name='realizaActividadLucrativa']").val(nodo.realizaActividadLucrativa);
+    $("#form" + item.seccionName + " select[name='realizaActividadLucrativa']").val(nodo.realizaActividadLucrativa.toString());
     $("#form" + item.seccionName + " select[name='tipoRelacion']").val(nodo.tipoRelacion);
     $("#form" + item.seccionName + " input[name='nombreEmpresaServicio']").val(nodo.empresa.nombreEmpresaServicio);
     $("#form" + item.seccionName + " input[name='rfc']").val(nodo.empresa.rfc);

@@ -79,7 +79,7 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
     });
 
     $(modulo + ".btnTerminar").on('click',function() {
-        window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
+        window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);        
     });
     
     $(modulo + ".btnHabilitar").on("click",function() {

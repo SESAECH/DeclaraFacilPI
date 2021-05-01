@@ -381,11 +381,14 @@ function headeFooter(doc){
 function descargar(doc){
     let fecha = new Date();    
     //archivo .dec
-    jsonResult.captura.version=VERSION;   
-    let text = JSON.stringify(jsonResult);
-    text = btoa(text);
-    let filename = jsonResult.declaracion.situacionPatrimonial.datosGenerales.curp + "_" + jsonResult.captura.tipo_declaracion + "_" + fecha.getFullYear() + ".dec";                    
-    download(filename, text);
+    jsonResult.captura.version=VERSION; 
+    jsonResult.captura.anio = fecha.getFullYear() ;       
+    //let text = JSON.stringify(jsonResult);
+   // text = btoa(unescape(encodeURIComponent(text)));
+    let filename = jsonResult.declaracion.situacionPatrimonial.datosGenerales.curp + "_" + jsonResult.captura.tipo_declaracion + "_" + jsonResult.captura.anio + ".dec";                    
+    
+    let zip = pako.gzip(JSON.stringify(jsonResult));
+    download(filename, zip,"appligation/gzip");
 
     //archivo .pdf
     filename = jsonResult.declaracion.situacionPatrimonial.datosGenerales.curp + "_" + jsonResult.captura.tipo_declaracion + "_" + fecha.getFullYear() + ".pdf";

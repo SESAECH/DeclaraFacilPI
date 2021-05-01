@@ -27,7 +27,7 @@ window.relacionConDeclarante = [{"clave":"CÓNYUGE", "valor":"CÓNYUGE"},{"clave
 window.beneficiariosPrograma = [{"clave":"DC","valor":"DECLARANTE"},{"clave":"CY","valor":"CÓNYUGE"},{"clave":"CON","valor":"CONCUBINA O CONCUBINARIO"},{"clave":"CONV","valor":"CONVIVIENTE"},{"clave":"HIJ","valor":"HIJO(A)"},{"clave":"HER","valor":"HERMANO(A)"},{"clave":"CU","valor":"CUÑADO(A)"},{"clave":"MA","valor":"MADRE"},{"clave":"PA","valor":"PADRE"},{"clave":"TIO","valor":"TIO(A)"},{"clave":"PRI","valor":"PRIMO(A)"},{"clave":"SOB","valor":"SOBRINO(A)"},{"clave":"AHI","valor":"AHIJADO(A)"},{"clave":"NUE","valor":"NUERA"},{"clave":"YER","valor":"YERNO"},{"clave":"ABU","valor":"ABUELO(A)"},{"clave":"NIE","valor":"NIETO(A)"},{"clave":"OTRO","valor":"OTRO(A)"}];
 //window.beneficiariosPrograma = beneficiariosPrograma;
 
-window.documentoObtenido = ["BOLETA","CERTIFICADO","CONSTANCIA","TITULO"];
+window.documentoObtenido = ["BOLETA","CERTIFICADO","CONSTANCIA","TÍTULO"];
 //window.documentoObtenido = documentoObtenido;
 
 window.estatus = ["CURSANDO","FINALIZADO","TRUNCO"];
@@ -136,7 +136,7 @@ window.entidadFederativa = [{"cve_agee":"01","nom_agee":"Aguascalientes","nom_ab
 window.trueFalse=[{"clave": true, "valor":"SI"},{"clave": false, "valor":"NO"}];
 //window.trueFalse = trueFalse;
 
-window.moneda = [{"clave":"MXN","valor":"PESO MEXICANO"},{"clave":"USD","valor":"DÓLAR ESTADOUNIDENSE"},{"clave":"MXV","valor":"UNIDAD DE INVERSIÓN MEXICANA"},{"clave":"EUR","valor":"EURO"}];
+window.moneda = [{"clave":"MXN","valor":"PESOS"},{"clave":"USD","valor":"DÓLAR ESTADOUNIDENSE"},{"clave":"MXV","valor":"UNIDAD DE INVERSIÓN MEXICANA"},{"clave":"EUR","valor":"EURO"}];
 //window.moneda = moneda;
 
 window.titulares=[
