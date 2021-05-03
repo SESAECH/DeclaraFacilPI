@@ -32,9 +32,9 @@ window.initParticipacionInstituciones = function initParticipacionInstituciones(
             break;
         case "TERMINADO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
+            $(modulo + ".chkNinguno").prop("disabled", true);
             if (jsonResult.declaracion.interes.participacion.ninguno){
-                $(modulo + ".chkNinguno")[0].checked=true;
-                $(modulo + ".chkNinguno").prop("disabled", true);
+                $(modulo + ".chkNinguno")[0].checked=true;                
             }
             $(modulo + "textarea[name='aclaracionesObservaciones']").val(jsonResult.declaracion.interes.participacionTomaDecisiones.aclaracionesObservaciones).prop("disabled", true);
             $(modulo + ".btnEditar").addClass("hide");
@@ -145,6 +145,13 @@ window.funcionalidadGuardarRegistroParticipacionInstituciones = function funcion
         }        
     });
 
+    $(form + "select[name='recibeRemuneracion']").on('change', function() {
+        if (this.value == "false"){ $(form + "input[name='montoMensual']").val("0").prop("disabled", true); }
+        else{ $(form + "input[name='montoMensual']").val("").prop("disabled", false); }             
+    });
+
+    $(form + "select[name='recibeRemuneracion']").val("false").trigger("change");
+
     if(jsonResult.captura.tipo_declaracion == "INICIAL"){
         $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
     }
@@ -191,9 +198,9 @@ window.guardarRegistroParticipacionInstituciones = function guardarRegistroParti
           "clave": $(form  + " select[name='tipoInstitucion'] option:selected").val(),
           "valor": $(form  + " input[name='tipoInstitucion_especifique']").val(),
         },
-        "nombreInstitucion":    $(form  + " input[name='nombreInstitucion']").val(),
-        "rfc":                  $(form  + " input[name='rfc']").val(),
-        "puestoRol":            $(form  + " input[name='puestoRol']").val(),
+        "nombreInstitucion":    $(form  + " input[name='nombreInstitucion']").val().toUpperCase(),
+        "rfc":                  $(form  + " input[name='rfc']").val().toUpperCase(),
+        "puestoRol":            $(form  + " input[name='puestoRol']").val().toUpperCase(),
         "fechaInicioParticipacion": $(form  + " input[name='fechaInicioParticipacion']").val(),
         "recibeRemuneracion":   $(form  + " select[name='recibeRemuneracion'] option:selected").val() =="true" ? true : false,
         "montoMensual": {
@@ -204,7 +211,7 @@ window.guardarRegistroParticipacionInstituciones = function guardarRegistroParti
           "pais": $(form  + " select[name='pais'] option:selected").val(),
           "entidadFederativa": {
             "clave": $(form  + " select[name='entidadFederativa'] option:selected").val(),
-            "valor": $(form  + " select[name='entidadFederativa'] option:selected")[0].innerText,
+            "valor": $(form  + " select[name='entidadFederativa'] option:selected")[0].innerText.toUpperCase(),
           }
         }
       };

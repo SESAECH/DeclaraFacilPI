@@ -96,10 +96,10 @@ window.initPareja = function initPareja(data){
     });
     
     $(modulo + ".btnHabilitar").on("click",function() {
-
         habilitarSeccion(seccion.apartado, seccion.no, seccionName);
         $("#chkNingunoPareja").prop("disabled", false);
         $(form +" :input").prop("disabled", false);
+        $(form + ".CBOtipoOperacion").prop("disabled", true);
         $(modulo + "textarea[name='aclaracionesObservaciones']").prop("disabled", false);
         if ($("#chkNingunoPareja")[0].checked){
             $(form + ".btnGuardar").addClass("hide");
@@ -302,7 +302,7 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
     $.validator.addMethod("CURP", function (value, element) {
         if (value !== '') {
             var patt = new RegExp("^[A-Z][A,E,I,O,U,X][A-Z]{2}[0-9]{2}[0-1][0-9][0-3][0-9][M,H][A-Z]{2}[B,C,D,F,G,H,J,K,L,M,N,Ñ,P,Q,R,S,T,V,W,X,Y,Z]{3}[0-9,A-Z][0-9]$");
-            return patt.test(value);
+            return patt.test(value.toUpperCase());
         } else {
             return false;
         }
@@ -413,9 +413,9 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
             root.domicilioMexico.numeroInterior =           $("#domParejaMxContent input[name='numeroInterior']").val();
             root.domicilioMexico.coloniaLocalidad =         $("#domParejaMxContent input[name='coloniaLocalidad']").val().toUpperCase();
             root.domicilioMexico.municipioAlcaldia.clave =  $("#domParejaMxContent select[name='municipioAlcaldia'] option:selected").val();
-            root.domicilioMexico.municipioAlcaldia.valor =  $("#domParejaMxContent select[name='municipioAlcaldia'] option:selected")[0].innerText;
+            root.domicilioMexico.municipioAlcaldia.valor =  $("#domParejaMxContent select[name='municipioAlcaldia'] option:selected")[0].innerText.toUpperCase();
             root.domicilioMexico.entidadFederativa.clave =  $("#domParejaMxContent select[name='entidadFederativa'] option:selected").val();
-            root.domicilioMexico.entidadFederativa.valor =  $("#domParejaMxContent select[name='entidadFederativa'] option:selected")[0].innerText;
+            root.domicilioMexico.entidadFederativa.valor =  $("#domParejaMxContent select[name='entidadFederativa'] option:selected")[0].innerText.toUpperCase();
             root.domicilioMexico.codigoPostal =             $("#domParejaMxContent input[name='codigoPostal']").val();
             
             //domicilio extranjero

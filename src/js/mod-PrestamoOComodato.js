@@ -232,7 +232,7 @@ window.guardarRegistroPrestamoOComodato = function guardarRegistroPrestamoOComod
           "tipoDuenoTitular":   $(form + "select[name='tipoDuenoTitular'] option:selected").val(),
           "nombreTitular":      $(form + "input[name='nombreTitular'] ").val().toUpperCase(),
           "rfc":                $(form + "input[name='rfc']").val().toUpperCase(),
-          "relacionConTitular": $(form + "input[name='relacionConTitular']").val(),
+          "relacionConTitular": $(form + "input[name='relacionConTitular']").val().toUpperCase(),
         }
       };
 
@@ -251,11 +251,11 @@ window.guardarRegistroPrestamoOComodato = function guardarRegistroPrestamoOComod
                       "coloniaLocalidad":   $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico input[name='coloniaLocalidad']").val().toUpperCase(),
                       "municipioAlcaldia": {
                         "clave":            $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico select[name='municipioAlcaldia'] option:selected").val(),
-                        "valor":            $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico select[name='municipioAlcaldia'] option:selected")[0].innerText,
+                        "valor":            $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico select[name='municipioAlcaldia'] option:selected")[0].innerText.toUpperCase(),
                       },
                       "entidadFederativa": {
                         "clave":            $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico select[name='entidadFederativa'] option:selected").val(),
-                        "valor":            $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico select[name='entidadFederativa'] option:selected")[0].innerText,
+                        "valor":            $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico select[name='entidadFederativa'] option:selected")[0].innerText.toUpperCase(),
                       },
                       "codigoPostal":       $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico input[name='codigoPostal']").val(),
                     }

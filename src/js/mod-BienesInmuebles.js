@@ -144,22 +144,37 @@ window.funcionalidadGuardarRegistroBienesInmuebles = function funcionalidadGuard
         }
     });
 
-    $(form + '.CBOrelacion').on('change', function() {
+    /* $(form + '.CBOrelacion').on('change', function() {
         $(form + ".content_relacion_transmisor_especifique").addClass("hide");
         $(form + ".content_relacion_transmisor_especifique input[name='especifique']").val($(form + "select[name='relacion'] option:selected")[0].innerText);
         if(this.value == "OTRO"){
             $(form + ".content_relacion_transmisor_especifique").removeClass("hide");
             $(form + ".content_relacion_transmisor_especifique input[name='especifique']").val("");
         }
-    });
+    }); */
     
+    $(form + '.CBOtipoPersona').on('change', function() {
+        if(this.value=="FISICA"){
+            $(form + ".CBOparentescoRelacion option").removeClass("hide");
+            $(form + ".CBOparentescoRelacion option[value='NIN']").addClass("hide");
+            $(form + ".CBOparentescoRelacion option[value='OTRO']").addClass("hide");     
+            $(form + '.CBOparentescoRelacion').val("ABU").trigger("change");         
+        }
+        else{
+            $(form + ".CBOparentescoRelacion option").addClass("hide");
+            $(form + ".CBOparentescoRelacion option[value='NIN']").removeClass("hide");
+            $(form + ".CBOparentescoRelacion option[value='OTRO']").removeClass("hide");
+            $(form + '.CBOparentescoRelacion').val("NIN").trigger("change");
+        }
+    }); 
+
     $(form + '.CBOparentescoRelacion').on('change', function() {
         $(form + ".content_transmisor_relacion_especifique").addClass("hide");
         $(form + ".content_transmisor_relacion_especifique input[name='transmisor_relacion_especifique']").val($(form + '.CBOparentescoRelacion option:selected')[0].innerText);
         if(this.value == "OTRO"){
             $(form + ".content_transmisor_relacion_especifique").removeClass("hide");
             $(form + ".content_transmisor_relacion_especifique input[name='transmisor_relacion_especifique']").val("");
-            $(form + '.CBOparentescoRelacion').val("NIN").trigger("change");
+            //$(form + '.CBOparentescoRelacion').val("NIN").trigger("change");
         }        
     });
 
@@ -193,9 +208,9 @@ window.funcionalidadGuardarRegistroBienesInmuebles = function funcionalidadGuard
     $(form + "#ubicacionInmuebleExContent").addClass("hide");
     $(form + ".CBOentidadFederativa").val("07").trigger("change");     
     $(form + '.CBOmotivoBaja').val("NA").trigger("change");
-    $(form + '.CBOtipoPersona').val("FISICA");
+    $(form + '.CBOtipoPersona').val("FISICA").trigger("change");
     $(form + '.CBOparentescoRelacion').val("ABU").trigger("change");
-    
+
     if(jsonResult.captura.tipo_declaracion == "INICIAL"){
         $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
     }
@@ -235,6 +250,8 @@ window.funcionalidadGuardarRegistroBienesInmuebles = function funcionalidadGuard
                 else{ guardar=true;}        
             }
             if (Object.keys(transmisoresTemp).length==0){ guardar=false; mensajeSwal("Aviso", "Agregue al menos 1 transmisor.", "warning");}
+            if($("#form" + seccionName + " input[name='porcentajePropiedad']").val()< 1 || $("#form" + seccionName + " input[name='porcentajePropiedad']").val()> 100){guardar=false; mensajeSwal("Aviso", "El porcentaje de propiedad debe ser entre 1 y 100.", "warning");}
+
             if (guardar){
                 var uuidItem;
                 if (accion=="EDITAR"){ uuidItem = uuid;}
@@ -259,7 +276,7 @@ window.funcionalidadGuardarRegistroBienesInmuebles = function funcionalidadGuard
                 "uuid":                 uuid,
                 "tipoPersona":          $(form + ".content_terceros_nuevo select[name='tipoPersona'] option:selected").val(),
                 "nombreRazonSocial":    $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val().toUpperCase(),
-                "rfc":                  $(form + ".content_terceros_nuevo input[name='rfc']").val(),
+                "rfc":                  $(form + ".content_terceros_nuevo input[name='rfc']").val().toUpperCase(),
             };
             $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val("");
             $(form + ".content_terceros_nuevo input[name='rfc']").val("");
@@ -269,6 +286,7 @@ window.funcionalidadGuardarRegistroBienesInmuebles = function funcionalidadGuard
 
     $(form + ".btnAgregarTransmisor").on('click',function() {
         if($(form + ".content_transmisor_nuevo input[name='transmisor_nombreRazonSocial']").val().length==0){ mensajeSwal("Aviso","Ingresa el nombre/institución o razón social del transmisor.", "warning")}
+        else if($(form + ".content_transmisor_nuevo input[name='transmisor_rfc']").val().length==0){ mensajeSwal("Aviso","Ingresa el RFC del transmisor.", "warning")}
         else if($(form + ".content_transmisor_nuevo input[name='transmisor_relacion_especifique']").val().length==0){ mensajeSwal("Aviso","Seleccione la relación del transmisor.", "warning")}
         else{
             let uuid=generarUUID();
@@ -279,7 +297,7 @@ window.funcionalidadGuardarRegistroBienesInmuebles = function funcionalidadGuard
                 "rfc":                  $(form + ".content_transmisor_nuevo input[name='transmisor_rfc']").val().toUpperCase(),
                 "relacion": {
                     "clave": $(form + ".content_transmisor_nuevo select[name='transmisor_relacion'] option:selected").val(),
-                    "valor": $(form + ".content_transmisor_nuevo input[name='transmisor_relacion_especifique']").val()
+                    "valor": $(form + ".content_transmisor_nuevo input[name='transmisor_relacion_especifique']").val().toUpperCase()
                   }
             };
             $(form + ".content_transmisor_nuevo input[name='transmisor_nombreRazonSocial']").val("");

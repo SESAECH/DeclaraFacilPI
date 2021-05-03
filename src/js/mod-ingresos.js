@@ -57,16 +57,20 @@ window.initIngresos = function initIngresos(data){
     
     $(form + ".btnGuardar").on('click',function() {
         if ($(".remuneracionMensualCargoPublicoCantidad").val() > 0){
-        window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
+            window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
         } else {
             mensajeSwal('Error','El ingreso de la persona que declara debe ser mayor a 0','error');
         }
     });
     $(form + ".btnTerminar").on('click',function() {
-        window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
-        $(form + ".btnEditar").addClass("hide");
-        $(form + ".btnEliminar").addClass("hide");
-        $(form + ".btnAgregar").addClass("hide");
+        if ($(".remuneracionMensualCargoPublicoCantidad").val() > 0){
+            window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
+            $(form + ".btnEditar").addClass("hide");
+            $(form + ".btnEliminar").addClass("hide");
+            $(form + ".btnAgregar").addClass("hide");
+        } else {
+            mensajeSwal('Error','El ingreso de la persona que declara debe ser mayor a 0','error');
+        }
     });    
     $(modulo + ".btnHabilitar").on('click',function() {
         habilitarSeccion(seccion.apartado, seccion.no, seccionName);
@@ -416,7 +420,7 @@ window.guardarServiciosProfesionales = function guardarServiciosProfesionales(uu
           "valor":  parseInt($("input[name='serviciosProfesionalesRemuneracionCantidad']").val()),
           "moneda": $("select[name='serviciosProfesionalesRemuneracionMoneda'] option:selected").val()
         },
-        "tipoServicio": $("input[name='tipoServicio']").val()
+        "tipoServicio": $("input[name='tipoServicio']").val().toUpperCase()
       };
       //limpiar inputs
       $("input[name='serviciosProfesionalesRemuneracionCantidad']").val("");
@@ -497,7 +501,7 @@ window.guardarEnajenacionBienes = function guardarEnajenacionBienes(uuidItem){
           "valor":  parseInt($("#formIngresos input[name='enajenacionBienesRemuneracionCantidad']").val()),
           "moneda": $("#formIngresos select[name='enajenacionBienesRemuneracionMoneda'] option:selected").val()
         },
-        "tipoBienEnajenado": $("#formIngresos select[name='tipoBienEnajenado'] option:selected").val()
+        "tipoBienEnajenado": $("#formIngresos select[name='tipoBienEnajenado'] option:selected").val().toUpperCase()
       };
       //limpiar inputs
       $("#formIngresos input[name='enajenacionBienesRemuneracionCantidad']").val("");
@@ -579,7 +583,7 @@ window.guardarOtrosIngresos = function guardarOtrosIngresos(uuidItem){
           "valor":  parseInt($("input[name='otrosIngresosRemuneracionCantidad']").val()),
           "moneda": $("select[name='otrosIngresosRemuneracionMoneda'] option:selected").val()
         },
-        "tipoIngreso": $("input[name='tipoIngreso']").val()
+        "tipoIngreso": $("input[name='tipoIngreso']").val().toUpperCase()
       };
       //limpiar inputs
       $("input[name='otrosIngresosRemuneracionCantidad']").val("");

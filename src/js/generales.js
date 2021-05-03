@@ -9,7 +9,7 @@ window.actualizarStatusSeccion = function actualizarStatusSeccion(declaracionSec
         $("#form" + seccionName +" :input").prop("disabled", true);
         $(".btnGuardar, .btnTerminar").addClass("hide");
         $(".btnHabilitar").removeClass("hide").prop("disabled", false);
-        mensajeSwal("Aviso","Sección terminada con exito.", "success");
+        mensajeSwal("Aviso","Sección terminada con éxito.", "success");
     }
     validarDeclaracionTerminada();
     //scroll top de la página.
@@ -796,7 +796,7 @@ window.initConstanciaFiscal = function initConstanciaFiscal(data){
         $(modulo + ".btnHabilitar").removeClass("hide");
         jsonResult.captura.declaracion[seccion.apartado].secciones[seccion.no].status= "TERMINADO";
         $(".status-seccion-" + seccion.apartado + "-" + seccion.no).removeClass("indicador-status indicador-status-process").addClass("indicador-status-success").text("TERMINADO");
-        mensajeSwal("Aviso","Sección terminada con exito.", "success");
+        mensajeSwal("Aviso","Sección terminada con éxito.", "success");
         validarDeclaracionTerminada();
     });
     

@@ -21,7 +21,8 @@ $("#contentMain").removeClass("col-md-9 col-lg-9").addClass("col-12");
 jQuery.extend(jQuery.validator.messages, {
   required: "Campo Obligatorio.",
   max: jQuery.validator.format("Por favor, escribe un valor menor o igual a {0}."),
-  min: jQuery.validator.format("Por favor, escribe un valor mayor o igual a {0}.")
+  min: jQuery.validator.format("Por favor, escribe un valor mayor o igual a {0}."),
+  minlength: "El mínimo de caracteres es de {0}."
 });
 
 $("#contentSelectTipoDeclaracion").removeClass("hide");
@@ -888,7 +889,7 @@ window.declaraciones={
             },
             "5": {
               "no": 5,
-              "titulo": "Experiencia laboral",
+              "titulo": "Experiencia laboral (últimos cinco empleos)",
               "moduloName": "moduloExperienciaLaboral",
               "status": "SIN_INFO",
               "apartado": "situacionPatrimonial",
@@ -991,7 +992,7 @@ window.declaraciones={
           "secciones": {
             "1": {
               "no": 1,
-              "titulo": "Participación en empresas, sociedades o asociaciones",
+              "titulo": "Participación en empresas, sociedades o asociaciones (hasta los 2 últimos años)",
               "moduloName": "moduloParticipacionEmpresas",
               "status": "SIN_INFO",
               "apartado": "interes",
@@ -1000,7 +1001,7 @@ window.declaraciones={
             },
             "2": {
               "no": 2,
-              "titulo": "¿Participa en alguna de estas instituciones?",
+              "titulo": "¿Participa en alguna de estas instituciones? (hasta los 2 últimos años)",
               "moduloName": "moduloParticipacionInstituciones",
               "status": "SIN_INFO",
               "apartado": "interes",
@@ -1009,7 +1010,7 @@ window.declaraciones={
             },
             "3": {
               "no": 3,
-              "titulo": "Apoyos o beneficios públicos",
+              "titulo": "Apoyos o beneficios públicos (hasta los 2 últimos años)",
               "moduloName": "moduloApoyosPublicos",
               "status": "SIN_INFO",
               "apartado": "interes",
@@ -1018,7 +1019,7 @@ window.declaraciones={
             },
             "4": {
               "no": 4,
-              "titulo": "Representación",
+              "titulo": "Representación (hasta los 2 últimos años)",
               "moduloName": "moduloRepresentacion",
               "status": "SIN_INFO",
               "apartado": "interes",
@@ -1027,7 +1028,7 @@ window.declaraciones={
             },
             "5": {
               "no": 5,
-              "titulo": "Clientes principales",
+              "titulo": "Clientes principales (hasta los 2 últimos años)",
               "moduloName": "moduloClientesPrincipales",
               "status": "SIN_INFO",
               "apartado": "interes",
@@ -1036,7 +1037,7 @@ window.declaraciones={
             },
             "6": {
               "no": 6,
-              "titulo": "Beneficios privados",
+              "titulo": "Beneficios privados (hasta los 2 últimos años)",
               "moduloName": "moduloBeneficiosPrivados",
               "status": "SIN_INFO",
               "apartado": "interes",
@@ -1045,7 +1046,7 @@ window.declaraciones={
             },
             "7": {
               "no": 7,
-              "titulo": "Fideicomisos",
+              "titulo": "Fideicomisos (hasta los 2 últimos años)",
               "moduloName": "moduloFideicomisos",
               "status": "SIN_INFO",
               "apartado": "interes",
@@ -1109,7 +1110,7 @@ window.declaraciones={
               },
               "5": {
                 "no": 5,
-                "titulo": "Experiencia laboral",
+                "titulo": "Experiencia laboral (últimos cinco empleos)",
                 "moduloName": "moduloExperienciaLaboral",
                 "status": "SIN_INFO",
                 "apartado": "situacionPatrimonial",

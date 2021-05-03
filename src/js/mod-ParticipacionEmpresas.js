@@ -33,9 +33,9 @@ window.initParticipacionEmpresas = function initParticipacionEmpresas(data){
             break;
         case "TERMINADO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
+            $(modulo + ".chkNinguno").prop("disabled", true);
             if (jsonResult.declaracion.interes.participacion.ninguno){
-                $(modulo + ".chkNinguno")[0].checked=true;
-                $(modulo + ".chkNinguno").prop("disabled", true);
+                $(modulo + ".chkNinguno")[0].checked=true;         
             }
             $(modulo + "textarea[name='aclaracionesObservaciones']").val(jsonResult.declaracion.interes.participacion.aclaracionesObservaciones).prop("disabled", true);
             $(modulo + ".btnEditar").addClass("hide");
@@ -131,6 +131,7 @@ window.funcionalidadGuardarRegistroParticipacionEmpresas = function funcionalida
     $(form + ".content_entidadFederativa").removeClass("hide");
     $(form + ".CBOtipoParticipacion").val("SCIO").trigger("change");
     $(form + ".CBOsector").val("AGRI").trigger("change");
+    
 
     $(form + '.CBOpais').on('change', function() {
         $(form + ".content_entidadFederativa").removeClass("hide");
@@ -154,6 +155,13 @@ window.funcionalidadGuardarRegistroParticipacionEmpresas = function funcionalida
             $(form + ".content_especifique_sector input[name='sector_especifique']").val("");
         }        
     });
+
+    $(form + '.CBOrecibeRemuneracion').on('change', function() {
+        if (this.value == "false"){ $(form + "input[name='montoMensual']").val("0").prop("disabled", true); }
+        else{ $(form + "input[name='montoMensual']").val("").prop("disabled", false); }             
+    });
+
+    $(form + '.CBOrecibeRemuneracion').val("false").trigger("change");
 
     if(jsonResult.captura.tipo_declaracion == "INICIAL"){
         $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
@@ -191,14 +199,14 @@ window.funcionalidadGuardarRegistroParticipacionEmpresas = function funcionalida
 window.guardarRegistroParticipacionEmpresas = function guardarRegistroParticipacionEmpresas(uuidItem, seccionNo, seccionName, modulo){    
     var form="#form" + seccionName;
     jsonResult.declaracion.interes.participacion.ninguno=false;
-    jsonResult.declaracion.interes.participacion.aclaracionesObservaciones =  $(modulo + " textarea[name='aclaracionesObservaciones']").val();
+    jsonResult.declaracion.interes.participacion.aclaracionesObservaciones =  $(modulo + " textarea[name='aclaracionesObservaciones']").val().toUpperCase();
     jsonResult.declaracion.interes.participacion.participacion[uuidItem] =
     {
         "uuid": uuidItem,
         "tipoOperacion": $(form  + " select[name='tipoOperacion'] option:selected").val(),
         "tipoRelacion": $(form  + " select[name='tipoRelacion'] option:selected").val(),
         "nombreEmpresaSociedadAsociacion": $(form  + " input[name='nombreEmpresaSociedadAsociacion']").val().toUpperCase(),
-        "rfc": $(form  + " input[name='rfc']").val().toUpperCase(),
+        "rfc": $(form + " input[name='rfc']").val().toUpperCase(),
         "porcentajeParticipacion": $(form  + " input[name='porcentajeParticipacion']").val(),
         "tipoParticipacion": {
           "clave": $(form  + " select[name='tipoParticipacion'] option:selected").val(),

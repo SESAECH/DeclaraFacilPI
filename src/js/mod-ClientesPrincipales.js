@@ -32,9 +32,9 @@ window.initClientesPrincipales = function initApoyosPublicos(data){
             break;
         case "TERMINADO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
+            $(modulo + ".chkNinguno").prop("disabled", true);
             if (jsonResult.declaracion.interes.clientesPrincipales.ninguno){
-                $(modulo + ".chkNinguno")[0].checked=true;
-                $(modulo + ".chkNinguno").prop("disabled", true);
+                $(modulo + ".chkNinguno")[0].checked=true;                
             }
             $(modulo + "textarea[name='aclaracionesObservaciones']").val(jsonResult.declaracion.interes.clientesPrincipales.aclaracionesObservaciones).prop("disabled", true);
             $(modulo + ".btnEditar").addClass("hide");
@@ -198,7 +198,7 @@ window.guardarRegistroClientesPrincipales = function guardarRegistroClientesPrin
         },
         "sector": {
           "clave":  $(form  + " select[name='sector'] option:selected").val(),
-          "valor":  $(form  + " select[name='sector'] option:selected")[0].innerText,
+          "valor":  $(form  + " input[name='sector_especifique']").val().toUpperCase(),
         },
         "montoAproximadoGanancia": {
           "valor":  parseInt($(form  + " input[name='montoAproximadoGanancia']").val()),
@@ -208,7 +208,7 @@ window.guardarRegistroClientesPrincipales = function guardarRegistroClientesPrin
           "pais":   $(form  + " select[name='pais'] option:selected").val(),
           "entidadFederativa": {
             "clave": $(form  + " select[name='entidadFederativa'] option:selected").val(),
-            "valor": $(form  + " select[name='entidadFederativa'] option:selected")[0].innerText,
+            "valor": $(form  + " select[name='entidadFederativa'] option:selected")[0].innerText.toUpperCase(),
           }
         }       
       }

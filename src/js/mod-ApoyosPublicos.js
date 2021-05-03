@@ -32,9 +32,9 @@ window.initApoyosPublicos = function initApoyosPublicos(data){
             break;
         case "TERMINADO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
+            $(modulo + ".chkNinguno").prop("disabled", true);
             if (jsonResult.declaracion.interes.apoyos.ninguno){
-                $(modulo + ".chkNinguno")[0].checked=true;
-                $(modulo + ".chkNinguno").prop("disabled", true);
+                $(modulo + ".chkNinguno")[0].checked=true;                
             }
             $(modulo + "textarea[name='aclaracionesObservaciones']").val(jsonResult.declaracion.interes.apoyos.aclaracionesObservaciones).prop("disabled", true);
             $(modulo + ".btnEditar").addClass("hide");
@@ -193,21 +193,21 @@ window.guardarRegistroApoyosPublicos = function guardarRegistroApoyosPublicos(uu
         "tipoPersona":  $(form  + " select[name='tipoPersona'] option:selected").val(),
         "beneficiarioPrograma": {
           "clave":  $(form  + " select[name='beneficiarioPrograma'] option:selected").val(),
-          "valor": $(form  + " input[name='beneficiarioPrograma_especifique']").val(),
+          "valor": $(form  + " input[name='beneficiarioPrograma_especifique']").val().toUpperCase(),
         },
-        "nombrePrograma": $(form  + " input[name='nombrePrograma']").val(),
-        "institucionOtorgante": $(form  + " input[name='institucionOtorgante']").val(),
+        "nombrePrograma": $(form  + " input[name='nombrePrograma']").val().toUpperCase(),
+        "institucionOtorgante": $(form  + " input[name='institucionOtorgante']").val().toUpperCase(),
         "nivelOrdenGobierno":  $(form  + " select[name='nivelOrdenGobierno'] option:selected").val(),
         "tipoApoyo": {
           "clave": $(form  + " select[name='tipoApoyo'] option:selected").val(),
-          "valor": $(form  + " input[name='tipoApoyo_especifique']").val(),
+          "valor": $(form  + " input[name='tipoApoyo_especifique']").val().toUpperCase(),
         },
         "formaRecepcion": $(form  + " select[name='formaRecepcion'] option:selected").val(),
         "montoApoyoMensual": {
           "valor":  parseInt($(form  + " input[name='montoApoyoMensual']").val()),
           "moneda": $(form  + " select[name='moneda'] option:selected").val(),
         },
-        "especifiqueApoyo": $(form  + " input[name='especifiqueApoyo']").val(),
+        "especifiqueApoyo": $(form  + " input[name='especifiqueApoyo']").val().toUpperCase(),
       }
 
     //cambiar status a captura.

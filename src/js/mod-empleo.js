@@ -79,6 +79,7 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
     });    
     $(modulo + ".btnHabilitar").on('click',function() {
         habilitarSeccion(seccion.apartado, seccion.no, seccionName);
+        $(form + ".CBOtipoOperacion").prop("disabled", true);
     });
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
@@ -206,7 +207,7 @@ window.loadInfoEmpleoCargoComision = function loadInfoEmpleoCargoComision(form){
     $(form + "input[name='nombreEntePublico']").val(root.nombreEntePublico);
     $(form + "input[name='areaAdscripcion']").val(root.areaAdscripcion );
     $(form + "input[name='empleoCargoComision']").val(root.empleoCargoComision);
-    $(form + "select[name='contratadoPorHonorarios']").val(root.contratadoPorHonorarios);
+    $(form + "select[name='contratadoPorHonorarios']").val(root.contratadoPorHonorarios.toString());
     $(form + "input[name='nivelEmpleoCargoComision']").val(root.nivelEmpleoCargoComision);
     $(form + "input[name='funcionPrincipal']").val(root.funcionPrincipal);
     $(form + "input[name='fechaTomaPosesion']").val(root.fechaTomaPosesion);

@@ -45,13 +45,13 @@ window.formDependientesEconomicos='<form action="" id="formDependientesEconomico
                                        <div class="col-lg-4">\
                                            <div class="form-group">\
                                                <label>RFC</label>\
-                                               <input type="text" name="rfc" class="form-control" required>\
+                                               <input type="text" name="rfc" class="form-control" maxlength="13" required>\
                                            </div>\
                                        </div>\
                                        <div class="col-lg-4">\
                                            <div class="form-group">\
                                                <label>CURP</label>\
-                                               <input type="text" name="curp" class="form-control" required>\
+                                               <input type="text" name="curp" class="form-control" maxlength="18" required>\
                                            </div>\
                                        </div>\
                                    </div>\
@@ -128,13 +128,13 @@ window.formDependientesEconomicos='<form action="" id="formDependientesEconomico
                                                </div>\
                                                <div class="col-lg-3">\
                                                    <div class="form-group">\
-                                                       <label>NUMERO EXTERIOR</label>\
+                                                       <label>NÚMERO EXTERIOR</label>\
                                                        <input type="text" name="numeroExterior" class="form-control" required>\
                                                    </div>\
                                                </div>\
                                                <div class="col-lg-3">\
                                                    <div class="form-group">\
-                                                       <label>NUMERO INTERIOR</label>\
+                                                       <label>NÚMERO INTERIOR</label>\
                                                        <input type="text" name="numeroInterior" class="form-control">\
                                                    </div>\
                                                </div>\
@@ -164,13 +164,13 @@ window.formDependientesEconomicos='<form action="" id="formDependientesEconomico
                                                </div>\
                                                <div class="col-lg-3">\
                                                    <div class="form-group">\
-                                                       <label>NUMERO EXTERIOR</label>\
+                                                       <label>NÚMERO EXTERIOR</label>\
                                                        <input type="text" name="numeroExterior" class="form-control" required>\
                                                    </div>\
                                                </div>\
                                                <div class="col-lg-3">\
                                                    <div class="form-group">\
-                                                       <label>NUMERO INTERIOR</label>\
+                                                       <label>NÚMERO INTERIOR</label>\
                                                        <input type="text" name="numeroInterior" class="form-control">\
                                                    </div>\
                                                </div>\
@@ -553,7 +553,7 @@ window.editarDependientesEconomicos = function editarDependientesEconomicos(data
     $("#laboralDependientePubContent input[name='fechaIngreso']").val(nodo.actividadLaboralSectorPublico.fechaIngreso);
 
     $("#laboralDependientePriContent input[name='nombreEmpresaSociedadAsociacion']").val(nodo.actividadLaboralSectorPrivadoOtro.nombreEmpresaSociedadAsociacion);
-    $("#laboralDependientePriContent input[name='empleoCargo']").val(nodo.actividadLaboralSectorPrivadoOtro.empleoCargo);
+    $("#laboralDependientePriContent input[name='empleoCargoComision']").val(nodo.actividadLaboralSectorPrivadoOtro.empleoCargo);
     $("#laboralDependientePriContent input[name='rfc']").val(nodo.actividadLaboralSectorPrivadoOtro.rfc);
     $("#laboralDependientePriContent input[name='fechaIngreso']").val(nodo.actividadLaboralSectorPrivadoOtro.fechaIngreso);
     $("#laboralDependientePriContent select[name='sector']").val(nodo.sector.clave);    
@@ -578,7 +578,7 @@ window.eliminarDependientesEconomicos = function eliminarDependientesEconomicos(
 window.guardarRegistroDependientesEconomicos = function guardarRegistroDependientesEconomicos(uuidItem, seccionNo, seccionName, modulo){    
     var form="#form" + seccionName;
     jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.ninguno=false;
-    jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.aclaracionesObservaciones =  $(modulo + " textarea[name='aclaracionesObservaciones']").val();
+    jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.aclaracionesObservaciones =  $(modulo + " textarea[name='aclaracionesObservaciones']").val().toUpperCase();
     jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.dependienteEconomico[uuidItem] =
     {
         "uuid": uuidItem,
@@ -603,11 +603,11 @@ window.guardarRegistroDependientesEconomicos = function guardarRegistroDependien
           "coloniaLocalidad":   $("#domDependienteMxContent input[name='coloniaLocalidad']").val().toUpperCase(),
           "municipioAlcaldia": {
             "clave":        $("#domDependienteMxContent select[name='municipioAlcaldia'] option:selected").val(),
-            "valor":        $("#domDependienteMxContent select[name='municipioAlcaldia'] option:selected")[0].innerText
+            "valor":        $("#domDependienteMxContent select[name='municipioAlcaldia'] option:selected")[0].innerText.toUpperCase()
           },
           "entidadFederativa": {
             "clave":        $("#domDependienteMxContent select[name='entidadFederativa'] option:selected").val(),
-            "valor":        $("#domDependienteMxContent select[name='entidadFederativa'] option:selected")[0].innerText
+            "valor":        $("#domDependienteMxContent select[name='entidadFederativa'] option:selected")[0].innerText.toUpperCase()
           },
           "codigoPostal":   $("#domDependienteMxContent input[name='codigoPostal']").val()
         },
@@ -771,10 +771,10 @@ window.funcionalidadGuardarRegistroDependientesEconomicos = function funcionalid
         },
         messages: {
             tipoOperacion : { required: "Seleccione el tipo de operación." },
-            nombre : { required: "Ingrese el nombre.", maxlength: "El máximo de caracteres es de 50." },
+            nombre : { required: "Ingrese el nombre(s).", maxlength: "El máximo de caracteres es de 50." },
             primerApellido : { required: "Ingrese el primer apellido." },
             fechaNacimiento : { required: "Ingrese la fecha de nacimmiento." },
-            rfc : { required: "Ingrese el RFC.", minlength: "El minimo de caracteres es de 12.", maxlength: "El máximo de caracteres es de 13." },
+            rfc : { required: "Ingrese el RFC.", minlength: "El mínimo de caracteres es de 12.", maxlength: "El máximo de caracteres es de 13." },
             curp : { required: "Ingrese la CURP.", minlength: "El mínimo de caracteres es de 18.", maxlength: "El máximo de caracteres es de 18." },
             lugarDondeReside : { required: "Seleccione el lugar donde reside." },
             calle : { required: "Ingrese la calle." },
@@ -791,7 +791,7 @@ window.funcionalidadGuardarRegistroDependientesEconomicos = function funcionalid
             ambitoPublico : { required: "Seleccione el ámbito público." },
             nombreEntePublico : { required: "Ingrese el nombre del ente público." },
             areaAdscripcion : { required: "Ingrese el área de adscripción." },
-            empleoCargoComision : { required: "Ingrese el empleo, cargo o comisión." },
+            empleoCargoComision : { required: "Ingrese el empleo, cargo." },
             funcionPrincipal : { required: "Ingrese la función principal." },
             salarioMensualNeto : { required: "Ingrese el salario mensual neto.", number: "Solo se permiten caracteres numéricos." },
             moneda : { required: "Seleccione el tipo de moneda." },

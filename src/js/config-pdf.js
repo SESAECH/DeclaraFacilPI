@@ -504,6 +504,7 @@ function tblDatosGenerales(){
     $("#pdfMiDeclaracion_datosGenerales .situacionPersonalEstadoCivil").text(nodo.situacionPersonalEstadoCivil.valor);
     $("#pdfMiDeclaracion_datosGenerales .regimenMatrimonial").text(nodo.regimenMatrimonial.valor);
     $("#pdfMiDeclaracion_datosGenerales .paisNacimiento").text(nodo.paisNacimiento);
+    $("#pdfMiDeclaracion_datosGenerales .nacionalidad").text(nodo.nacionalidad);
     $("#pdfMiDeclaracion_datosGenerales .aclaracionesObservaciones").text(nodo.aclaracionesObservaciones);
 }
 
@@ -536,7 +537,7 @@ function tblDomicilio(){
 
 function tblDatosCurriculares(){
     let html="";
-     html+='<tr><td colspan="5" style="background-color: #621132; color: #fff; font-size:14px;">3. DATOS CURRICULARES</td></tr>';
+     html+='<tr><td colspan="5" style="background-color: #621132; color: #fff; font-size:14px;">3. DATOS CURRICULARES DEL DECLARANTE</td></tr>';
     Object.keys(jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad).forEach(function (index) {
         var nodo = jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad[index];
         html +='    <tr style="background-color: #dee2e6;">\
@@ -564,7 +565,7 @@ function tblDatosCurriculares(){
     });
 
     html+=' <tr>\
-                <td style="background-color: #dee2e6;" colspan="5">ACLARACIONES/OBSERVACIONES</td>\
+                <td style="background-color: #dee2e6;" colspan="5">ACLARACIONES / OBSERVACIONES</td>\
             </tr>\
             <tr>\
                 <td colspan="5" style="height:80px;">' + jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.aclaracionesObservaciones + '</td>\
@@ -624,7 +625,7 @@ function tblCV(){
 
             if (nodo.ambitoSector.clave=="PUB"){
                 html +='<tr style="background-color: #dee2e6;">\
-                            <td colspan="2">NOMBRE DEL ENTE PÚBLICO/NOMBRE DE LA EMPRESA, SOCIEDAD O ASOCIACIÓN</td>\
+                            <td colspan="2">NOMBRE DEL ENTE PÚBLICO</td>\
                             <td>UBICACIÓN</td>\
                         </tr>\
                         <tr>\
@@ -632,8 +633,8 @@ function tblCV(){
                             <td>' + nodo.ubicacion + '</td>\
                         </tr>\
                         <tr style="background-color: #dee2e6;">\
-                            <td style="width: 34%;">ÁMBITO/SECTOR EN QUE LABORASTE</td>\
-                            <td style="width: 33%;">NIVEL/ORDEN DE GOBIERNO</td>\
+                            <td style="width: 34%;">ÁMBITO / SECTOR EN EL QUE LABORASTE</td>\
+                            <td style="width: 33%;">NIVEL / ORDEN DE GOBIERNO</td>\
                             <td style="width: 33%;">ÁMBITO PÚBLICO</td>\
                         </tr>\
                         <tr>\
@@ -642,7 +643,7 @@ function tblCV(){
                             <td style="width: 33%;">' + nodo.ambitoPublico + '</td>\
                         </tr>\
                         <tr style="background-color: #dee2e6;">\
-                            <td style="width: 34%;">EMPLEO, CARGO O COMISIÓN/PUESTO</td>\
+                            <td style="width: 34%;">EMPLEO, CARGO O COMISIÓN</td>\
                             <td style="width: 33%;">FECHA DE INGRESO</td>\
                             <td style="width: 33%;">FECHA DE EGRESO</td>\
                         </tr>\
@@ -650,17 +651,25 @@ function tblCV(){
                             <td style="width: 34%;">' + nodo.empleoCargoComision + '</td>\
                             <td style="width: 33%;">' + nodo.fechaIngreso + '</td>\
                             <td style="width: 33%;">' + nodo.fechaEgreso + '</td>\
+                        </tr>\
+                        <tr style="background-color: #dee2e6;">\
+                            <td style="width: 34%;">ÁREA DE ADSCRIPCIÓN</td>\
+                            <td colspan="2">FUNCIÓN PRINCIPAL</td>\
+                        </tr>\
+                        <tr>\
+                            <td style="width: 34%;">' + nodo.areaAdscripcion + '</td>\
+                            <td colspan="2">' + nodo.funcionPrincipal + '</td>\
                         </tr>';
             }
             else{
                 html +=' <tr style="background-color: #dee2e6;">\
-                            <td colspan="3">NOMBRE DEL ENTE PÚBLICO/NOMBRE DE LA EMPRESA, SOCIEDAD O ASOCIACIÓN</td>\
+                            <td colspan="3">NOMBRE DE LA EMPRESA, SOCIEDAD O ASOCIACIÓN</td>\
                         </tr>\
                         <tr>\
                             <td colspan="3">' +  nodo.nombreEmpresaSociedadAsociacion + '</td>\
                         </tr>\
                         <tr style="background-color: #dee2e6;">\
-                            <td style="width: 34%;">ÁMBITO/SECTOR EN QUE LABORASTE</td>\
+                            <td style="width: 34%;">ÁMBITO / SECTOR EN QUE LABORASTE</td>\
                             <td style="width: 33%;">ÁREA DE ADSCRIPCIÓN</td>\
                             <td style="width: 33%;">EMPLEO, CARGO O COMISIÓN/PUESTO</td>\
                         </tr>\
@@ -674,13 +683,13 @@ function tblCV(){
                             <td>FECHA DE INGRESO</td>\
                             <td style="width: 33%;">FECHA DE EGRESO</td>\
                         </tr>\
-                        <tr style="background-color: #dee2e6;">\
+                        <tr>\
                             <td>' + nodo.rfc + '</td>\
                             <td style="width: 33%;">' + nodo.fechaIngreso + '</td>\
                             <td style="width: 33%;">' + nodo.fechaEgreso + '</td>\
                         </tr>\
                         <tr style="background-color: #dee2e6;">\
-                            <td colspan="2">SECTOR</td>\
+                            <td colspan="2">SECTOR AL QUE PERTENECE</td>\
                             <td>UBICACIÓN</td>\
                         </tr>\
                         <tr>\
@@ -690,14 +699,14 @@ function tblCV(){
             }
             html+='<tr><td colspan="3" style="background-color: #fff; border:1px solid #fff; color: #fff; font-size:14px;"></td></tr>';
         }); 
-        html+= '<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html+= '<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.experienciaLaboral.aclaracionesObservaciones + '</td>\
                 </tr>';       
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.experienciaLaboral.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -764,8 +773,8 @@ function tblPareja(titulo){
                         <td class="numeroInterior">' + nodo.domicilioMexico.numeroInterior + '</td>\
                     </tr>\
                     <tr style="background-color: #dee2e6;">\
-                        <td>COLONIA/LOCALIDAD</td>\
-                        <td>MUNICIPIO/ALCALDÍA</td>\
+                        <td>COLONIA / LOCALIDAD</td>\
+                        <td>MUNICIPIO / ALCALDÍA</td>\
                         <td>ENTIDAD FEDERATIVA</td>\
                     </tr>\
                     <tr>\
@@ -792,8 +801,8 @@ function tblPareja(titulo){
                         <td class="numeroInterior">' + nodo.domicilioExtranjero.numeroInterior + '</td>\
                     </tr>\
                     <tr style="background-color: #dee2e6;">\
-                        <td>CIUDAD/LOCALIDAD</td>\
-                        <td>ESTADO/PROVINCIA/PAIS</td>\
+                        <td>CIUDAD / LOCALIDAD</td>\
+                        <td>ESTADO / PROVINCIA/PAIS</td>\
                         <td>CÓDIGO POSTAL</td>\
                     </tr>\
                     <tr>\
@@ -802,15 +811,89 @@ function tblPareja(titulo){
                         <td class="codigoPostal">' + nodo.domicilioExtranjero.codigoPostal + '</td>\
                     </tr>';
         }
+        
+        if(jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboral.clave=="PUB"){
+            let actividadLaboralPareja =jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboralSectorPublico;
+            htm+="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
+            htm+="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboral.valor + "</td></tr>";
+            html +='<tr style="background-color: #dee2e6;">\
+                        <td colspan="2">NOMBRE DEL ENTE PÚBLICO</td>\
+                        <td>ÁREA DE ADSCRIPCIÓN</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + actividadLaboralPareja.nombreEntePublico + '</td>\
+                        <td>' + actividadLaboralPareja.areaAdscripcion + '</td>\
+                    </tr>\
+                    <tr style="background-color: #dee2e6;">\
+                        <td style="width: 34%;">ÁMBITO PÚBLICO</td>\
+                        <td style="width: 33%;">NIVEL / ORDEN DE GOBIERNO</td>\
+                        <td style="width: 33%;">FECHA DE INGRESO</td>\
+                    </tr>\
+                    <tr>\
+                        <td style="width: 34%;">' + actividadLaboralPareja.ambitoPublico + '</td>\
+                        <td style="width: 33%;">' + actividadLaboralPareja.nivelOrdenGobierno + '</td>\
+                        <td style="width: 33%;">' + actividadLaboralPareja.fechaIngreso + '</td>\
+                    </tr>\
+                    <tr style="background-color: #dee2e6;">\
+                        <td style="width: 34%;">EMPLEO, CARGO O COMISIÓN</td>\
+                        <td style="width: 33%;">FUNCION PRINCIPAL</td>\
+                        <td style="width: 33%;">SALARIO MENSUAL NETO</td>\
+                    </tr>\
+                    <tr>\
+                        <td style="width: 34%;">' + actividadLaboralPareja.empleoCargoComision + '</td>\
+                        <td style="width: 33%;">' + actividadLaboralPareja.funcionPrincipal + '</td>\
+                        <td style="width: 33%;">' + actividadLaboralPareja.salarioMensualNeto.valor + actividadLaboralPareja.salarioMensualNeto.moneda + '</td>\
+                    </tr>\
+                    <tr style="background-color: #dee2e6;">\
+                        <td style="width: 34%;">ÁREA DE ADSCRIPCIÓN</td>\
+                        <td colspan="2">FUNCIÓN PRINCIPAL</td>\
+                    </tr>\
+                    <tr>\
+                        <td style="width: 34%;">' + actividadLaboralPareja.areaAdscripcion + '</td>\
+                        <td colspan="2">' + actividadLaboralPareja.funcionPrincipal + '</td>\
+                    </tr>';
+        }
+        else{
+            let actividadLaboralPareja2 =jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboralSectorPrivadoOtro;
+            let provContraGob =  actividadLaboralPareja2.proveedorContratistaGobierno ? "SI":"NO";
+            htm+="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
+            htm+="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboral.valor + "</td></tr>";
+            html +=' <tr style="background-color: #dee2e6;">\
+                            <td colspan="2">NOMBRE DE LA EMPRESA, SOCIEDAD O ASOCIACIÓN</td>\
+                            <td style="width: 33%;">RFC</td>\
+                        </tr>\
+                        <tr>\
+                            <td colspan="2">' +  actividadLaboralPareja2.nombreEmpresaSociedadAsociacion + '</td>\
+                            <td>' +  actividadLaboralPareja2.rfc + '</td>\
+                        </tr>\
+                        <tr style="background-color: #dee2e6;">\
+                            <td style="width: 34%;">ÁMBITO / SECTOR EN QUE LABORASTE</td>\
+                            <td style="width: 33%;">EMPLEO O CARGO</td>\
+                            <td style="width: 33%;">SALARIO MENSUAL NETO</td>\
+                        </tr>\
+                        <tr>\
+                            <td style="width: 34%;">' + actividadLaboralPareja2.sector.valor + '</td>\
+                            <td style="width: 33%;">' + actividadLaboralPareja2.empleoCargoComision + '</td>\
+                            <td style="width: 33%;">' + actividadLaboralPareja2.salarioMensualNeto.valor + actividadLaboralPareja2.salarioMensualNeto.moneda + '</td>\
+                        </tr>\
+                        <tr style="background-color: #dee2e6;">\
+                            <td>FECHA DE INGRESO</td>\
+                            <td colspan="2" style="width: 33%;">¿ES PROOVEDOR O CONTRATISTA DE GOBIERNO?</td>\
+                        </tr>\
+                        <tr>\
+                            <td>' + actividadLaboralPareja2.fechaIngreso + '</td>\
+                            <td style="width: 33%;">' + provContraGob + '</td>\
+                        </tr>';
+        }
 
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.datosPareja.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.datosPareja.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -910,15 +993,81 @@ function tblDependienteEco(titulo){
                             <td class="codigoPostal">' + nodo.domicilioExtranjero.codigoPostal + '</td>\
                         </tr>';
             }
+
+            if(jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboral.clave=="PUB"){
+                let actividadLaboralDependiente =jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboralSectorPublico;
+                htm+="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
+                htm+="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboral.valor + "</td></tr>";
+                html +='<tr style="background-color: #dee2e6;">\
+                            <td colspan="2">NOMBRE DEL ENTE PÚBLICO</td>\
+                            <td>ÁREA DE ADSCRIPCIÓN</td>\
+                        </tr>\
+                        <tr>\
+                            <td colspan="2">' + actividadLaboralDependiente.nombreEntePublico + '</td>\
+                            <td>' + actividadLaboralDependiente.areaAdscripcion + '</td>\
+                        </tr>\
+                        <tr style="background-color: #dee2e6;">\
+                            <td style="width: 34%;">ÁMBITO PÚBLICO</td>\
+                            <td style="width: 33%;">NIVEL / ORDEN DE GOBIERNO</td>\
+                            <td style="width: 33%;">FECHA DE INGRESO</td>\
+                        </tr>\
+                        <tr>\
+                            <td style="width: 34%;">' + actividadLaboralDependiente.ambitoPublico + '</td>\
+                            <td style="width: 33%;">' + actividadLaboralDependiente.nivelOrdenGobierno + '</td>\
+                            <td style="width: 33%;">' + actividadLaboralDependiente.fechaIngreso + '</td>\
+                        </tr>\
+                        <tr style="background-color: #dee2e6;">\
+                            <td style="width: 34%;">EMPLEO, CARGO O COMISIÓN</td>\
+                            <td style="width: 33%;">FUNCION PRINCIPAL</td>\
+                            <td style="width: 33%;">SALARIO MENSUAL NETO</td>\
+                        </tr>\
+                        <tr>\
+                            <td style="width: 34%;">' + actividadLaboralDependiente.empleoCargoComision + '</td>\
+                            <td style="width: 33%;">' + actividadLaboralDependiente.funcionPrincipal + '</td>\
+                            <td style="width: 33%;">' + actividadLaboralDependiente.salarioMensualNeto.valor + actividadLaboralDependiente.salarioMensualNeto.moneda + '</td>\
+                        </tr>\
+                        <tr style="background-color: #dee2e6;">\
+                            <td style="width: 34%;">ÁREA DE ADSCRIPCIÓN</td>\
+                            <td colspan="2">FUNCIÓN PRINCIPAL</td>\
+                        </tr>\
+                        <tr>\
+                            <td style="width: 34%;">' + actividadLaboralDependiente.areaAdscripcion + '</td>\
+                            <td colspan="2">' + actividadLaboralDependiente.funcionPrincipal + '</td>\
+                        </tr>';
+            }
+            else{
+                let actividadLaboralDependiente2 =jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboralSectorPrivadoOtro;
+                let provContraGob =  actividadLaboralDependiente2.proveedorContratistaGobierno ? "SI":"NO";
+                htm+="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
+                htm+="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboral.valor + "</td></tr>";
+                html +=' <tr style="background-color: #dee2e6;">\
+                                <td colspan="2">NOMBRE DE LA EMPRESA, SOCIEDAD O ASOCIACIÓN</td>\
+                                <td style="width: 33%;">RFC</td>\
+                            </tr>\
+                            <tr>\
+                                <td colspan="2">' +  actividadLaboralDependiente2.nombreEmpresaSociedadAsociacion + '</td>\
+                                <td>' +  actividadLaboralDependiente2.rfc + '</td>\
+                            </tr>\
+                            <tr style="background-color: #dee2e6;">\
+                                <td style="width: 34%;">FECHA DE INGRESO</td>\
+                                <td style="width: 33%;">EMPLEO O CARGO</td>\
+                                <td style="width: 33%;">SALARIO MENSUAL NETO</td>\
+                            </tr>\
+                            <tr>\
+                                <td style="width: 34%;">' + actividadLaboralDependiente2.fechaIngreso + '</td>\
+                                <td style="width: 33%;">' + actividadLaboralDependiente2.empleoCargo + '</td>\
+                                <td style="width: 33%;">' + actividadLaboralDependiente2.salarioMensualNeto.valor + actividadLaboralDependiente2.salarioMensualNeto.moneda + '</td>\
+                            </tr>';
+            }
         });
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -1134,7 +1283,7 @@ function tblIngresos(titulo){
                 <td style="text-align: right;">' + totalIngresosNetos + " " + totalIngresosNetosMoneda + '</td>\
             </tr>';   
             
-    html += '<tr style="background-color: #dee2e6;"><td colspan="2">ACLARACIONES/OBSERVACIONES</td></tr>\
+    html += '<tr style="background-color: #dee2e6;"><td colspan="2">ACLARACIONES / OBSERVACIONES</td></tr>\
             <tr>\
                 <td colspan="2">' + nodoIngresos.aclaracionesObservaciones + '</td>\
             </tr>';
@@ -1241,14 +1390,14 @@ function tblDesempenoServidorPublico(titulo){
                     <td style="text-align: right;">' + format(nodo.totalIngresosNetosAnuales.valor) + " " + nodo.totalIngresosNetosAnuales.moneda + '</td>\
                 </tr>';   
                 
-        html += '<tr style="background-color: #dee2e6;"><td colspan="2">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html += '<tr style="background-color: #dee2e6;"><td colspan="2">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="2">' + nodo.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="2">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="2">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="2">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="2">' + jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -1400,14 +1549,14 @@ function tblBienesInMuebles(titulo){
 
             html+="<tr style='border-left:1px solid #fff; border-right:1px solid #fff;'><td colspan='3' style='border-left:1px solid #fff; border-right:1px solid #fff;'><td></tr>"                                
         });
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.bienesInmuebles.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.bienesInmuebles.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -1503,14 +1652,14 @@ function tblVehiculos(titulo){
 
             html+="<tr style='border-left:1px solid #fff; border-right:1px solid #fff;'><td colspan='3' style='border-left:1px solid #fff; border-right:1px solid #fff;'><td></tr>"                                
         });
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.vehiculos.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.vehiculos.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -1593,14 +1742,14 @@ function tblBienesMuebles(titulo){
 
             html+="<tr style='border-left:1px solid #fff; border-right:1px solid #fff;'><td colspan='3' style='border-left:1px solid #fff; border-right:1px solid #fff;'><td></tr>"                                
         });
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.bienesMuebles.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.bienesMuebles.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -1687,14 +1836,14 @@ function tblInversiones(titulo){
 
             html+="<tr style='border-left:1px solid #fff; border-right:1px solid #fff;'><td colspan='3' style='border-left:1px solid #fff; border-right:1px solid #fff;'><td></tr>"                                
         });
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.inversiones.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.inversiones.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -1786,14 +1935,14 @@ function tblAdeudos(titulo){
 
             html+="<tr style='border-left:1px solid #fff; border-right:1px solid #fff;'><td colspan='3' style='border-left:1px solid #fff; border-right:1px solid #fff;'><td></tr>"                                
         });
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.adeudos.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.adeudos.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -1901,14 +2050,14 @@ function tblPrestamoOComodato(titulo){
             html+="</tr>";
             html+="<tr><td colspan='3'><td></tr>"                                
         });
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.prestamoOComodato.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.situacionPatrimonial.prestamoOComodato.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -1974,14 +2123,14 @@ function tblParticipacionEmpresas(){
 
             html+="<tr><td colspan='3'><td></tr>"                                
         });
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.interes.participacion.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.interes.participacion.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -2046,14 +2195,14 @@ function tblParticipacionInstituciones(){
             
             html+="<tr><td colspan='3'><td></tr>"                                
         });
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.interes.participacionTomaDecisiones.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.interes.participacionTomaDecisiones.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -2104,14 +2253,14 @@ function tblApoyos(){
 
             html+="<tr><td colspan='3'><td></tr>"                                
         });
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.interes.apoyos.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.interes.apoyos.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -2176,14 +2325,14 @@ function tblRepresentacion(){
 
             html+="<tr><td colspan='2'><td></tr>"                                
         });
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="2">' + jsonResult.declaracion.interes.representacion.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="2">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="2">' + jsonResult.declaracion.interes.representacion.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -2242,14 +2391,14 @@ function tblClientes(){
 
             html+="<tr><td colspan='3'><td></tr>"                                
         });
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.interes.clientesPrincipales.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.interes.clientesPrincipales.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -2309,14 +2458,14 @@ function tblBeneficios(){
                         
             html+="<tr><td colspan='3'><td></tr>"                                
         });
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.interes.beneficiosPrivados.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.interes.beneficiosPrivados.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -2387,14 +2536,14 @@ function tblFideicomisos(){
 
             html+="<tr><td colspan='3'><td></tr>"                                
         });
-        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+        html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.interes.fideicomisos.aclaracionesObservaciones + '</td>\
                 </tr>';
     }
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>\
-                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
                 <tr>\
                     <td colspan="3">' + jsonResult.declaracion.interes.fideicomisos.aclaracionesObservaciones + '</td>\
                 </tr>';
@@ -2413,7 +2562,7 @@ function tblConstanciaFiscal(){
     else{
         html +='<tr><td colspan="3">NO TENGO INFORMACIÓN QUE REPORTAR.</td></tr>';
     }
-    html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES/OBSERVACIONES</td></tr>\
+    html +='<tr style="background-color: #dee2e6;"><td colspan="3">ACLARACIONES / OBSERVACIONES</td></tr>\
             <tr>\
                 <td colspan="3">' + jsonResult.declaracion.fiscal.constanciaFiscal.aclaracionesObservaciones + '</td>\
             </tr>';

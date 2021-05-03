@@ -32,9 +32,9 @@ window.initBeneficiosPrivados = function initBeneficiosPrivados(data){
             break;
         case "TERMINADO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
+            $(modulo + ".chkNinguno").prop("disabled", true);
             if (jsonResult.declaracion.interes.beneficiosPrivados.ninguno){
-                $(modulo + ".chkNinguno")[0].checked=true;
-                $(modulo + ".chkNinguno").prop("disabled", true);
+                $(modulo + ".chkNinguno")[0].checked=true;                
             }
             $(modulo + "textarea[name='aclaracionesObservaciones']").val(jsonResult.declaracion.interes.beneficiosPrivados.aclaracionesObservaciones).prop("disabled", true);
             $(modulo + ".btnEditar").addClass("hide");
@@ -142,6 +142,8 @@ window.funcionalidadGuardarRegistroBeneficiosPrivados = function funcionalidadGu
             $(form + ".content_especifique_sector input[name='sector_especifique']").val("");
         }        
     });
+    
+    $(form + ".CBOtipoBeneficio").val("S").trigger("change"); 
     $(form + ".CBOsector").val("AGRI").trigger("change"); 
     $(form + ".custom-control-input").prop("checked", false);
 
@@ -166,7 +168,7 @@ window.funcionalidadGuardarRegistroBeneficiosPrivados = function funcionalidadGu
         $(".content_chk_beneficiarios .custom-control-input").each(function(index) {
             if (this.checked){beneficiarios.push({clave:this.dataset.clave, valor: this.dataset.valor});}            
         });
-        if (beneficiarios.length==0){ mensajeSwal("Aviso", "Seleccione almenos 1 beneficiario.", "warning");}
+        if (beneficiarios.length==0){ mensajeSwal("Aviso", "Seleccione al menos 1 beneficiario.", "warning");}
         else{
             if( $("#form" + seccionName).valid()) {
                 var uuidItem;
@@ -196,7 +198,7 @@ window.guardarRegistroBeneficiosPrivados = function guardarRegistroBeneficiosPri
         "tipoPersona":      $(form  + " select[name='tipoPersona'] option:selected").val(),
         "tipoBeneficio": {
           "clave":          $(form  + " select[name='tipoBeneficio'] option:selected").val(),
-          "valor":          $(form  + " select[name='tipoBeneficio'] option:selected")[0].innerText,
+          "valor":          $(form  + " select[name='tipoBeneficio'] option:selected")[0].innerText.toUpperCase(),
         },
         "beneficiario": beneficiarios,
         "otorgante": {
@@ -212,7 +214,7 @@ window.guardarRegistroBeneficiosPrivados = function guardarRegistroBeneficiosPri
         },
         "sector": {
           "clave":  $(form  + " select[name='sector'] option:selected").val(),
-          "valor": $(form  + " input[name='sector_especifique']").val(),
+          "valor": $(form  + " input[name='sector_especifique']").val().toUpperCase(),
         }
     };
 

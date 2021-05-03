@@ -75,11 +75,19 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
     $(modulo + ".btnHabilitar").unbind("click");
 
     $(form + ".btnGuardar").on('click',function() {
-        window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
+        if ($(form + "input[name='remuneracionNetaCargoPublicoCantidad']").val() > 0){
+            window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
+        } else {
+            mensajeSwal('Error','La remuneración neta del declarante debe ser mayor a 0','error');
+        }
     });
 
-    $(modulo + ".btnTerminar").on('click',function() {
-        window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);        
+    $(form + ".btnTerminar").on('click',function() {
+        if ($(form + "input[name='remuneracionNetaCargoPublicoCantidad']").val() > 0){
+            window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
+        } else {
+            mensajeSwal('Error','La remuneración neta del declarante debe ser mayor a 0','error');
+        }
     });
     
     $(modulo + ".btnHabilitar").on("click",function() {
@@ -398,7 +406,7 @@ window.guardarActividadFinanciera_aaa = function guardarActividadFinanciera_aaa(
         "tipoInstrumento": 
         {
             "clave":  $(form + "select[name='tipoInstrumento'] option:selected").val(),
-            "valor":  $(form + "select[name='tipoInstrumento'] option:selected")[0].innerText,
+            "valor":  $(form + "select[name='tipoInstrumento'] option:selected")[0].innerText.toUpperCase(),
           }          
       };
       //limpiar inputs
@@ -485,7 +493,7 @@ window.guardarServiciosProfesionales_aaa = function guardarServiciosProfesionale
           "valor":  parseInt($(form + "input[name='serviciosProfesionalesRemuneracionCantidad']").val()),
           "moneda": $(form + "select[name='serviciosProfesionalesRemuneracionMoneda'] option:selected").val()
         },
-        "tipoServicio": $(form + "input[name='tipoServicio']").val()
+        "tipoServicio": $(form + "input[name='tipoServicio']").val().toUpperCase()
       };
       //limpiar inputs
       $(form + "input[name='serviciosProfesionalesRemuneracionCantidad']").val("");
@@ -572,7 +580,7 @@ window.guardarEnajenacionBienes_aaa = function guardarEnajenacionBienes_aaa(uuid
           "valor":  parseInt($(form + "input[name='enajenacionBienesRemuneracionCantidad']").val()),
           "moneda": $(form + "select[name='enajenacionBienesRemuneracionMoneda'] option:selected").val()
         },
-        "tipoBienEnajenado": $(form + "select[name='tipoBienEnajenado'] option:selected").val()
+        "tipoBienEnajenado": $(form + "select[name='tipoBienEnajenado'] option:selected").val().toUpperCase()
       };
       //limpiar inputs
       $(form + "input[name='enajenacionBienesRemuneracionCantidad']").val("");
@@ -659,7 +667,7 @@ window.guardarOtrosIngresos_aaa = function guardarOtrosIngresos_aaa(uuidItem){
           "valor":  parseInt($(form + "input[name='otrosIngresosRemuneracionCantidad']").val()),
           "moneda": $(form + "select[name='otrosIngresosRemuneracionMoneda'] option:selected").val()
         },
-        "tipoIngreso": $(form + "input[name='tipoIngreso']").val()
+        "tipoIngreso": $(form + "input[name='tipoIngreso']").val().toUpperCase()
       };
       //limpiar inputs
       $(form + "input[name='otrosIngresosRemuneracionCantidad']").val("");

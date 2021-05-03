@@ -20,6 +20,10 @@ window.initAdeudos = function initAdeudos(data){
         break;
         case "EN_PROCESO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
+            if (jsonResult.declaracion.situacionPatrimonial.adeudos.ninguno){
+                $(modulo + ".chkNinguno")[0].checked=true;                
+            }
+
             $(modulo + ".btnAgregar").removeClass("hide");
             $(modulo + ".btnHabilitar").addClass("hide");
             $(modulo + ".btnTerminar").removeClass("hide");
@@ -217,8 +221,8 @@ window.funcionalidadGuardarRegistroAdeudos = function funcionalidadGuardarRegist
             tercerosTemp[uuid]={
                 "uuid":                 uuid,
                 "tipoPersona":          $(form + ".content_terceros_nuevo select[name='tipoPersona'] option:selected").val(),
-                "nombreRazonSocial":    $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val(),
-                "rfc":                  $(form + ".content_terceros_nuevo input[name='rfc']").val(),
+                "nombreRazonSocial":    $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val().toUpperCase(),
+                "rfc":                  $(form + ".content_terceros_nuevo input[name='rfc']").val().toUpperCase(),
             };
             $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val("");
             $(form + ".content_terceros_nuevo input[name='rfc']").val("");

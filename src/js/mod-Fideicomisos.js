@@ -32,9 +32,9 @@ window.initFideicomisos = function initFideicomisos(data){
             break;
         case "TERMINADO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
+            $(modulo + ".chkNinguno").prop("disabled", true);
             if (jsonResult.declaracion.interes.fideicomisos.ninguno){
-                $(modulo + ".chkNinguno")[0].checked=true;
-                $(modulo + ".chkNinguno").prop("disabled", true);
+                $(modulo + ".chkNinguno")[0].checked=true;                
             }
             $(modulo + "textarea[name='aclaracionesObservaciones']").val(jsonResult.declaracion.interes.fideicomisos.aclaracionesObservaciones).prop("disabled", true);
             $(modulo + ".btnEditar").addClass("hide");
@@ -177,24 +177,24 @@ window.guardarRegistroFideicomisos = function guardarRegistroFideicomisos(uuidIt
         "tipoRelacion":  $(form  + " select[name='tipoRelacion'] option:selected").val(),
         "tipoFideicomiso": $(form  + " select[name='tipoFideicomiso'] option:selected").val(),
         "tipoParticipacion": $(form  + " select[name='tipoParticipacion'] option:selected").val(),
-        "rfcFideicomiso": $(form  + " input[name='rfcFideicomiso']").val(),
+        "rfcFideicomiso": $(form  + " input[name='rfcFideicomiso']").val().toUpperCase(),
         "fideicomitente": {
           "tipoPersona":  $(form  + " select[name='fideicomitente_tipoPersona'] option:selected").val(),
-          "nombreRazonSocial": $(form  + " input[name='fideicomitente_nombreRazonSocial']").val(),
-          "rfc": $(form  + " input[name='fideicomitente_rfc']").val(),
+          "nombreRazonSocial": $(form  + " input[name='fideicomitente_nombreRazonSocial']").val().toUpperCase(),
+          "rfc": $(form  + " input[name='fideicomitente_rfc']").val().toUpperCase(),
         },
         "fiduciario": {
-          "nombreRazonSocial": $(form  + " input[name='fiduciario_nombreRazonSocial']").val(),
-          "rfc":  $(form  + " input[name='fiduciario_rfc']").val(),
+          "nombreRazonSocial": $(form  + " input[name='fiduciario_nombreRazonSocial']").val().toUpperCase(),
+          "rfc":  $(form  + " input[name='fiduciario_rfc']").val().toUpperCase(),
         },
         "fideicomisario": {
           "tipoPersona":  $(form  + " select[name='fideicomisario_tipoPersona'] option:selected").val(),
-          "nombreRazonSocial": $(form  + " input[name='fideicomisario_nombreRazonSocial']").val(),
-          "rfc": $(form  + " input[name='fideicomisario_rfc']").val(),
+          "nombreRazonSocial": $(form  + " input[name='fideicomisario_nombreRazonSocial']").val().toUpperCase(),
+          "rfc": $(form  + " input[name='fideicomisario_rfc']").val().toUpperCase(),
         },
         "sector": {
           "clave": $(form  + " select[name='sector']").val(),
-          "valor": $(form  + " input[name='sector_especifique']").val(),
+          "valor": $(form  + " input[name='sector_especifique']").val().toUpperCase(),
         },
         "extranjero": $(form  + " select[name='extranjero'] option:selected").val(),
       };
@@ -246,7 +246,7 @@ window.editarFideicomisos = function editarFideicomisos(data){
     $("#form" + item.seccionName + " input[name='fideicomisario_nombreRazonSocial']").val(nodo.fideicomisario.nombreRazonSocial);
     $("#form" + item.seccionName + " input[name='fideicomisario_rfc']").val(nodo.fideicomisario.rfc);
 
-    $("#form" + item.seccionName + " select[name='sector']").val(nodo.sector.clave); 
+    $("#form" + item.seccionName + " select[name='sector']").val(nodo.sector.clave).trigger("change"); 
     $("#form" + item.seccionName + " input[name='sector_especifique']").val(nodo.sector.valor);
     $("#form" + item.seccionName + " select[name='extranjero']").val(nodo.extranjero);
 }      

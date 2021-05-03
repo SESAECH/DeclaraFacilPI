@@ -215,8 +215,8 @@ window.funcionalidadGuardarRegistroInversiones = function funcionalidadGuardarRe
             tercerosTemp[uuid]={
                 "uuid":                 uuid,
                 "tipoPersona":          $(form + ".content_terceros_nuevo select[name='tipoPersona'] option:selected").val(),
-                "nombreRazonSocial":    $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val(),
-                "rfc":                  $(form + ".content_terceros_nuevo input[name='rfc']").val(),
+                "nombreRazonSocial":    $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val().toUpperCase(),
+                "rfc":                  $(form + ".content_terceros_nuevo input[name='rfc']").val().toUpperCase(),
             };
             $(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val("");
             $(form + ".content_terceros_nuevo input[name='rfc']").val("");

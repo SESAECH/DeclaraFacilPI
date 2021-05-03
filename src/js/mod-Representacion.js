@@ -32,9 +32,9 @@ window.initRepresentacion = function initRepresentacion(data){
             break;
         case "TERMINADO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
+            $(modulo + ".chkNinguno").prop("disabled", true);
             if (jsonResult.declaracion.interes.representacion.ninguno){
-                $(modulo + ".chkNinguno")[0].checked=true;
-                $(modulo + ".chkNinguno").prop("disabled", true);
+                $(modulo + ".chkNinguno")[0].checked=true;                
             }
             $(modulo + "textarea[name='aclaracionesObservaciones']").val(jsonResult.declaracion.interes.representacion.aclaracionesObservaciones).prop("disabled", true);
             $(modulo + ".btnEditar").addClass("hide");
@@ -142,6 +142,13 @@ window.funcionalidadGuardarRegistroRepresentacion = function funcionalidadGuarda
         }        
     });
 
+    $(form + "select[name='recibeRemuneracion']").on('change', function() {
+        if (this.value == "false"){ $(form + "input[name='montoMensual']").val("0").prop("disabled", true); }
+        else{ $(form + "input[name='montoMensual']").val("").prop("disabled", false); }             
+    });
+
+    $(form + "select[name='recibeRemuneracion']").val("false").trigger("change");
+
     $(form + ".CBOpais").val("MX").trigger("change");
     $(form + ".CBOsector").val("AGRI").trigger("change");
 
@@ -190,8 +197,8 @@ window.guardarRegistroRepresentacion = function guardarRegistroRepresentacion(uu
         "tipoRepresentacion":   $(form  + " select[name='tipoRepresentacion'] option:selected").val(),
         "fechaInicioRepresentacion": $(form  + " input[name='fechaInicioRepresentacion']").val(),
         "tipoPersona":          $(form  + " select[name='tipoPersona'] option:selected").val(),
-        "nombreRazonSocial":    $(form  + " input[name='nombreRazonSocial']").val(),
-        "rfc":                  $(form  + " input[name='rfc']").val(),
+        "nombreRazonSocial":    $(form  + " input[name='nombreRazonSocial']").val().toUpperCase(),
+        "rfc":                  $(form  + " input[name='rfc']").val().toUpperCase(),
         "recibeRemuneracion":   $(form  + " select[name='recibeRemuneracion'] option:selected").val()=="true" ? true : false,
         "montoMensual": {
           "valor":              parseInt($(form  + " input[name='montoMensual']").val()),
@@ -201,12 +208,12 @@ window.guardarRegistroRepresentacion = function guardarRegistroRepresentacion(uu
           "pais":               $(form  + " select[name='pais'] option:selected").val(),
           "entidadFederativa": {
             "clave": $(form  + " select[name='entidadFederativa'] option:selected").val(),
-            "valor": $(form  + " select[name='entidadFederativa'] option:selected")[0].innerText,
+            "valor": $(form  + " select[name='entidadFederativa'] option:selected")[0].innerText.toUpperCase(),
           }
         },
         "sector": {
           "clave": $(form  + " select[name='sector']").val(),
-          "valor": $(form  + " input[name='sector_especifique']").val(),
+          "valor": $(form  + " input[name='sector_especifique']").val().toUpperCase(),
         }
       };
 

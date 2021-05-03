@@ -151,13 +151,27 @@ window.funcionalidadGuardarRegistroVehiculos = function funcionalidadGuardarRegi
         }        
     });
 
+    $(form + '.CBOtipoPersona').on('change', function() {
+        if(this.value=="FISICA"){
+            $(form + ".CBOparentescoRelacion option").removeClass("hide");
+            $(form + ".CBOparentescoRelacion option[value='NIN']").addClass("hide");
+            $(form + ".CBOparentescoRelacion option[value='OTRO']").addClass("hide");     
+            $(form + '.CBOparentescoRelacion').val("ABU").trigger("change");         
+        }
+        else{
+            $(form + ".CBOparentescoRelacion option").addClass("hide");
+            $(form + ".CBOparentescoRelacion option[value='NIN']").removeClass("hide");
+            $(form + ".CBOparentescoRelacion option[value='OTRO']").removeClass("hide");
+            $(form + '.CBOparentescoRelacion').val("NIN").trigger("change");
+        }
+    }); 
+
     $(form + '.CBOparentescoRelacion').on('change', function() {
         $(form + ".content_transmisor_relacion_especifique").addClass("hide");
         $(form + ".content_transmisor_relacion_especifique input[name='transmisor_relacion_especifique']").val($(form + '.CBOparentescoRelacion option:selected')[0].innerText);
         if(this.value == "OTRO"){
             $(form + ".content_transmisor_relacion_especifique").removeClass("hide");
             $(form + ".content_transmisor_relacion_especifique input[name='transmisor_relacion_especifique']").val("");
-            $(form + '.CBOparentescoRelacion').val("ABU").trigger("change");
         }        
     });
 
@@ -182,7 +196,8 @@ window.funcionalidadGuardarRegistroVehiculos = function funcionalidadGuardarRegi
     $(form + '.CBOmotivoBaja').val("NA").trigger("change");
     $(form + ".CBOentidadFederativa").val("07").trigger("change");
     $(form + ".CBOpais").val("MX").trigger("change");
-
+    $(form + '.CBOtipoPersona').val("FISICA").trigger("change");
+    
     tercerosTemp={};
     transmisoresTemp={};
     $("#formVehiculos .tblTerceros tbody").empty();
@@ -235,7 +250,7 @@ window.funcionalidadGuardarRegistroVehiculos = function funcionalidadGuardarRegi
 
     $(form + ".btnAgregarTercero").on('click',function() {
         if($(form + ".content_terceros_nuevo input[name='nombreRazonSocial']").val().length==0){ mensajeSwal("Aviso","Ingresa el nombre / institución o razón social del tercero.", "warning")}
-        //else if($(form + ".content_terceros_nuevo input[name='rfc']").val().length<12){ mensajeSwal("Aviso","Ingresa el RFC del tercero.", "warning")}
+        else if($(form + ".content_terceros_nuevo input[name='rfc']").val().length<12){ mensajeSwal("Aviso","Ingresa el RFC del tercero.", "warning")}
         else{
             let uuid=generarUUID();
             tercerosTemp[uuid]={
@@ -252,6 +267,7 @@ window.funcionalidadGuardarRegistroVehiculos = function funcionalidadGuardarRegi
 
     $(form + ".btnAgregarTransmisor").on('click',function() {
         if($(form + ".content_transmisor_nuevo input[name='transmisor_nombreRazonSocial']").val().length==0){ mensajeSwal("Aviso","Ingresa el nombre/institución o razón social del transmisor.", "warning")}
+        else if($(form + ".content_terceros_nuevo input[name='transmisor_rfc']").val().length<12){ mensajeSwal("Aviso","Ingresa el RFC del transmisor.", "warning")}
         else if($(form + ".content_transmisor_nuevo input[name='transmisor_relacion_especifique']").val().length==0){ mensajeSwal("Aviso","Seleccione la relación del transmisor.", "warning")}
         else{
             let uuid=generarUUID();
@@ -262,7 +278,7 @@ window.funcionalidadGuardarRegistroVehiculos = function funcionalidadGuardarRegi
                 "rfc":                  $(form + ".content_transmisor_nuevo input[name='transmisor_rfc']").val().toUpperCase(),
                 "relacion": {
                     "clave": $(form + ".content_transmisor_nuevo select[name='transmisor_relacion'] option:selected").val(),
-                    "valor": $(form + ".content_transmisor_nuevo input[name='transmisor_relacion_especifique']").val()
+                    "valor": $(form + ".content_transmisor_nuevo input[name='transmisor_relacion_especifique']").val().toUpperCase()
                   }
             };
             $(form + ".content_transmisor_nuevo input[name='transmisor_nombreRazonSocial']").val("");
