@@ -67,6 +67,8 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
         }
         else{
             jsonResult.captura = avanceCaptura.captura;
+            console.log (jsonResult.captura);
+            console.log(avanceCaptura.captura);
             jsonResult.declaracion ={};
             $("input[name='nameContralor']").val(jsonResult.captura.contralor);
             Object.keys(avanceCaptura.captura.declaracion.situacionPatrimonial.secciones).forEach(function (index) {
@@ -93,18 +95,21 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
                     $(".status-seccion-" + item.apartado + "-" + item.no).removeClass("indicador-status").addClass("indicador-status-success").text("TERMINADO");
                 }            
             });
-            Object.keys(avanceCaptura.captura.declaracion.fiscal.secciones).forEach(function (index) {
-                var item = avanceCaptura.captura.declaracion.fiscal.secciones[index];
-                if (!jsonResult.declaracion[item.apartado]){jsonResult.declaracion[item.apartado] = {};}
-                if (!jsonResult.declaracion[item.apartado][item.seccion]){jsonResult.declaracion[item.apartado][item.seccion] = {};}
-                jsonResult.declaracion[item.apartado][item.seccion] = avanceCaptura.declaracion[item.apartado][item.seccion];
-                if (item.status =="EN_PROCESO"){
-                    $(".status-seccion-" + item.apartado + "-" + item.no).removeClass("indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
+            if (typeof avanceCaptura.captura.declaracion.fiscal !='undefined') {
+                Object.keys(avanceCaptura.captura.declaracion.fiscal.secciones).forEach(function (index) {
+                    var item = avanceCaptura.captura.declaracion.fiscal.secciones[index];
+                    if (!jsonResult.declaracion[item.apartado]){jsonResult.declaracion[item.apartado] = {};}
+                    if (!jsonResult.declaracion[item.apartado][item.seccion]){jsonResult.declaracion[item.apartado][item.seccion] = {};}
+                    jsonResult.declaracion[item.apartado][item.seccion] = avanceCaptura.declaracion[item.apartado][item.seccion];
+                    if (item.status =="EN_PROCESO"){
+                        $(".status-seccion-" + item.apartado + "-" + item.no).removeClass("indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
+                    }
+                    else if (item.status =="TERMINADO"){
+                        $(".status-seccion-" + item.apartado + "-" + item.no).removeClass("indicador-status").addClass("indicador-status-success").text("TERMINADO");
+                    }            
                 }
-                else if (item.status =="TERMINADO"){
-                    $(".status-seccion-" + item.apartado + "-" + item.no).removeClass("indicador-status").addClass("indicador-status-success").text("TERMINADO");
-                }            
-            });
+                );
+            }
 
             validarDeclaracionTerminada();
             $("#modalIniciar").modal("hide");
