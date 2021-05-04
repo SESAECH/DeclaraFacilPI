@@ -20,6 +20,9 @@ window.initBienesMuebles = function initBienesMuebles(data){
         break;
         case "EN_PROCESO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
+            if (jsonResult.declaracion.situacionPatrimonial.bienesMuebles.ninguno){
+                $(modulo + ".chkNinguno")[0].checked=true;                
+            }
             $(modulo + ".btnAgregar").removeClass("hide");
             $(modulo + ".btnHabilitar").addClass("hide");
             $(modulo + ".btnTerminar").removeClass("hide");

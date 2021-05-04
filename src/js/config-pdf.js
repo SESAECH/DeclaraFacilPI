@@ -814,8 +814,8 @@ function tblPareja(titulo){
         
         if(jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboral.clave=="PUB"){
             let actividadLaboralPareja =jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboralSectorPublico;
-            htm+="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
-            htm+="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboral.valor + "</td></tr>";
+            html +="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
+            html +="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboral.valor + "</td></tr>";
             html +='<tr style="background-color: #dee2e6;">\
                         <td colspan="2">NOMBRE DEL ENTE PÚBLICO</td>\
                         <td>ÁREA DE ADSCRIPCIÓN</td>\
@@ -856,8 +856,8 @@ function tblPareja(titulo){
         else{
             let actividadLaboralPareja2 =jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboralSectorPrivadoOtro;
             let provContraGob =  actividadLaboralPareja2.proveedorContratistaGobierno ? "SI":"NO";
-            htm+="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
-            htm+="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboral.valor + "</td></tr>";
+            html +="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
+            html +="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboral.valor + "</td></tr>";
             html +=' <tr style="background-color: #dee2e6;">\
                             <td colspan="2">NOMBRE DE LA EMPRESA, SOCIEDAD O ASOCIACIÓN</td>\
                             <td style="width: 33%;">RFC</td>\
@@ -996,8 +996,8 @@ function tblDependienteEco(titulo){
 
             if(jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboral.clave=="PUB"){
                 let actividadLaboralDependiente =jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboralSectorPublico;
-                htm+="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
-                htm+="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboral.valor + "</td></tr>";
+                html +="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
+                html +="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboral.valor + "</td></tr>";
                 html +='<tr style="background-color: #dee2e6;">\
                             <td colspan="2">NOMBRE DEL ENTE PÚBLICO</td>\
                             <td>ÁREA DE ADSCRIPCIÓN</td>\
@@ -1038,9 +1038,9 @@ function tblDependienteEco(titulo){
             else{
                 let actividadLaboralDependiente2 =jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboralSectorPrivadoOtro;
                 let provContraGob =  actividadLaboralDependiente2.proveedorContratistaGobierno ? "SI":"NO";
-                htm+="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
-                htm+="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboral.valor + "</td></tr>";
-                html +=' <tr style="background-color: #dee2e6;">\
+                html +="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
+                html +="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboral.valor + "</td></tr>";
+                html +='<tr style="background-color: #dee2e6;">\
                                 <td colspan="2">NOMBRE DE LA EMPRESA, SOCIEDAD O ASOCIACIÓN</td>\
                                 <td style="width: 33%;">RFC</td>\
                             </tr>\

@@ -75,19 +75,11 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
     $(modulo + ".btnHabilitar").unbind("click");
 
     $(form + ".btnGuardar").on('click',function() {
-        if ($(form + "input[name='remuneracionNetaCargoPublicoCantidad']").val() > 0){
-            window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
-        } else {
-            mensajeSwal('Error','La remuneración neta del declarante debe ser mayor a 0','error');
-        }
+        window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
     });
 
     $(form + ".btnTerminar").on('click',function() {
-        if ($(form + "input[name='remuneracionNetaCargoPublicoCantidad']").val() > 0){
-            window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
-        } else {
-            mensajeSwal('Error','La remuneración neta del declarante debe ser mayor a 0','error');
-        }
+        window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
     });
     
     $(modulo + ".btnHabilitar").on("click",function() {
@@ -222,52 +214,59 @@ window.guardarFormDesempenoServidorPublico = function guardarFormDesempenoServid
           actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, "TERMINADO");
     }
     else{
-        $("#form" + seccionName).validate({
-            rules: {
-                fechaIngreso:{ required: true, date:true },
-                fechaConclusion:{ required: true },
-                remuneracionNetaCargoPublicoCantidad : { required: true, maxlength: 50 },
-                ingresoNetoParejaDependienteCantidad : { required: true, maxlength: 50 },
-            },
-            messages: {
-                fechaIngreso:{ required: "Escribe la fecha de ingreso." },
-                fechaConclusion:{ required: "Escribe la fecha de conclusión"},
-                remuneracionNetaCargoPublicoCantidad : { required: "Ingrese la remuneración neta." },
-                ingresoNetoParejaDependienteCantidad : { required: "Escribe el ingreso neto." },
-            },
-            // Make sure the form is submitted to the destination defined
-            // in the "action" attribute of the form when valid
-            submitHandler: function(formIn, btn) {
-                let nodo = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
-                let chk = $("#chkNingunoDesempenoServidorPublico")[0].checked;
-                nodo.servidorPublicoAnioAnterior= !chk;
-                nodo.fechaIngreso    =  $(form + "input[name='fechaIngreso']").val();
-                nodo.fechaConclusion =  $(form + "input[name='fechaConclusion']").val();
-                
-                nodo.remuneracionNetaCargoPublico.valor =    parseInt($(form + "input[name='remuneracionNetaCargoPublicoCantidad']").val());
-                nodo.remuneracionNetaCargoPublico.moneda =   $(form + "select[name='remuneracionNetaCargoPublicoMoneda'] option:selected").val();
-                nodo.otrosIngresosTotal.valor =        parseInt($(form + "input[name='otrosIngresosTotalCantidad']").val());
-                nodo.otrosIngresosTotal.moneda =       $(form + "select[name='otrosIngresosTotalMoneda'] option:selected").val();
-
-                nodo.ingresoNetoAnualDeclarante.valor =    parseInt($(form + "input[name='ingresoNetoDeclaranteCantidad']").val());
-                nodo.ingresoNetoAnualDeclarante.moneda =   $(form + "select[name='ingresoNetoDeclaranteMoneda'] option:selected").val();
-
-                nodo.ingresoNetoAnualParejaDependiente.valor =    parseInt($(form + "input[name='ingresoNetoParejaDependienteCantidad']").val());
-                nodo.ingresoNetoAnualParejaDependiente.moneda =   $(form + "select[name='ingresoNetoParejaDependienteMoneda'] option:selected").val();
-
-                nodo.totalIngresosNetosAnuales.valor =    parseInt($(form + "input[name='totalIngresosNetosCantidad']").val());
-                nodo.totalIngresosNetosAnuales.moneda =   $(form + "select[name='totalIngresosNetosMoneda'] option:selected").val();
-
-                nodo.aclaracionesObservaciones =   $(form + "textarea[name='aclaracionesObservaciones']").val().toUpperCase();      
-                actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);
-                if (btn.originalEvent.submitter.dataset.seccionstatus=="TERMINADO"){
-                    $("#chkNingunoDesempenoServidorPublico").prop("disabled", true);
-                    $(form + ".btnAgregar").addClass("hide");
-                    $(form + ".btnEditar").addClass("hide");
-                    $(form + ".btnEliminar").addClass("hide");
+        if ($(form + "input[name='remuneracionNetaCargoPublicoCantidad']").val() > 0){
+            $("#form" + seccionName).validate({
+                rules: {
+                    fechaIngreso:{ required: true, date:true },
+                    fechaConclusion:{ required: true },
+                    remuneracionNetaCargoPublicoCantidad : { required: true, maxlength: 50 },
+                    ingresoNetoParejaDependienteCantidad : { required: true, maxlength: 50 },
+                },
+                messages: {
+                    fechaIngreso:{ required: "Escribe la fecha de ingreso." },
+                    fechaConclusion:{ required: "Escribe la fecha de conclusión"},
+                    remuneracionNetaCargoPublicoCantidad : { required: "Ingrese la remuneración neta." },
+                    ingresoNetoParejaDependienteCantidad : { required: "Escribe el ingreso neto." },
+                },
+                // Make sure the form is submitted to the destination defined
+                // in the "action" attribute of the form when valid
+                submitHandler: function(formIn, btn) {
+                    let nodo = jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
+                    let chk = $("#chkNingunoDesempenoServidorPublico")[0].checked;
+                    nodo.servidorPublicoAnioAnterior= !chk;
+                    nodo.fechaIngreso    =  $(form + "input[name='fechaIngreso']").val();
+                    nodo.fechaConclusion =  $(form + "input[name='fechaConclusion']").val();
+                    
+                    nodo.remuneracionNetaCargoPublico.valor =    parseInt($(form + "input[name='remuneracionNetaCargoPublicoCantidad']").val());
+                    nodo.remuneracionNetaCargoPublico.moneda =   $(form + "select[name='remuneracionNetaCargoPublicoMoneda'] option:selected").val();
+                    nodo.otrosIngresosTotal.valor =        parseInt($(form + "input[name='otrosIngresosTotalCantidad']").val());
+                    nodo.otrosIngresosTotal.moneda =       $(form + "select[name='otrosIngresosTotalMoneda'] option:selected").val();
+    
+                    nodo.ingresoNetoAnualDeclarante.valor =    parseInt($(form + "input[name='ingresoNetoDeclaranteCantidad']").val());
+                    nodo.ingresoNetoAnualDeclarante.moneda =   $(form + "select[name='ingresoNetoDeclaranteMoneda'] option:selected").val();
+    
+                    nodo.ingresoNetoAnualParejaDependiente.valor =    parseInt($(form + "input[name='ingresoNetoParejaDependienteCantidad']").val());
+                    nodo.ingresoNetoAnualParejaDependiente.moneda =   $(form + "select[name='ingresoNetoParejaDependienteMoneda'] option:selected").val();
+    
+                    nodo.totalIngresosNetosAnuales.valor =    parseInt($(form + "input[name='totalIngresosNetosCantidad']").val());
+                    nodo.totalIngresosNetosAnuales.moneda =   $(form + "select[name='totalIngresosNetosMoneda'] option:selected").val();
+    
+                    nodo.aclaracionesObservaciones =   $(form + "textarea[name='aclaracionesObservaciones']").val().toUpperCase();      
+                    actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);
+                    if (btn.originalEvent.submitter.dataset.seccionstatus=="TERMINADO"){
+                        $("#chkNingunoDesempenoServidorPublico").prop("disabled", true);
+                        $(form + ".btnAgregar").addClass("hide");
+                        $(form + ".btnEditar").addClass("hide");
+                        $(form + ".btnEliminar").addClass("hide");
+                    }
                 }
-            }
-        });              
+            });  
+        } 
+        else {
+            mensajeSwal('Error','La remuneración neta del declarante debe ser mayor a 0','error');
+        }
+
+            
     }   
 }
 
