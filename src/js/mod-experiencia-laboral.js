@@ -62,7 +62,7 @@ window.formExperienciaLaboral='<form action="" id="formExperienciaLaboral">\
                                     </div>\
                                     <div class="col-lg-6">\
                                         <div class="form-group">\
-                                            <label>R.F.C.</label>\
+                                            <label>RFC</label>\
                                             <input type="text" name="rfc" class="form-control" maxlength="13" required>\
                                         </div>\
                                     </div>\
@@ -71,6 +71,7 @@ window.formExperienciaLaboral='<form action="" id="formExperienciaLaboral">\
                                             <label>SECTOR AL QUE PERTENECE</label>\
                                             <select name="sector" class="form-control CBOsector"></select>\
                                         </div>\
+                                        <div class="form-group content_sector_especifique hide"><label>ESPECIFIQUE</label> <input name="sector_especifique" class="form-control" required></div>\
                                     </div>\
                                     <div class="col-lg-6">\
                                         <div class="form-group">\
@@ -323,7 +324,7 @@ window.guardarRegistroExperienciaLaboral = function guardarRegistroExperienciaLa
             "puesto":   $(form + " input[name='puesto']").val().toUpperCase(),
             "sector": {
                 "clave": $(form + " select[name='sector'] option:selected").val(),
-                "valor": $(form + " select[name='sector'] option:selected")[0].innerText,
+                "valor": $(form  + "input[name='sector_especifique']").val().toUpperCase(),
               },
             "fechaIngreso": $(form + " input[name='fechaIngreso']").val(),
             "fechaEgreso":  $(form + " input[name='fechaEgreso']").val(),
@@ -355,6 +356,16 @@ window.funcionalidadGuardarRegistroExperienciaLaboral = function funcionalidadGu
     loadCat(ambitoPublico, form + ".CBOambitoPublico");
     loadCat(extranjero, form + ".CBOubicacion"); 
     loadCat(sector, form + ".CBOsector");
+
+    $(form + '.CBOsector').on('change', function() {
+        $(form + ".content_sector_especifique").addClass("hide");
+        $(form + ".content_sector_especifique input[name='sector_especifique']").val($(form + '.CBOsector option:selected')[0].innerText);
+        if(this.value == "OTRO"){
+            $(form + ".content_sector_especifique").removeClass("hide");
+            $(form + ".content_sector_especifique input[name='sector_especifique']").val("");
+        }        
+    });
+
     if(jsonResult.captura.tipo_declaracion == "INICIAL"){
         $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
     }

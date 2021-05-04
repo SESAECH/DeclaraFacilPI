@@ -10,6 +10,15 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
     loadCat(tipoInstrumento, ".CBOtipoInstrumento");
     loadCat(tipoBienEnajenacionBienes, ".CBOtipoBienEnajenacionBienes");
 
+    $(form + '.CBOtipoInstrumento').on('change', function() {
+        $(form + ".content_tipoInstrumento_especifique").addClass("hide");
+        $(form + ".content_tipoInstrumento_especifique input[name='tipoInstrumento_especifique']").val($(form + '.CBOtipoInstrumento option:selected')[0].innerText);
+        if(this.value == "OTRO"){
+            $(form + ".content_tipoInstrumento_especifique").removeClass("hide");
+            $(form + ".content_tipoInstrumento_especifique input[name='tipoInstrumento_especifique']").val("");
+        }        
+    });
+
     //validar status de la sección.
     switch(seccion.status){
         case "SIN_INFO":
@@ -21,6 +30,7 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
              //asginar valores predeterminados a catálogos(ayuda al usuario).
              $(form + ".CBOmoneda").val("MXN");  
              $(form + ".cantidad").val("0");
+             $(form + ".CBOtipoInstrumento").val("CAP").trigger("change");
              $(form + "textarea[name='aclaracionesObservaciones']").val();
              $("#tableActividadIndustrial_actividadAnualAnterior").empty();
              $("#tableActividadFinanciera_actividadAnualAnterior").empty();
@@ -405,7 +415,7 @@ window.guardarActividadFinanciera_aaa = function guardarActividadFinanciera_aaa(
         "tipoInstrumento": 
         {
             "clave":  $(form + "select[name='tipoInstrumento'] option:selected").val(),
-            "valor":  $(form + "select[name='tipoInstrumento'] option:selected")[0].innerText.toUpperCase(),
+            "valor":  $(form  + "input[name='tipoInstrumento_especifique']").val().toUpperCase(),
           }          
       };
       //limpiar inputs
