@@ -685,8 +685,8 @@ window.mensajeSwal = function mensajeSwal(titulo, mensaje, tipo){
         showConfirmButton: true,
         customClass: {
             confirmButton: "btn btn-success"
-        },
-        closeOnConfirm: true
+        }
+        /* closeOnConfirm: false */
     });
 };
 //window.mensajeSwal = mensajeSwal;

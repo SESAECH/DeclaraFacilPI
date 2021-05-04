@@ -93,7 +93,7 @@ window.initPareja = function initPareja(data){
 
     $(modulo + ".btnTerminar").on('click',function() {        
         window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
-        $("#chkNingunoPareja").prop("disabled", true); 
+       
     });
     
     $(modulo + ".btnHabilitar").on("click",function() {
@@ -454,7 +454,10 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
             root.aclaracionesObservaciones = $("#form" + seccionName + " textarea[name='aclaracionesObservaciones']").val().toUpperCase();;
         
             //actualiza el status de la sección (en proceso/terminado).
-            actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);            
+            actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);           
+            if (btn.originalEvent.submitter.dataset.seccionstatus =="TERMINADO"){
+                $("#chkNingunoPareja").prop("disabled", true); 
+            }
         }
     });
     }

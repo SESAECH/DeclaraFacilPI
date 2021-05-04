@@ -146,6 +146,9 @@ window.initExperienciaLaboral = function initExperienciaLaboral(data){
         break;
         case "EN_PROCESO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
+            if (jsonResult.declaracion.situacionPatrimonial.bienesInmuebles.ninguno){
+                $(modulo + ".chkNinguno")[0].checked=true;                
+            }
             $(modulo + ".btnAgregar").removeClass("hide");
             $(modulo + ".btnHabilitar").addClass("hide");
             $(modulo + ".btnTerminar").removeClass("hide");
@@ -193,6 +196,7 @@ window.initExperienciaLaboral = function initExperienciaLaboral(data){
         $(modulo + ".btnHabilitar").removeClass("hide");
         jsonResult.captura.declaracion[seccion.apartado].secciones[seccion.no].status= "TERMINADO";
         $(".status-seccion-" + seccion.apartado +"-" + seccion.no).removeClass("indicador-status indicador-status-process").addClass("indicador-status-success").text("TERMINADO");
+        mensajeSwal("Aviso","Sección terminada con exito.", "success");
         validarDeclaracionTerminada();
     });
     
@@ -324,7 +328,7 @@ window.guardarRegistroExperienciaLaboral = function guardarRegistroExperienciaLa
             "puesto":   $(form + " input[name='puesto']").val().toUpperCase(),
             "sector": {
                 "clave": $(form + " select[name='sector'] option:selected").val(),
-                "valor": $(form  + "input[name='sector_especifique']").val().toUpperCase(),
+                "valor": $(form  + " input[name='sector_especifique']").val().toUpperCase(),
               },
             "fechaIngreso": $(form + " input[name='fechaIngreso']").val(),
             "fechaEgreso":  $(form + " input[name='fechaEgreso']").val(),

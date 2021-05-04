@@ -56,21 +56,10 @@ window.initIngresos = function initIngresos(data){
     $(modulo + ".btnHabilitar").unbind("click");
     
     $(form + ".btnGuardar").on('click',function() {
-        if ($("input[name='remuneracionMensualCargoPublicoCantidad']").val() > 0){
-            window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
-        } else {
-            mensajeSwal('Error','El ingreso de la persona que declara debe ser mayor a 0','error');
-        }
+        window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);        
     });
     $(form + ".btnTerminar").on('click',function() {
-        if ($("input[name='remuneracionMensualCargoPublicoCantidad']").val() > 0){
-            window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
-            $(form + ".btnEditar").addClass("hide");
-            $(form + ".btnEliminar").addClass("hide");
-            $(form + ".btnAgregar").addClass("hide");
-        } else {
-            mensajeSwal('Error','El ingreso de la persona que declara debe ser mayor a 0','error');
-        }
+        window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
     });    
     $(modulo + ".btnHabilitar").on('click',function() {
         habilitarSeccion(seccion.apartado, seccion.no, seccionName);
@@ -121,105 +110,114 @@ window.initIngresos = function initIngresos(data){
 window.loadInfoIngresos = function loadInfoIngresos(){
     var nodo = jsonResult.declaracion.situacionPatrimonial.ingresos;
 
-    $("input[name='remuneracionMensualCargoPublicoCantidad']").val(nodo.remuneracionMensualCargoPublico.valor);
-    $("input[name='remuneracionMensualCargoPublicoMoneda']").val(nodo.remuneracionMensualCargoPublico.moneda);
-    $("input[name='otrosIngresosMensualesTotalCantidad']").val(nodo.otrosIngresosMensualesTotal.valor);
-    $("input[name='otrosIngresosMensualesTotalMoneda']").val(nodo.otrosIngresosMensualesTotal.moneda);
+    $("#formIngresos input[name='remuneracionMensualCargoPublicoCantidad']").val(nodo.remuneracionMensualCargoPublico.valor);
+    $("#formIngresos input[name='remuneracionMensualCargoPublicoMoneda']").val(nodo.remuneracionMensualCargoPublico.moneda);
+    $("#formIngresos input[name='otrosIngresosMensualesTotalCantidad']").val(nodo.otrosIngresosMensualesTotal.valor);
+    $("#formIngresos input[name='otrosIngresosMensualesTotalMoneda']").val(nodo.otrosIngresosMensualesTotal.moneda);
 
     pintarTablaActividadIndustrial();
-    $("input[name='actividadIndustrialRemuneracionTotalCantidad']").val(nodo.actividadIndustialComercialEmpresarial.remuneracionTotal.valor);
+    $("#formIngresos input[name='actividadIndustrialRemuneracionTotalCantidad']").val(nodo.actividadIndustialComercialEmpresarial.remuneracionTotal.valor);
 
     pintarTablaActividadFinanciera();
-    $("input[name='actividadFinancieraRemuneracionTotalCantidad']").val(nodo.actividadFinanciera.remuneracionTotal.valor);
+    $("#formIngresos input[name='actividadFinancieraRemuneracionTotalCantidad']").val(nodo.actividadFinanciera.remuneracionTotal.valor);
 
     pintarTablaServiciosProfesionales();
-    $("input[name='serviciosProfesionalesRemuneracionTotalCantidad']").val(nodo.serviciosProfesionales.remuneracionTotal.valor);
+    $("#formIngresos input[name='serviciosProfesionalesRemuneracionTotalCantidad']").val(nodo.serviciosProfesionales.remuneracionTotal.valor);
 
     pintarTablaOtrosIngresos();
-    $("input[name='otrosIngresosRemuneracionTotalCantidad']").val(nodo.otrosIngresos.remuneracionTotal.valor);
+    $("#formIngresos input[name='otrosIngresosRemuneracionTotalCantidad']").val(nodo.otrosIngresos.remuneracionTotal.valor);
   
-    $("input[name='ingresoMensualNetoDeclaranteCantidad']").val(nodo.ingresoMensualNetoDeclarante.valor);
-    $("input[name='ingresoMensualNetoDeclaranteMoneda']").val(nodo.ingresoMensualNetoDeclarante.moneda);
+    $("#formIngresos input[name='ingresoMensualNetoDeclaranteCantidad']").val(nodo.ingresoMensualNetoDeclarante.valor);
+    $("#formIngresos input[name='ingresoMensualNetoDeclaranteMoneda']").val(nodo.ingresoMensualNetoDeclarante.moneda);
 
-    $("input[name='ingresoMensualNetoParejaDependienteCantidad']").val(nodo.ingresoMensualNetoParejaDependiente.valor);
-    $("input[name='ingresoMensualNetoParejaDependienteMoneda']").val(nodo.ingresoMensualNetoParejaDependiente.moneda);
+    $("#formIngresos input[name='ingresoMensualNetoParejaDependienteCantidad']").val(nodo.ingresoMensualNetoParejaDependiente.valor);
+    $("#formIngresos input[name='ingresoMensualNetoParejaDependienteMoneda']").val(nodo.ingresoMensualNetoParejaDependiente.moneda);
 
-    $("input[name='totalIngresosMensualesNetosCantidad']").val(nodo.totalIngresosMensualesNetos.valor);
-    $("input[name='totalIngresosMensualesNetosMoneda']").val(nodo.totalIngresosMensualesNetos.moneda);
+    $("#formIngresos input[name='totalIngresosMensualesNetosCantidad']").val(nodo.totalIngresosMensualesNetos.valor);
+    $("#formIngresos input[name='totalIngresosMensualesNetosMoneda']").val(nodo.totalIngresosMensualesNetos.moneda);
 
     $("#formIngresos input[name='aclaracionesObservaciones']").val(nodo.aclaracionesObservaciones);
 }
 
 window.guardarFormIngresos = function guardarFormIngresos(seccionNo, seccionName, seccionApartado){       
-    $("#form" + seccionName).validate({
-        rules: {
-            remuneracionMensualCargoPublicoCantidad : { required: true, maxlength: 50 },
-            ingresoMensualNetoParejaDependienteCantidad : { required: true, maxlength: 50 },
-        },
-        messages: {
-            remuneracionMensualCargoPublicoCantidad : { required: "Ingrese la remuneración mensual." },
-            ingresoMensualNetoParejaDependienteCantidad : { required: "Escribe el ingreso mensual." },
-        },
-        // Make sure the form is submitted to the destination defined
-        // in the "action" attribute of the form when valid
-        submitHandler: function(form, btn) {
-            var nodo = jsonResult.declaracion.situacionPatrimonial.ingresos;
-            switch(jsonResult.captura.tipo_declaracion){
-                case "INICIAL":
-                    nodo.remuneracionMensualCargoPublico.valor =    parseInt($("input[name='remuneracionMensualCargoPublicoCantidad']").val());
-                    nodo.remuneracionMensualCargoPublico.moneda =   $("select[name='remuneracionMensualCargoPublicoMoneda'] option:selected").val();
-                    
-                    nodo.otrosIngresosMensualesTotal.valor =        parseInt($("input[name='otrosIngresosMensualesTotalCantidad']").val());
-                    nodo.otrosIngresosMensualesTotal.moneda =       $("select[name='otrosIngresosMensualesTotalMoneda'] option:selected").val();
-
-                    nodo.ingresoMensualNetoDeclarante.valor =    parseInt($("input[name='ingresoMensualNetoDeclaranteCantidad']").val());
-                    nodo.ingresoMensualNetoDeclarante.moneda =   $("select[name='ingresoMensualNetoDeclaranteMoneda'] option:selected").val();
-
-                    nodo.ingresoMensualNetoParejaDependiente.valor =    parseInt($("input[name='ingresoMensualNetoParejaDependienteCantidad']").val());
-                    nodo.ingresoMensualNetoParejaDependiente.moneda =   $("select[name='ingresoMensualNetoParejaDependienteMoneda'] option:selected").val();
-
-                    nodo.totalIngresosMensualesNetos.valor =    parseInt($("input[name='totalIngresosMensualesNetosCantidad']").val());
-                    nodo.totalIngresosMensualesNetos.moneda =   $("select[name='totalIngresosMensualesNetosMoneda'] option:selected").val();
-                    break;
-                case "MODIFICACION":
-                    nodo.remuneracionAnualCargoPublico.valor =    parseInt($("input[name='remuneracionMensualCargoPublicoCantidad']").val());
-                    nodo.remuneracionAnualCargoPublico.moneda =   $("select[name='remuneracionMensualCargoPublicoMoneda'] option:selected").val();
-                    
-                    nodo.otrosIngresosAnualesTotal.valor =        parseInt($("input[name='otrosIngresosMensualesTotalCantidad']").val());
-                    nodo.otrosIngresosAnualesTotal.moneda =       $("select[name='otrosIngresosMensualesTotalMoneda'] option:selected").val();
-
-                    nodo.ingresoAnualNetoDeclarante.valor =    parseInt($("input[name='ingresoMensualNetoDeclaranteCantidad']").val());
-                    nodo.ingresoAnualNetoDeclarante.moneda =   $("select[name='ingresoMensualNetoDeclaranteMoneda'] option:selected").val();
-
-                    nodo.ingresoAnualNetoParejaDependiente.valor =    parseInt($("input[name='ingresoMensualNetoParejaDependienteCantidad']").val());
-                    nodo.ingresoAnualNetoParejaDependiente.moneda =   $("select[name='ingresoMensualNetoParejaDependienteMoneda'] option:selected").val();
-
-                    nodo.totalIngresosAnualesNetos.valor =    parseInt($("input[name='totalIngresosMensualesNetosCantidad']").val());
-                    nodo.totalIngresosAnualesNetos.moneda =   $("select[name='totalIngresosMensualesNetosMoneda'] option:selected").val();
-                    break;
-                case "CONCLUSION":
-                    nodo.remuneracionConclusionCargoPublico.valor =    parseInt($("input[name='remuneracionMensualCargoPublicoCantidad']").val());
-                    nodo.remuneracionConclusionCargoPublico.moneda =   $("select[name='remuneracionMensualCargoPublicoMoneda'] option:selected").val();
-                    
-                    nodo.otrosIngresosConclusionTotal.valor =        parseInt($("input[name='otrosIngresosMensualesTotalCantidad']").val());
-                    nodo.otrosIngresosConclusionTotal.moneda =       $("select[name='otrosIngresosMensualesTotalMoneda'] option:selected").val();
-
-                    nodo.ingresoConclusionNetoDeclarante.valor =    parseInt($("input[name='ingresoMensualNetoDeclaranteCantidad']").val());
-                    nodo.ingresoConclusionNetoDeclarante.moneda =   $("select[name='ingresoMensualNetoDeclaranteMoneda'] option:selected").val();
-
-                    nodo.ingresoConclusionNetoParejaDependiente.valor =    parseInt($("input[name='ingresoMensualNetoParejaDependienteCantidad']").val());
-                    nodo.ingresoConclusionNetoParejaDependiente.moneda =   $("select[name='ingresoMensualNetoParejaDependienteMoneda'] option:selected").val();
-
-                    nodo.totalIngresosConclusionNetos.valor =    parseInt($("input[name='totalIngresosMensualesNetosCantidad']").val());
-                    nodo.totalIngresosConclusionNetos.moneda =   $("select[name='totalIngresosMensualesNetosMoneda'] option:selected").val();
-                    break;
-            }            
-
-            nodo.aclaracionesObservaciones =   $("#formIngresos textarea[name='aclaracionesObservaciones']").val();
-            //actualiza el status de la sección (en proceso/terminado)."situacion_patrimonial"
-            actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);
-        }
-    });    
+    if ($("input[name='remuneracionMensualCargoPublicoCantidad']").val() > 0){
+        $("#form" + seccionName).validate({
+            rules: {
+                remuneracionMensualCargoPublicoCantidad : { required: true, maxlength: 50 },
+                ingresoMensualNetoParejaDependienteCantidad : { required: true, maxlength: 50 },
+            },
+            messages: {
+                remuneracionMensualCargoPublicoCantidad : { required: "Ingrese la remuneración mensual." },
+                ingresoMensualNetoParejaDependienteCantidad : { required: "Escribe el ingreso mensual." },
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function(form, btn) {
+                var nodo = jsonResult.declaracion.situacionPatrimonial.ingresos;
+                switch(jsonResult.captura.tipo_declaracion){
+                    case "INICIAL":
+                        nodo.remuneracionMensualCargoPublico.valor =    parseInt($("input[name='remuneracionMensualCargoPublicoCantidad']").val());
+                        nodo.remuneracionMensualCargoPublico.moneda =   $("select[name='remuneracionMensualCargoPublicoMoneda'] option:selected").val();
+                        
+                        nodo.otrosIngresosMensualesTotal.valor =        parseInt($("input[name='otrosIngresosMensualesTotalCantidad']").val());
+                        nodo.otrosIngresosMensualesTotal.moneda =       $("select[name='otrosIngresosMensualesTotalMoneda'] option:selected").val();
+    
+                        nodo.ingresoMensualNetoDeclarante.valor =    parseInt($("input[name='ingresoMensualNetoDeclaranteCantidad']").val());
+                        nodo.ingresoMensualNetoDeclarante.moneda =   $("select[name='ingresoMensualNetoDeclaranteMoneda'] option:selected").val();
+    
+                        nodo.ingresoMensualNetoParejaDependiente.valor =    parseInt($("input[name='ingresoMensualNetoParejaDependienteCantidad']").val());
+                        nodo.ingresoMensualNetoParejaDependiente.moneda =   $("select[name='ingresoMensualNetoParejaDependienteMoneda'] option:selected").val();
+    
+                        nodo.totalIngresosMensualesNetos.valor =    parseInt($("input[name='totalIngresosMensualesNetosCantidad']").val());
+                        nodo.totalIngresosMensualesNetos.moneda =   $("select[name='totalIngresosMensualesNetosMoneda'] option:selected").val();
+                        break;
+                    case "MODIFICACION":
+                        nodo.remuneracionAnualCargoPublico.valor =    parseInt($("input[name='remuneracionMensualCargoPublicoCantidad']").val());
+                        nodo.remuneracionAnualCargoPublico.moneda =   $("select[name='remuneracionMensualCargoPublicoMoneda'] option:selected").val();
+                        
+                        nodo.otrosIngresosAnualesTotal.valor =        parseInt($("input[name='otrosIngresosMensualesTotalCantidad']").val());
+                        nodo.otrosIngresosAnualesTotal.moneda =       $("select[name='otrosIngresosMensualesTotalMoneda'] option:selected").val();
+    
+                        nodo.ingresoAnualNetoDeclarante.valor =    parseInt($("input[name='ingresoMensualNetoDeclaranteCantidad']").val());
+                        nodo.ingresoAnualNetoDeclarante.moneda =   $("select[name='ingresoMensualNetoDeclaranteMoneda'] option:selected").val();
+    
+                        nodo.ingresoAnualNetoParejaDependiente.valor =    parseInt($("input[name='ingresoMensualNetoParejaDependienteCantidad']").val());
+                        nodo.ingresoAnualNetoParejaDependiente.moneda =   $("select[name='ingresoMensualNetoParejaDependienteMoneda'] option:selected").val();
+    
+                        nodo.totalIngresosAnualesNetos.valor =    parseInt($("input[name='totalIngresosMensualesNetosCantidad']").val());
+                        nodo.totalIngresosAnualesNetos.moneda =   $("select[name='totalIngresosMensualesNetosMoneda'] option:selected").val();
+                        break;
+                    case "CONCLUSION":
+                        nodo.remuneracionConclusionCargoPublico.valor =    parseInt($("input[name='remuneracionMensualCargoPublicoCantidad']").val());
+                        nodo.remuneracionConclusionCargoPublico.moneda =   $("select[name='remuneracionMensualCargoPublicoMoneda'] option:selected").val();
+                        
+                        nodo.otrosIngresosConclusionTotal.valor =        parseInt($("input[name='otrosIngresosMensualesTotalCantidad']").val());
+                        nodo.otrosIngresosConclusionTotal.moneda =       $("select[name='otrosIngresosMensualesTotalMoneda'] option:selected").val();
+    
+                        nodo.ingresoConclusionNetoDeclarante.valor =    parseInt($("input[name='ingresoMensualNetoDeclaranteCantidad']").val());
+                        nodo.ingresoConclusionNetoDeclarante.moneda =   $("select[name='ingresoMensualNetoDeclaranteMoneda'] option:selected").val();
+    
+                        nodo.ingresoConclusionNetoParejaDependiente.valor =    parseInt($("input[name='ingresoMensualNetoParejaDependienteCantidad']").val());
+                        nodo.ingresoConclusionNetoParejaDependiente.moneda =   $("select[name='ingresoMensualNetoParejaDependienteMoneda'] option:selected").val();
+    
+                        nodo.totalIngresosConclusionNetos.valor =    parseInt($("input[name='totalIngresosMensualesNetosCantidad']").val());
+                        nodo.totalIngresosConclusionNetos.moneda =   $("select[name='totalIngresosMensualesNetosMoneda'] option:selected").val();
+                        break;
+                }            
+    
+                nodo.aclaracionesObservaciones =   $("#formIngresos textarea[name='aclaracionesObservaciones']").val();
+                //actualiza el status de la sección (en proceso/terminado)."situacion_patrimonial"
+                actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);
+                if (btn.originalEvent.submitter.dataset.seccionstatus =="TERMINADO"){
+                    $(form + ".btnEditar").addClass("hide");
+                    $(form + ".btnEliminar").addClass("hide");
+                    $(form + ".btnAgregar").addClass("hide");
+                }
+            }
+        });      
+    } else {
+        mensajeSwal('Error','El ingreso de la persona que declara debe ser mayor a 0','error');
+    }  
 }
 
 

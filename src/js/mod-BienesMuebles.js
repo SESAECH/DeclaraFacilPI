@@ -152,7 +152,7 @@ window.funcionalidadGuardarRegistroBienesMuebles = function funcionalidadGuardar
         }        
     });
 
-    $(form + '.CBOtipoPersona').on('change', function() {
+    $(form + '.content_transmisor .CBOtipoPersona').on('change', function() {
         if(this.value=="FISICA"){
             $(form + ".CBOparentescoRelacion option").removeClass("hide");
             $(form + ".CBOparentescoRelacion option[value='NIN']").addClass("hide");
@@ -260,7 +260,7 @@ window.funcionalidadGuardarRegistroBienesMuebles = function funcionalidadGuardar
 
     $(form + ".btnAgregarTransmisor").on('click',function() {
         if($(form + ".content_transmisor_nuevo input[name='transmisor_nombreRazonSocial']").val().length==0){ mensajeSwal("Aviso","Ingresa el NOMBRE / INSTITUCIÓN O RAZÓN SOCIAL del transmisor.", "warning")}
-        else if($(form + ".content_terceros_nuevo input[name='transmisor_rfc']").val().length<12){ mensajeSwal("Aviso","Ingresa el RFC del transmisor.", "warning")}
+        else if($(form + ".content_transmisor_nuevo input[name='transmisor_rfc']").val().length<12){ mensajeSwal("Aviso","Ingresa el RFC del transmisor.", "warning")}
         else if($(form + ".content_transmisor_nuevo input[name='transmisor_relacion_especifique']").val().length==0){ mensajeSwal("Aviso","Seleccione la relación del transmisor.", "warning")}
         else{
             let uuid=generarUUID();

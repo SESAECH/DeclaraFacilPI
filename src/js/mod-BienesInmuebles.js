@@ -156,7 +156,7 @@ window.funcionalidadGuardarRegistroBienesInmuebles = function funcionalidadGuard
         }
     }); */
     
-    $(form + '.CBOtipoPersona').on('change', function() {
+    $(form + '.content_transmisor_nuevo .CBOtipoPersona').on('change', function() {
         if(this.value=="FISICA"){
             $(form + ".CBOparentescoRelacion option").removeClass("hide");
             $(form + ".CBOparentescoRelacion option[value='NIN']").addClass("hide");
@@ -481,6 +481,7 @@ window.editarBienesInmuebles = function editarBienesInmuebles(data){
     $(form + "input[name='datoIdentificacion']").val(nodo.datoIdentificacion);
     $(form + "select[name='valorConformeA']").val(nodo.valorConformeA);
     $(form + "select[name='motivoBaja']").val(nodo.motivoBaja.clave).trigger("change");
+    $(form + "input[name='motivoBaja_especifique']").val(nodo.motivoBaja.valor);
     $(form + ".CBOubicacionInmueble").val(nodo.ubicacionInmueble).trigger("change");
     if(nodo.ubicacionInmueble=="MX"){        
         //domicilio mexico.

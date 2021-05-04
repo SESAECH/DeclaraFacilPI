@@ -81,7 +81,7 @@ function gerarPdfDecSimplificada(){
     finalY = doc.lastAutoTable.finalY;
     doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComision', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });   
     finalY = doc.lastAutoTable.finalY;
-    if(jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio =="MX"){
+    if(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.domicilio =="MX"){
         doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComisionDOMMX', margin: { top: 0, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 1, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto'  });
     }
     else{
@@ -170,7 +170,7 @@ function gerarPdfDecCompleta(){
     finalY = doc.lastAutoTable.finalY;
     doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComision', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });   
     finalY = doc.lastAutoTable.finalY;
-    if(jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante.domicilio =="MX"){
+    if(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.domicilio =="MX"){
         doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComisionDOMMX', margin: { top: 0, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 1, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto'  });
     }
     else{
@@ -524,13 +524,13 @@ function tblDomicilio(){
     }
     else{
         //extranjero
-        $("#pdfMiDeclaracion_domicilioDeclaranteEXT .calle").text(nodo.domicilioMexico.calle);
-        $("#pdfMiDeclaracion_domicilioDeclaranteEXT .numeroExterior").text(nodo.domicilioMexico.numeroExterior);
-        $("#pdfMiDeclaracion_domicilioDeclaranteEXT .numeroInterior").text(nodo.domicilioMexico.numeroInterior);
-        $("#pdfMiDeclaracion_domicilioDeclaranteEXT .coloniaLocalidad").text(nodo.domicilioMexico.coloniaLocalidad);
-        $("#pdfMiDeclaracion_domicilioDeclaranteEXT .estadoProvincia").text(nodo.domicilioMexico.estadoProvincia);
-        $("#pdfMiDeclaracion_domicilioDeclaranteEXT .pais").text(nodo.domicilioMexico.pais);
-        $("#pdfMiDeclaracion_domicilioDeclaranteEXT .codigoPostal").text(nodo.domicilioMexico.codigoPostal);
+        $("#pdfMiDeclaracion_domicilioDeclaranteEXT .calle").text(nodo.domicilioExtranjero.calle);
+        $("#pdfMiDeclaracion_domicilioDeclaranteEXT .numeroExterior").text(nodo.domicilioExtranjero.numeroExterior);
+        $("#pdfMiDeclaracion_domicilioDeclaranteEXT .numeroInterior").text(nodo.domicilioExtranjero.numeroInterior);
+        $("#pdfMiDeclaracion_domicilioDeclaranteEXT .ciudadLocalidad").text(nodo.domicilioExtranjero.ciudadLocalidad);
+        $("#pdfMiDeclaracion_domicilioDeclaranteEXT .estadoProvincia").text(nodo.domicilioExtranjero.estadoProvincia);
+        $("#pdfMiDeclaracion_domicilioDeclaranteEXT .pais").text(nodo.domicilioExtranjero.pais);
+        $("#pdfMiDeclaracion_domicilioDeclaranteEXT .codigoPostal").text(nodo.domicilioExtranjero.codigoPostal);
         $("#pdfMiDeclaracion_domicilioDeclaranteEXT .aclaracionesObservaciones").text(nodo.aclaracionesObservaciones);
     }
 }
@@ -604,13 +604,13 @@ function tblEmpleo(titulo){
     }
     else{
         //extranjero
-        $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .calle").text(nodo.domicilioMexico.calle);
-        $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .numeroExterior").text(nodo.domicilioMexico.numeroExterior);
-        $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .numeroInterior").text(nodo.domicilioMexico.numeroInterior);
-        $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .coloniaLocalidad").text(nodo.domicilioMexico.coloniaLocalidad);
-        $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .estadoProvincia").text(nodo.domicilioMexico.estadoProvincia);
-        $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .pais").text(nodo.domicilioMexico.pais.toUpperCase());
-        $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .codigoPostal").text(nodo.domicilioMexico.codigoPostal);
+        $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .calle").text(nodo.domicilioExtranjero.calle);
+        $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .numeroExterior").text(nodo.domicilioExtranjero.numeroExterior);
+        $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .numeroInterior").text(nodo.domicilioExtranjero.numeroInterior);
+        $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .ciudadLocalidad").text(nodo.domicilioExtranjero.ciudadLocalidad);
+        $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .estadoProvincia").text(nodo.domicilioExtranjero.estadoProvincia);
+        $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .pais").text(nodo.domicilioExtranjero.pais.toUpperCase());
+        $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .codigoPostal").text(nodo.domicilioExtranjero.codigoPostal);
         $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .aclaracionesObservaciones").text(nodo.aclaracionesObservaciones);
     }
 }

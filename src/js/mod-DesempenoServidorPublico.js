@@ -56,6 +56,7 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
                 $(modulo + ".btnEliminar").addClass("hide");
                 $(modulo + ".btnAgregar").addClass("hide");
             }            
+            $(modulo + ".btnGuardar").removeClass("hide");
             $(modulo + ".btnTerminar").removeClass("hide");
             $(modulo + ".btnHabilitar").addClass("hide");
             break;
@@ -96,6 +97,7 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
     $(modulo + ".btnHabilitar").on("click",function() {
         $("#chkNingunoDesempenoServidorPublico").prop("disabled", false);
         $("#form" + seccionName +" :input").prop("disabled", false);
+        habilitarSeccion(seccion.apartado, seccion.no, seccionName);
 
         $(modulo + ".btnTerminar").removeClass("hide");
         $(modulo + ".btnAgregar").removeClass("hide");
