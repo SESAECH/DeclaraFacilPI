@@ -327,7 +327,7 @@ window.guardarRegistroBienesInmuebles = function guardarRegistroBienesInmuebles(
         "tipoOperacion":    $("#form" + seccionName + " select[name='tipoOperacion'] option:selected").val(),
         "tipoInmueble": {
           "clave": $("#form" + seccionName + " select[name='tipoInmueble'] option:selected").val(),
-          "valor": $("#form" + seccionName + " input[name='especifique']").val()
+          "valor": $("#form" + seccionName + " input[name='especifique']").val().toUpperCase()
         },
         "titular": titulares,
         "porcentajePropiedad": $("#form" + seccionName + " input[name='porcentajePropiedad']").val(),
@@ -463,6 +463,7 @@ window.editarBienesInmuebles = function editarBienesInmuebles(data){
 
     $(form + "select[name='tipoOperacion']").val(nodo.tipoOperacion);
     $(form + "select[name='tipoInmueble']").val(nodo.tipoInmueble.clave).trigger("change");
+    $(form + ".content_tipo_inmueble_especifique input[name='especifique']").val(nodo.tipoInmueble.valor);
     //$(form + "select[name='nombre']").val(nodo.titular[0].clave);
 
     $(form + "input[name='porcentajePropiedad']").val(nodo.porcentajePropiedad);
@@ -496,12 +497,12 @@ window.editarBienesInmuebles = function editarBienesInmuebles(data){
     else{
         //domicilio extranjero
         $(form + "#ubicacionInmuebleExContent input[name='calle']").val(nodo.domicilioExtranjero.calle);
-        $(form + "#domDependienteExContent input[name='numeroExterior']").val(nodo.domicilioExtranjero.numeroExterior);
-        $(form + "#domDependienteExContent input[name='numeroInterior']").val(nodo.domicilioExtranjero.numeroInterior);
-        $(form + "#domDependienteExContent input[name='ciudadLocalidad']").val(nodo.domicilioExtranjero.ciudadLocalidad);
-        $(form + "#domDependienteExContent input[name='estadoProvincia']").val(nodo.domicilioExtranjero.estadoProvincia);
-        $(form + "#domDependienteExContent select[name='pais']").val(nodo.domicilioExtranjero.pais);
-        $(form + "#domDependienteExContent input[name='codigoPostal']").val(nodo.domicilioExtranjero.codigoPostal); 
+        $(form + "#ubicacionInmuebleExContent input[name='numeroExterior']").val(nodo.domicilioExtranjero.numeroExterior);
+        $(form + "#ubicacionInmuebleExContent input[name='numeroInterior']").val(nodo.domicilioExtranjero.numeroInterior);
+        $(form + "#ubicacionInmuebleExContent input[name='ciudadLocalidad']").val(nodo.domicilioExtranjero.ciudadLocalidad);
+        $(form + "#ubicacionInmuebleExContent input[name='estadoProvincia']").val(nodo.domicilioExtranjero.estadoProvincia);
+        $(form + "#ubicacionInmuebleExContent select[name='pais']").val(nodo.domicilioExtranjero.pais);
+        $(form + "#ubicacionInmuebleExContent input[name='codigoPostal']").val(nodo.domicilioExtranjero.codigoPostal); 
     }
 }
 

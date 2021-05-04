@@ -374,6 +374,7 @@ window.funcionalidadGuardarRegistroExperienciaLaboral = function funcionalidadGu
         $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
     }
     loadFormAmbitoSector();
+    $(form + '.CBOsector').val("AGRI").trigger("change");
 
     $(form + ".btnCerrar").unbind("click");
     $(form + ".btnAgregar").unbind("click");

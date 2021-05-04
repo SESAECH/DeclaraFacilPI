@@ -128,10 +128,6 @@ window.funcionalidadGuardarRegistroParticipacionInstituciones = function funcion
 
     $(form + ":input[type='text']").val("");
 
-    $(form + ".CBOpais").val("MX").trigger("change");
-    $(form + ".content_entidadFederativa").removeClass("hide");
-    $(form + ".CBOtipoInstitucion").val("OSC").trigger("change");
-
     $(form + '.CBOpais').on('change', function() {
         $(form + ".content_entidadFederativa").removeClass("hide");
         if(this.value != "MX"){
@@ -154,7 +150,10 @@ window.funcionalidadGuardarRegistroParticipacionInstituciones = function funcion
     });
 
     $(form + "select[name='recibeRemuneracion']").val("false").trigger("change");
-
+    $(form + ".CBOpais").val("MX").trigger("change");
+    $(form + ".content_entidadFederativa").removeClass("hide");
+    $(form + ".CBOtipoInstitucion").val("OSC").trigger("change");
+    
     if(jsonResult.captura.tipo_declaracion == "INICIAL"){
         $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
     }
@@ -199,7 +198,7 @@ window.guardarRegistroParticipacionInstituciones = function guardarRegistroParti
         "tipoRelacion": $(form  + " select[name='tipoRelacion'] option:selected").val(),
         "tipoInstitucion": {
           "clave": $(form  + " select[name='tipoInstitucion'] option:selected").val(),
-          "valor": $(form  + " input[name='tipoInstitucion_especifique']").val(),
+          "valor": $(form  + " input[name='tipoInstitucion_especifique']").val() .toUpperCase(),
         },
         "nombreInstitucion":    $(form  + " input[name='nombreInstitucion']").val().toUpperCase(),
         "rfc":                  $(form  + " input[name='rfc']").val().toUpperCase(),
@@ -256,7 +255,7 @@ window.editarParticipacionInstituciones = function editarParticipacionInstitucio
     $("#form" + item.seccionName + " input[name='rfc']").val(nodo.rfc);
     $("#form" + item.seccionName + " input[name='puestoRol']").val(nodo.puestoRol);
     $("#form" + item.seccionName + " input[name='fechaInicioParticipacion']").val(nodo.fechaInicioParticipacion);
-    $("#form" + item.seccionName + " select[name='recibeRemuneracion']").val(nodo.recibeRemuneracion.toString());
+    $("#form" + item.seccionName + " select[name='recibeRemuneracion']").val(nodo.recibeRemuneracion.toString()).trigger("change");
     $("#form" + item.seccionName + " input[name='montoMensual']").val(nodo.montoMensual.valor);
     $("#form" + item.seccionName + " select[name='moneda']").val(nodo.montoMensual.moneda);
     $("#form" + item.seccionName + " select[name='pais']").val(nodo.ubicacion.pais).trigger("change");

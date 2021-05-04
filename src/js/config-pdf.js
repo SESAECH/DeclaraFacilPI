@@ -2142,7 +2142,7 @@ function tblParticipacionInstituciones(){
         Object.keys(jsonResult.declaracion.interes.participacionTomaDecisiones.participacion).forEach(function (index) {
             let nodo = jsonResult.declaracion.interes.participacionTomaDecisiones.participacion[index];
             let recibe= "";
-            nodo.recibeRemuneracion ==true ? realiza = "SI": realiza = "NO";
+            nodo.recibeRemuneracion ==true ? recibe = "SI": recibe = "NO";
 
             html+="<tr style='background-color: #dee2e6;'>";
             html+=" <td>TIPO DE RELACIÓN</td>";
@@ -2271,8 +2271,8 @@ function tblRepresentacion(){
     if(!jsonResult.declaracion.interes.representacion.ninguno){
         Object.keys(jsonResult.declaracion.interes.representacion.representacion).forEach(function (index) {
             let nodo = jsonResult.declaracion.interes.representacion.representacion[index];
-            let realiza= "";
-            nodo.recibeRemuneracion ==true ? realiza = "SI": realiza = "NO";
+            let recibe= "";
+            nodo.recibeRemuneracion ==true ? recibe = "SI": recibe = "NO";
 
             html+="<tr style='background-color: #dee2e6;'>";
             html+=" <td>TIPO DE RELACIÓN</td>";
@@ -2306,7 +2306,7 @@ function tblRepresentacion(){
             html+=" <td>MONTO MENSUAL NETO</td>";
             html+="</tr>";
             html+="<tr>";
-            html+=" <td>" + nodo.realiza + "</td>";
+            html+=" <td>" + recibe + "</td>";
             html+=" <td style='text-align: right;'>" + format(nodo.montoMensual.valor) + nodo.montoMensual.moneda + "</td>";
             html+="</tr>";
 
