@@ -994,10 +994,10 @@ function tblDependienteEco(titulo){
                         </tr>';
             }
 
-            if(jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboral.clave=="PUB"){
-                let actividadLaboralDependiente =jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboralSectorPublico;
+            if(nodo.actividadLaboral.clave=="PUB"){
+                let actividadLaboralDependiente = nodo.actividadLaboralSectorPublico;
                 html +="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
-                html +="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboral.valor + "</td></tr>";
+                html +="<tr><td colspan='3'>" + nodo.actividadLaboral.valor + "</td></tr>";
                 html +='<tr style="background-color: #dee2e6;">\
                             <td colspan="2">NOMBRE DEL ENTE PÚBLICO</td>\
                             <td>ÁREA DE ADSCRIPCIÓN</td>\
@@ -1036,10 +1036,10 @@ function tblDependienteEco(titulo){
                         </tr>';
             }
             else{
-                let actividadLaboralDependiente2 =jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboralSectorPrivadoOtro;
+                let actividadLaboralDependiente2 =nodo.actividadLaboralSectorPrivadoOtro;
                 let provContraGob =  actividadLaboralDependiente2.proveedorContratistaGobierno ? "SI":"NO";
                 html +="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
-                html +="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.actividadLaboral.valor + "</td></tr>";
+                html +="<tr><td colspan='3'>" + nodo.actividadLaboral.valor + "</td></tr>";
                 html +='<tr style="background-color: #dee2e6;">\
                                 <td colspan="2">NOMBRE DE LA EMPRESA, SOCIEDAD O ASOCIACIÓN</td>\
                                 <td style="width: 33%;">RFC</td>\

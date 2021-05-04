@@ -123,10 +123,8 @@ window.guardarFormDatosGenerales = function guardarFormDatosGenerales(seccionNo,
             root.situacionPersonalEstadoCivil.valor = $("#formDatosGenerales select[name='situacionPersonalEstadoCivil'] option:selected")[0].innerText;
             root.regimenMatrimonial.clave =         $("#formDatosGenerales select[name='regimenMatrimonial'] option:selected").val();
             root.regimenMatrimonial.valor =         $("#formDatosGenerales select[name='regimenMatrimonial'] option:selected")[0].innerText;
-            root.paisNacimiento.clave =             $("#formDatosGenerales select[name='paisNacimiento'] option:selected").val();
-            root.paisNacimiento.valor =             $("#formDatosGenerales select[name='paisNacimiento'] option:selected")[0].innerText;
-            root.nacionalidad.clave =               $("#formDatosGenerales select[name='nacionalidad'] option:selected").val();
-            root.nacionalidad.valor =               $("#formDatosGenerales select[name='nacionalidad'] option:selected")[0].innerText;
+            root.paisNacimiento =             $("#formDatosGenerales select[name='paisNacimiento'] option:selected").val();          
+            root.nacionalidad =               $("#formDatosGenerales select[name='nacionalidad'] option:selected").val();        
             root.aclaracionesObservaciones =        $("#formDatosGenerales textarea[name='aclaracionesObservaciones']").val().toUpperCase();
             //actualiza el status de la sección (en proceso/terminado)."situacion_patrimonial"
             actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);
@@ -142,8 +140,8 @@ window.loadInfoDatosGenerales = function loadInfoDatosGenerales(){
             switch(index){
                 case "situacionPersonalEstadoCivil":
                 case "regimenMatrimonial":
-                case "paisNacimiento":
-                case "nacionalidad":
+               /*  case "paisNacimiento":
+                case "nacionalidad": */
                     document.getElementsByName(index)[0].value = item.clave;
                     break;
                 default: 
@@ -154,4 +152,6 @@ window.loadInfoDatosGenerales = function loadInfoDatosGenerales(){
             }
         }
     });
+    $("#formDatosGenerales select[name='paisNacimiento']").val(infoSeccionGuardada.paisNacimiento);
+    $("#formDatosGenerales select[name='nacionalidad']").val(infoSeccionGuardada.nacionalidad);
 }
