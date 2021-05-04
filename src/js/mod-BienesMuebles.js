@@ -299,7 +299,7 @@ window.guardarRegistroBienesMuebles = function guardarRegistroBienesMuebles(uuid
         "titular": titulares,
         "tipoBien": {
           "clave": $(form + "select[name='tipoBien'] option:selected").val(),
-          "valor": $(form + "input[name='tipoBien_especifique']").val(),
+          "valor": $(form + "input[name='tipoBien_especifique']").val().toUpperCase(),
         },
         "transmisor": transmisoresTemp,
         "tercero": tercerosTemp,
@@ -316,7 +316,7 @@ window.guardarRegistroBienesMuebles = function guardarRegistroBienesMuebles(uuid
         "fechaAdquisicion": $(form + "input[name='fechaAdquisicion']").val(),
         "motivoBaja": {
           "clave": $(form + "select[name='motivoBaja'] option:selected").val(),
-          "valor": $(form + "input[name='motivoBaja_especifique']").val()
+          "valor": $(form + "input[name='motivoBaja_especifique']").val().toUpperCase()
         }
     };
 
@@ -370,9 +370,9 @@ window.editarBienesMuebles = function editarBienesMuebles(data){
     $(form + "select[name='tipoBien']").val(nodo.tipoBien.clave).trigger("change");
     $(form + "input[name='tipoBien_especifique']").val(nodo.tipoBien.valor);
     $(form + "input[name='descripcionGeneralBien']").val(nodo.descripcionGeneralBien);
-    $(form + "input[name='formaAdquisicion']").val(nodo.formaAdquisicion.valor);
-    $(form + "input[name='formaAdquisicion']").val(nodo.formaAdquisicion.moneda);
-    $(form + "input[name='formaPago']").val(nodo.formaPago);
+    $(form + "select[name='formaAdquisicion']").val(nodo.formaAdquisicion.valor);
+    //$(form + "select[name='formaAdquisicion']").val(nodo.formaAdquisicion.moneda);
+    $(form + "select[name='formaPago']").val(nodo.formaPago);
     $(form + "input[name='valorAdquisicion']").val(nodo.valorAdquisicion.valor);
     $(form + "select[name='moneda']").val(nodo.valorAdquisicion.moneda);
     $(form + "input[name='fechaAdquisicion']").val(nodo.fechaAdquisicion);
