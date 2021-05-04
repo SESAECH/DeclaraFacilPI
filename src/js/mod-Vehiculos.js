@@ -308,7 +308,7 @@ window.guardarRegistroVehiculos = function guardarRegistroVehiculos(uuidItem, se
         "titular": titulares,
         "tipoVehiculo": {
           "clave": $(form + "select[name='tipoVehiculo'] option:selected").val(),
-          "valor": $(form + "input[name='tipoVehiculo_especifique']").val(),
+          "valor": $(form + "input[name='tipoVehiculo_especifique']").val().toUpperCase(),
         },
         "transmisor": transmisoresTemp,
         "tercero": tercerosTemp,
