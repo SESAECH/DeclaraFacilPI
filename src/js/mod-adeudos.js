@@ -248,7 +248,7 @@ window.guardarRegistroAdeudos = function guardarRegistroAdeudos(uuidItem, seccio
         "titular": titulares,
         "tipoAdeudo": {
           "clave": $(form + "select[name='tipoAdeudo'] option:selected").val(),
-          "valor": $(form + ".tipoAdeudo_especifique input[name='especifique']").val().toUpperCase(),
+          "valor": $(form + "input[name='especifique']").val().toUpperCase(),
         },
         "numeroCuentaContrato": $(form + "input[name='numeroCuentaContrato']").val().toUpperCase(),
         "fechaAdquisicion":     $(form + "input[name='fechaAdquisicion']").val(),
@@ -257,7 +257,7 @@ window.guardarRegistroAdeudos = function guardarRegistroAdeudos(uuidItem, seccio
           "moneda": $(form + "select[name='montoOriginal_moneda'] option:selected").val(),
         },
         "otorganteCredito": {
-          "tipoPersona":        $(form + "select[name='tipoPersona'] option:selected").val(),
+          "tipoPersona":        $(form + "select[name='tipoPersonaOtorgante'] option:selected").val(),
           "nombreInstitucion":  $(form + "input[name='nombreInstitucion']").val().toUpperCase(),
           "rfc":                $(form + "input[name='otorganteCredito_rfc']").val().toUpperCase(),
         },
@@ -351,13 +351,14 @@ window.editarAdeudos = function editarAdeudos(data){
     }
 
     $(form + "select[name='tipoAdeudo']").val(nodo.tipoAdeudo.clave).trigger("change");
+    $(form + "input[name='especifique']").val(nodo.tipoAdeudo.valor);
     $(form + "input[name='numeroCuentaContrato']").val(nodo.numeroCuentaContrato);
     $(form + "input[name='fechaAdquisicion']").val(nodo.fechaAdquisicion);
     $(form + "input[name='montoOriginal']").val(nodo.montoOriginal.valor);
     $(form + "select[name='montoOriginal_moneda']").val(nodo.montoOriginal.moneda);
     //$(form + "input[name='saldoInsolutoSituacionActual']").val(nodo.saldoInsolutoSituacionActual.valor);
     //$(form + "select[name='saldoInsolutoSituacionActual_moneda']").val(nodo.saldoInsolutoSituacionActual.moneda);
-    $(form + "select[name='tipoPersona']").val(nodo.otorganteCredito.tipoPersona);
+    $(form + "select[name='tipoPersonaOtorgante']").val(nodo.otorganteCredito.tipoPersona);
     $(form + "input[name='nombreInstitucion']").val(nodo.otorganteCredito.nombreInstitucion);
     $(form + "input[name='otorganteCredito_rfc']").val(nodo.otorganteCredito.rfc);
     $(form + "select[name='pais']").val(nodo.localizacionAdeudo.pais);

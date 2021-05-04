@@ -276,7 +276,7 @@ window.guardarFormDesempenoServidorPublico = function guardarFormDesempenoServid
             });  
         } 
         else {
-            mensajeSwal('Error','La remuneración neta del declarante debe ser mayor a 0','error');
+            mensajeSwal('Error','La remuneración neta del declarante debe ser mayor a 0.','error');
         }            
     }   
 }
