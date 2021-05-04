@@ -248,7 +248,7 @@ window.guardarRegistroAdeudos = function guardarRegistroAdeudos(uuidItem, seccio
         "titular": titulares,
         "tipoAdeudo": {
           "clave": $(form + "select[name='tipoAdeudo'] option:selected").val(),
-          "valor": $(form + "input[name='especifique']").val(),
+          "valor": $(form + ".tipoAdeudo_especifique input[name='especifique']").val().toUpperCase(),
         },
         "numeroCuentaContrato": $(form + "input[name='numeroCuentaContrato']").val().toUpperCase(),
         "fechaAdquisicion":     $(form + "input[name='fechaAdquisicion']").val(),

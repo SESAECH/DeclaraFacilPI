@@ -215,7 +215,8 @@ window.guardarFormIngresos = function guardarFormIngresos(seccionNo, seccionName
                 }
             }
         });      
-    } else {
+    } 
+    else {
         mensajeSwal('Error','El ingreso de la persona que declara debe ser mayor a 0','error');
     }  
 }
