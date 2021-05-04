@@ -40,10 +40,10 @@ window.initPareja = function initPareja(data){
             $("#laboralParejaPubContent").removeClass("hide");
             $("#laboralParejaPriContent").addClass("hide");
         }
-        else if(this.value == "PRI"){                                            
+       /*  else if(this.value == "PRI"){                                            
             $("#laboralParejaPubContent").addClass("hide");
             $("#laboralParejaPriContent").removeClass("hide");
-        }
+        } */
         else{
             $("#laboralParejaPubContent").addClass("hide");
             $("#laboralParejaPriContent").addClass("hide");
@@ -93,6 +93,7 @@ window.initPareja = function initPareja(data){
 
     $(modulo + ".btnTerminar").on('click',function() {        
         window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
+        $("#chkNingunoPareja").prop("disabled", true); 
     });
     
     $(modulo + ".btnHabilitar").on("click",function() {
