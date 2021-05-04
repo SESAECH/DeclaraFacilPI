@@ -2084,10 +2084,6 @@ function tblParticipacionEmpresas(){
             let recibe= "";
             nodo.recibeRemuneracion ==true ? realiza = "SI": realiza = "NO";
 
-            html+="<tr>";
-            html+=" <td colspan='3' style='font-size:12px;'>TIPO DE RELACIÓN | " + nodo.tipoBien.inmueble.tipoInmueble.valor + "</td>";
-            html+="</tr>";
-
             html+="<tr style='background-color: #dee2e6;'>";
             html+=" <td>NOMBRE DE LA EMPRESA, SOCIEDAD O ASOCIACIÓN</td>";
             html+=" <td>RFC</td>";
