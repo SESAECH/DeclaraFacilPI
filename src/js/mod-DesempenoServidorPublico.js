@@ -90,6 +90,7 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
 
     $(form + ".btnTerminar").on('click',function() {
         window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
+        $("#chkNingunoDesempenoServidorPublico").prop("disabled", true);
     });
     
     $(modulo + ".btnHabilitar").on("click",function() {

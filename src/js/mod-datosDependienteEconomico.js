@@ -559,7 +559,7 @@ window.editarDependientesEconomicos = function editarDependientesEconomicos(data
     $("#laboralDependientePriContent select[name='sector']").val(nodo.sector.clave);    
     $("#laboralDependientePriContent input[name='valor']").val(nodo.actividadLaboralSectorPrivadoOtro.salarioMensualNeto.valor);
     $("#laboralDependientePriContent select[name='moneda']").val(nodo.actividadLaboralSectorPrivadoOtro.salarioMensualNeto.moneda);
-    $("#laboralDependientePriContent input[type='radio'][name='proveedorContratistaGobierno']").val(nodo.actividadLaboralSectorPrivadoOtro.proveedorContratistaGobierno);        
+    nodo.proveedorContratistaGobierno ? $("#laboralDependientePriContent #radioDependienteProveGob1").prop("checked", true): $("#laboralDependientePriContent #radioDependienteProveGob2").prop("checked", true);  
         //generales
     $("#form" + item.seccionName + " textarea[name='aclaracionesObservaciones']").val(nodo.aclaracionesObservaciones); 
 }
