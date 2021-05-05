@@ -245,7 +245,7 @@ window.guardarRegistroPrestamoOComodato = function guardarRegistroPrestamoOComod
                 "inmueble": {
                     "tipoInmueble": {
                       "clave": $(form + "#contentPrestamoOComodato_tipoBien_inmueble select[name='tipoInmueble'] option:selected").val(),
-                      "valor": $(form + "#contentPrestamoOComodato_tipoBien_inmueble select[name='tipoInmueble'] option:selected")[0].innerText,
+                      "valor": $(form + ".tipo_inmueble_especifique input[name='especifique']").val().toUpperCase()
                     },
                     "domicilioMexico": {
                       "calle":              $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico input[name='calle']").val().toUpperCase(),
@@ -270,7 +270,7 @@ window.guardarRegistroPrestamoOComodato = function guardarRegistroPrestamoOComod
                 "inmueble": {
                     "tipoInmueble": {
                         "clave": $(form + "#contentPrestamoOComodato_tipoBien_inmueble select[name='tipoInmueble'] option:selected").val(),
-                        "valor": $(form + "#contentPrestamoOComodato_tipoBien_inmueble select[name='tipoInmueble'] option:selected")[0].innerText,
+                        "valor": $(form + ".tipo_inmueble_especifique input[name='especifique']").val().toUpperCase(),
                     },
                     "domicilioExtranjero": {
                       "calle":              $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domExtranjero input[name='calle']").val().toUpperCase(),
@@ -290,17 +290,17 @@ window.guardarRegistroPrestamoOComodato = function guardarRegistroPrestamoOComod
             "vehiculo": {
                 "tipo": {
                   "clave": $(form + "#contentPrestamoOComodato_tipoBien_vehiculo select[name='tipo'] option:selected").val(),
-                  "valor": $(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='especifique']").val(),
+                  "valor": $(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='especifique']").val().toUpperCase(),
                 },
                 "marca":    $(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='marca']").val().toUpperCase(),
                 "modelo":   $(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='modelo']").val().toUpperCase(),
                 "anio":     $(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='anio']").val(),
                 "numeroSerieRegistro":$(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='numeroSerieRegistro']").val().toUpperCase(),
                 "lugarRegistro": {
-                  "pais":   $(form + "#contentPrestamoOComodato_tipoBien_vehiculo select[name='pais'] option:selected").val(),
+                  "pais":   $(form + "#contentPrestamoOComodato_tipoBien_vehiculo select[name='pais'] option:selected").val().toUpperCase(),
                   "entidadFederativa": {
                     "clave": $(form + "#contentPrestamoOComodato_tipoBien_vehiculo select[name='entidadFederativa'] option:selected").val(),
-                    "valor": $(form + "#contentPrestamoOComodato_tipoBien_vehiculo select[name='entidadFederativa'] option:selected")[0].innerText,
+                    "valor": $(form + "#contentPrestamoOComodato_tipoBien_vehiculo select[name='entidadFederativa'] option:selected")[0].innerText.toUpperCase(),
                     }
                 }
             }
@@ -359,6 +359,7 @@ window.editarPrestamoOComodato = function editarPrestamoOComodato(data){
     if(Object.keys(nodo.tipoBien)[0]=="inmueble"){
         $(form + ".CBOtipoBien").val("INM").trigger("change");
         $(form + "#contentPrestamoOComodato_tipoBien_inmueble select[name='tipoInmueble']").val(nodo.tipoBien.inmueble.tipoInmueble.clave).trigger("change");
+        $(form + ".tipo_inmueble_especifique input[name='especifique']").val(nodo.tipoBien.inmueble.tipoInmueble.valor);
         if(Object.keys(nodo.tipoBien.inmueble).indexOf("domicilioMexico")>-1){
             $(form + '#domicilioMXPrestamoOComodato').prop("checked", true);
             $("#contentPrestamoOComodato_tipoBien_inmueble #domExtranjero").addClass("hide");

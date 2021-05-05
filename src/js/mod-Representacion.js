@@ -254,13 +254,14 @@ window.editarRepresentacion = function editarRepresentacion(data){
     $("#form" + item.seccionName + " select[name='tipoPersona']").val(nodo.tipoPersona);
     $("#form" + item.seccionName + " input[name='nombreRazonSocial']").val(nodo.nombreRazonSocial);
     $("#form" + item.seccionName + " input[name='rfc']").val(nodo.rfc);
-    $("#form" + item.seccionName + " select[name='recibeRemuneracion']").val(nodo.recibeRemuneracion.toString());
+    $("#form" + item.seccionName + " select[name='recibeRemuneracion']").val(nodo.recibeRemuneracion.toString()).trigger("change");
     $("#form" + item.seccionName + " input[name='montoMensual']").val(nodo.montoMensual.valor);
     $("#form" + item.seccionName + " input[name='moneda']").val(nodo.montoMensual.moneda);
     $("#form" + item.seccionName + " select[name='pais']").val(nodo.ubicacion.pais).trigger("change");
     $("#form" + item.seccionName + " select[name='entidadFederativa']").val(nodo.ubicacion.entidadFederativa.clave);
-    $("#form" + item.seccionName + " select[name='sector']").val(nodo.sector.clave).trigger("change");   
-    $("#form" + item.seccionName + " input[name='sector_especifique']").val(nodo.sector.valor);
+    $("#form" + item.seccionName + " .CBOsector").val(nodo.sector.clave).trigger("change");
+    $("#form" + item.seccionName + " .content_especifique_sector input[name='sector_especifique']").val(nodo.sector.valor);
+    console.log("#form" + item.seccionName + " .CBOsector");
 }
 
 window.eliminarRepresentacion = function eliminarRepresentacion(data){

@@ -272,7 +272,7 @@ window.editarBeneficiosPrivados = function editarBeneficiosPrivados(data){
     $("#form" + item.seccionName + " input[name='especifiqueBeneficio']").val(nodo.especifiqueBeneficio);
     $("#form" + item.seccionName + " input[name='montoMensualAproximado']").val(nodo.montoMensualAproximado.valor);
     $("#form" + item.seccionName + " select[name='moneda']").val(nodo.montoMensualAproximado.moneda);
-    $("#form" + item.seccionName + " select[name='sector']").val(nodo.sector.clave);
+    $("#form" + item.seccionName + " select[name='sector']").val(nodo.sector.clave).trigger("change");
     $("#form" + item.seccionName + " input[name='especifique']").val();
 }
 

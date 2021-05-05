@@ -814,7 +814,7 @@ function tblPareja(titulo){
         
         if(jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboral.clave=="PUB"){
             let actividadLaboralPareja =jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboralSectorPublico;
-            html +="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
+            html +="<tr style='background-color: #dee2e6;'><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
             html +="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboral.valor + "</td></tr>";
             html +='<tr style="background-color: #dee2e6;">\
                         <td colspan="2">NOMBRE DEL ENTE PÚBLICO</td>\
@@ -853,10 +853,14 @@ function tblPareja(titulo){
                         <td colspan="2">' + actividadLaboralPareja.funcionPrincipal + '</td>\
                     </tr>';
         }
+        else if(sonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboral.clave=="NIN"){
+            html +="<tr style='background-color: #dee2e6;'><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
+            html +="<tr><td colspan='3'>NINGUNA</td></tr>";
+        }
         else{
             let actividadLaboralPareja2 =jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboralSectorPrivadoOtro;
             let provContraGob =  actividadLaboralPareja2.proveedorContratistaGobierno ? "SI":"NO";
-            html +="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
+            html +="<tr style='background-color: #dee2e6;'><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
             html +="<tr><td colspan='3'>" + jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboral.valor + "</td></tr>";
             html +=' <tr style="background-color: #dee2e6;">\
                             <td colspan="2">NOMBRE DE LA EMPRESA, SOCIEDAD O ASOCIACIÓN</td>\
@@ -996,7 +1000,7 @@ function tblDependienteEco(titulo){
 
             if(nodo.actividadLaboral.clave=="PUB"){
                 let actividadLaboralDependiente = nodo.actividadLaboralSectorPublico;
-                html +="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
+                html +="<tr style='background-color: #dee2e6;'><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
                 html +="<tr><td colspan='3'>" + nodo.actividadLaboral.valor + "</td></tr>";
                 html +='<tr style="background-color: #dee2e6;">\
                             <td colspan="2">NOMBRE DEL ENTE PÚBLICO</td>\
@@ -1035,10 +1039,14 @@ function tblDependienteEco(titulo){
                             <td colspan="2">' + actividadLaboralDependiente.funcionPrincipal + '</td>\
                         </tr>';
             }
+            else if(nodo.actividadLaboral.clave=="NIN"){
+                html +="<tr style='background-color: #dee2e6;'><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
+                html +="<tr><td colspan='3'>NINGUNA</td></tr>";
+            }
             else{
                 let actividadLaboralDependiente2 =nodo.actividadLaboralSectorPrivadoOtro;
-                let provContraGob =  actividadLaboralDependiente2.proveedorContratistaGobierno ? "SI":"NO";
-                html +="<tr><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
+                let provContraGob =  nodo.proveedorContratistaGobierno ? "SI":"NO";
+                html +="<tr style='background-color: #dee2e6;'><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
                 html +="<tr><td colspan='3'>" + nodo.actividadLaboral.valor + "</td></tr>";
                 html +='<tr style="background-color: #dee2e6;">\
                                 <td colspan="2">NOMBRE DE LA EMPRESA, SOCIEDAD O ASOCIACIÓN</td>\
@@ -1057,6 +1065,12 @@ function tblDependienteEco(titulo){
                                 <td style="width: 34%;">' + actividadLaboralDependiente2.fechaIngreso + '</td>\
                                 <td style="width: 33%;">' + actividadLaboralDependiente2.empleoCargo + '</td>\
                                 <td style="width: 33%;">' + actividadLaboralDependiente2.salarioMensualNeto.valor + actividadLaboralDependiente2.salarioMensualNeto.moneda + '</td>\
+                            </tr>\
+                            <tr style="background-color: #dee2e6;">\
+                                <td colspan="3">¿ES PROOVEDOR O CONTRATISTA DE GOBIERNO?</td>\
+                            </tr>\
+                            <tr>\
+                                <td colspan="3">' + provContraGob + '</td>\
                             </tr>';
             }
         });
@@ -2315,7 +2329,7 @@ function tblRepresentacion(){
             html+=" <td>SECTOR PRODUCTIVO AL QUE PERTENECE</td>";
             html+="</tr>";
             html+="<tr>";
-            html+=" <td>" + nodo.ubicacion.pais + "/" + nodo.ubicacion.entidadFederativa.valor + "</td>";
+            nodo.ubicacion.pais =="MX" ? html+=" <td>" + nodo.ubicacion.pais + "/" + nodo.ubicacion.entidadFederativa.valor + "</td>": html+=" <td>" + nodo.ubicacion.pais + "</td>";
             html+=" <td>" + nodo.sector.valor + "</td>";
             html+="</tr>";
 
