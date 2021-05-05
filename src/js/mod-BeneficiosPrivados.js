@@ -146,6 +146,24 @@ window.funcionalidadGuardarRegistroBeneficiosPrivados = function funcionalidadGu
         }        
     });
     
+    $(form + '.CBOformaRecepcion').on('change', function() {
+        if(this.value == "MONETARIO"){
+            $(".CBOmoneda").val("MXN").prop("disabled", false);
+            $("input[name='montoMensualAproximado']").val("").prop("disabled", false);
+            $(".content_especifique_beneficio").addClass("hide");
+            $("input[name='especifiqueBeneficio']").val("");
+
+        } 
+        else{
+            $(".CBOmoneda").val("MXN").prop("disabled", true);
+            $("input[name='montoMensualAproximado']").val("0").prop("disabled", true);
+            $(".content_especifique_beneficio").removeClass("hide");
+            $("input[name='especifiqueBeneficio']").val("");
+        }       
+    });
+    
+    $(form + '.CBOformaRecepcion').val("MONETARIO").trigger("change");
+
     $(form + ".CBOtipoBeneficio").val("S").trigger("change"); 
     $(form + ".CBOsector").val("AGRI").trigger("change"); 
     $(form + ".custom-control-input").prop("checked", false);
@@ -201,7 +219,7 @@ window.guardarRegistroBeneficiosPrivados = function guardarRegistroBeneficiosPri
         "tipoPersona":      $(form  + " select[name='tipoPersona'] option:selected").val(),
         "tipoBeneficio": {
           "clave":          $(form  + " select[name='tipoBeneficio'] option:selected").val(),
-          "valor":          $(form  + " select[name='tipoBeneficio'] option:selected")[0].innerText.toUpperCase(),
+          "valor":          $(form  + " input[name='tipoBeneficio_especifique']").val().toUpperCase(),
         },
         "beneficiario": beneficiarios,
         "otorgante": {
@@ -262,18 +280,18 @@ window.editarBeneficiosPrivados = function editarBeneficiosPrivados(data){
     });
 
     $("#form" + item.seccionName + " select[name='tipoOperacion']").val(nodo.tipoOperacion);
-    $("#form" + item.seccionName + " select[name='tipoBeneficio']").val(nodo.tipoBeneficio.clave);
-    $("#form" + item.seccionName + " input[name='especifique']").val();
+    $("#form" + item.seccionName + " select[name='tipoBeneficio']").val(nodo.tipoBeneficio.clave).trigger("change");
+    $("#form" + item.seccionName + " input[name='tipoBeneficio_especifique']").val(nodo.tipoBeneficio.valor);
     //$("#form" + item.seccionName + " select[name='beneficiario']").val(nodo.beneficiario.valor);
     $("#form" + item.seccionName + " select[name='tipoPersona']").val(nodo.otorgante.tipoPersona);
     $("#form" + item.seccionName + " input[name='nombreRazonSocial']").val(nodo.otorgante.nombreRazonSocial);
     $("#form" + item.seccionName + " input[name='rfc']").val(nodo.otorgante.rfc);
-    $("#form" + item.seccionName + " select[name='formaRecepcion']").val(nodo.formaRecepcion);
+    $("#form" + item.seccionName + " select[name='formaRecepcion']").val(nodo.formaRecepcion).trigger("change");
     $("#form" + item.seccionName + " input[name='especifiqueBeneficio']").val(nodo.especifiqueBeneficio);
     $("#form" + item.seccionName + " input[name='montoMensualAproximado']").val(nodo.montoMensualAproximado.valor);
     $("#form" + item.seccionName + " select[name='moneda']").val(nodo.montoMensualAproximado.moneda);
     $("#form" + item.seccionName + " select[name='sector']").val(nodo.sector.clave).trigger("change");
-    $("#form" + item.seccionName + " input[name='especifique']").val();
+    $("#form" + item.seccionName + " input[name='sector_especifique']").val(nodo.sector.valor);
 }
 
 window.eliminarBeneficiosPrivados = function eliminarBeneficiosPrivados(data){

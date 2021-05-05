@@ -368,8 +368,8 @@ window.editarPrestamoOComodato = function editarPrestamoOComodato(data){
             $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico input[name='numeroExterior']").val(nodo.tipoBien.inmueble.domicilioMexico.numeroExterior);
             $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico input[name='numeroInterior']").val(nodo.tipoBien.inmueble.domicilioMexico.numeroInterior);
             $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico input[name='coloniaLocalidad']").val(nodo.tipoBien.inmueble.domicilioMexico.coloniaLocalidad);
-            $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico select[name='municipioAlcaldia']").val(nodo.tipoBien.inmueble.domicilioMexico.municipioAlcaldia.clave);
-            $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico select[name='entidadFederativa']").val(nodo.tipoBien.inmueble.domicilioMexico.entidadFederativa.clave);            
+            $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico select[name='entidadFederativa']").val(nodo.tipoBien.inmueble.domicilioMexico.entidadFederativa.clave).trigger("change");           
+            $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico select[name='municipioAlcaldia']").val(nodo.tipoBien.inmueble.domicilioMexico.municipioAlcaldia.clave);            
             $(form + "#contentPrestamoOComodato_tipoBien_inmueble #domMexico input[name='codigoPostal']").val(nodo.tipoBien.inmueble.domicilioMexico.codigoPostal);            
         }
         else{
@@ -393,7 +393,7 @@ window.editarPrestamoOComodato = function editarPrestamoOComodato(data){
         $(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='modelo']").val(nodo.tipoBien.vehiculo.modelo);
         $(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='anio']").val(nodo.tipoBien.vehiculo.anio);
         $(form + "#contentPrestamoOComodato_tipoBien_vehiculo input[name='numeroSerieRegistro']").val(nodo.tipoBien.vehiculo.numeroSerieRegistro);
-        $(form + "#contentPrestamoOComodato_tipoBien_vehiculo select[name='pais']").val(nodo.tipoBien.vehiculo.lugarRegistro.pais);
+        $(form + "#contentPrestamoOComodato_tipoBien_vehiculo select[name='pais']").val(nodo.tipoBien.vehiculo.lugarRegistro.pais).trigger("change");
         $(form + "#contentPrestamoOComodato_tipoBien_vehiculo select[name='entidadFederativa']").val(nodo.tipoBien.vehiculo.lugarRegistro.entidadFederativa.clave);
     }                       
 }

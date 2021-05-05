@@ -387,7 +387,7 @@ window.editarAdeudos = function editarAdeudos(data){
             $(form + "select[name='saldoInsolutoSituacionActual_moneda']").val(nodo.saldoInsolutoFechaConclusion.moneda);
             if (nodo.porcentajeIncrementoDecremento<0) {
                 $(form + "select[name='porcentajeIncrementoDecremento_simbolo']").val("-");
-                $(form + "input[name='porcentajeIncrementoDecremento']").val(nodo.porcentajeIncrementoDecremento);
+                $(form + "input[name='porcentajeIncrementoDecremento']").val(Math.abs(nodo.porcentajeIncrementoDecremento));
             }
             else{
                 $(form + "select[name='porcentajeIncrementoDecremento_simbolo']").val("+");

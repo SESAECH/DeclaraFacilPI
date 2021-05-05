@@ -152,6 +152,22 @@ window.funcionalidadGuardarRegistroApoyosPublicos = function funcionalidadGuarda
         }        
     });
 
+    $(form + '.CBOformaRecepcion').on('change', function() {
+        if(this.value == "MONETARIO"){
+            $(".CBOmoneda").val("MXN").prop("disabled", false);
+            $("input[name='montoApoyoMensual']").val("").prop("disabled", false);
+            $(".content_especifique_apoyo").addClass("hide");
+            $("input[name='especifiqueApoyo']").val("");
+
+        } 
+        else{
+            $(".CBOmoneda").val("MXN").prop("disabled", true);
+            $("input[name='montoApoyoMensual']").val("0").prop("disabled", true);
+            $(".content_especifique_apoyo").removeClass("hide");
+            $("input[name='especifiqueApoyo']").val("");
+        }       
+    });
+    $(form + '.CBOformaRecepcion').val("MONETARIO").trigger("change");
     if(jsonResult.captura.tipo_declaracion == "INICIAL"){
         $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
     }
@@ -253,7 +269,7 @@ window.editarApoyosPublicos = function editarApoyosPublicos(data){
     $("#form" + item.seccionName + " select[name='tipoApoyo']").val(nodo.tipoApoyo.clave).trigger("change");
     $("#form" + item.seccionName + " input[name='tipoApoyo_especifique']").val(nodo.tipoApoyo.valor)
     $("#form" + item.seccionName + " input[name='especifique']").val(nodo.especifiqueApoyo);
-    $("#form" + item.seccionName + " select[name='formaRecepcion']").val(nodo.formaRecepcion);
+    $("#form" + item.seccionName + " select[name='formaRecepcion']").val(nodo.formaRecepcion).trigger("change");
     $("#form" + item.seccionName + " input[name='montoApoyoMensual']").val(nodo.montoApoyoMensual.valor);
     $("#form" + item.seccionName + " select[name='moneda']").val(nodo.montoApoyoMensual.moneda);
     $("#form" + item.seccionName + " input[name='especifiqueApoyo']").val(nodo.especifiqueApoyo);

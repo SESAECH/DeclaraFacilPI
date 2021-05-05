@@ -115,11 +115,68 @@ window.initIngresos = function initIngresos(data){
 
 window.loadInfoIngresos = function loadInfoIngresos(){
     var nodo = jsonResult.declaracion.situacionPatrimonial.ingresos;
+    switch(jsonResult.captura.tipo_declaracion){
+        case "INICIAL":
+            $("#formIngresos input[name='remuneracionMensualCargoPublicoCantidad']").val(nodo.remuneracionMensualCargoPublico.valor);
+            $("#formIngresos select[name='remuneracionMensualCargoPublicoMoneda']").val(nodo.remuneracionMensualCargoPublico.moneda);
+            
+            $("#formIngresos input[name='otrosIngresosMensualesTotalCantidad']").val(nodo.otrosIngresosMensualesTotal.valor);
+            $("#formIngresos select[name='otrosIngresosMensualesTotalMoneda']").val(nodo.otrosIngresosMensualesTotal.moneda);
 
-    $("#formIngresos input[name='remuneracionMensualCargoPublicoCantidad']").val(nodo.remuneracionMensualCargoPublico.valor);
+            $("#formIngresos input[name='ingresoMensualNetoDeclaranteCantidad']").val(nodo.ingresoMensualNetoDeclarante.valor);
+            $("#formIngresos select[name='ingresoMensualNetoDeclaranteMoneda']").val(nodo.ingresoMensualNetoDeclarante.moneda);
+
+            $("#formIngresos input[name='ingresoMensualNetoParejaDependienteCantidad']").val(nodo.ingresoMensualNetoParejaDependiente.valor);
+            $("#formIngresos select[name='ingresoMensualNetoParejaDependienteMoneda']").val(nodo.ingresoMensualNetoParejaDependiente.moneda);
+
+            $("#formIngresos input[name='totalIngresosMensualesNetosCantidad']").val(nodo.totalIngresosMensualesNetos.valor);
+            $("#formIngresos select[name='totalIngresosMensualesNetosMoneda']").val(nodo.totalIngresosMensualesNetos.moneda);
+            break;
+        case "MODIFICACION":
+            $("#formIngresos input[name='remuneracionMensualCargoPublicoCantidad']").val(nodo.remuneracionAnualCargoPublico.valor);
+            $("#formIngresos select[name='remuneracionMensualCargoPublicoMoneda']").val(nodo.remuneracionAnualCargoPublico.moneda);
+            
+            $("#formIngresos input[name='otrosIngresosMensualesTotalCantidad']").val(nodo.otrosIngresosAnualesTotal.valor);
+            $("#formIngresos select[name='otrosIngresosMensualesTotalMoneda']").val(nodo.otrosIngresosAnualesTotal.moneda);
+
+            $("#formIngresos input[name='ingresoMensualNetoDeclaranteCantidad']").val(nodo.ingresoAnualNetoDeclarante.valor);
+            $("#formIngresos select[name='ingresoMensualNetoDeclaranteMoneda']").val(nodo.ingresoAnualNetoDeclarante.moneda);
+
+            $("#formIngresos input[name='ingresoMensualNetoParejaDependienteCantidad']").val(nodo.ingresoAnualNetoParejaDependiente.valor);
+            $("#formIngresos select[name='ingresoMensualNetoParejaDependienteMoneda']").val(nodo.ingresoAnualNetoParejaDependiente.moneda);
+
+            $("#formIngresos input[name='totalIngresosMensualesNetosCantidad']").val(nodo.totalIngresosAnualesNetos.valor);
+            $("#formIngresos select[name='totalIngresosMensualesNetosMoneda']").val(nodo.totalIngresosAnualesNetos.moneda);
+
+            pintarTablaEnajenacionBienes();
+            $("#formIngresos input[name='enajenacionBienesRemuneracionTotalCantidad']").val(nodo.enajenacionBienes.remuneracionTotal.valor);
+            
+            break;
+        case "CONCLUSION":
+            $("i#formIngresos nput[name='remuneracionMensualCargoPublicoCantidad']").val(nodo.remuneracionConclusionCargoPublico.valor);
+            $("#formIngresos select[name='remuneracionMensualCargoPublicoMoneda']").val(nodo.remuneracionConclusionCargoPublico.moneda);
+            
+            $("#formIngresos input[name='otrosIngresosMensualesTotalCantidad']").val(nodo.otrosIngresosConclusionTotal.valor);
+            $("#formIngresos select[name='otrosIngresosMensualesTotalMoneda']").val(nodo.otrosIngresosConclusionTotal.moneda);
+
+            $("#formIngresos input[name='ingresoMensualNetoDeclaranteCantidad']").val(nodo.ingresoConclusionNetoDeclarante.valor);
+            $("#formIngresos select[name='ingresoMensualNetoDeclaranteMoneda']").val(nodo.ingresoConclusionNetoDeclarante.moneda);
+
+            $("#formIngresos input[name='ingresoMensualNetoParejaDependienteCantidad']").val(nodo.ingresoConclusionNetoParejaDependiente.valor);
+            $("#formIngresos select[name='ingresoMensualNetoParejaDependienteMoneda']").val(nodo.ingresoConclusionNetoParejaDependiente.moneda);
+
+            $("#formIngresos input[name='totalIngresosMensualesNetosCantidad']").val(nodo.totalIngresosConclusionNetos.valor);
+            $("#formIngresos select[name='totalIngresosMensualesNetosMoneda']").val(nodo.totalIngresosConclusionNetos.moneda);
+
+            pintarTablaEnajenacionBienes();
+            $("#formIngresos input[name='enajenacionBienesRemuneracionTotalCantidad']").val(nodo.enajenacionBienes.remuneracionTotal.valor);
+            break;
+    }
+
+    /* $("#formIngresos input[name='remuneracionMensualCargoPublicoCantidad']").val(nodo.remuneracionMensualCargoPublico.valor);
     $("#formIngresos input[name='remuneracionMensualCargoPublicoMoneda']").val(nodo.remuneracionMensualCargoPublico.moneda);
     $("#formIngresos input[name='otrosIngresosMensualesTotalCantidad']").val(nodo.otrosIngresosMensualesTotal.valor);
-    $("#formIngresos input[name='otrosIngresosMensualesTotalMoneda']").val(nodo.otrosIngresosMensualesTotal.moneda);
+    $("#formIngresos input[name='otrosIngresosMensualesTotalMoneda']").val(nodo.otrosIngresosMensualesTotal.moneda); */
 
     pintarTablaActividadIndustrial();
     $("#formIngresos input[name='actividadIndustrialRemuneracionTotalCantidad']").val(nodo.actividadIndustialComercialEmpresarial.remuneracionTotal.valor);
@@ -133,14 +190,16 @@ window.loadInfoIngresos = function loadInfoIngresos(){
     pintarTablaOtrosIngresos();
     $("#formIngresos input[name='otrosIngresosRemuneracionTotalCantidad']").val(nodo.otrosIngresos.remuneracionTotal.valor);
   
-    $("#formIngresos input[name='ingresoMensualNetoDeclaranteCantidad']").val(nodo.ingresoMensualNetoDeclarante.valor);
+    
+
+   /*  $("#formIngresos input[name='ingresoMensualNetoDeclaranteCantidad']").val(nodo.ingresoMensualNetoDeclarante.valor);
     $("#formIngresos input[name='ingresoMensualNetoDeclaranteMoneda']").val(nodo.ingresoMensualNetoDeclarante.moneda);
 
     $("#formIngresos input[name='ingresoMensualNetoParejaDependienteCantidad']").val(nodo.ingresoMensualNetoParejaDependiente.valor);
     $("#formIngresos input[name='ingresoMensualNetoParejaDependienteMoneda']").val(nodo.ingresoMensualNetoParejaDependiente.moneda);
 
     $("#formIngresos input[name='totalIngresosMensualesNetosCantidad']").val(nodo.totalIngresosMensualesNetos.valor);
-    $("#formIngresos input[name='totalIngresosMensualesNetosMoneda']").val(nodo.totalIngresosMensualesNetos.moneda);
+    $("#formIngresos input[name='totalIngresosMensualesNetosMoneda']").val(nodo.totalIngresosMensualesNetos.moneda); */
 
     $("#formIngresos input[name='aclaracionesObservaciones']").val(nodo.aclaracionesObservaciones);
 }

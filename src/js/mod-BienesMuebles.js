@@ -306,7 +306,7 @@ window.guardarRegistroBienesMuebles = function guardarRegistroBienesMuebles(uuid
         "descripcionGeneralBien": $(form + "input[name='descripcionGeneralBien']").val().toUpperCase(),
         "formaAdquisicion": {
           "clave": $(form + "select[name='formaAdquisicion'] option:selected").val(),
-          "valor": $(form + "select[name='formaAdquisicion'] option:selected")[0].innerText,
+          "valor": $(form + "select[name='formaAdquisicion'] option:selected")[0].innerText.toUpperCase(),
         },
         "formaPago": $(form + "select[name='formaPago'] option:selected").val(),
         "valorAdquisicion": {
@@ -370,7 +370,7 @@ window.editarBienesMuebles = function editarBienesMuebles(data){
     $(form + "select[name='tipoBien']").val(nodo.tipoBien.clave).trigger("change");
     $(form + "input[name='tipoBien_especifique']").val(nodo.tipoBien.valor);
     $(form + "input[name='descripcionGeneralBien']").val(nodo.descripcionGeneralBien);
-    $(form + "select[name='formaAdquisicion']").val(nodo.formaAdquisicion.valor);
+    $(form + "select[name='formaAdquisicion']").val(nodo.formaAdquisicion.clave);
     //$(form + "select[name='formaAdquisicion']").val(nodo.formaAdquisicion.moneda);
     $(form + "select[name='formaPago']").val(nodo.formaPago);
     $(form + "input[name='valorAdquisicion']").val(nodo.valorAdquisicion.valor);
