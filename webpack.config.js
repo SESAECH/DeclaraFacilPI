@@ -55,7 +55,7 @@ module.exports = {
   	}]
   },
   optimization:{
-  	minimize:true,
+  	minimize:false,
     minimizer: [new TerserPlugin({extractComments:'all',}), //new OptimizeCssAssetsPlugin(),
     ],
     splitChunks:false,

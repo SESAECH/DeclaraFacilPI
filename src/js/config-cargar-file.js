@@ -67,8 +67,8 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
         }
         else{
             jsonResult.captura = avanceCaptura.captura;
-            console.log (jsonResult.captura);
-            console.log(avanceCaptura.captura);
+            //console.log (jsonResult.captura);
+            //console.log(avanceCaptura.captura);
             jsonResult.declaracion ={};
             $("input[name='nameContralor']").val(jsonResult.captura.contralor);
             Object.keys(avanceCaptura.captura.declaracion.situacionPatrimonial.secciones).forEach(function (index) {

@@ -336,7 +336,7 @@ window.jsonResult = {
         "interes": {
           "participacion": {
             "ninguno": false,
-            "participacion": [],
+            "participacion": {},
             "aclaracionesObservaciones": ""
           },
           "participacionTomaDecisiones": {
