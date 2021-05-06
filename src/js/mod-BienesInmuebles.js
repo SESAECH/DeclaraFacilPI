@@ -158,9 +158,7 @@ window.funcionalidadGuardarRegistroBienesInmuebles = function funcionalidadGuard
     
     $(form + '.content_transmisor_nuevo .CBOtipoPersona').on('change', function() {
         if(this.value=="FISICA"){
-            $(form + ".CBOparentescoRelacion option").removeClass("hide");
-            $(form + ".CBOparentescoRelacion option[value='NIN']").addClass("hide");
-            $(form + ".CBOparentescoRelacion option[value='OTRO']").addClass("hide");     
+            $(form + ".CBOparentescoRelacion option").removeClass("hide");    
             $(form + '.CBOparentescoRelacion').val("ABU").trigger("change");         
         }
         else{

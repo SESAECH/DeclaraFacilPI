@@ -156,9 +156,7 @@ window.funcionalidadGuardarRegistroVehiculos = function funcionalidadGuardarRegi
 
     $(form + '.content_transmisor .CBOtipoPersona').on('change', function() {
         if(this.value=="FISICA"){
-            $(form + ".CBOparentescoRelacion option").removeClass("hide");
-            $(form + ".CBOparentescoRelacion option[value='NIN']").addClass("hide");
-            $(form + ".CBOparentescoRelacion option[value='OTRO']").addClass("hide");     
+            $(form + ".CBOparentescoRelacion option").removeClass("hide");    
             $(form + '.CBOparentescoRelacion').val("ABU").trigger("change");         
         }
         else{
