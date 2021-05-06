@@ -2096,7 +2096,7 @@ function tblParticipacionEmpresas(){
         Object.keys(jsonResult.declaracion.interes.participacion.participacion).forEach(function (index) {
             let nodo = jsonResult.declaracion.interes.participacion.participacion[index];
             let recibe= "";
-            nodo.recibeRemuneracion ==true ? realiza = "SI": realiza = "NO";
+            nodo.recibeRemuneracion ==true ? recibe = "SI": recibe = "NO";
 
             html+="<tr style='background-color: #dee2e6;'>";
             html+=" <td>NOMBRE DE LA EMPRESA, SOCIEDAD O ASOCIACIÓN</td>";
@@ -2127,7 +2127,7 @@ function tblParticipacionEmpresas(){
             html+="</tr>";
             html+="<tr>";
             html+=" <td>" + nodo.ubicacion.pais + "</td>";
-            html+=" <td>" + nodo.ubicacion.entidadFederativa.valor + "</td>";
+            nodo.ubicacion.pais=="MX" ? html+=" <td>" + nodo.ubicacion.entidadFederativa.valor + "</td>": html+=" <td></td>";
             html+=" <td>" + nodo.sector.valor + "</td>";
             html+="</tr>";
 
@@ -2200,7 +2200,7 @@ function tblParticipacionInstituciones(){
             html+="</tr>";
             html+="<tr>";
             html+=" <td>" + nodo.ubicacion.pais + "</td>";
-            html+=" <td>" + nodo.ubicacion.entidadFederativa.valor + "</td>";
+            nodo.ubicacion.pais=="MX" ? html+=" <td>" + nodo.ubicacion.entidadFederativa.valor + "</td>" : html+=" <td></td>"; 
             html+="</tr>";
             
             html+="<tr><td colspan='3'><td></tr>"                                
@@ -2396,7 +2396,7 @@ function tblClientes(){
             html+="<tr>";
             html+=" <td>" + nodo.sector.valor + "</td>";
             html+=" <td style='text-align: right;'>" + format(nodo.montoAproximadoGanancia.valor) + nodo.montoAproximadoGanancia.moneda + "</td>";
-            html+=" <td>" + nodo.ubicacion.pais + "/" + nodo.ubicacion.entidadFederativa.valor + "</td>";
+            nodo.ubicacion.pais =="MX" ? html+=" <td>" + nodo.ubicacion.pais + "/" + nodo.ubicacion.entidadFederativa.valor + "</td>" : html+=" <td>" + nodo.ubicacion.pais +"</td>";
             html+="</tr>";
 
             html+="<tr><td colspan='3'><td></tr>"                                
@@ -2529,7 +2529,7 @@ function tblFideicomisos(){
             html+=" <td>RFC</td>";
             html+="</tr>";
             html+="<tr>";
-            html+=" <td>" + nodo.fiduciario.nombreRazonSocial + "</td>";
+            html+=" <td colspan='2'>" + nodo.fiduciario.nombreRazonSocial + "</td>";
             html+=" <td>" + nodo.fiduciario.rfc + "</td>";
             html+="</tr>";
 

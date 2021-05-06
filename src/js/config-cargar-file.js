@@ -95,6 +95,10 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
                     $(".status-seccion-" + item.apartado + "-" + item.no).removeClass("indicador-status").addClass("indicador-status-success").text("TERMINADO");
                 }            
             });
+            //corrección a array.
+            if (Object.keys(jsonResult.declaracion.interes.participacion.participacion).length==0){
+                jsonResult.declaracion.interes.participacion.participacion={};
+            }
             
             if (typeof avanceCaptura.captura.declaracion.fiscal !='undefined') {
                 Object.keys(avanceCaptura.captura.declaracion.fiscal.secciones).forEach(function (index) {
