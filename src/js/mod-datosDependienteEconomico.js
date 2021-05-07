@@ -711,13 +711,13 @@ window.funcionalidadGuardarRegistroDependientesEconomicos = function funcionalid
             $("#laboralDependientePubContent").removeClass("hide");
             $("#laboralDependientePriContent").addClass("hide");
         }
-        else if(this.value == "PRI"){                                            
+        else if(this.value == "NIN"){                                            
             $("#laboralDependientePubContent").addClass("hide");
-            $("#laboralDependientePriContent").removeClass("hide");
+            $("#laboralDependientePriContent").addClass("hide");
         }
         else{
             $("#laboralDependientePubContent").addClass("hide");
-            $("#laboralDependientePriContent").addClass("hide");
+            $("#laboralDependientePriContent").removeClass("hide");
         }
     });
 

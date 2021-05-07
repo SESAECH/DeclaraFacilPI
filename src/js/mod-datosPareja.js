@@ -40,14 +40,19 @@ window.initPareja = function initPareja(data){
             $("#laboralParejaPubContent").removeClass("hide");
             $("#laboralParejaPriContent").addClass("hide");
         }
+        else if(this.value == "NIN"){                                            
+            $("#laboralParejaPubContent").addClass("hide");
+            $("#laboralParejaPriContent").addClass("hide");
+        }
+        else{
+            $("#laboralParejaPubContent").addClass("hide");
+            $("#laboralParejaPriContent").removeClass("hide");
+        }
        /*  else if(this.value == "PRI"){                                            
             $("#laboralParejaPubContent").addClass("hide");
             $("#laboralParejaPriContent").removeClass("hide");
         } */
-        else{
-            $("#laboralParejaPubContent").addClass("hide");
-            $("#laboralParejaPriContent").addClass("hide");
-        }
+       
     });
 
     //validar status de la sección.
