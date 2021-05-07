@@ -853,7 +853,7 @@ function tblPareja(titulo){
                         <td colspan="2">' + actividadLaboralPareja.funcionPrincipal + '</td>\
                     </tr>';
         }
-        else if(sonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboral.clave=="NIN"){
+        else if(jsonResult.declaracion.situacionPatrimonial.datosPareja.actividadLaboral.clave=="NIN"){
             html +="<tr style='background-color: #dee2e6;'><td colspan='3'>ACTIVIDAD LABORAL</td></tr>";
             html +="<tr><td colspan='3'>NINGUNA</td></tr>";
         }
