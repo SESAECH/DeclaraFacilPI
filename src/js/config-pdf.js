@@ -537,39 +537,47 @@ function tblDomicilio(){
 
 function tblDatosCurriculares(){
     let html="";
-     html+='<tr><td colspan="5" style="background-color: #621132; color: #fff; font-size:14px;">3. DATOS CURRICULARES DEL DECLARANTE</td></tr>';
-    Object.keys(jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad).forEach(function (index) {
-        var nodo = jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad[index];
-        html +='    <tr style="background-color: #dee2e6;">\
-                        <td style="width: 20%;">NIVEL</td>\
-                        <td style="width: 20%;">DOCUMENTO OBTENIDO</td>\
-                        <td style="width: 20%;">FECHA OBTENCIÓN</td>\
-                        <td style="width: 20%;">ESTATUS</td>\
-                        <td style="width: 20%;">UBICACIÓN</td>\
-                    </tr>\
-                    <tr>\
-                        <td style="width: 20%;">' + nodo.nivel.valor + '</td>\
-                        <td style="width: 20%;">' + nodo.documentoObtenido + '</td>\
-                        <td style="width: 20%;">' + nodo.fechaObtencion + '</td>\
-                        <td style="width: 20%;">' + nodo.estatus + '</td>\
-                        <td style="width: 20%;">' + nodo.institucionEducativa.ubicacion + '</td>\
-                    </tr>\
-                    <tr style="background-color: #dee2e6;">\
-                        <td colspan="3">INSTITUCIÓN EDUCATIVA</td>\
-                        <td colspan="2">CARRERA O ÁREA DE CONOCIMIENTO</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="3">' + nodo.institucionEducativa.nombre + '</td>\
-                        <td colspan="2">' + nodo.carreraAreaConocimiento + '</td>\
-                    </tr>';
-    });
-
-    html+=' <tr>\
-                <td style="background-color: #dee2e6;" colspan="5">ACLARACIONES / OBSERVACIONES</td>\
-            </tr>\
-            <tr>\
-                <td colspan="5" style="height:80px;">' + jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.aclaracionesObservaciones + '</td>\
-            </tr>';
+    html+='<tr><td colspan="5" style="background-color: #621132; color: #fff; font-size:14px;">3. DATOS CURRICULARES DEL DECLARANTE</td></tr>';
+    if(!jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.ninguno){
+        Object.keys(jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad).forEach(function (index) {
+            var nodo = jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad[index];
+            html +='    <tr style="background-color: #dee2e6;">\
+                            <td style="width: 20%;">NIVEL</td>\
+                            <td style="width: 20%;">DOCUMENTO OBTENIDO</td>\
+                            <td style="width: 20%;">FECHA OBTENCIÓN</td>\
+                            <td style="width: 20%;">ESTATUS</td>\
+                            <td style="width: 20%;">UBICACIÓN</td>\
+                        </tr>\
+                        <tr>\
+                            <td style="width: 20%;">' + nodo.nivel.valor + '</td>\
+                            <td style="width: 20%;">' + nodo.documentoObtenido + '</td>\
+                            <td style="width: 20%;">' + nodo.fechaObtencion + '</td>\
+                            <td style="width: 20%;">' + nodo.estatus + '</td>\
+                            <td style="width: 20%;">' + nodo.institucionEducativa.ubicacion + '</td>\
+                        </tr>\
+                        <tr style="background-color: #dee2e6;">\
+                            <td colspan="3">INSTITUCIÓN EDUCATIVA</td>\
+                            <td colspan="2">CARRERA O ÁREA DE CONOCIMIENTO</td>\
+                        </tr>\
+                        <tr>\
+                            <td colspan="3">' + nodo.institucionEducativa.nombre + '</td>\
+                            <td colspan="2">' + nodo.carreraAreaConocimiento + '</td>\
+                        </tr>';
+        });
+        html+=' <tr>\
+                    <td style="background-color: #dee2e6;" colspan="5">ACLARACIONES / OBSERVACIONES</td>\
+                </tr>\
+                <tr>\
+                    <td colspan="5" style="height:80px;">' + jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.aclaracionesObservaciones + '</td>\
+                </tr>';
+    }
+    else{
+        html +='<tr><td colspan="5">Manifiesto bajo protesta de decir verdad, que no tengo ningún registro que agregar en esta sección que es requerida </br> en la presente declaración de forma veráz y verificable.</td></tr>\
+                <tr style="background-color: #dee2e6;"><td colspan="5">ACLARACIONES / OBSERVACIONES</td></tr>\
+                <tr>\
+                    <td colspan="5">' + jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.aclaracionesObservaciones + '</td>\
+                </tr>';            
+    }            
     $("#pdfMiDeclaracion_datosCurricularesDeclarante>tbody").empty().append(html);
 }
 

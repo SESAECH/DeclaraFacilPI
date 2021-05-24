@@ -10,7 +10,7 @@ window.initDatosGenerales = function initDatosGenerales(data){
     loadCat(regimenMatrimonial, form + ".CBOregimenMatrimonial");
     loadCat(paises, form + ".CBOpaisNacimiento");
     loadCat(paises, form + ".CBOnacionalidad");
-
+    $("#formDatosGenerales select[name='situacionPersonalEstadoCivil']").val("SOL").trigger("change");
     //validar status de la sección.
     switch(seccion.status){
         case "SIN_INFO": 
@@ -52,6 +52,16 @@ window.initDatosGenerales = function initDatosGenerales(data){
     });    
     $(modulo + ".btnHabilitar").on('click',function() {
         habilitarSeccion(seccion.apartado, seccion.no, seccionName);
+        switch($("#formDatosGenerales select[name='situacionPersonalEstadoCivil']").val()){
+            case "SOL":
+            case "DIV":
+            case "VIU":
+                $("#formDatosGenerales select[name='regimenMatrimonial']").prop("disabled", true);
+                break;
+            default: 
+                $("#formDatosGenerales select[name='regimenMatrimonial']").prop("disabled", false); 
+                break;
+        }
     });
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
@@ -136,22 +146,36 @@ window.loadInfoDatosGenerales = function loadInfoDatosGenerales(){
     var infoSeccionGuardada = jsonResult.declaracion.situacionPatrimonial.datosGenerales;
     $.each(infoSeccionGuardada, function (index, item) {
         if(typeof item == "string"){ document.getElementsByName(index)[0].value = item; }
-        else{
-            switch(index){
-                case "situacionPersonalEstadoCivil":
-                case "regimenMatrimonial":
-               /*  case "paisNacimiento":
-                case "nacionalidad": */
-                    document.getElementsByName(index)[0].value = item.clave;
-                    break;
-                default: 
-                    $.each(item, function (subindex, subitem) {
-                        document.getElementsByName(subindex)[0].value = subitem;
-                    }); 
-                break;
-            }
-        }
     });
+
+    $("#formDatosGenerales input[name='rfc']").val(infoSeccionGuardada.rfc.rfc);
+    $("#formDatosGenerales input[name='homoClave']").val(infoSeccionGuardada.rfc.homoClave);
+    $("#formDatosGenerales input[name='institucional']").val(infoSeccionGuardada.correoElectronico.institucional);
+    $("#formDatosGenerales input[name='personal']").val(infoSeccionGuardada.correoElectronico.personal);
+
+    $("#formDatosGenerales input[name='casa']").val(infoSeccionGuardada.telefono.casa);
+    $("#formDatosGenerales input[name='celularPersonal']").val(infoSeccionGuardada.telefono.celularPersonal);
+    
+    $("#formDatosGenerales select[name='situacionPersonalEstadoCivil']").val(infoSeccionGuardada.situacionPersonalEstadoCivil.clave).trigger("change");
+    $("#formDatosGenerales select[name='regimenMatrimonial']").val(infoSeccionGuardada.regimenMatrimonial.clave);
+
     $("#formDatosGenerales select[name='paisNacimiento']").val(infoSeccionGuardada.paisNacimiento);
     $("#formDatosGenerales select[name='nacionalidad']").val(infoSeccionGuardada.nacionalidad);
 }
+
+$('#formDatosGenerales select[name="situacionPersonalEstadoCivil"]').on('change', function() {
+    switch(this.value){
+        case "SOL":
+        case "DIV":
+        case "VIU":
+            $("#formDatosGenerales select[name='regimenMatrimonial']").val("NA").prop("disabled", true);
+            $("#formDatosGenerales .CBOregimenMatrimonial option[value='NA']").removeClass("hide");
+            break;
+        default: 
+            $("#formDatosGenerales .CBOregimenMatrimonial option[value='NA']").addClass("hide");
+            $("#formDatosGenerales select[name='regimenMatrimonial']").val("SOC").prop("disabled", false); 
+            break;
+    }
+                 
+}); 
+

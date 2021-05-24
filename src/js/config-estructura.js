@@ -64,6 +64,7 @@ window.jsonResult = {
             "aclaracionesObservaciones": ""
           },
           "datosCurricularesDeclarante": {
+            "ninguno": false,
             "escolaridad": {},
             "aclaracionesObservaciones": ""
           },

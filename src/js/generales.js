@@ -65,6 +65,42 @@ $(".chkNinguno").on("change",function() {
 
     if(this.checked){     
         switch(this.dataset.form){
+            case "CV":
+                if (Object.keys(jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad).length>0){
+                    Swal.fire({
+                        title: 'Aviso',
+                        text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "Continuar",
+                        denyButtonText: "Cancelar",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                //borrar info del jsonResult y de la tabla.
+                                jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad=[];
+                                jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.ninguno=true;
+                                $(tabla + " tbody").empty();
+                                //onhabilitar controles.
+                                $(btnAgregar).addClass("hide");                                
+                                $(btnTerminar).removeClass("hide");
+                                $(tabla).addClass("hide");
+                            } 
+                            else if (result.isDenied) {
+                                $("#modulo" + this.dataset.form + " .chkNinguno")[0].checked=false;
+                                $(btnAgregar).removeClass("hide");                                
+                                $(btnTerminar).removeClass("hide");
+                                $(tabla).removeClass("hide");
+                            }
+                    });
+                }
+                else{
+                    jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.ninguno=true;
+                    $(btnAgregar).addClass("hide");                
+                    $(btnTerminar).removeClass("hide");
+                    $(tabla).addClass("hide");
+                }
+                break;            
             case "ExperienciaLaboral":
                 if (Object.keys(jsonResult.declaracion.situacionPatrimonial.experienciaLaboral.experiencia).length>0){
                     Swal.fire({

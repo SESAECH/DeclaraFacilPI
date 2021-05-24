@@ -77,7 +77,10 @@ window.initCV = function initCV(data){
     //validar status de la sección.
     switch(seccion.status){
         case "SIN_INFO": 
-            //asginar valores predeterminados a catálogos(ayuda al usuario).          
+            //asginar valores predeterminados a catálogos(ayuda al usuario).
+            jsonResult.declaracion.situacionPatrimonial.experienciaLaboral.ninguno=true;
+            $(modulo + ".chkNinguno").prop("disabled", false);
+            $(modulo + ".chkNinguno")[0].checked=false;
             $(modulo + "textarea[name='aclaracionesObservaciones']").val("");
             $(modulo + ".btnAgregar").removeClass("hide");
             $(modulo + ".btnTerminar").addClass("hide");
@@ -86,17 +89,32 @@ window.initCV = function initCV(data){
         break;
         case "EN_PROCESO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
+            if (jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.ninguno){
+                $(modulo + ".chkNinguno")[0].checked=true;                
+            }
             $(modulo + ".btnAgregar").removeClass("hide");
             $(modulo + ".btnHabilitar").addClass("hide");
+            $(modulo + ".btnTerminar").removeClass("hide");
             if (Object.keys(jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad).length > 0){
+                $(modulo + ".btnAgregar").removeClass("hide");
+            }
+            else{
+                $(modulo + ".btnAgregar").addClass("hide");
+            }
+
+            /* if (Object.keys(jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad).length > 0){
                 $(modulo + ".btnTerminar").removeClass("hide");
             }
             else{
                 $(modulo + ".btnTerminar").addClass("hide");
-            }        
+            }    */     
             break;
         case "TERMINADO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
+            $(modulo + ".chkNinguno").prop("disabled", true);
+            if (jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.ninguno){
+                $(modulo + ".chkNinguno")[0].checked=true;                
+            }
             $(modulo + "textarea[name='aclaracionesObservaciones']").val(jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.aclaracionesObservaciones).prop("disabled", true);
             $(modulo + ".btnEditar").addClass("hide");
             $(modulo + ".btnEliminar").addClass("hide");
@@ -130,12 +148,21 @@ window.initCV = function initCV(data){
     });
     
     $(modulo + ".btnHabilitar").on("click",function() {  
+        $(modulo + ".chkNinguno").prop("disabled", false);
         $(modulo + ".btnTerminar").removeClass("hide");
         $(modulo + ".btnAgregar").removeClass("hide");
         $(modulo + ".btnEditar").removeClass("hide");
         $(modulo + ".btnEliminar").removeClass("hide");
         $(modulo + "textarea[name='aclaracionesObservaciones']").prop("disabled", false);
         $(modulo + ".btnHabilitar").addClass("hide");
+
+        if ($(modulo + ".chkNinguno")[0].checked){
+            $(modulo + ".btnAgregar").addClass("hide");
+        }
+        else{
+            $(modulo + ".btnAgregar").removeClass("hide");
+        } 
+
         jsonResult.captura.declaracion[seccion.apartado].secciones[seccion.no].status= "EN_PROCESO";
         $(".status-seccion-" + seccion.apartado + "-" + seccion.no).removeClass("indicador-status indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
         validarDeclaracionTerminada();
@@ -265,6 +292,7 @@ window.funcionalidadGuardarRegistroCV = function funcionalidadGuardarRegistroCV(
 //guaradr registro en el JsonResult.
 window.guardarRegistroCV = function guardarRegistroCV(uuidItem, seccionNo, seccionName, modulo){
     var form="#form" + seccionName;
+    jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.ninguno=false;
     jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.aclaracionesObservaciones =  $(modulo + "textarea[name='aclaracionesObservaciones']").val().toUpperCase();
     jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.escolaridad[uuidItem] =
     {

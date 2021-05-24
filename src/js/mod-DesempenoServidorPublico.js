@@ -227,7 +227,7 @@ window.guardarFormDesempenoServidorPublico = function guardarFormDesempenoServid
           actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, "TERMINADO");
     }
     else{
-        if ($(form + "input[name='remuneracionNetaCargoPublicoCantidad']").val() > 0){
+        if ($(form + "input[name='remuneracionNetaCargoPublicoCantidad']").val() > -1){
             $("#form" + seccionName).validate({
                 rules: {
                     fechaIngreso:{ required: true, date:true },

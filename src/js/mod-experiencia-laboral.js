@@ -146,7 +146,7 @@ window.initExperienciaLaboral = function initExperienciaLaboral(data){
         break;
         case "EN_PROCESO":
             window["pintarTabla" + seccionName](seccion.no, seccionName);
-            if (jsonResult.declaracion.situacionPatrimonial.bienesInmuebles.ninguno){
+            if (jsonResult.declaracion.situacionPatrimonial.experienciaLaboral.ninguno){
                 $(modulo + ".chkNinguno")[0].checked=true;                
             }
             $(modulo + ".btnAgregar").removeClass("hide");

@@ -205,7 +205,7 @@ window.loadInfoIngresos = function loadInfoIngresos(){
 }
 
 window.guardarFormIngresos = function guardarFormIngresos(seccionNo, seccionName, seccionApartado, seccionstatus){       
-    if ($("#formIngresos input[name='remuneracionMensualCargoPublicoCantidad']").val() == 0){ mensajeSwal('Error','El ingreso de la persona que declara debe ser mayor a 0','error');}
+    if ($("#formIngresos input[name='remuneracionMensualCargoPublicoCantidad']").val() < 0){ mensajeSwal('Error','El ingreso de la persona que declara debe ser mayor a 0','error');}
     else if ($("#formIngresos input[name='ingresoMensualNetoParejaDependienteCantidad']").val().length == 0){ mensajeSwal('Error','El ingreso de la pareja y/o dependientes económicos no puede estar vacío.','error');}
     else{
         var nodo = jsonResult.declaracion.situacionPatrimonial.ingresos;

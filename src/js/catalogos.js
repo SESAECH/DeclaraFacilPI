@@ -56,7 +56,7 @@ window.nivel = [{"clave":"PRI","valor":"PRIMARIA"},{"clave":"SEC","valor":"SECUN
 window.parentescoRelacion = [{"clave":"ABU","valor":"ABUELO(A)"},{"clave":"BISA","valor":"BISABUELO(A)"},{"clave":"BISN","valor":"BISNIETO(A)"},{"clave":"CONB","valor":"CONCUBINA O CONCUBINARIO"},{"clave":"CONC","valor":"CONCUÑO(A)"},{"clave":"CONY","valor":"CÓNYUGE"},{"clave":"CUN","valor":"CUÑADO(A)"},{"clave":"HER","valor":"HERMANO(A)"},{"clave":"HIJ","valor":"HIJO(A)"},{"clave":"MAD","valor":"MADRE"},{"clave":"PAD","valor":"PADRE"},{"clave":"PRI","valor":"PRIMO(A)"},{"clave":"SOB","valor":"SOBRINO(A)"},{"clave":"SUE","valor":"SUEGRO(A)"},{"clave":"TATA","valor":"TATARABUELO(A)"},{"clave":"TATN","valor":"TATARANIETO(A)"},{"clave":"TIOA","valor":"TIO(A)"},{"clave":"NIE","valor":"NIETO(A)"},{"clave":"NIN","valor":"NINGUNO"},{"clave":"AHI","valor":"AHIJADO(A)"},{"clave":"NUE","valor":"NUERA"},{"clave":"YER","valor":"YERNO"},{"clave":"OTRO","valor":"OTRO (ESPECIFIQUE)"}];
 //window.parentescoRelacion = parentescoRelacion ;
 
-window.regimenMatrimonial = [{"clave":"SOC","valor":"SOCIEDAD CONYUGAL"},{"clave":"SBI","valor":"SEPARACIÓN DE BIENES"},{"clave":"OTR","valor":"OTRO"}];
+window.regimenMatrimonial = [{"clave":"SOC","valor":"SOCIEDAD CONYUGAL"},{"clave":"SBI","valor":"SEPARACIÓN DE BIENES"},{"clave":"OTR","valor":"OTRO"}, {"clave":"NA","valor":"NO APLICA"}];
 //window.regimenMatrimonial = regimenMatrimonial;
 
 
