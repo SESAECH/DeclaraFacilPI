@@ -395,9 +395,9 @@ window.editarVehiculos = function editarVehiculos(data){
     $(form + "select[name='pais']").val(nodo.lugarRegistro.pais).trigger("change");
     $(form + "select[name='entidadFederativa']").val(nodo.lugarRegistro.entidadFederativa.clave);
 
-    $(form + "input[name='formaAdquisicion']").val(nodo.formaAdquisicion.valor);
-    $(form + "input[name='formaAdquisicion']").val(nodo.formaAdquisicion.moneda);
-    $(form + "input[name='formaPago']").val(nodo.formaPago);
+    $(form + "select[name='formaAdquisicion']").val(nodo.formaAdquisicion.valor);
+    $(form + "select[name='formaAdquisicion']").val(nodo.formaAdquisicion.moneda);
+    $(form + "select[name='formaPago']").val(nodo.formaPago);
     $(form + "input[name='valorAdquisicion']").val(nodo.valorAdquisicion.valor);
     $(form + "select[name='moneda']").val(nodo.valorAdquisicion.moneda);
     $(form + "input[name='fechaAdquisicion']").val(nodo.fechaAdquisicion);

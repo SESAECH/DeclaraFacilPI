@@ -1323,7 +1323,7 @@ function tblDesempenoServidorPublico(titulo){
                     <td style="text-align: right;">' + format(nodo.remuneracionNetaCargoPublico.valor) + " " + nodo.remuneracionNetaCargoPublico.moneda +'</td>\
                 </tr>\
                 <tr>\
-                    <td style="background-color: #dee2e6;">II.- OTROS INGRESOS MENSUALES DEL DECLARANTE (SUMA DEL II.1 AL II.5)</td>\
+                    <td style="background-color: #dee2e6;">II.- OTROS INGRESOS DEL DECLARANTE, RECIBIDOS DURANTE EL TIEMPO EN EL QUE SE DESEMPEÑO COMO SERVIDOR PÚBLICO EN EL AÑO INMEDIANTO ANTERIOR (SUMA DEL II.1 AL II.5)</td>\
                     <td style="text-align: right;">' + format(nodo.otrosIngresosTotal.valor) + " " + nodo.otrosIngresosTotal.moneda + '</td>\
                 </tr>\
                 <tr style="background-color: #dee2e6;">\
@@ -1392,15 +1392,15 @@ function tblDesempenoServidorPublico(titulo){
         });    
 
         html +='<tr>\
-                    <td style="background-color: #dee2e6;">A.- INGRESO MENSUAL NETO DEL DECLARANTE (SUMA DEL NUMERAL I Y II)</td>\
+                    <td style="background-color: #dee2e6;">A.- INGRESO NETO DEL DECLARANTE, RECIBIDO EN EL AÑO INMEDIATO ANTERIOR (SUMA DEL NUMERAL I Y II)</td>\
                     <td style="text-align: right;">' + format(nodo.ingresoNetoAnualDeclarante.valor) + " " + nodo.ingresoNetoAnualDeclarante.moneda +'</td>\
                 </tr>\
                 <tr>\
-                    <td style="background-color: #dee2e6;">B.- INGRESO MENSUAL DE LA PAREJA Y/O DEPENDIENTES ECONÓMICOS (DESPUÉS DE IMPUESTOS)</td>\
+                    <td style="background-color: #dee2e6;">B.- INGRESO NETO DE LA PAREJA Y/O DEPENDIENTES ECONÓMICOS, RECIBIDO EN EL AÑO INMEDIATO ANTERIOR (DESPUÉS DE IMPUESTOS)</td>\
                     <td style="text-align: right;">' + format(nodo.ingresoNetoAnualParejaDependiente.valor) + " " + nodo.ingresoNetoAnualParejaDependiente.moneda + '</td>\
                 </tr>\
                 <tr>\
-                    <td style="background-color: #dee2e6;">C.- TOTAL DE INGRESOS MENSUALES NETOS PERCIBIDOS POR EL DECLARANTE, PAREJA Y/O DEPENDIENTES ECONÓMICOS (SUMA DE LOS APARTADOS A Y B)</td>\
+                    <td style="background-color: #dee2e6;">C.- TOTAL DE INGRESOS NETOS PERCIBIDOS POR EL DECLARANTE, PAREJA Y/O DEPENDIENTES ECONÓMICOS, EN EL AÑO INMEDIATO ANTERIOR (SUMA DE LOS APARTADOS A Y B)</td>\
                     <td style="text-align: right;">' + format(nodo.totalIngresosNetosAnuales.valor) + " " + nodo.totalIngresosNetosAnuales.moneda + '</td>\
                 </tr>';   
                 
