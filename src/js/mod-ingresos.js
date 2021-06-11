@@ -153,7 +153,7 @@ window.loadInfoIngresos = function loadInfoIngresos(){
             
             break;
         case "CONCLUSION":
-            $("i#formIngresos nput[name='remuneracionMensualCargoPublicoCantidad']").val(nodo.remuneracionConclusionCargoPublico.valor);
+            $("#formIngresos input[name='remuneracionMensualCargoPublicoCantidad']").val(nodo.remuneracionConclusionCargoPublico.valor?nodo.remuneracionConcluisionCargoPublico.valor:nodo.ingresoConclusionNetoDeclarante.valor);
             $("#formIngresos select[name='remuneracionMensualCargoPublicoMoneda']").val(nodo.remuneracionConclusionCargoPublico.moneda);
             
             $("#formIngresos input[name='otrosIngresosMensualesTotalCantidad']").val(nodo.otrosIngresosConclusionTotal.valor);
@@ -243,7 +243,7 @@ window.guardarFormIngresos = function guardarFormIngresos(seccionNo, seccionName
                 nodo.totalIngresosAnualesNetos.moneda =   $("#formIngresos select[name='totalIngresosMensualesNetosMoneda'] option:selected").val();
                 break;
             case "CONCLUSION":
-                nodo.remuneracionConclusionCargoPublico.valor =    parseInt($("i#formIngresos nput[name='remuneracionMensualCargoPublicoCantidad']").val());
+                nodo.remuneracionConclusionCargoPublico.valor =    parseInt($("#formIngresos input[name='remuneracionMensualCargoPublicoCantidad']").val());
                 nodo.remuneracionConclusionCargoPublico.moneda =   $("#formIngresos select[name='remuneracionMensualCargoPublicoMoneda'] option:selected").val();
                 
                 nodo.otrosIngresosConclusionTotal.valor =        parseInt($("#formIngresos input[name='otrosIngresosMensualesTotalCantidad']").val());
