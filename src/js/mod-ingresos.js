@@ -153,7 +153,7 @@ window.loadInfoIngresos = function loadInfoIngresos(){
             
             break;
         case "CONCLUSION":
-            $("#formIngresos input[name='remuneracionMensualCargoPublicoCantidad']").val(nodo.remuneracionConclusionCargoPublico.valor?nodo.remuneracionConcluisionCargoPublico.valor:nodo.ingresoConclusionNetoDeclarante.valor);
+            $("#formIngresos input[name='remuneracionMensualCargoPublicoCantidad']").val(nodo.remuneracionConclusionCargoPublico.valor?nodo.remuneracionConclusionCargoPublico.valor:nodo.ingresoConclusionNetoDeclarante.valor-nodo.otrosIngresosConclusionTotal.valor);
             $("#formIngresos select[name='remuneracionMensualCargoPublicoMoneda']").val(nodo.remuneracionConclusionCargoPublico.moneda);
             
             $("#formIngresos input[name='otrosIngresosMensualesTotalCantidad']").val(nodo.otrosIngresosConclusionTotal.valor);

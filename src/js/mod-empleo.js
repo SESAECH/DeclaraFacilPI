@@ -22,6 +22,7 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
         if(jsonResult.captura.tipo_declaracion == "INTERESES"){
         $(form + "select[name='tipoOperacion']").val("SIN_CAMBIOS").prop("disabled", true);
     }
+        $(".lblFechaTomaPosesion").text ( jsonResult.captura.tipo_declaracion == "CONCLUSION" ? "FECHA DE CONCLUSIÓN" : "FECHA DE TOMA DE POSESIÓN");
     $(form + '.rdDomicilio').click(function(){
         if(this.id =="domicilioEmpMX"){
             $(form + "#domEmpMexico").removeClass("hide");

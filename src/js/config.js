@@ -728,6 +728,9 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
 
     //titulo del formulario de captura.
     $(".titulo-declaracion-captura").text("DECLARACIÓN " + jsonResult.captura.tipo_declaracion + " | " + jsonResult.captura.formato);
+    
+    //etiqueta de datos del empleo para conclusión o inicial/modificacion
+    $(".lblFechaTomaPosesion").text ( jsonResult.captura.tipo_declaracion == "CONCLUSION" ? "FECHA DE CONCLUSIÓN" : "FECHA DE TOMA DE POSESIÓN");
 
     //pintar secciones.
     htmlSecciones+='<h6 class="text-muted p10">Situación Patrimonial</h6>';
