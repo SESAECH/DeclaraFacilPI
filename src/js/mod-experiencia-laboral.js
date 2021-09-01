@@ -271,6 +271,10 @@ window.editarExperienciaLaboral = function editarExperienciaLaboral(data){
         $("#form" + item.seccionName + " input[name='area']").val(nodo.area);
         $("#form" + item.seccionName + " input[name='puesto']").val(nodo.puesto);
         $("#form" + item.seccionName + " select[name='sector']").val(nodo.sector.clave);
+        $("#form" + item.seccionName + " input[name='sector_especifique']").val(nodo.sector.valor);
+
+        if(nodo.sector.clave == "OTRO"){ $("#form" + item.seccionName + " #privadoContent .content_sector_especifique").removeClass("hide"); }
+        else{ $("#form" + item.seccionName + " #privadoContent .content_sector_especifique").addClass("hide"); }
     }
     $("#form" + item.seccionName + " input[name='fechaIngreso']").val(nodo.fechaIngreso);
     $("#form" + item.seccionName + " input[name='fechaEgreso']").val(nodo.fechaEgreso);

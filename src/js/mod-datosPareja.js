@@ -406,11 +406,21 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
             root.rfc =                      $("#form" + seccionName + " input[name='rfc']").val().toUpperCase();
             root.relacionConDeclarante =    $("#form" + seccionName + " select[name='relacionConDeclarante'] option:selected").val();            
             root.curp =                     $("#form" + seccionName + " input[name='curp']").val().toUpperCase();;
-
+            /* 
             root.esDependienteEconomico =   $("#form" + seccionName + " input[type='radio'][name='esDependienteEconomico']:checked").val().toLowerCase() == 'true' ? true : false;
             root.ciudadanoExtranjero =      $("#form" + seccionName + " input[type='radio'][name='ciudadanoExtranjero']:checked").val().toLowerCase() == 'true' ? true : false;
             root.habitaDomicilioDeclarante = $("#form" + seccionName + " input[type='radio'][name='habitaDomicilioDeclarante']:checked").val().toLowerCase() == 'true' ? true : false;
+            */
 
+            if ($("#form" + seccionName + " input[type='radio'][name='esDependienteEconomico']")[0].checked){ root.esDependienteEconomico = true; } 
+            else{ root.esDependienteEconomico = false; }
+
+            if ($("#form" + seccionName + " input[type='radio'][name='ciudadanoExtranjero']")[0].checked){ root.ciudadanoExtranjero = true; } 
+            else{ root.ciudadanoExtranjero = false; }
+
+            if ($("#form" + seccionName + " input[type='radio'][name='habitaDomicilioDeclarante']")[0].checked){ root.habitaDomicilioDeclarante = true; } 
+            else{ root.habitaDomicilioDeclarante = false; }
+            
             root.lugarDondeReside =         $("#form" + seccionName + " select[name='lugarDondeReside'] option:selected").val();
             
             //domicilio mexico.
