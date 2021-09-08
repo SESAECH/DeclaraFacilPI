@@ -128,8 +128,8 @@ window.funcionalidadGuardarRegistroParticipacionEmpresas = function funcionalida
     loadCat(sector, form + ".CBOsector");
     loadCat(moneda, form + ".CBOmoneda");
 
-    $(form + ":input[type='text']").val("");
-
+    //$(form + ":input[type='text']").val("");
+    $(form).trigger("reset");
     $(form + ".CBOpais").val("MX").trigger("change");
     $(form + ".content_entidadFederativa").removeClass("hide");
     $(form + ".CBOtipoParticipacion").val("SCIO").trigger("change");
@@ -187,13 +187,23 @@ window.funcionalidadGuardarRegistroParticipacionEmpresas = function funcionalida
             var uuidItem;
             if (accion=="EDITAR"){ uuidItem = uuid;}
             else{ uuidItem= generarUUID();}   
-            window["guardarRegistro" + seccionName](uuidItem, seccionNo, seccionName, modulo);
-            window["pintarTabla" + seccionName](seccionNo, seccionName);
-            //ocultar/mostrar formularos.
-            $(modulo + ".formSecundario").addClass("hide");
-            $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut"); 
-            $(modulo + ".btnTerminar").removeClass("hide");
-            goTop();   
+
+            var validacion=true;
+            if ($("#form" + seccionName  + " select[name='recibeRemuneracion'] option:selected").val()=="true"){
+                if (parseInt($("#form" + seccionName  + " input[name='montoMensual']").val())<1){
+                    validacion=false;
+                    mensajeSwal("Aviso", "Ingrese un monto mayor a 0.", "error");
+                }
+            }
+            if (validacion){
+                window["guardarRegistro" + seccionName](uuidItem, seccionNo, seccionName, modulo);
+                window["pintarTabla" + seccionName](seccionNo, seccionName);
+                //ocultar/mostrar formularos.
+                $(modulo + ".formSecundario").addClass("hide");
+                $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut"); 
+                $(modulo + ".btnTerminar").removeClass("hide");
+                goTop();  
+            } 
         }       
     });
 }

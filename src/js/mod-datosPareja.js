@@ -319,7 +319,7 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
             nombre : { required: true, maxlength: 50 },
             primerApellido : { required: true },
             fechaNacimiento : { required: true },
-            /* rfc : { required: true, minlength: 12, maxlength: 13 }, */
+            rfc : { required: true, minlength: 13, maxlength: 13 },
             curp : { required: true, minlength: 18, maxlength: 18, CURP: true },
             relacionConDeclarante : { required: true },
             esDependienteEconomico : { required: true },
@@ -346,19 +346,19 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
             moneda : { required: true },
             fechaIngreso : { required: true },
             nombreEmpresaSociedadAsociacion : { required: true },
-            // empleoCargoComision : { required: true },
+            empleoCargoComision : { required: true },
             /* rfc : { required: true, minlength: 10, maxlength: 10, RFC: true }, */
-            // fechaIngreso : { required: true },
+            fechaIngreso : { required: true },
             sector : { required: true },
-            // salarioMensualNeto : { required: true, number: true },
+            salarioMensualNeto : { required: true, number: true },
             proveedorContratistaGobierno : { required: true }
         },
         messages: {
             tipoOperacion : { required: "Selecione el tipo de operación." },
-            nombre : { required: "Ingrese el nombre.", maxlength: "El máximo de caracteres es de 50." },
+            nombre : { required: "Ingrese el nombre(s).", maxlength: "El máximo de caracteres es de 50." },
             primerApellido : { required: "Ingrese el primer apellido." },
             fechaNacimiento : { required: "Ingrese la fecha de nacimmiento." },
-           /*  rfc : { required: "Ingrese el RFC.", minlength: "El minimo de caracteres es de 12.", maxlength: "El máximo de caracteres es de 13." }, */
+            rfc : { required: "Ingrese el RFC.", minlength: "El mínimo de caracteres es de 13.", maxlength: "El máximo de caracteres es de 13." },
             curp : { required: "Ingrese la CURP.", minlength: "El mínimo de caracteres es de 18.", maxlength: "El máximo de caracteres es de 18." },
             relacionConDeclarante : { required: "Seleccione la relación con el declarante." },
             esDependienteEconomico : { required: "Seleccione si es dependiente económico." },
@@ -379,17 +379,17 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
             ambitoPublico : { required: "Seleccione el ámbito público." },
             nombreEntePublico : { required: "Ingrese el nombre del ente público." },
             areaAdscripcion : { required: "Ingrese el área de adscripción." },
-            empleoCargoComision : { required: "Ingrese el empleo, cargo o comisión." },
+            empleoCargoComision : { required: "Ingrese el empleo o cargo." },
             funcionPrincipal : { required: "Ingrese la función principal." },
             salarioMensualNeto : { required: "Ingrese el salario mensual neto.", number: "Solo se permiten caracteres numéricos." },
             moneda : { required: "Seleccione el tipo de moneda." },
-            fechaIngreso : { required: "Ingrese la fecha de ingreso." },
+            fechaIngreso : { required: "Ingrese la fecha de ingreso al empleo." },
             nombreEmpresaSociedadAsociacion : { required: "Ingrese el nombre de la empresa, sociedad o asociación." },
-            // empleoCargoComision : { required: "Ingrese el empleo, cargo o comisión." },
-            rfc : { required: "Ingrese el RFC.", minlength: "El minimo de caracteres es de 12.", maxlength: "El máximo de caracteres es de 13." },
-            // fechaIngreso : { required: "Ingrese la fecha de ingreso." },
+            empleoCargoComision : { required: "Ingrese el empleo, cargo o comisión." },
+            //rfc : { required: "Ingrese el RFC.", minlength: "El minimo de caracteres es de 12.", maxlength: "El máximo de caracteres es de 13." },
+            fechaIngreso : { required: "Ingrese la fecha de ingreso." },
             sector : { required: "Seleccione el sector." },
-            // salarioMensualNeto : { required: "Ingrese el salario mensual neto.", number: "Solo se permiten caracteres numéricos." },
+            salarioMensualNeto : { required: "Ingrese el salario mensual neto.", number: "Solo se permiten caracteres numéricos." },
             proveedorContratistaGobierno : { required: "Seleccione si es contratista de gobierno." }
         },
         // Make sure the form is submitted to the destination defined
@@ -458,7 +458,7 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
 
             root.actividadLaboralSectorPrivadoOtro.nombreEmpresaSociedadAsociacion =    $("#laboralParejaPriContent input[name='nombreEmpresaSociedadAsociacion']").val().toUpperCase();
             root.actividadLaboralSectorPrivadoOtro.empleoCargoComision =                $("#laboralParejaPriContent input[name='empleoCargoComision']").val().toUpperCase();
-            root.actividadLaboralSectorPrivadoOtro.rfc =                                $("#laboralParejaPriContent input[name='rfc']").val().toUpperCase();
+            root.actividadLaboralSectorPrivadoOtro.rfc =                                $("#laboralParejaPriContent input[name='rfcPriContent']").val().toUpperCase();
             root.actividadLaboralSectorPrivadoOtro.fechaIngreso =                       $("#laboralParejaPriContent input[name='fechaIngreso']").val();
             root.actividadLaboralSectorPrivadoOtro.sector.clave =                       $("#laboralParejaPriContent select[name='sector'] option:selected").val();
             root.actividadLaboralSectorPrivadoOtro.sector.valor =                       $("#laboralParejaPriContent select[name='sector'] option:selected")[0].innerText;
@@ -534,7 +534,7 @@ window.loadInfoPareja = function loadInfoPareja(seccionName){
     
         $("#laboralParejaPriContent input[name='nombreEmpresaSociedadAsociacion']").val(root.actividadLaboralSectorPrivadoOtro.nombreEmpresaSociedadAsociacion);
         $("#laboralParejaPriContent input[name='empleoCargoComision']").val(root.actividadLaboralSectorPrivadoOtro.empleoCargoComision);
-        $("#laboralParejaPriContent input[name='rfc']").val(root.actividadLaboralSectorPrivadoOtro.rfc);
+        $("#laboralParejaPriContent input[name='rfcPriContent']").val(root.actividadLaboralSectorPrivadoOtro.rfc);
         $("#laboralParejaPriContent input[name='fechaIngreso']").val(root.actividadLaboralSectorPrivadoOtro.fechaIngreso);
         $("#laboralParejaPriContent select[name='sector']").val(root.actividadLaboralSectorPrivadoOtro.sector.clave);    
         $("#laboralParejaPriContent input[name='valor']").val(root.actividadLaboralSectorPrivadoOtro.salarioMensualNeto.valor);

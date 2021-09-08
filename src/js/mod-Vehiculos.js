@@ -182,8 +182,8 @@ window.funcionalidadGuardarRegistroVehiculos = function funcionalidadGuardarRegi
             $(form + ".ent_fed").removeClass("hide");
         }
     });
-
-    $(form + ":input[type='text']").val("");
+    $(form).trigger("reset");
+    //$(form + ":input[type='text']").val("");
     
     if(jsonResult.captura.tipo_declaracion == "INICIAL"){
         $("#form" + seccionName + " select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
@@ -191,7 +191,7 @@ window.funcionalidadGuardarRegistroVehiculos = function funcionalidadGuardarRegi
 
     $(form + '.CBOtipoVehiculo').val("AUMOT").trigger("change");
     //$(form + "input[name='tipoVehiculo_especifique']").val($(form + '.CBOtipoVehiculo option:selected')[0].innerText);
-    $(form + '.CBOmoneda').val("MXN");
+    $(form + '.CBOmoneda').val("MXN").prop("disabled", true);
     $(form + '.CBOtitularBien').val("DEC")  .trigger("change");
     $(form + '.CBOparentescoRelacion').val("ABU").trigger("change");
     $(form + '.CBOmotivoBaja').val("NA").trigger("change");

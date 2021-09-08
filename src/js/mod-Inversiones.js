@@ -141,8 +141,8 @@ window.funcionalidadGuardarRegistroInversiones = function funcionalidadGuardarRe
         }                 
     });  
 
-    $(form + ":input[type='text']").val("");
-
+    //$(form + ":input[type='text']").val("");
+    $(form).trigger("reset");
     switch(jsonResult.captura.tipo_declaracion){
         case "INICIAL":
             $("#form" + seccionName + " select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
@@ -359,7 +359,7 @@ window.editarInversiones = function editarInversiones(data){
             $(form + "select[name='saldoSituacionActual_moneda']").val(nodo.saldoDiciembreAnterior.moneda);
             if (nodo.porcentajeIncrementoDecremento<0) {
                 $(form + "select[name='porcentajeIncrementoDecremento_simbolo']").val("-");
-                $(form + "input[name='porcentajeIncrementoDecremento']").val(nodo.porcentajeIncrementoDecremento);
+                $(form + "input[name='porcentajeIncrementoDecremento']").val(nodo.porcentajeIncrementoDecremento*-1);
             }
             else{
                 $(form + "select[name='porcentajeIncrementoDecremento_simbolo']").val("+");
@@ -372,7 +372,7 @@ window.editarInversiones = function editarInversiones(data){
             $(form + "select[name='saldoSituacionActual_moneda']").val(nodo.saldoFechaConclusion.moneda);
             if (nodo.porcentajeIncrementoDecremento<0) {
                 $(form + "select[name='porcentajeIncrementoDecremento_simbolo']").val("-");
-                $(form + "input[name='porcentajeIncrementoDecremento']").val(nodo.porcentajeIncrementoDecremento);
+                $(form + "input[name='porcentajeIncrementoDecremento']").val(nodo.porcentajeIncrementoDecremento*-1);
             }
             else{
                 $(form + "select[name='porcentajeIncrementoDecremento_simbolo']").val("+");

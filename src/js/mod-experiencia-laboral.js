@@ -10,7 +10,7 @@ window.formExperienciaLaboral='<form action="" id="formExperienciaLaboral">\
                                     </div>\
                                     <div class="col-lg-6">\
                                         <div class="form-group">\
-                                            <label>ÁMBITO/SECTOR EN QUE LABORASTE</label>\
+                                            <label>ÁMBITO/SECTOR EN EL QUE LABORASTE</label>\
                                             <select name="ambitoSector" class="form-control CBOambitoSector" onchange="loadFormAmbitoSector();"></select>\
                                         </div>\
                                     </div>\

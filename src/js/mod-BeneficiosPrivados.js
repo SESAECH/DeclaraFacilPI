@@ -126,7 +126,10 @@ window.funcionalidadGuardarRegistroBeneficiosPrivados = function funcionalidadGu
     loadCat(sector, form + ".CBOsector");
     loadCat(moneda, form + ".CBOmoneda");
 
-    $(form + ":input[type='text']").val("");
+    //$(form + ":input[type='text']").val("");
+
+    $(form + " input[name='nombreRazonSocial']").val("");
+    $(form + " input[name='rfc']").val("");
 
     $(form + '.CBOtipoBeneficio').on('change', function() {
         $(form + ".content_especifique_tipoBeneficio").addClass("hide");

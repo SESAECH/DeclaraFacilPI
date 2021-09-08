@@ -15,13 +15,13 @@ window.formCV = '<form action="" id="formCV">\
     </div> \
     <div class="col-lg-8">\
         <div class="form-group">\
-            <label>NOMBRE DE LA INSTITUCI&Oacute;N EDUCATIVA</label>\
+            <label>INSTITUCI&Oacute;N EDUCATIVA</label>\
             <input type="text" name="nombre" class="form-control" required>\
         </div>\
     </div>\
     <div class="col-lg-4">\
         <div class="form-group">\
-            <label>UBICACIÓN</label>\
+            <label>LUGAR DONDE SE UBICA</label>\
             <select name="ubicacion" class="form-control CBOubicacion"></select>\
         </div>\
     </div>\
@@ -135,6 +135,9 @@ window.initCV = function initCV(data){
     $(modulo + ".btnTerminar").on('click',function() {
         jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.aclaracionesObservaciones =  $(modulo + "textarea[name='aclaracionesObservaciones']").val();
         $(modulo + "textarea[name='aclaracionesObservaciones']").prop("disabled", true);
+        if (jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante.ninguno){
+            $(modulo + ".chkNinguno").prop("disabled", true);
+        }
         //inhabilitar controles del modulo.
         $(modulo + ".btnTerminar").addClass("hide");
         $(modulo + ".btnAgregar").addClass("hide");

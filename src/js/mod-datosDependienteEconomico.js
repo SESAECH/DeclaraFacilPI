@@ -791,11 +791,11 @@ window.funcionalidadGuardarRegistroDependientesEconomicos = function funcionalid
             ambitoPublico : { required: "Seleccione el ámbito público." },
             nombreEntePublico : { required: "Ingrese el nombre del ente público." },
             areaAdscripcion : { required: "Ingrese el área de adscripción." },
-            empleoCargoComision : { required: "Ingrese el empleo, cargo." },
+            empleoCargoComision : { required: "Ingrese el empleo o cargo." },
             funcionPrincipal : { required: "Ingrese la función principal." },
             salarioMensualNeto : { required: "Ingrese el salario mensual neto.", number: "Solo se permiten caracteres numéricos." },
             moneda : { required: "Seleccione el tipo de moneda." },
-            fechaIngreso : { required: "Ingrese la fecha de ingreso." },
+            fechaIngreso : { required: "Ingrese la fecha de ingreso al empleo." },
             nombreEmpresaSociedadAsociacion : { required: "Ingrese el nombre de la empresa, sociedad o asociación." },
             sector : { required: "Seleccione el sector." },
             proveedorContratistaGobierno : { required: "Seleccione si es contratista de gobierno." }

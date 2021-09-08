@@ -124,8 +124,8 @@ window.funcionalidadGuardarRegistroRepresentacion = function funcionalidadGuarda
     loadCat(sector, form + ".CBOsector");
     loadCat(moneda, form + ".CBOmoneda");
 
-    $(form + ":input[type='text']").val("");
-
+    //$(form + ":input[type='text']").val("");
+    $(form).trigger("reset");
     $(form + '.CBOpais').on('change', function() {
         $(form + ".content_entidadFederativa").removeClass("hide");
         if(this.value != "MX"){
@@ -173,13 +173,23 @@ window.funcionalidadGuardarRegistroRepresentacion = function funcionalidadGuarda
             var uuidItem;
             if (accion=="EDITAR"){ uuidItem = uuid;}
             else{ uuidItem= generarUUID();}   
-            window["guardarRegistro" + seccionName](uuidItem, seccionNo, seccionName, modulo);
-            window["pintarTabla" + seccionName](seccionNo, seccionName);
-            //ocultar/mostrar formularos.
-            $(modulo + ".formSecundario").addClass("hide");
-            $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut"); 
-            $(modulo + ".btnTerminar").removeClass("hide");
-            goTop();   
+
+            var validacion=true;
+            if ($("#form" + seccionName  + " select[name='recibeRemuneracion'] option:selected").val()=="true"){
+                if (parseInt($("#form" + seccionName  + " input[name='montoMensual']").val())<1){
+                    validacion=false;
+                    mensajeSwal("Aviso", "Ingrese un monto mayor a 0.", "error");
+                }
+            }
+            if (validacion){
+                window["guardarRegistro" + seccionName](uuidItem, seccionNo, seccionName, modulo);
+                window["pintarTabla" + seccionName](seccionNo, seccionName);
+                //ocultar/mostrar formularos.
+                $(modulo + ".formSecundario").addClass("hide");
+                $(modulo + ".formPrincipal").removeClass("hide").addClass("animated fadeOut"); 
+                $(modulo + ".btnTerminar").removeClass("hide");
+                goTop(); 
+            }  
         }       
     });
 }
@@ -201,25 +211,25 @@ window.guardarRegistroRepresentacion = function guardarRegistroRepresentacion(uu
         "rfc":                  $(form  + " input[name='rfc']").val().toUpperCase(),
         "recibeRemuneracion":   $(form  + " select[name='recibeRemuneracion'] option:selected").val()=="true" ? true : false,
         "montoMensual": {
-          "valor":              parseInt($(form  + " input[name='montoMensual']").val()),
-          "moneda":             $(form  + " select[name='moneda'] option:selected").val(),
+        "valor":              parseInt($(form  + " input[name='montoMensual']").val()),
+        "moneda":             $(form  + " select[name='moneda'] option:selected").val(),
         },
         "ubicacion": {
-          "pais":               $(form  + " select[name='pais'] option:selected").val(),
-          "entidadFederativa": {
+        "pais":               $(form  + " select[name='pais'] option:selected").val(),
+        "entidadFederativa": {
             "clave": $(form  + " select[name='entidadFederativa'] option:selected").val(),
             "valor": $(form  + " select[name='entidadFederativa'] option:selected")[0].innerText.toUpperCase(),
-          }
+        }
         },
         "sector": {
-          "clave": $(form  + " select[name='sector']").val(),
-          "valor": $(form  + " input[name='sector_especifique']").val().toUpperCase(),
+        "clave": $(form  + " select[name='sector']").val(),
+        "valor": $(form  + " input[name='sector_especifique']").val().toUpperCase(),
         }
-      };
+    };
 
     //cambiar status a captura.
     jsonResult.captura.declaracion.interes.secciones[seccionNo].status= "EN_PROCESO";
-    $(".status-seccion-" + jsonResult.captura.declaracion.interes.secciones[seccionNo].apartado + "-" + seccionNo).removeClass("indicador-status indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
+    $(".status-seccion-" + jsonResult.captura.declaracion.interes.secciones[seccionNo].apartado + "-" + seccionNo).removeClass("indicador-status indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");            
 }
 
 //pintar tabla html.
@@ -256,7 +266,7 @@ window.editarRepresentacion = function editarRepresentacion(data){
     $("#form" + item.seccionName + " input[name='rfc']").val(nodo.rfc);
     $("#form" + item.seccionName + " select[name='recibeRemuneracion']").val(nodo.recibeRemuneracion.toString()).trigger("change");
     $("#form" + item.seccionName + " input[name='montoMensual']").val(nodo.montoMensual.valor);
-    $("#form" + item.seccionName + " input[name='moneda']").val(nodo.montoMensual.moneda);
+    $("#form" + item.seccionName + " select[name='moneda']").val(nodo.montoMensual.moneda);
     $("#form" + item.seccionName + " select[name='pais']").val(nodo.ubicacion.pais).trigger("change");
     $("#form" + item.seccionName + " select[name='entidadFederativa']").val(nodo.ubicacion.entidadFederativa.clave);
     $("#form" + item.seccionName + " .CBOsector").val(nodo.sector.clave).trigger("change");

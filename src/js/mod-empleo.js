@@ -119,7 +119,7 @@ window.guardarFormEmpleoCargoComision = function guardarFormEmpleoCargoComision(
             contratadoPorHonorarios : { required: "Seleccione si o no está contratado por honorarios." },
             nivelEmpleoCargoComision : { required: "Ingrese el nivel del empleo, cargo o comisión." },
             funcionPrincipal : { required : "Ingrese la función principal." },
-            fechaTomaPosesion : { required: "Ingrese la fecha de posesión."},
+            fechaTomaPosesion : { required: "Ingrese la fecha."},
             telefono : { required: "Ingrese el número telefónico de oficina", number: "Solo se permiten caracteres numéricos.", minlength: "El mínimo de caracteres es de 10", maxlength: "El máximo de caracteres es de 10." },
             entidadFederativa: { required: "Seleccione la entidad federativa." },
             municipioAlcaldia: { required: "Seleccione el municipio o alcaldía." },

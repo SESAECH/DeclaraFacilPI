@@ -13,7 +13,7 @@ window.actividadLaboral = [{"clave":"PRI","valor":"PRIVADO"},{"clave":"PUB","val
 /* var nivelOrdenGobierno = ["FEDERAL","ESTATAL","MUNICIPAL_ALCALDIA"]; */
 /* var relacionConDeclarante = ["CÓNYUGE","CONCUBINA_CONCUBINARIO_UNION_LIBRE","SOCIEDAD_DE_CONVIVENCIA"]; */
 
-window.extranjero = [{"clave":"MX", "valor":"MÉXICO"},{"clave":"EX", "valor":"EXTRANJERO"}];
+window.extranjero = [{"clave":"MX", "valor":"MÉXICO"},{"clave":"EX", "valor":"EN EL EXTRANJERO"}];
 //window.extranjero =extranjero;
 window.ambitoSector = [{"clave":"PUB","valor":"PÚBLICO"},{"clave":"PRV","valor":"PRIVADO"},{"clave":"OTR","valor":"OTRO (ESPECIFIQUE)"}];
 //window.ambitoSector = ambitoSector;
@@ -21,7 +21,7 @@ window.ambitoPublico = [{"clave":"EJECUTIVO", "valor":"EJECUTIVO"},{"clave":"LEG
 //window.ambitoPublico =ambitoPublico;
 window.nivelOrdenGobierno = [{"clave":"FEDERAL", "valor":"FEDERAL"},{"clave":"ESTATAL", "valor":"ESTATAL"},{"clave":"MUNICIPAL_ALCALDIA", "valor":"MUNICIPAL/ALCALDÍA"}];
 //window.nivelOrdenGobierno = nivelOrdenGobierno;
-window.relacionConDeclarante = [{"clave":"CÓNYUGE", "valor":"CÓNYUGE"},{"clave":"CONCUBINA_CONCUBINARIO_UNION_LIBRE", "valor":"CONCUBINA/CONCUBINARIO/UNION LIBRE"},{"clave":"SOCIEDAD_DE_CONVIVENCIA", "valor":"SOCIEDAD DE CONVIVENCIA"}];
+window.relacionConDeclarante = [{"clave":"CÓNYUGE", "valor":"CÓNYUGE"},{"clave":"CONCUBINA_CONCUBINARIO_UNION_LIBRE", "valor":"CONCUBINA/CONCUBINARIO/UNIÓN LIBRE"},{"clave":"SOCIEDAD_DE_CONVIVENCIA", "valor":"SOCIEDAD DE CONVIVENCIA"}];
 //window.relacionConDeclarante = relacionConDeclarante;
 
 window.beneficiariosPrograma = [{"clave":"DC","valor":"DECLARANTE"},{"clave":"CY","valor":"CÓNYUGE"},{"clave":"CON","valor":"CONCUBINA O CONCUBINARIO"},{"clave":"CONV","valor":"CONVIVIENTE"},{"clave":"HIJ","valor":"HIJO(A)"},{"clave":"HER","valor":"HERMANO(A)"},{"clave":"CU","valor":"CUÑADO(A)"},{"clave":"MA","valor":"MADRE"},{"clave":"PA","valor":"PADRE"},{"clave":"TIO","valor":"TIO(A)"},{"clave":"PRI","valor":"PRIMO(A)"},{"clave":"SOB","valor":"SOBRINO(A)"},{"clave":"AHI","valor":"AHIJADO(A)"},{"clave":"NUE","valor":"NUERA"},{"clave":"YER","valor":"YERNO"},{"clave":"ABU","valor":"ABUELO(A)"},{"clave":"NIE","valor":"NIETO(A)"},{"clave":"OTRO","valor":"OTRO(A)"}];
@@ -43,7 +43,8 @@ window.formaPago = ["CRÉDITO","CONTADO","NO APLICA"];
 window.formaRecepcion = ["MONETARIO","ESPECIE"];
 //window.formaRecepcion =formaRecepcion;
 
-window.lugarDondeReside = ["MÉXICO","EXTRANJERO","SE_DESCONOCE"];
+//window.lugarDondeReside = ["MÉXICO","EXTRANJERO","SE_DESCONOCE"];
+window.lugarDondeReside = [{"clave": "MÉXICO", "valor":"EN MÉXICO"}, {"clave": "EXTRANJERO", "valor":"EN EL EXTRANJERO"}, {"clave": "SE_DESCONOCE", "valor":"SE DESCONOCE"}];
 //window.lugarDondeReside =lugarDondeReside;
 
 window.motivoBaja = [{"clave":"NA","valor":"NO APLICA"},{"clave":"VNT","valor":"VENTA"},{"clave":"DNC","valor":"DONACIÓN"},{"clave":"SNT","valor":"SINIESTRO"},{"clave":"OTRO","valor":"OTRO (ESPECIFIQUE)"}];
@@ -82,7 +83,8 @@ window.tipoBeneficio = [{"clave":"S","valor":"SORTEO"},{"clave":"C","valor":"CON
 window.tipoBienBienesMuebles = [{"clave":"MECA","valor":"MENAJE DE CASA (MUEBLES Y ACCESORIOS DE CASA)"},{"clave":"APAE","valor":"APARATOS ELECTRÓNICOS Y ELECTRODOMÉSTICOS"},{"clave":"JOYA","valor":"JOYAS"},{"clave":"COLEC","valor":"COLECCIONES"},{"clave":"OBRA","valor":"OBRAS DE ARTE"},{"clave":"OTRO","valor":"OTRO (ESPECIFIQUE)"}];
 //window.tipoBienBienesMuebles =tipoBienBienesMuebles;
 
-window.tipoBienEnajenacionBienes = ["MUEBLE","INMUEBLE","VEHICULO"];
+//window.tipoBienEnajenacionBienes = ["MUEBLE","INMUEBLE","VEHICULO"];
+window.tipoBienEnajenacionBienes = [{"clave": "MUEBLE", "valor": "MUEBLE"},{"clave": "INMUEBLE", "valor": "INMUEBLE"},{"clave": "VEHICULO", "valor": "VEHÍCULO"}];
 //window.tipoBienEnajenacionBienes = tipoBienEnajenacionBienes;
 
 window.tipoFideicomiso = [{"clave":"PUBLICO", "valor": "PÚBLICO"},{"clave":"PRIVADO", "valor": "PRIVADO"},{"clave":"MIXTO", "valor": "MIXTO"}];
@@ -94,13 +96,14 @@ window.tipoInmueble = [{"clave":"CASA","valor":"CASA"},{"clave":"DPTO","valor":"
 window.tipoInstitucion = [{"clave":"OSC","valor":"ORGANIZACIONES DE LA SOCIEDAD CIVIL"},{"clave":"OB","valor":"ORGANIZACIONES BENÉFICAS"},{"clave":"PP","valor":"PARTIDOS POLÍTICOS"},{"clave":"GS","valor":"GREMIOS/SINDICATOS"},{"clave":"OTRO","valor":"OTRO (ESPECIFIQUE)"}];
 //window.tipoInstitucion = tipoInstitucion;
 
-window.tipoInstrumento = [{"clave":"CAP","valor":"CAPITAL"},{"clave":"FIN","valor":"FONDOS DE INVERSIÓN"},{"clave":"OPR","valor":"ORGANIZACIONES PRIVADA"},{"clave":"SSI","valor":"SEGURO DE SEPARACIÓN INDIVIDUALIZADO"},{"clave":"VBU","valor":"VALORES BURSÁTILES"},{"clave":"BON","valor":"BONOS"},{"clave":"OTRO","valor":"OTRO (ESPECIFIQUE)"}];
+window.tipoInstrumento = [{"clave":"CAP","valor":"CAPITAL"},{"clave":"FIN","valor":"FONDOS DE INVERSIÓN"},{"clave":"OPR","valor":"ORGANIZACIONES PRIVADAS"},{"clave":"SSI","valor":"SEGURO DE SEPARACIÓN INDIVIDUALIZADO"},{"clave":"VBU","valor":"VALORES BURSÁTILES"},{"clave":"BON","valor":"BONOS"},{"clave":"OTRO","valor":"OTRO (ESPECIFIQUE)"}];
 //window.tipoInstrumento = tipoInstrumento;
 
 window.tipoInversion = [{"clave":"BANC","valor":"BANCARIA"},{"clave":"FINV","valor":"FONDOS DE INVERSIÓN"},{"clave":"ORPM","valor":"ORGANIZACIONES PRIVADAS Y/O MERCANTILES"},{"clave":"POMM","valor":"POSESIÓN DE MONEDAS Y/O METALES"},{"clave":"SEGR","valor":"SEGUROS"},{"clave":"VBUR","valor":"VALORES BURSÁTILES"},{"clave":"AFOT","valor":"AFORES Y OTROS"}];
 //window.tipoInversion = tipoInversion;
 
-window.tipoOperacion = ["AGREGAR","MODIFICAR","SIN_CAMBIOS","BAJA"];
+//window.tipoOperacion = ["AGREGAR","MODIFICAR","SIN_CAMBIOS","BAJA"];
+window.tipoOperacion = [{"clave":"AGREGAR", "valor":"AGREGAR"}, {"clave":"MODIFICAR", "valor":"MODIFICAR"}, {"clave":"SIN_CAMBIOS", "valor":"SIN CAMBIOS"}, {"clave":"BAJA", "valor":"BAJA"}];
 //window.tipoOperacion =tipoOperacion;
 
 window.tipoParticipacion = [{"clave":"SCIO","valor":"SOCIO"},{"clave":"ACCI","valor":"ACCIONISTA"},{"clave":"COMI","valor":"COMISARIO"},{"clave":"REPR","valor":"REPRESENTANTE"},{"clave":"APOD","valor":"APODERADO"},{"clave":"COLB","valor":"COLABORADOR"},{"clave":"BENE","valor":"BENEFICIARIO"},{"clave":"OTRO","valor":"OTRO (ESPECIFIQUE)"}];

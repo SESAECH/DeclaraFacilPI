@@ -126,7 +126,8 @@ window.funcionalidadGuardarRegistroClientesPrincipales = function funcionalidadG
     loadCat(sector, form + ".CBOsector");
     loadCat(tipoPersona, form + ".CBOtipoPersona");
  
-    $(form + ":input[type='text']").val("");
+    $(form).trigger("reset");
+    //$(form + ":input[type='text']").val("");
 
     $(form + '.CBOpais').on('change', function() {
         $(form + ".content_entidadFederativa").removeClass("hide");
@@ -256,7 +257,7 @@ window.editarClientesPrincipales = function editarClientesPrincipales(data){
     $("#form" + item.seccionName + " input[name='rfcClientePrincipal']").val(nodo.clientePrincipal.rfc);
     $("#form" + item.seccionName + " select[name='sector']").val(nodo.sector.clave).trigger("change");   
     $("#form" + item.seccionName + " input[name='sector_especifique']").val(nodo.sector.valor);
-    $("#form" + item.seccionName + " input[name='especifique']").val();
+//$("#form" + item.seccionName + " input[name='especifique']").val(nodo.sector.valor);
     $("#form" + item.seccionName + " input[name='montoAproximadoGanancia']").val(nodo.montoAproximadoGanancia.valor);
     $("#form" + item.seccionName + " select[name='moneda']").val(nodo.montoAproximadoGanancia.moneda);
     $("#form" + item.seccionName + " select[name='pais']").val(nodo.ubicacion.pais).trigger("change");

@@ -52,11 +52,23 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
                 $("#chkNingunoDesempenoServidorPublico")[0].checked=true;
                 $(modulo + "textarea[name='aclaracionesObservaciones']").val(jsonResult.declaracion[seccion.apartado][seccion.seccion].aclaracionesObservaciones).prop("disabled", true);
 
+                $("#conetentFormDesempenoServidorPublico").addClass("hide");
+                $("#formDesempenoServidorPublico .btnGuardar").addClass("hide");
+                $("#formDesempenoServidorPublico .btnTerminar").removeClass("hide");
+
                 $(modulo + ".btnEditar").addClass("hide");
                 $(modulo + ".btnEliminar").addClass("hide");
                 $(modulo + ".btnAgregar").addClass("hide");
             }            
-            $(modulo + ".btnGuardar").removeClass("hide");
+            //$(modulo + ".btnGuardar").removeClass("hide");
+
+            if ($(modulo + " #chkNingunoDesempenoServidorPublico")[0].checked){
+                $(modulo + ".btnGuardar").addClass("hide");
+            }
+            else{
+                $(modulo + ".btnGuardar").removeClass("hide");
+            } 
+
             $(modulo + ".btnTerminar").removeClass("hide");
             $(modulo + ".btnHabilitar").addClass("hide");
             break;
@@ -109,6 +121,12 @@ window.initDesempenoServidorPublico = function initDesempenoServidorPublico(data
         $(modulo + ".cantidadDisabled").prop("disabled", true);
         $(modulo + ".CBOmoneda").prop("disabled", true);
         
+        if ($(modulo + " #chkNingunoDesempenoServidorPublico")[0].checked){
+            $(modulo + ".btnGuardar").addClass("hide");
+        }
+        else{
+            $(modulo + ".btnGuardar").removeClass("hide");
+        } 
 
         jsonResult.captura.declaracion[seccion.apartado].secciones[seccion.no].status= "EN_PROCESO";
         $(".status-seccion-" + seccion.apartado + "-" + seccion.no).removeClass("indicador-status indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
@@ -236,10 +254,10 @@ window.guardarFormDesempenoServidorPublico = function guardarFormDesempenoServid
                     ingresoNetoParejaDependienteCantidad : { required: true, maxlength: 50 },
                 },
                 messages: {
-                    fechaIngreso:{ required: "Escribe la fecha de ingreso." },
-                    fechaConclusion:{ required: "Escribe la fecha de conclusión"},
+                    fechaIngreso:{ required: "Ingrese la fecha de inicio." },
+                    fechaConclusion:{ required: "Ingrese la fecha de conclusión"},
                     remuneracionNetaCargoPublicoCantidad : { required: "Ingrese la remuneración neta." },
-                    ingresoNetoParejaDependienteCantidad : { required: "Escribe el ingreso neto." },
+                    ingresoNetoParejaDependienteCantidad : { required: "Ingrese el ingreso neto." },
                 },
                 // Make sure the form is submitted to the destination defined
                 // in the "action" attribute of the form when valid
