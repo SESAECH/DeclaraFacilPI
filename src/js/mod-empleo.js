@@ -80,7 +80,7 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
     });    
     $(modulo + ".btnHabilitar").on('click',function() {
         habilitarSeccion(seccion.apartado, seccion.no, seccionName);
-        $(form + ".CBOtipoOperacion").prop("disabled", true);
+        //$(form + ".CBOtipoOperacion").prop("disabled", true);
     });
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");

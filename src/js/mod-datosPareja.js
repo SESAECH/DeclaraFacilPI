@@ -105,7 +105,7 @@ window.initPareja = function initPareja(data){
         habilitarSeccion(seccion.apartado, seccion.no, seccionName);
         $("#chkNingunoPareja").prop("disabled", false);
         $(form +" :input").prop("disabled", false);
-        $(form + ".CBOtipoOperacion").prop("disabled", true);
+        //$(form + ".CBOtipoOperacion").prop("disabled", true);
         $(modulo + "textarea[name='aclaracionesObservaciones']").prop("disabled", false);
         if ($("#chkNingunoPareja")[0].checked){
             $(form + ".btnGuardar").addClass("hide");

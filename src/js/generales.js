@@ -32,7 +32,8 @@ window.habilitarSeccion = function habilitarSeccion(declaracionSeccion, seccionN
     else{
         $("#form" + seccionName +" :input").prop("disabled", false);
         $(".btnGuardar, .btnTerminar").removeClass("hide");
-    }        
+    }
+    //$("#form" + seccionName + " .CBOtipoOperacion").prop("disabled", false);
     $(".btnHabilitar").addClass("hide");  
     validarDeclaracionTerminada();
     //scroll top de la página.
@@ -761,6 +762,7 @@ $(".numeric").keypress(function (e) {
 
 
 window.format = function format(num) {
+    if (num == null){num=0;}
     var n = num.toString(), p = n.indexOf('.');
     return n.replace(/\d(?=(?:\d{3})+(?:\.|$))/g, function ($0, i) {
         return p < 0 || i < p ? ($0 + ',') : $0;
