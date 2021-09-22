@@ -579,6 +579,10 @@ window.guardarRegistroDependientesEconomicos = function guardarRegistroDependien
     var form="#form" + seccionName;
     jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.ninguno=false;
     jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.aclaracionesObservaciones =  $(modulo + " textarea[name='aclaracionesObservaciones']").val().toUpperCase();
+    let provGobDepEco = false;
+    if ($("#laboralDependientePriContent input[type='radio'][name='proveedorContratistaGobierno']")[0].checked){ provGobDepEco = true; } 
+    else{ provGobDepEco = false; }
+
     jsonResult.declaracion.situacionPatrimonial.datosDependienteEconomico.dependienteEconomico[uuidItem] =
     {
         "uuid": uuidItem,
@@ -647,7 +651,7 @@ window.guardarRegistroDependientesEconomicos = function guardarRegistroDependien
             "moneda":                       $("#laboralDependientePriContent select[name='moneda'] option:selected").val()
           }
         },
-        "proveedorContratistaGobierno": $("#laboralDependientePriContent input[type='radio'][name='proveedorContratistaGobierno']:checked").val().toLowerCase() == 'true' ? true : false,
+        "proveedorContratistaGobierno":  provGobDepEco, //$("#laboralDependientePriContent input[type='radio'][name='proveedorContratistaGobierno']:checked").val().toLowerCase() == 'true' ? true : false,
         "sector": {
           "clave": $("#laboralDependientePriContent select[name='sector'] option:selected").val(),
           "valor": $("#laboralDependientePriContent select[name='sector'] option:selected")[0].innerText

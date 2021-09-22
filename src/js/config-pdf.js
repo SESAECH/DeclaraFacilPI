@@ -1037,14 +1037,6 @@ function tblDependienteEco(titulo){
                             <td style="width: 34%;">' + actividadLaboralDependiente.empleoCargoComision + '</td>\
                             <td style="width: 33%;">' + actividadLaboralDependiente.funcionPrincipal + '</td>\
                             <td style="width: 33%;">' + actividadLaboralDependiente.salarioMensualNeto.valor + actividadLaboralDependiente.salarioMensualNeto.moneda + '</td>\
-                        </tr>\
-                        <tr style="background-color: #dee2e6;">\
-                            <td style="width: 34%;">ÁREA DE ADSCRIPCIÓN</td>\
-                            <td colspan="2">FUNCIÓN PRINCIPAL</td>\
-                        </tr>\
-                        <tr>\
-                            <td style="width: 34%;">' + actividadLaboralDependiente.areaAdscripcion + '</td>\
-                            <td colspan="2">' + actividadLaboralDependiente.funcionPrincipal + '</td>\
                         </tr>';
             }
             else if(nodo.actividadLaboral.clave=="NIN"){
@@ -1075,10 +1067,12 @@ function tblDependienteEco(titulo){
                                 <td style="width: 33%;">' + actividadLaboralDependiente2.salarioMensualNeto.valor + actividadLaboralDependiente2.salarioMensualNeto.moneda + '</td>\
                             </tr>\
                             <tr style="background-color: #dee2e6;">\
-                                <td colspan="3">¿ES PROOVEDOR O CONTRATISTA DE GOBIERNO?</td>\
+                                <td colspan="2">SECTOR</td>\
+                                <td>¿ES PROOVEDOR O CONTRATISTA DE GOBIERNO?</td>\
                             </tr>\
                             <tr>\
-                                <td colspan="3">' + provContraGob + '</td>\
+                                <td colspan="2">' + nodo.sector.valor + '</td>\
+                                <td>' + provContraGob + '</td>\
                             </tr>';
             }
         });
@@ -1604,7 +1598,7 @@ function tblVehiculos(titulo){
             html+="<tr>";
             html+=" <td>" + titulares.slice(0, -1) + "</td>";
             html+=" <td>" + nodo.tipoVehiculo.valor + "</td>";
-            html+=" <td>" + nodo.lugarRegistro.pais + "/" + nodo.lugarRegistro.entidadFederativa.valor + "</td>";
+            nodo.lugarRegistro.pais == "MX" ? html+=" <td>" + nodo.lugarRegistro.pais + "/" + nodo.lugarRegistro.entidadFederativa.valor + "</td>" : html+=" <td>" + nodo.lugarRegistro.pais + "</td>";
             html+="</tr>";
 
             if (Object.keys(nodo.tercero).length>0){

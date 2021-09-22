@@ -464,7 +464,11 @@ window.guardarFormPareja = function guardarFormPareja(seccionNo, seccionName, se
             root.actividadLaboralSectorPrivadoOtro.sector.valor =                       $("#laboralParejaPriContent select[name='sector'] option:selected")[0].innerText;
             root.actividadLaboralSectorPrivadoOtro.salarioMensualNeto.valor =           $("#laboralParejaPriContent input[name='valor']").val();
             root.actividadLaboralSectorPrivadoOtro.salarioMensualNeto.moneda =          $("#laboralParejaPriContent select[name='moneda'] option:selected").val();
-            root.actividadLaboralSectorPrivadoOtro.proveedorContratistaGobierno =       $("#laboralParejaPriContent input[type='radio'][name='proveedorContratistaGobierno']:checked").val().toLowerCase() == 'true' ? true : false;
+            
+            if ($("#laboralParejaPriContent input[type='radio'][name='proveedorContratistaGobierno']")[0].checked){ root.actividadLaboralSectorPrivadoOtro.proveedorContratistaGobierno = true; } 
+            else{ root.actividadLaboralSectorPrivadoOtro.proveedorContratistaGobierno = false; }
+
+            //root.actividadLaboralSectorPrivadoOtro.proveedorContratistaGobierno =       $("#laboralParejaPriContent input[type='radio'][name='proveedorContratistaGobierno']:checked").val().toLowerCase() == 'true' ? true : false;
             //generales
             root.aclaracionesObservaciones = $("#form" + seccionName + " textarea[name='aclaracionesObservaciones']").val().toUpperCase();;
         
