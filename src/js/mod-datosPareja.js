@@ -500,9 +500,13 @@ window.loadInfoPareja = function loadInfoPareja(seccionName){
         $("#form" + seccionName + " select[name='relacionConDeclarante']").val(root.relacionConDeclarante);            
         $("#form" + seccionName + " input[name='curp']").val(root.curp);
     
-        $("#form" + seccionName + " input[type='radio'][name='esDependienteEconomico']").val(root.esDependienteEconomico);
-        $("#form" + seccionName + " input[type='radio'][name='ciudadanoExtranjero']").val(root.ciudadanoExtranjero);
-        $("#form" + seccionName + " input[type='radio'][name='habitaDomicilioDeclarante']").val(root.habitaDomicilioDeclarante);
+        root.esDependienteEconomico ? $("#form" + seccionName + " input[type='radio'][name='esDependienteEconomico']")[0].checked=true : $("#form" + seccionName + " input[type='radio'][name='esDependienteEconomico']")[1].checked=true;
+        root.ciudadanoExtranjero ? $("#form" + seccionName + " input[type='radio'][name='ciudadanoExtranjero']")[0].checked=true : $("#form" + seccionName + " input[type='radio'][name='ciudadanoExtranjero']")[1].checked=true;
+        root.habitaDomicilioDeclarante ? $("#form" + seccionName + " input[type='radio'][name='habitaDomicilioDeclarante']")[0].checked=true : $("#form" + seccionName + " input[type='radio'][name='habitaDomicilioDeclarante']")[1].checked=true;
+        
+        //$("#form" + seccionName + " input[type='radio'][name='esDependienteEconomico']").val(root.esDependienteEconomico);
+        //$("#form" + seccionName + " input[type='radio'][name='ciudadanoExtranjero']").val(root.ciudadanoExtranjero);
+        //$("#form" + seccionName + " input[type='radio'][name='habitaDomicilioDeclarante']").val(root.habitaDomicilioDeclarante);
 
         $("#form" + seccionName + " select[name='lugarDondeReside']").val(root.lugarDondeReside).change();
 
