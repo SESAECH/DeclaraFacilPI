@@ -33,7 +33,7 @@ module.exports = {
     watchContentBase:true,
   },
   //devtool:'inline-source-map',
-  plugins:[ 
+  plugins:[
     new webpack.DefinePlugin({ VERSION: JSON.stringify(PACKAGE.version),}),
     new webpack.ProvidePlugin({ $: "jquery", jQuery: 'jquery','window.jQuery': 'jquery'}),
     new webpack.optimize.LimitChunkCountPlugin({maxChunks:1,}),
