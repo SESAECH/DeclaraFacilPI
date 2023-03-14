@@ -51,7 +51,7 @@ function gerarPdfDecSimplificada(){
 
     doc.text(jsonResult.captura.tipo_declaracion, 50, 30);
     doc.text(jsonResult.captura.formato, 50, 35);
-    doc.text(jsonResult.captura.anio, 50, 40);
+    doc.text(jsonResult.captura.anio.toString(), 50, 40);
     doc.text(getDateTime(), 50, 45);
     doc.text(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.nombreEntePublico, 50, 50);
 
@@ -147,7 +147,8 @@ function gerarPdfDecCompleta(){
 
     doc.text(jsonResult.captura.tipo_declaracion, 50, 30);
     doc.text(jsonResult.captura.formato, 50, 35);
-    doc.text(jsonResult.captura.anio, 50, 40);
+    doc.text(jsonResult.captura.anio.toString(), 50, 40);
+
     doc.text(getDateTime(), 50, 45);
     doc.text(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.nombreEntePublico, 50, 50);
 
@@ -314,7 +315,7 @@ function gerarPdfDecCompletaINTERESES(){
 
     doc.text(jsonResult.captura.tipo_declaracion, 50, 30);
     doc.text(jsonResult.captura.formato, 50, 35);
-    doc.text(jsonResult.captura.anio, 50, 40);
+    doc.text(jsonResult.captura.anio.toString(), 50, 40);
     doc.text(getDateTime(), 50, 45);
     doc.text(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.nombreEntePublico, 50, 50);
 
