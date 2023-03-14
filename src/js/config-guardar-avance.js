@@ -1,9 +1,9 @@
 //funcionalidad a controles de guardado.
 $("#btnGuardarAvance").on('click',function() {
-    let fecha = new Date();
+    //let fecha = new Date();
     jsonResult.captura.contralor = $("input[name='nameContralor']").val().toUpperCase(); 
     jsonResult.captura.version = VERSION;
-    jsonResult.captura.anio = fecha.getFullYear() ; 
+    jsonResult.captura.anio = $('#cboAnioEjercicio').val();//fecha.getFullYear() ; 
     let filename = jsonResult.declaracion.situacionPatrimonial.datosGenerales.curp + "_" + jsonResult.captura.tipo_declaracion + "_" + jsonResult.captura.anio + ".dec";
     
     let zip = pako.gzip(JSON.stringify(jsonResult));

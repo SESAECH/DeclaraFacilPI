@@ -3,6 +3,7 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
     var seccion = JSON.parse(atob(data));
     var seccionName = seccion.moduloName.replace("modulo","");
     var form = "#form" + seccion.moduloName.replace("modulo", "")+ " ";
+    var formOtro = "#formOtroEmpleoCargoComision ";
     var modulo = "#" + seccion.moduloName + " ";
 
     //cargar catalogos.
@@ -12,17 +13,92 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
     loadCat(trueFalse, form + ".CBOcontratadoPorHonorarios");
     loadCat(entidadFederativa, form + ".CBOentidadFederativa");
     loadCat(paises, form + ".CBOpais");
-
+    
+    loadCat(entidadFederativa, formOtro + ".CBOentidadFederativaOtro");
+    loadCat(nivelOrdenGobierno, formOtro + ".CBOnivelOrdenGobierno");
+    loadCat(ambitoPublico, formOtro + ".CBOambitoPublico");
+    loadCat(trueFalse, formOtro + ".CBOcontratadoPorHonorarios");
+    loadCat(paises, formOtro + ".CBOpais");
+    
     $(form + ".CBOentidadFederativa").on('change', function() {
         loadMunicipios(form + ".CBOmunicipioAlcaldia", this.value);
     });
-        if(jsonResult.captura.tipo_declaracion == "INICIAL"){
+    
+    $(formOtro + ".CBOentidadFederativaOtro").on('change', function() {
+        loadMunicipios(formOtro + ".CBOmunicipioAlcaldiaOtro", this.value);
+    });
+    
+    $("#contentOtroEmpleoCargoComision0").addClass("hide");
+    $("#contentOtroEmpleoCargoComision1").addClass("hide");
+    $("#contentOtroEmpleoCargoComision2").addClass("hide");
+    $("#btnAgregarOtrosEmpleos").addClass("hide");
+    $("#tblOtrosEmpleos").addClass("hide");
+
+    $("#chkOtroEmpleoCargoComision")[0].checked=false;
+
+    switch(jsonResult.captura.tipo_declaracion){
+        case "INICIAL":            
             $(form + "select[name='tipoOperacion']").val("AGREGAR").prop("disabled", true);
-        }
-        if(jsonResult.captura.tipo_declaracion == "INTERESES"){
-        $(form + "select[name='tipoOperacion']").val("SIN_CAMBIOS").prop("disabled", true);
+            $(".lblFechaTomaPosesion").text("FECHA DE TOMA DE POSESIÓN");
+            break;
+        case "MODIFICACION":            
+            $(".lblFechaTomaPosesion").text("FECHA DE TOMA DE POSESIÓN");
+            $("#contentOtroEmpleoCargoComision0").removeClass("hide");
+            $("#contentOtroEmpleoCargoComision1").removeClass("hide");            
+            break;
+        case "CONCLUSION":
+            $(".lblFechaTomaPosesion").text("FECHA DE CONCLUSIÓN");
+            break;
+        case "INTERESES":
+            $(form + "select[name='tipoOperacion']").val("SIN_CAMBIOS").prop("disabled", true);
+            $(".lblFechaTomaPosesion").text("FECHA DE TOMA DE POSESIÓN");
+            break;
     }
-        $(".lblFechaTomaPosesion").text ( jsonResult.captura.tipo_declaracion == "CONCLUSION" ? "FECHA DE CONCLUSIÓN" : "FECHA DE TOMA DE POSESIÓN");
+
+    $("#chkOtroEmpleoCargoComision").on('click',function() {
+        if(this.checked){
+            $("#btnAgregarOtrosEmpleos").removeClass("hide");
+            $("#tblOtrosEmpleos").removeClass("hide");
+
+            $(form + ".btnGuardar").removeClass("hide");
+            $(form + ".btnTerminar").addClass("hide");
+        }
+        else{
+            if (Object.keys(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.otroEmpleoCargoComision).length>0){
+                Swal.fire({
+                    title: 'Aviso',
+                    text:"Tiene registros capturados, ¿seguro quiere eliminarlos?",
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: "Continuar",
+                    denyButtonText: "Cancelar",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.otroEmpleoCargoComision={};
+                            $("#tblOtrosEmpleos tbody").empty();
+                            $("#tblOtrosEmpleos").addClass("hide");
+                            $("#btnAgregarOtrosEmpleos").addClass("hide");
+                            
+                            $(form + ".btnGuardar").removeClass("hide");
+                            $(form + ".btnTerminar").removeClass("hide");
+                        }
+                        else{
+                            $("#chkOtroEmpleoCargoComision")[0].checked=true;
+                        }
+                });
+            }
+            else{
+                jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.otroEmpleoCargoComision={};
+                $("#tblOtrosEmpleos tbody").empty();
+                $("#tblOtrosEmpleos").addClass("hide");
+                $("#btnAgregarOtrosEmpleos").addClass("hide");
+                            
+                $(form + ".btnGuardar").removeClass("hide");
+                $(form + ".btnTerminar").removeClass("hide");
+            }
+        }
+    });
+
     $(form + '.rdDomicilio').click(function(){
         if(this.id =="domicilioEmpMX"){
             $(form + "#domEmpMexico").removeClass("hide");
@@ -36,29 +112,56 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
         }
     });
 
+    $(formOtro + '.rdDomicilioOtro').click(function(){
+        if(this.id =="domicilioEmpMXOtro"){
+            $(formOtro + "#domEmpMexicoOtro").removeClass("hide");
+            $(formOtro + "#domEmpExtranjeroOtro").addClass("hide");
+        }
+        else{ 
+            $(formOtro + "#domEmpExtranjeroOtro").removeClass("hide");
+            $(formOtro + "#domEmpMexicoOtro").addClass("hide");
+        }
+    });
+
     //validar status de la sección.
     switch(seccion.status){
         case "SIN_INFO": 
             //asginar valores predeterminados a catálogos(ayuda al usuario).
             $(form + "#domicilioEmpMX").prop("checked", true);
             $(form + "#domEmpMexico").removeClass("hide");
-            $(form + "domEmpExtranjero").addClass("hide");
+            $(form + "#domEmpExtranjero").addClass("hide");
+
+            $(formOtro + "#domicilioEmpMXOtro").prop("checked", true);
+            $(formOtro + "#domEmpMexicoOtro").removeClass("hide");
+            $(formOtro + "#domEmpExtranjeroOtro").addClass("hide");
+
+            jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.domicilio="MX";            
+
             $(form + ".CBOpais").val("MX");
             $(form + ".CBOentidadFederativa").val("07").change();
+            $(formOtro + ".CBOentidadFederativaOtro").val("07").change();
+
             $(form + ".btnGuardar").removeClass("hide");
             $(form + ".btnTerminar").removeClass("hide");
             $(modulo + ".btnHabilitar").addClass("hide");
         break;
         case "EN_PROCESO":
             //cargar información guardada previamente.
-            window["loadInfo" + seccionName](form);
+            window["loadInfo" + seccionName](form, seccion.no, seccionName);
             $(form + ".btnGuardar").removeClass("hide");
             $(form + ".btnTerminar").removeClass("hide");
+            if(jsonResult.captura.tipo_declaracion === "MODIFICACION"){
+                if($("#chkOtroEmpleoCargoComision")[0].checked){
+                    if (Object.keys(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.otroEmpleoCargoComision).length===0){
+                        $(form + ".btnTerminar").addClass("hide");
+                    }
+                }
+            }
             $(modulo + ".btnHabilitar").addClass("hide");
             break;
         case "TERMINADO":
             //cargar información guardada previamente.
-            window["loadInfo" + seccionName](form);           
+            window["loadInfo" + seccionName](form, seccion.no, seccionName);           
             $(form + ":input").prop("disabled", true);
 
             $(form + ".btnGuardar").addClass("hide");
@@ -72,6 +175,10 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
     $(form + ".btnTerminar").unbind("click");
     $(modulo + ".btnHabilitar").unbind("click");
 
+    $("#btnAgregarOtrosEmpleos").unbind("click");
+    $("#btnAgregarOtroEmpleoOK").unbind("click");
+    $("#btnCerrarOtroEmpleo").unbind("click");
+    
     $(form + ".btnGuardar").on('click',function() {
         window["guardarForm" + seccionName](seccion.no, seccionName, seccion.apartado);
     });
@@ -82,12 +189,44 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
         habilitarSeccion(seccion.apartado, seccion.no, seccionName);
         //$(form + ".CBOtipoOperacion").prop("disabled", true);
     });
+
+    //----------------------------------------------------------------------------
+    //-----agregar otros empleos    
+    $("#btnAgregarOtrosEmpleos").on('click',function() {
+        $(form + ".btnGuardar").addClass("hide");
+        $(form + ".btnTerminar").addClass("hide");
+        $(modulo + ".btnHabilitar").addClass("hide");
+
+        $("#formOtroEmpleoCargoComision")[0].reset();
+        $(formOtro + ".CBOentidadFederativaOtro").val("07").change();
+        $("#domicilioEmpMXOtro")[0].checked=true;
+        $("#formOtroEmpleoCargoComision #domEmpMexicoOtro").removeClass("hide");
+        $("#formOtroEmpleoCargoComision #domEmpExtranjeroOtro").addClass("hide");
+
+        $("#btnAgregarOtrosEmpleos").addClass("click");
+        $("#tblOtrosEmpleos").addClass("hide"); 
+        $("#contentOtroEmpleoCargoComision2").removeClass("hide");
+    });
+    
+    $("#btnCerrarOtroEmpleo").on('click',function() {
+        $("#btnAgregarOtrosEmpleos").removeClass("click");
+        $("#tblOtrosEmpleos").removeClass("hide"); 
+        $("#contentOtroEmpleoCargoComision2").addClass("hide");
+    });
+
+    $("#btnAgregarOtroEmpleoOK").on('click',function() {        
+        window["guardarOtroEmpleoCargoComision"]("", seccion.no, seccionName, "NUEVO");
+        //guardarOtroEmpleoCargoComision(uuidItem, seccion.no, seccionName);        
+    });
+    //----------------------------------------------------------------------------
+
     $(".content_seccion").addClass("hide");
     $("#" + seccion.moduloName).removeClass("hide");
 }
 
 window.guardarFormEmpleoCargoComision = function guardarFormEmpleoCargoComision(seccionNo, seccionName,  seccionApartado){    
-    var formulario = "#form" + seccionName + " ";
+    var formulario = "#form" + seccionName + " ";    
+
     $(formulario).validate({
         rules: {
             nivelOrdenGobierno : { required: true },
@@ -193,13 +332,19 @@ window.guardarFormEmpleoCargoComision = function guardarFormEmpleoCargoComision(
                 root.domicilioExtranjero.codigoPostal = $("#domEmpExtranjero input[name='codigoPostal']").val();
             }                                            
             root.aclaracionesObservaciones = $(formulario + "textarea[name='aclaracionesObservaciones']").val().toUpperCase();
+            
+            if(jsonResult.captura.tipo_declaracion === "MODIFICACION"){
+                if($("#chkOtroEmpleoCargoComision")[0].checked){
+                    root.cuentaConOtroCargoPublico=true;
+                }
+            }
             //actualiza el status de la sección (en proceso/terminado).
             actualizarStatusSeccion(seccionApartado, seccionNo, seccionName, btn.originalEvent.submitter.dataset.seccionstatus);
         }
     });    
 }
 
-window.loadInfoEmpleoCargoComision = function loadInfoEmpleoCargoComision(form){
+window.loadInfoEmpleoCargoComision = function loadInfoEmpleoCargoComision(form, seccionNo, seccionName){
     var root = jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision;
     
     $(form + "select[name='tipoOperacion']").val(root.tipoOperacion);
@@ -244,4 +389,199 @@ window.loadInfoEmpleoCargoComision = function loadInfoEmpleoCargoComision(form){
 
     //generales
      $(form + "textarea[name='aclaracionesObservaciones']").val(root.aclaracionesObservaciones);
+
+    //otro empleo    
+    if(jsonResult.captura.tipo_declaracion === "MODIFICACION"){
+        $("#chkOtroEmpleoCargoComision")[0].checked = root.cuentaConOtroCargoPublico;
+        $(form + "select[name='contratadoPorHonorariosOtro']").val("false");
+        if(root.cuentaConOtroCargoPublico){
+            pintarTablaOtrosEmpleos(seccionNo, seccionName);
+            $("#btnAgregarOtrosEmpleos").removeClass("hide");       
+        }
+    }
+}
+
+window.guardarOtroEmpleoCargoComision = function guardarOtroEmpleoCargoComision(uuidItem, seccionNo, seccionName, accion){    
+    var formulario = "#formOtroEmpleoCargoComision ";    
+
+    $(formulario).validate({
+        rules: {            
+            entidadFederativaOtro : { required: true },
+            municipioAlcaldiaOtro : { required: true },
+            calleOtro : { required: true },
+            numeroExteriorOtro : { required: true },
+            coloniaLocalidadOtro : { required: true },
+            codigoPostalOtro : { required: true, number: true, minlength: 5, maxlength: 5 },
+            ciudadLocalidadOtro : { required: true },
+            estadoProvinciaOtro : { required: true },
+            paisOtro : { required: true },
+            nivelOrdenGobiernoOtro : { required: true },
+            ambitoPublicoOtro : { required: true },
+            nombreEntePublicoOtro : { required: true },
+            areaAdscripcionOtro : { required: true },
+            empleoCargoComisionOtro : { required: true },
+            contratadoPorHonorariosOtro : { required: true },
+            nivelEmpleoCargoComisionOtro : { required: true },
+            funcionPrincipal : { required: true },
+            fechaTomaPosesionOtro : { required: true },
+            telefonoOtro : { required: true, number: true, minlength: 10, maxlength: 10 },
+        },
+        messages: {
+            nivelOrdenGobiernoOtro : { required: "Seleccione el orden de gobierno." },
+            ambitoPublicoOtro : { required: "Seleccione el ámbito público." },
+            nombreEntePublicoOtro: { required: "Ingrese el nombre del ente público."},
+            areaAdscripcionOtro : { required: "Ingrese el área de adscripción." },
+            empleoCargoComisionOtro: { required: "Ingrese el empleo, cargo o comisión." },
+            contratadoPorHonorariosOtro : { required: "Seleccione si o no está contratado por honorarios." },
+            nivelEmpleoCargoComisionOtro : { required: "Ingrese el nivel del empleo, cargo o comisión." },
+            funcionPrincipalOtro : { required : "Ingrese la función principal." },
+            fechaTomaPosesionOtro : { required: "Ingrese la fecha."},
+            telefonoOtro : { required: "Ingrese el número telefónico de oficina", number: "Solo se permiten caracteres numéricos.", minlength: "El mínimo de caracteres es de 10", maxlength: "El máximo de caracteres es de 10." },
+            entidadFederativaOtro: { required: "Seleccione la entidad federativa." },
+            municipioAlcaldiaOtro: { required: "Seleccione el municipio o alcaldía." },
+            calleOtro: { required: "Ingrese la calle." },
+            numeroExteriorOtro : { required: "Ingrese el número exterior." },
+            coloniaLocalidadOtro : { required: "Ingrese la colonia o localidad." },
+            codigoPostalOtro : { required: "Ingrese el C.P.", number: "Solo se permiten caracteres numéricos.", minlength: "El mínimo de caracteres es de 5.", maxlength: "El máximo de caracteres es de 5." },
+            ciudadLocalidadOtro : { required: "Ingrese la ciudad o localidad." },
+            estadoProvinciaOtro : { required: "Ingrese el estado o provincia." },
+            paisOtro : { required: "Selecione el país." }
+        },
+        submitHandler: function(form, btn) {
+            var root = jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision;
+            
+            if(jsonResult.captura.tipo_declaracion === "MODIFICACION"){
+                if($("#chkOtroEmpleoCargoComision")[0].checked){
+                    if (accion ==="NUEVO"){ uuidItem = generarUUID();}
+
+                    let honorariosOtro = $(formulario + "select[name='contratadoPorHonorariosOtro'] option:selected").val() =="false" ? false: true;
+                    let domicilioOtro = $(formulario + "#domicilioEmpMXOtro")[0].checked ? "MX":"EXT";
+                    root.cuentaConOtroCargoPublico=true;
+                    root.otroEmpleoCargoComision[uuidItem]={
+                        uuid: uuidItem,
+                        nivelOrdenGobierno: $(formulario + "select[name='nivelOrdenGobiernoOtro'] option:selected").val(),
+                        ambitoPublico: $(formulario + "select[name='ambitoPublicoOtro'] option:selected").val(),
+                        nombreEntePublico: $(formulario + "input[name='nombreEntePublicoOtro']").val().toUpperCase(),
+                        areaAdscripcion: $(formulario + "input[name='areaAdscripcionOtro']").val().toUpperCase(),
+                        empleoCargoComision: $(formulario + "input[name='empleoCargoComisionOtro']").val().toUpperCase(),
+                        contratadoPorHonorarios: honorariosOtro,
+                        nivelEmpleoCargoComision: $(formulario + "input[name='nivelEmpleoCargoComisionOtro']").val().toUpperCase(),
+                        funcionPrincipal: $(formulario + "input[name='funcionPrincipalOtro']").val().toUpperCase(),
+                        fechaTomaPosesion:$(formulario + "input[name='fechaTomaPosesionOtro']").val(),
+                        telefonoOficina:{
+                            telefono: $(formulario + "input[name='telefonoOtro']").val(),
+                            extension: $(formulario + "input[name='extensionOtro']").val()
+                        },
+                        domicilio: domicilioOtro,
+                        domicilioMexico: {
+                            calle: "",
+                            numeroExterior: "",
+                            numeroInterior: "",
+                            coloniaLocalidad: "",
+                            municipioAlcaldia: {
+                              clave: "",
+                              valor: ""
+                            },
+                            entidadFederativa: {
+                              clave: "",
+                              valor: ""
+                            },
+                            codigoPostal: ""
+                        },
+                        domicilioExtranjero: {
+                            calle: "",
+                            numeroExterior: "",
+                            numeroInterior: "",
+                            ciudadLocalidad: "",
+                            estadoProvincia: "",
+                            pais: "MX",
+                            codigoPostal: ""
+                        },
+                        aclaracionesObservaciones: $(formulario + "textarea[name='aclaracionesObservacionesOtro']").val().toUpperCase()
+                    };
+
+                    if (root.otroEmpleoCargoComision[uuidItem].domicilio == "MX"){
+                        //domicilio mexico.
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.calle = $("#domEmpMexicoOtro input[name='calleOtro']").val().toUpperCase();
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.numeroExterior = $("#domEmpMexicoOtro input[name='numeroExteriorOtro']").val();
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.numeroInterior = $("#domEmpMexicoOtro input[name='numeroInteriorOtro']").val();
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.coloniaLocalidad = $("#domEmpMexicoOtro input[name='coloniaLocalidadOtro']").val().toUpperCase();
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.municipioAlcaldia.clave = $("#domEmpMexicoOtro select[name='municipioAlcaldiaOtro'] option:selected").val();
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.municipioAlcaldia.valor = $("#domEmpMexicoOtro select[name='municipioAlcaldiaOtro'] option:selected")[0].innerText;
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.entidadFederativa.clave = $("#domEmpMexicoOtro select[name='entidadFederativaOtro'] option:selected").val();
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.entidadFederativa.valor = $("#domEmpMexicoOtro select[name='entidadFederativaOtro'] option:selected")[0].innerText;
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.codigoPostal = $("#domEmpMexicoOtro input[name='codigoPostalOtro']").val();
+        
+                        //domicilio extranjero
+                        root.otroEmpleoCargoComision[uuidItem].domicilioExtranjero.calle = "";
+                        root.otroEmpleoCargoComision[uuidItem].domicilioExtranjero.numeroExterior = "";
+                        root.otroEmpleoCargoComision[uuidItem].domicilioExtranjero.numeroInterior = "";
+                        root.otroEmpleoCargoComision[uuidItem].domicilioExtranjero.ciudadLocalidad = "";
+                        root.otroEmpleoCargoComision[uuidItem].domicilioExtranjero.estadoProvincia = "";
+                        root.otroEmpleoCargoComision[uuidItem].domicilioExtranjero.pais = "MX"
+                        root.otroEmpleoCargoComision[uuidItem].domicilioExtranjero.codigoPostal = "";
+                    }
+                    else{
+                        $("#domEmpMexicoOtro select[name='entidadFederativaOtro'] option:selected").val("07").trigger("change");
+                        //domicilio mexico.
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.calle = "";
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.numeroExterior = "";
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.numeroInterior = "";
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.coloniaLocalidad = "";
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.municipioAlcaldia.clave = $("#domEmpMexicoOtro select[name='municipioAlcaldiaOtro'] option:selected").val();
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.municipioAlcaldia.valor = $("#domEmpMexicoOtro select[name='municipioAlcaldiaOtro'] option:selected")[0].innerText;
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.entidadFederativa.clave = $("#domEmpMexicoOtro select[name='entidadFederativaOtro'] option:selected").val();
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.entidadFederativa.valor = $("#domEmpMexicoOtro select[name='entidadFederativaOtro'] option:selected")[0].innerText;
+                        root.otroEmpleoCargoComision[uuidItem].domicilioMexico.codigoPostal = "";
+        
+                        //domicilio extranjero
+                        root.otroEmpleoCargoComision[uuidItem].domicilioExtranjero.calle = $("#domEmpExtranjeroOtro input[name='calleOtro']").val().toUpperCase();
+                        root.otroEmpleoCargoComision[uuidItem].domicilioExtranjero.numeroExterior = $("#domEmpExtranjeroOtro input[name='numeroExteriorOtro']").val();
+                        root.otroEmpleoCargoComision[uuidItem].domicilioExtranjero.numeroInterior = $("#domEmpExtranjeroOtro input[name='numeroInteriorOtro']").val();
+                        root.otroEmpleoCargoComision[uuidItem].domicilioExtranjero.ciudadLocalidad = $("#domEmpExtranjeroOtro input[name='ciudadLocalidadOtro']").val().toUpperCase();
+                        root.otroEmpleoCargoComision[uuidItem].domicilioExtranjero.estadoProvincia = $("#domEmpExtranjeroOtro input[name='estadoProvinciaOtro']").val().toUpperCase();
+                        root.otroEmpleoCargoComision[uuidItem].domicilioExtranjero.pais = $("#domEmpExtranjeroOtro select[name='paisOtro'] option:selected").val();
+                        root.otroEmpleoCargoComision[uuidItem].domicilioExtranjero.codigoPostal = $("#domEmpExtranjeroOtro input[name='codigoPostalOtro']").val();
+                    }
+                    
+                    pintarTablaOtrosEmpleos(seccionNo, seccionName);  
+                    $("#contentOtroEmpleoCargoComision2").addClass("hide");
+                    $("#btnAgregarOtrosEmpleos").removeClass("click");
+
+                    $("#formEmpleoCargoComision .btnGuardar").removeClass("hide");
+                    $("#formEmpleoCargoComision .btnTerminar").removeClass("hide");
+                    $("#moduloEmpleoCargoComision .btnHabilitar").addClass("hide");
+                }
+            }            
+        }
+    });    
+}
+
+window.pintarTablaOtrosEmpleos = function pintarTablaOtrosEmpleos(seccionNo, seccionName){
+    var html="";
+    const lista = jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.otroEmpleoCargoComision;
+    Object.keys(lista).forEach(function (row) {
+        var params = { uuid: lista[row].uuid, seccionNo: seccionNo, seccionName: seccionName };
+        html+="<tr id='" + lista[row].uuid + "'>";
+        html+=" <td>" + lista[row].nivelOrdenGobierno +"</td>";
+        html+=" <td>" + lista[row].ambitoPublico +"</td>";
+        html+=" <td>" + lista[row].nombreEntePublico +"</td>";
+        html+=" <td class='text-right'>";
+        html+="     <button class='btn btn-sm btn-warning btnEditar' onclick='editarOtroEmpleo(\"" + btoa(JSON.stringify(params)) + "\");'>Editar</button>";
+        html+="     <button class='btn btn-sm btn-danger btnEliminar' onclick='eliminarOtroEmpleo(\"" + btoa(JSON.stringify(params)) + "\");'>Eliminar</button>";              
+        html+=" </td>";
+        html+="</tr>";
+    });
+    $(".tblOtrosEmpleos tbody").empty().append(html);
+    $("#tblOtrosEmpleos").removeClass("hide"); 
+}
+
+window.eliminarOtroEmpleo = function eliminarOtroEmpleo(data){
+    var item = JSON.parse(atob(data));
+    //elimina item en object json y tabla.
+    delete jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.otroEmpleoCargoComision[item.uuid];
+    $("#" + item.uuid).remove();
+    if (Object.keys(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.otroEmpleoCargoComision).length==0){
+        $("#modulo" + item.seccionName + " .btnTerminar").addClass("hide");
+    }
 }

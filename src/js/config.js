@@ -1,7 +1,10 @@
 
 $(document).ready(function() {
     console.log( "ready! dom cargado..." );
-    $("#contentSelectTipoDeclaracion").removeClass("hide");  
+    $("#contentSelectTipoDeclaracion").removeClass("hide");
+    $("#modalAvisoPrivacidad").modal("show");
+    $("#btnAceptarAvisoPrivacidad").addClass("hide");
+    loadAniosEjercicio();
     window.onbeforeunload = function() { return "Si sale ahora, perderá la información capturada, ¿Realmente desea salir?"; }
 });
 
@@ -9,9 +12,9 @@ $(document).ready(function() {
 document.title = "DeclaraFácil PI v"+VERSION+"  | SESAECH";
 $(".sistemaTitulo").html('<div width="200" ><a href="#" class="nav-link p-0 text-white" id="BtnAvisoPrivacidad">Aviso de Privacidad </a> <a href="#" class="nav-link p-0 text-white" id="BtnAcercade" >Acerca de... | V ' + VERSION + ' &nbsp;</a> </div>' );
 
-$("#BtnAvisoPrivacidad"). on('click', function() {$("#modalAvisoPrivacidad").modal("show");})     
+$("#BtnAvisoPrivacidad").on('click', function() {$("#modalAvisoPrivacidad").modal("show");})     
 
-$("#BtnAcercade"). on('click', function() {$("#modalAcercade").modal("show");})   
+$("#BtnAcercade").on('click', function() {$("#modalAcercade").modal("show");})   
 
 $(".sistemaPiePagina1").text("Secretaría Ejecutiva del Sistema Anticorrupción del Estado de Chiapas");
 
@@ -29,7 +32,14 @@ $("#contentSelectTipoDeclaracion").removeClass("hide");
 $("input[type=text]").keyup(function () {  
         $(this).val($(this).val().toUpperCase());  
         console.log ('mayusculizado');
-    });
+});
+
+$("#chkAceptarTerminos").on('click',function() {
+  $("#btnAceptarAvisoPrivacidad").addClass("hide");
+  if(this.checked){
+    $("#btnAceptarAvisoPrivacidad").removeClass("hide");
+  }  
+});
 
 //------------------------------------------------------------------------------------------//
 //varibles globales.
@@ -139,7 +149,11 @@ $('.btnSelectTipoDeclaracion').on('click',function() {
                               </a>\
                           </li>';
           });
-      }/*
+      }
+      
+      
+
+      /*
       if (Object.keys(jsonResult.captura.declaracion.fiscal.secciones).length > 0){
         htmlSecciones+='<h6 class="text-muted p10">Presentaci&oacute;n de Declaraci&oacute;n Fiscal</h6>';
         $.each(jsonResult.captura.declaracion.fiscal.secciones, function(index, item){
@@ -349,6 +363,8 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
               case "MODIFICACION":
                   delete jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
                   delete jsonResult.captura.declaracion.situacionPatrimonial.secciones[7];//actividadAnualAnterior
+                  jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.cuentaConOtroCargoPublico=false;
+                  jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.otroEmpleoCargoComision={};
                   jsonResult.declaracion.situacionPatrimonial.ingresos={
                       "remuneracionAnualCargoPublico": {
                         "valor": 0,
@@ -792,6 +808,13 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
       });
     }
 
+    //otro empleo
+    if(jsonResult.captura.tipo_declaracion === "MODIFICACION"){
+      jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.cuentaConOtroCargoPublico=false;
+      jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.otroEmpleoCargoComision={};
+    }
+    //----------------
+    
     $("#menuSecciones").empty().append(htmlSecciones);  
     //ocultar/mostrar controles base.
     $("#contentSelectTipoDeclaracion").addClass("hide");
@@ -847,6 +870,12 @@ window.regresarAlInicio = function regresarAlInicio(){
     $("#contentCapturaDeclaracion, #contentSelectFormatoDeclaracion").addClass("hide");    
 }
 
+window.loadAniosEjercicio = function loadAniosEjercicio(){
+  let fecha = new Date();
+  for(let anio = fecha.getFullYear(); anio > 2020; anio--){
+    $('#cboAnioEjercicio').append($('<option>', { value: anio, text : anio}));
+  }  
+}
 
 //------------------------------------------------------------------------------------------//
 //secciones de declaraciones.

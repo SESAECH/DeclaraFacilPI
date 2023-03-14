@@ -15,7 +15,7 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
             avanceCaptura = JSON.parse(atob(data));
             //console.log(avanceCaptura);
           }
-
+        //console.log(avanceCaptura);
         let mismoFormato = true;
         avanceCaptura.captura.formato == jsonResult.captura.formato ? mismoFormato = true: mismoFormato = false;
         if (mismoFormato){ avanceCaptura.captura.tipo_declaracion == jsonResult.captura.tipo_declaracion ? mismoFormato = true: mismoFormato = false;}
@@ -34,6 +34,7 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
                 if (result.isConfirmed) {
                   //jsonResult.declaracion ={};
                   $("input[name='nameContralor']").val(avanceCaptura.captura.contralor);
+                  $("#cboAnioEjercicio").val(avanceCaptura.captura.anio);
 /*                    jsonResult.declaracion.situacionPatrimonial.datosGenerales = avanceCaptura.declaracion.situacionPatrimonial.datosGenerales;
                     jsonResult.declaracion.situacionPatrimonial.domicilioDeclarante = avanceCaptura.declaracion.situacionPatrimonial.domicilioDeclarante;
                     jsonResult.declaracion.situacionPatrimonial.datosCurricularesDeclarante = avanceCaptura.declaracion.situacionPatrimonial.datosCurricularesDeclarante;
@@ -192,7 +193,7 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
                             jsonResult.captura.declaracion[item.apartado].secciones[item.no].status = 'EN_PROCESO';
                             $(".status-seccion-" + item.apartado + "-" + item.no).removeClass("indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
                             //correccion a array
-                            if (typeof jsonResult.declaracion[item.apartado] != 'undefined') {if (Object.keys(jsonResult.declaracion.[item.apartado][item.seccion]).length == 0){jsonResult.declaracion[item.apartado][item.seccion]={}}}
+                            if (typeof jsonResult.declaracion[item.apartado] != 'undefined') {if (Object.keys(jsonResult.declaracion[item.apartado][item.seccion]).length == 0){jsonResult.declaracion[item.apartado][item.seccion]={}}}
                         }
                     });
                     //cargamos declaracion de intereses si aplica
@@ -207,7 +208,7 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
                         jsonResult.captura.declaracion[item.apartado].secciones[item.no].status = 'EN_PROCESO';
                         $(".status-seccion-" + item.apartado + "-" + item.no).removeClass("indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
                         //correccion a array
-                        if (typeof jsonResult.declaracion[item.apartado] != 'undefined') {if (Object.keys(jsonResult.declaracion.[item.apartado][item.seccion]).length == 0){jsonResult.declaracion[item.apartado][item.seccion]={}}}
+                        if (typeof jsonResult.declaracion[item.apartado] != 'undefined') {if (Object.keys(jsonResult.declaracion[item.apartado][item.seccion]).length == 0){jsonResult.declaracion[item.apartado][item.seccion]={}}}
                     });
                     /*
                     if (typeof jsonResult.declaracion.interes != 'undefined') {
@@ -228,11 +229,13 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
             //console.log(avanceCaptura.captura);
             jsonResult.declaracion ={};
             $("input[name='nameContralor']").val(jsonResult.captura.contralor);
+            $("#cboAnioEjercicio").val(jsonResult.captura.anio);
             Object.keys(avanceCaptura.captura.declaracion.situacionPatrimonial.secciones).forEach(function (index) {
                 var item = avanceCaptura.captura.declaracion.situacionPatrimonial.secciones[index];
                 if (!jsonResult.declaracion[item.apartado]){jsonResult.declaracion[item.apartado] = {};}
                 if (!jsonResult.declaracion[item.apartado][item.seccion]){jsonResult.declaracion[item.apartado][item.seccion] = {};}
                 jsonResult.declaracion[item.apartado][item.seccion] = avanceCaptura.declaracion[item.apartado][item.seccion];
+                
                 if (item.status =="EN_PROCESO"){
                     $(".status-seccion-" + item.apartado + "-" + item.no).removeClass("indicador-status-success").addClass("indicador-status-process").text("EN PROCESO");
                 }
@@ -240,6 +243,16 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
                     $(".status-seccion-" + item.apartado + "-" + item.no).removeClass("indicador-status").addClass("indicador-status-success").text("TERMINADO");
                 }
             });
+
+            //otro empleo
+            if(jsonResult.captura.tipo_declaracion === "MODIFICACION"){
+              if(typeof jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.cuentaConOtroCargoPublico == 'undefined'){
+                jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.cuentaConOtroCargoPublico=false;
+                jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.otroEmpleoCargoComision={};
+              }
+            }
+            //----------------
+
             Object.keys(avanceCaptura.captura.declaracion.interes.secciones).forEach(function (index) {
                 var item = avanceCaptura.captura.declaracion.interes.secciones[index];
                 if (!jsonResult.declaracion[item.apartado]){jsonResult.declaracion[item.apartado] = {};}

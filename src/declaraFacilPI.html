@@ -32,9 +32,18 @@
                     <div class="sidebar-sticky pt-3">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="form-group p10">
+                                <div class="form-group p10" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
                                     <label>Nombre del Contralor Interno que recibe:</label>
                                     <input type="text" name="nameContralor" class="form-control" maxlength="80">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group p10">
+                                    <label>Ejercicio:</label>
+                                    <select name="anioEjercicio" class="form-control" id="cboAnioEjercicio"></select>
+                                    <!-- <input type="text" name="anioEjercicio" class="form-control" maxlength="80"> -->
                                 </div>
                             </div>
                         </div>
@@ -659,6 +668,39 @@
                                                 <textarea name="aclaracionesObservaciones" class="form-control text-uppercase" rows="5"></textarea>
                                             </div>
                                         </div>
+                                        <div class="col-lg-12 mb10 text-center" id="contentOtroEmpleoCargoComision0"><h6 class="bg-seccion">OTRO EMPLEO, CARGO O COMISIÓN</h6></div>
+                                        <div class="col-lg-12 mb10 hide" id="contentOtroEmpleoCargoComision1">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="chkOtroEmpleoCargoComision" value="true"> 
+                                                        <label class="form-check-label" for="chkAceptarTerminos">¿Cuenta con otro empleo, cargo, comisión en el servicio público distinto al declarado?</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 text-right">
+                                                    <button type="button" class="btn btn-light mr10 mb10 btnAgregar hide" id="btnAgregarOtrosEmpleos">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                        </svg>
+                                                        Agregar
+                                                    </button>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <table class="table tblOtrosEmpleos hide" id="tblOtrosEmpleos">
+                                                        <thead>
+                                                            <tr class="">
+                                                                <th style="width: 15%;">Nivel</th>
+                                                                <th style="width: 15%;">Ámbito</th>
+                                                                <th style="width: 50%;">Ente Público</th>
+                                                                <th style="width: 20%;" class="text-right">Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>              
                                     <div class="row">
                                         <div class="col-lg-12 text-right">
@@ -674,6 +716,209 @@
                                                 </svg>
                                                 Terminar
                                             </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form action="" id="formOtroEmpleoCargoComision">
+                                    <div class="col-lg-12 hide" id="contentOtroEmpleoCargoComision2">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>NIVEL/ORDEN DE GOBIERNO</label>
+                                                    <select name="nivelOrdenGobiernoOtro" class="form-control CBOnivelOrdenGobierno"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>&Aacute;MBITO P&Uacute;BLICO</label>
+                                                    <select name="ambitoPublicoOtro" class="form-control CBOambitoPublico"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>NOMBRE DEL ENTE P&Uacute;BLICO</label>
+                                                    <input type="text" name="nombreEntePublicoOtro" class="form-control" required>
+                                                </div>                        
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>&Aacute;REA DE ADSCRIPCI&Oacute;N</label>
+                                                    <input type="text" name="areaAdscripcionOtro" class="form-control" required>
+                                                </div>                        
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>EMPLEO, CARGO O COMISI&Oacute;N</label>
+                                                    <input type="text" name="empleoCargoComisionOtro" class="form-control" required>
+                                                </div>                        
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>¿EST&Aacute;S CONTRATADO POR HONORARIOS?</label>
+                                                    <select name="contratadoPorHonorariosOtro" class="form-control CBOcontratadoPorHonorarios"></select>
+                                                </div>                        
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>NIVEL DEL EMPLEO, CARGO O COMISI&Oacute;N</label>
+                                                    <input type="text" name="nivelEmpleoCargoComisionOtro" class="form-control" required>
+                                                </div>                        
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label>ESPECIFIQUE FUNCI&Oacute;N PRINCIPAL</label>
+                                                    <input type="text" name="funcionPrincipalOtro" class="form-control" required>
+                                                </div>                        
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="lblFechaTomaPosesion">FECHA DE TOMA DE POSESI&Oacute;N</label>
+                                                    <input type="date" name="fechaTomaPosesionOtro" class="form-control" required>
+                                                </div>                        
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>TEL&Eacute;FONO DE OFICINA</label>
+                                                    <input type="text" name="telefonoOtro" class="form-control numeric" maxlength="10" required>
+                                                </div>                        
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>EXTENSI&Oacute;N</label>
+                                                    <input type="text" name="extensionOtro" class="form-control" maxlength="10">
+                                                </div>                        
+                                            </div>                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 mb10 text-center">
+                                                <h6 class="bg-seccion">DOMICILIO DEL OTRO EMPLEO, CARGO O COMISI&Oacute;N</h6>
+                                            </div>
+                                            <div class="col-lg-12 mb10">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="domicilioEmpMXOtro" name="domicilioOtro" class="custom-control-input rdDomicilioOtro">
+                                                    <label class="custom-control-label" for="domicilioEmpMXOtro">Domicilio en M&eacute;xico</label>
+                                                  </div>
+                                                  <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="domicilioEmpEXTOtro" name="domicilioOtro" class="custom-control-input rdDomicilioOtro">
+                                                    <label class="custom-control-label" for="domicilioEmpEXTOtro">Domicilio en el Extranjero</label>
+                                                  </div>
+                                            </div>
+                                            <div class="col-lg-12" id="domEmpMexicoOtro">
+                                                <div class="row p10">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>ENTIDAD FEDERATIVA</label>
+                                                            <select name="entidadFederativaOtro" class="form-control CBOentidadFederativaOtro" required></select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>MUNICIPIO/ALCALD&Iacute;A</label>
+                                                            <select name="municipioAlcaldiaOtro" class="form-control CBOmunicipioAlcaldiaOtro" required></select>
+                                                        </div>
+                                                    </div> 
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>CALLE</label>
+                                                            <input type="text" name="calleOtro" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>N&Uacute;MERO EXTERIOR</label>
+                                                            <input type="text" name="numeroExteriorOtro" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>N&Uacute;MERO INTERIOR</label>
+                                                            <input type="text" name="numeroInteriorOtro" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>COLONIA/LOCALIDAD</label>
+                                                            <input type="text" name="coloniaLocalidadOtro" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>C&Oacute;DIGO POSTAL</label>
+                                                            <input type="text" name="codigoPostalOtro" class="form-control numeric" maxlength="5" required>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 hide" id="domEmpExtranjeroOtro">
+                                                <div class="row p10">                    
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>CALLE</label>
+                                                            <input type="text" name="calleOtro" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>N&Uacute;MERO EXTERIOR</label>
+                                                            <input type="text" name="numeroExteriorOtro" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>N&Uacute;MERO INTERIOR</label>
+                                                            <input type="text" name="numeroInteriorOtro" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row p10">                    
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>CIUDAD/LOCALIDAD</label>
+                                                            <input type="text" name="ciudadLocalidadOtro" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>ESTADO/PROVINCIA</label>
+                                                            <input type="text" name="estadoProvinciaOtro" class="form-control" required>
+                                                        </div>
+                                                    </div>                    
+                                                </div>
+                                                <div class="row p10">                    
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>PA&Iacute;S</label>
+                                                            <select name="paisOtro" class="form-control CBOpais" required></select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>C&Oacute;DIGO POSTAL</label>
+                                                            <input type="text" name="codigoPostalOtro" class="form-control numeric" maxlength="5" required>
+                                                        </div>
+                                                    </div>                    
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label>ACLARACIONES / OBSERVACIONES</label>
+                                                    <textarea name="aclaracionesObservacionesOtro" class="form-control text-uppercase" rows="5"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 text-right">
+                                                <button type="submit" class="btn btn-light btnAgregar" id="btnAgregarOtroEmpleoOK">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                    </svg>
+                                                    Agregar
+                                                </button>
+                                                <button type="button" class="btn btn-secondary btnCerrar" id="btnCerrarOtroEmpleo" data-uuid="">            
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">                
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+                                                    </svg>
+                                                    Cerrar
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -5739,6 +5984,10 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        <table class="table table-bordered" style="width: 100%;font-size: 10px; background-color: #fff;" id="pdfMiDeclaracion_datosEmpleoCargoComisionOtro">
+                                            <tbody>                                                
+                                            </tbody>
+                                        </table>                                        
 
                                         <table class="table table-bordered" style="width: 100%;font-size: 10px; background-color: #fff;" id="pdfMiDeclaracion_experienciaLaboral">
                                             <tbody>
@@ -6017,19 +6266,43 @@
                 <div class="modal-body">                                        
                     <!-- <pre id="output"></pre> -->
                    <div class="row">
-                       <div class="col-lg-12 p-5">			   
-                         <h3 class="text-center">Aviso de Privacidad del Sistema DeclaraF&aacute;cil PI Portable<p>Versi&oacute;n Simplificada</h3><p class="text-justify">
-La Secretar&iacute;a Ejecutiva del Sistema Anticorrupci&oacute;n del Estado de Chiapas (SESAECH) a trav&eacute;s de la Direcci&oacute;n de Sistemas Electr&oacute;nicos y Plataforma Digital, es responsable del tratamiento de los datos personales que nos proporcione, los cuales ser&aacute;n protegidos conforme a lo dispuesto en la Ley de Protecci&oacute;n de Datos Personales en Posesi&oacute;n de Sujetos Obligados del Estado de Chiapas  (LPDPPSOCHIS). Los datos personales recabados en el Sistema DeclaraF&aacute;cil PI Portable de las personas servidoras p&uacute;blicas de los entes p&uacute;blicos, &oacute;rganos aut&oacute;nomos y ayuntamientos ser&aacute;n utilizados con la finalidad de contar con la informaci&oacute;n de las Declaraciones de Situaci&oacute;n Patrimonial, de Declaraci&oacute;n de Intereses y Constancia de Presentaci&oacute;n de Declaraci&oacute;n Fiscal que conformar&aacute; el Sistema de Evoluci&oacute;n Patrimonial, de Declaraci&oacute;n de Intereses y Presentaci&oacute;n de Constancia de Declaraci&oacute;n Fiscal del Sistema Electr&oacute;nico Estatal de Chiapas. Se informa que no se realizar&aacute;n transferencias de dichos datos, salvo aquellas que sean necesarias para atender requerimientos de informaci&oacute;n de autoridades competentes que est&eacute;n debidamente fundados y motivados. Para mayor informaci&oacute;n acerca del tratamiento, as&iacute; como para el ejercicio de los derechos de acceso, rectificaci&oacute;n, cancelaci&oacute;n y oposici&oacute;n de datos personales (derechos ARCO), se pone a su disposici&oacute;n el domicilio de la Unidad de Transparencia de la SESAECH, la cual se encuentra ubicada en Boulevard Andr&eacute;s Serra Rojas No. 1090, Edificio Torre Chiapas, Piso 16, Colonia Paso Lim&oacute;n, C. P. 29045, Tuxtla Guti&eacute;rrez, Chiapas, M&eacute;xico; adem&aacute;s, podr&aacute; acceder a consultar la versi&oacute;n integral de este aviso de privacidad en la siguiente direcci&oacute;n electr&oacute;nica:
-<a href="https://sesaech.gob.mx/datos-personales/avisos-de-privacidad" target="_blank" style="word-wrap: break-word; display: inline-block;"> https://sesaech.gob.mx/datos-personales/avisos-de-privacidad</a> (se requiere internet para acceder al aviso integral).</p>Fecha de la &uacute;ltima actualizaci&oacute;n: 27 de junio de 2022.
+                       <div class="col-lg-12 px-4">
+                         <h4 class="text-center">Aviso de Privacidad del Sistema DeclaraF&aacute;cil PI Portable <br> Versi&oacute;n Simplificada</h4>
+                            <p class="text-justify">
+                                La Secretaría Ejecutiva del Sistema Anticorrupción del Estado de Chiapas (SESAECH) a través de la Dirección de Sistemas Electrónicos y Plataforma Digital, 
+                                es la responsable del tratamiento de los datos personales que toda persona proporcione cuando ejerza el derecho de acceso a la información mediante la presentación de solicitudes 
+                                dirigidas a dicho sujeto obligado del ámbito local de esta entidad federativa, los cuales serán protegidos conforme a lo dispuesto en la Ley General de Protección de Datos Personales 
+                                en Posesión de Sujetos Obligados (LGPDPPSO) y en la Ley de Protección de Datos Personales en Posesión de Sujetos Obligados del Estado de Chiapas (LPDPPSOCHIS), así como en el 
+                                resto de la normatividad que regule la protección de los datos personales y resulte aplicable. Las finalidades para las cuales se obtienen los datos personales recabados son: 
+                                contar con la información de las Declaraciones de Situación Patrimonial, de Declaración de Intereses y Constancia de Presentación de Declaración Fiscal que conformará el Sistema 
+                                de Evolución Patrimonial, de Declaración de Intereses y Presentación de Constancia de Declaración Fiscal del Sistema Electrónico Estatal de Chiapas. Se informa que no se realizarán 
+                                transferencias de los datos personales recabados y tratados, salvo aquéllas que sean necesarias para cumplir con una orden judicial o atender requerimientos de información del 
+                                Instituto de Transparencia, Acceso a la Información y Protección de Datos Personales del Estado de Chiapas (ITAIPCH) o de otra autoridad competente que estén debidamente fundados y motivados. 
+                                Para más información acerca del tratamiento de sus datos personales o sobre los mecanismos y medios disponibles para que, en su caso, puedan manifestar su negativa al tratamiento 
+                                de dichos datos para finalidades y transferencias que requieran su consentimiento, las personas titulares de los mismos podrán ejercer sus derechos ARCOP 
+                                (acceso, rectificación, cancelación, oposición y portabilidad) directamente ante la Unidad de Transparencia de la SESAECH, ubicada en Boulevard Andrés Serra Rojas 1090, piso 16 
+                                de la Torre Chiapas, Colonia El Retiro o Paso Limón, C.P. 29045, Tuxtla Gutiérrez, Chiapas, México; o bien, a través de la Plataforma Nacional de Transparencia (PNT) 
+                                <a href="http://www.plataformadetransparencia.org.mx" target="_blank" style="word-wrap: break-word; display: inline-block;">http://www.plataformadetransparencia.org.mx</a>
+                                , en la sección denominada “Solicitudes”, así como vía correo electrónico dirigido a las cuentas oficiales o institucionales 
+                                transparencia@sesaech.gob.mx y/o sesaech@transparencia.chiapas.gob.mx; o bien, a través de cualquier otro medio que al efecto establezcan o aprueben el Consejo Nacional del 
+                                Sistema Nacional de Transparencia, Acceso a la Información Pública y Protección de Datos Personales (CONAIP-SNT) o el Pleno del ITAIPCH. Asimismo, podrán consultar la versión 
+                                integral de este aviso de privacidad en el apartado “Dirección de Sistemas Electrónicos y Plataforma Digital” de la dirección electrónica                                   
+                                <a href="https://sesaech.gob.mx/datos-personales/avisos-de-privacidad" target="_blank" style="word-wrap: break-word; display: inline-block;">https://sesaech.gob.mx/datos-personales/avisos-de-privacidad</a>
+                            </p>
+                            <p>Fecha de la última actualización: 08 de diciembre de 2022.</p>
+                            <p>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="chkAceptarTerminos" value="true">
+                                    <label class="form-check-label" for="chkAceptarTerminos">He leído y acepto el Aviso de Privacidad.</label>
+                                </div>
+                            </p>                            
                        </div>
                    </div>
                    <div class="row mt10">
                        <div class="col-lg-12 text-center">
-                        <button type="button" class="btn btn-block btn-secondary" onclick="cerrarModal();">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
-                            </svg>
-                            REGRESAR
+                        <button type="button" class="btn btn-block btn-primary" onclick="cerrarModal();" id="btnAceptarAvisoPrivacidad">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"></path><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"></path></svg>
+                            ACEPTAR Y CERRAR
                         </button>
                        </div>
 

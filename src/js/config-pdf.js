@@ -35,24 +35,29 @@ function gerarPdfDecSimplificada(){
         creator: 'DeclaraFácil PI'
     });
 
-    //var numPaginas =0;
     llenarPDF();
 
     doc.setFontSize(8);
-    //doc.setTextColor(300);
     doc.text('TIPO DE DECLARACIÓN:', 48, 30, {maxWidth: 50, align: "right"});
     doc.text('FORMATO:', 48, 35, {maxWidth: 50, align: "right"});
+    doc.text('EJERCICIO:', 48, 40, {maxWidth: 50, align: "right"});
+    doc.text('FECHA DE IMPRESIÓN:', 48, 45, {maxWidth: 50, align: "right"});
+    doc.text('ENTE PÚBLICO:', 48, 50, {maxWidth: 50, align: "right"});
+
+    /* doc.text('TIPO DE DECLARACIÓN:', 48, 30, {maxWidth: 50, align: "right"});
+    doc.text('FORMATO:', 48, 35, {maxWidth: 50, align: "right"});
     doc.text('FECHA DE IMPRESIÓN:', 48, 40, {maxWidth: 50, align: "right"});
-    doc.text('ENTE PÚBLICO:', 48, 45, {maxWidth: 50, align: "right"});
+    doc.text('ENTE PÚBLICO:', 48, 45, {maxWidth: 50, align: "right"}); */
 
     doc.text(jsonResult.captura.tipo_declaracion, 50, 30);
     doc.text(jsonResult.captura.formato, 50, 35);
-    doc.text(getDateTime(), 50, 40);
-    doc.text(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.nombreEntePublico, 50, 45);
+    doc.text(jsonResult.captura.anio, 50, 40);
+    doc.text(getDateTime(), 50, 45);
+    doc.text(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.nombreEntePublico, 50, 50);
 
     doc.setLineWidth(0.2);
     doc.setDrawColor(140,140,140);
-    doc.line(15, 48, 200, 48);
+    doc.line(15, 53, 200, 53);
 
     doc.setFontSize(8);
     doc.text('C. ' + $("input[name='nameContralor']").val().toUpperCase() + ', BAJO PROTESTA DE DECIR VERDAD, PRESENTO A USTED MI DECLARACIÓN DE SITUACIÓN PATRIMONIAL Y DE INTERESES, CONFORME A LO DISPUESTO EN LA LEY GENERAL DE RESPONSABILIDADES ADMINISTRATIVAS, LA LEY GENERAL DEL SISTEMA NACIONAL ANTICORRUPCIÓN Y LA NORMATIVIDAD APLICABLE.', 15, 60, {maxWidth: 180, align: "justify"})
@@ -86,6 +91,13 @@ function gerarPdfDecSimplificada(){
     }
     else{
         doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT', margin: { top: 0, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 1, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto'  });
+    }
+
+    //DATOS DEL EMPLEO, CARGO O COMISION. (OTRO)
+    if(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.cuentaConOtroCargoPublico){
+        finalY = doc.lastAutoTable.finalY;
+        doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComisionOtro', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });   
+        finalY = doc.lastAutoTable.finalY;
     }
 
     //EXPERIENCIA LABORAL.
@@ -124,24 +136,24 @@ function gerarPdfDecCompleta(){
         creator: 'DeclaraFácil PI'
     });
 
-    //var numPaginas =0;
     llenarPDF();
 
-    doc.setFontSize(8);
-    //doc.setTextColor(300);
+    doc.setFontSize(8);    
     doc.text('TIPO DE DECLARACIÓN:', 48, 30, {maxWidth: 50, align: "right"});
     doc.text('FORMATO:', 48, 35, {maxWidth: 50, align: "right"});
-    doc.text('FECHA DE IMPRESIÓN:', 48, 40, {maxWidth: 50, align: "right"});
-    doc.text('ENTE PÚBLICO:', 48, 45, {maxWidth: 50, align: "right"});
+    doc.text('EJERCICIO:', 48, 40, {maxWidth: 50, align: "right"});
+    doc.text('FECHA DE IMPRESIÓN:', 48, 45, {maxWidth: 50, align: "right"});
+    doc.text('ENTE PÚBLICO:', 48, 50, {maxWidth: 50, align: "right"});
 
     doc.text(jsonResult.captura.tipo_declaracion, 50, 30);
     doc.text(jsonResult.captura.formato, 50, 35);
-    doc.text(getDateTime(), 50, 40);
-    doc.text(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.nombreEntePublico, 50, 45);
+    doc.text(jsonResult.captura.anio, 50, 40);
+    doc.text(getDateTime(), 50, 45);
+    doc.text(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.nombreEntePublico, 50, 50);
 
     doc.setLineWidth(0.2);
     doc.setDrawColor(140,140,140);
-    doc.line(15, 48, 200, 48);
+    doc.line(15, 53, 200, 53);
 
     doc.setFontSize(8);
     doc.text('C. ' + $("input[name='nameContralor']").val().toUpperCase() + ', BAJO PROTESTA DE DECIR VERDAD, PRESENTO A USTED MI DECLARACIÓN DE SITUACIÓN PATRIMONIAL Y DE INTERESES, CONFORME A LO DISPUESTO EN LA LEY GENERAL DE RESPONSABILIDADES ADMINISTRATIVAS, LA LEY GENERAL DEL SISTEMA NACIONAL ANTICORRUPCIÓN Y LA NORMATIVIDAD APLICABLE.', 15, 60, {maxWidth: 180, align: "justify"})
@@ -177,6 +189,13 @@ function gerarPdfDecCompleta(){
         doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT', margin: { top: 0, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 1, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto'  });
     }
 
+    //DATOS DEL EMPLEO, CARGO O COMISION. (OTRO)
+    if(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.cuentaConOtroCargoPublico){
+        finalY = doc.lastAutoTable.finalY;
+        doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComisionOtro', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });   
+        finalY = doc.lastAutoTable.finalY;
+    }
+    
     //EXPERIENCIA LABORAL.
     finalY = doc.lastAutoTable.finalY;
     doc.autoTable({ html: '#pdfMiDeclaracion_experienciaLaboral', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });
@@ -279,24 +298,29 @@ function gerarPdfDecCompletaINTERESES(){
         creator: 'DeclaraFácil PI'
     });
 
-    //var numPaginas =0;
     llenarPDF();
 
     doc.setFontSize(8);
-    //doc.setTextColor(300);
     doc.text('TIPO DE DECLARACIÓN:', 48, 30, {maxWidth: 50, align: "right"});
     doc.text('FORMATO:', 48, 35, {maxWidth: 50, align: "right"});
+    doc.text('EJERCICIO:', 48, 40, {maxWidth: 50, align: "right"});
+    doc.text('FECHA DE IMPRESIÓN:', 48, 45, {maxWidth: 50, align: "right"});
+    doc.text('ENTE PÚBLICO:', 48, 50, {maxWidth: 50, align: "right"});
+
+    /* doc.text('TIPO DE DECLARACIÓN:', 48, 30, {maxWidth: 50, align: "right"});
+    doc.text('FORMATO:', 48, 35, {maxWidth: 50, align: "right"});
     doc.text('FECHA DE IMPRESIÓN:', 48, 40, {maxWidth: 50, align: "right"});
-    doc.text('ENTE PÚBLICO:', 48, 45, {maxWidth: 50, align: "right"});
+    doc.text('ENTE PÚBLICO:', 48, 45, {maxWidth: 50, align: "right"}); */
 
     doc.text(jsonResult.captura.tipo_declaracion, 50, 30);
     doc.text(jsonResult.captura.formato, 50, 35);
-    doc.text(getDateTime(), 50, 40);
-    doc.text(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.nombreEntePublico, 50, 45);
+    doc.text(jsonResult.captura.anio, 50, 40);
+    doc.text(getDateTime(), 50, 45);
+    doc.text(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.nombreEntePublico, 50, 50);
 
     doc.setLineWidth(0.2);
     doc.setDrawColor(140,140,140);
-    doc.line(15, 48, 200, 48);
+    doc.line(15, 53, 200, 53);
 
     doc.setFontSize(8);
     doc.text('C. ' + $("input[name='nameContralor']").val().toUpperCase() + ', BAJO PROTESTA DE DECIR VERDAD, PRESENTO A USTED MI DECLARACIÓN DE SITUACIÓN PATRIMONIAL Y DE INTERESES, CONFORME A LO DISPUESTO EN LA LEY GENERAL DE RESPONSABILIDADES ADMINISTRATIVAS, LA LEY GENERAL DEL SISTEMA NACIONAL ANTICORRUPCIÓN Y LA NORMATIVIDAD APLICABLE.', 15, 60, {maxWidth: 180, align: "justify"})
@@ -584,7 +608,6 @@ function tblDatosCurriculares(){
 function tblEmpleo(titulo){
 	$("#tituloTblEmpleo").text(titulo);
 
-
     //DATOS DEL EMPLEO, CARGO O COMISIÓN
     let nodo = jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision;
     honorarios = nodo.contratadoPorHonorarios == true ? "SI": "NO";
@@ -620,6 +643,68 @@ function tblEmpleo(titulo){
         $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .pais").text(nodo.domicilioExtranjero.pais.toUpperCase());
         $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .codigoPostal").text(nodo.domicilioExtranjero.codigoPostal);
         $("#pdfMiDeclaracion_datosEmpleoCargoComisionDOMEXT .aclaracionesObservaciones").text(nodo.aclaracionesObservaciones);
+    }
+
+    if (nodo.cuentaConOtroCargoPublico){
+        let html="", htmlDomicilio="";
+        html+='<tr><td colspan="4" style="background-color: #621132; color: #fff; font-size: 14px;">4.1 DATOS DEL OTRO EMPLEO, CARGO O COMISI&Oacute;N EN EL SERVICIO PÚBLICO</td></tr>';
+        Object.keys(nodo.otroEmpleoCargoComision).forEach(function (index) {
+            var subNodo = nodo.otroEmpleoCargoComision[index];
+            let honorariosOtro = subNodo.contratadoPorHonorarios == true ? "SI": "NO";
+
+            html +='<tr style="background-color: #dee2e6;">\
+                        <td colspan="2">NIVEL / ORDEN DE GOBIERNO</td>\
+                        <td colspan="2">&Aacute;MBITO P&Uacute;BLICO</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2" class="nivelOrdenGobierno text-center">' + subNodo.nivelOrdenGobierno + '</td>\
+                        <td colspan="2" class="ambitoPublico text-center">' + subNodo.ambitoPublico + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td style="background-color: #dee2e6;">NOMBRE DEL ENTE P&Uacute;BLICO</td>\
+                        <td colspan="3" class="nombreEntePublico">' + subNodo.nombreEntePublico + '</td>\
+                    </tr>\
+                    <tr style="background-color: #dee2e6;">\
+                        <td style="width: 25%;">&Aacute;REA DE ADSCRIPCI&Oacute;N</td>\
+                        <td style="width: 25%;">EMPLEO, CARGO O COMISI&Oacute;N</td>\
+                        <td style="width: 25%;">¿EST&Aacute; CONTRATADO POR HONORARIOS?</td>\
+                        <td style="width: 25%;">NIVEL DEL EMPLEO, CARGO O COMISI&Oacute;N</td>\
+                    </tr>\
+                    <tr>\
+                        <td style="width: 25%;" class="areaAdscripcion">' + subNodo.areaAdscripcion + '</td>\
+                        <td style="width: 25%;" class="empleoCargoComision">' + subNodo.empleoCargoComision + '</td>\
+                        <td style="width: 25%;" class="contratadoPorHonorarios text-center">' + honorariosOtro + '</td>\
+                        <td style="width: 25%;" class="nivelEmpleoCargoComision">' + subNodo.nivelEmpleoCargoComision + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td style="background-color: #dee2e6;">FUNCI&Oacute;N PRINCIPAL</td>\
+                        <td colspan="3" class="funcionPrincipal">' + subNodo.funcionPrincipal + '</td>\
+                    </tr>\
+                    <tr style="background-color: #dee2e6;">\
+                        <td colspan="2"> <span class="lblFechaTomaPosesion">FECHA DE TOMA DE POSESI&Oacute;N</span> DEL EMPLEO, CARGO O COMISI&Oacute;N</td>\
+                        <td colspan="2">TEL&Eacute;FONO DE OFICINA Y EXTENSI&Oacute;N</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2" class="fechaTomaPosesion text-center">' + subNodo.fechaTomaPosesion + '</td>\
+                        <td colspan="2" class="telefonoOficina">' + subNodo.telefonoOficina.telefono + " EXT. " + subNodo.telefonoOficina.extension + '</td>\
+                    </tr>';
+
+            if (subNodo.domicilio == "MX"){
+                htmlDomicilio = subNodo.domicilioMexico.calle + " #" + subNodo.domicilioMexico.numeroExterior +" INT."+ subNodo.domicilioMexico.numeroInterior + " " + 
+                                subNodo.domicilioMexico.coloniaLocalidad + ", " + subNodo.domicilioMexico.municipioAlcaldia.valor + ", " + 
+                                subNodo.domicilioMexico.entidadFederativa.valor + " CP." + subNodo.domicilioMexico.codigoPostal;
+            }
+            else{
+                htmlDomicilio = subNodo.domicilioExtranjero.calle + " #" + subNodo.domicilioExtranjero.numeroExterior +" INT."+ subNodo.domicilioExtranjero.numeroInterior + " " + 
+                                subNodo.domicilioExtranjero.ciudadLocalidad + " " + subNodo.domicilioExtranjero.estadoProvincia + ", " + 
+                                subNodo.domicilioExtranjero.pais + " CP." + subNodo.domicilioExtranjero.codigoPostal;
+                }                    
+            html +='<tr><td colspan="4"style="background-color: #dee2e6; text-align: center;" >DOMICILIO</td></tr>';
+            html +='<tr><td colspan="4">' + htmlDomicilio + '</td></tr>';
+            html +='<tr><td colspan="4" style="background-color: #fff; border:1px solid #fff; color: #fff; font-size:14px;"></td></tr>';
+        });
+        
+        $("#pdfMiDeclaracion_datosEmpleoCargoComisionOtro>tbody").empty().append(html);            
     }
 }
 
