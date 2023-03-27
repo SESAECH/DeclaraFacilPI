@@ -609,8 +609,9 @@ window.editarOtroEmpleo = function editarOtroEmpleo(data){
     window.accion = "EDITAR";
     window.uuidOtro = dataItem.uuid;
 
-    let validator = $("#formOtroEmpleoCargoComision").validate();
-    validator.resetForm();
+    //let validator = $("#formOtroEmpleoCargoComision").validate();
+    //validator.resetForm();
+    $("#formOtroEmpleoCargoComision").trigger("reset");
 
     //$(formOtro + "select[name='tipoOperacion']").val(item.tipoOperacion);
     $(formOtro + "select[name='nivelOrdenGobiernoOtro']").val(item.nivelOrdenGobierno);

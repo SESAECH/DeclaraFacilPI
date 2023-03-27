@@ -99,6 +99,16 @@ function gerarPdfDecSimplificada(){
         doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComisionOtro', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });   
         finalY = doc.lastAutoTable.finalY;
     }
+    else{
+        if (jsonResult.captura.tipo_declaracion === "MODIFICACION"){
+            let html ='<tr style="background-color: #dee2e6;"><td colspan="4">¿CUENTA CON OTRO EMPLEO, CARGO, COMISIÓN EN EL SERVICIO PÚBLICO DISTINTO AL DECLARADO?</td></tr>\
+                        <tr><td colspan="4" style="text-align: justify; padding:10px;">NO</td></tr>';
+            $("#pdfMiDeclaracion_datosEmpleoCargoComisionOtro>tbody").empty().append(html);
+            finalY = doc.lastAutoTable.finalY;
+            doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComisionOtro', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });   
+            finalY = doc.lastAutoTable.finalY;
+        }
+    }
 
     //EXPERIENCIA LABORAL.
     finalY = doc.lastAutoTable.finalY;
@@ -148,7 +158,6 @@ function gerarPdfDecCompleta(){
     doc.text(jsonResult.captura.tipo_declaracion, 50, 30);
     doc.text(jsonResult.captura.formato, 50, 35);
     doc.text(jsonResult.captura.anio.toString(), 50, 40);
-
     doc.text(getDateTime(), 50, 45);
     doc.text(jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.nombreEntePublico, 50, 50);
 
@@ -195,6 +204,16 @@ function gerarPdfDecCompleta(){
         finalY = doc.lastAutoTable.finalY;
         doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComisionOtro', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });   
         finalY = doc.lastAutoTable.finalY;
+    }
+    else{
+        if (jsonResult.captura.tipo_declaracion === "MODIFICACION"){
+            let html ='<tr style="background-color: #dee2e6;"><td colspan="4">¿CUENTA CON OTRO EMPLEO, CARGO, COMISIÓN EN EL SERVICIO PÚBLICO DISTINTO AL DECLARADO?</td></tr>\
+                        <tr><td colspan="4" style="text-align: justify; padding:10px;">NO</td></tr>';
+            $("#pdfMiDeclaracion_datosEmpleoCargoComisionOtro>tbody").empty().append(html);
+            finalY = doc.lastAutoTable.finalY;
+            doc.autoTable({ html: '#pdfMiDeclaracion_datosEmpleoCargoComisionOtro', margin: { top: 25, bottom:25 }, styles: { fontSize: 8 }, startY: finalY + 10, useCss: true, didDrawPage: function (data) { data.settings.margin.top = 30; }, rowPageBreak: 'auto' });   
+            finalY = doc.lastAutoTable.finalY;
+        }
     }
     
     //EXPERIENCIA LABORAL.
@@ -702,6 +721,8 @@ function tblEmpleo(titulo){
                 }                    
             html +='<tr><td colspan="4"style="background-color: #dee2e6; text-align: center;" >DOMICILIO</td></tr>';
             html +='<tr><td colspan="4">' + htmlDomicilio + '</td></tr>';
+            html +='<tr style="background-color: #dee2e6;"><td colspan="4">ACLARACIONES / OBSERVACIONES</td></tr>\
+                    <tr><td colspan="4" style="text-align: justify; padding:10px;">' + subNodo.aclaracionesObservaciones + '</td></tr>';
             html +='<tr><td colspan="4" style="background-color: #fff; border:1px solid #fff; color: #fff; font-size:14px;"></td></tr>';
         });
         
