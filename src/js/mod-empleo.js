@@ -588,8 +588,8 @@ window.pintarTablaOtrosEmpleos = function pintarTablaOtrosEmpleos(seccionNo, sec
         html+=" <td>" + lista[row].ambitoPublico +"</td>";
         html+=" <td>" + lista[row].nombreEntePublico +"</td>";
         html+=" <td class='text-right'>";
-        html+="     <button class='btn btn-sm btn-warning btnEditar' onclick='editarOtroEmpleo(\"" + btoa(JSON.stringify(params)) + "\");'>Editar</button>";
-        html+="     <button class='btn btn-sm btn-danger btnEliminar' onclick='eliminarOtroEmpleo(\"" + btoa(JSON.stringify(params)) + "\");'>Eliminar</button>";              
+        html+="     <button type='button' class='btn btn-sm btn-warning btnEditar' onclick='editarOtroEmpleo(\"" + btoa(JSON.stringify(params)) + "\");'>Editar</button>";
+        html+="     <button type='button' class='btn btn-sm btn-danger btnEliminar' onclick='eliminarOtroEmpleo(\"" + btoa(JSON.stringify(params)) + "\");'>Eliminar</button>";              
         html+=" </td>";
         html+="</tr>";
     });
@@ -681,3 +681,23 @@ window.eliminarOtroEmpleo = function eliminarOtroEmpleo(data){
 
 window.accion = "";
 window.uuidOtro ="";
+
+$("#formEmpleoCargoComision select[name='nivelOrdenGobierno']").on("change",function() {
+    console.log ("onchange de nivelOrdenGobierno");
+    console.log(this.value);
+    $("#formEmpleoCargoComision select[name='ambitoPublico']").prop("disabled", false);
+    if(this.value === "MUNICIPAL_ALCALDIA"){
+        $("#formEmpleoCargoComision select[name='ambitoPublico']").val("EJECUTIVO");
+        $("#formEmpleoCargoComision select[name='ambitoPublico']").prop("disabled", true);
+    }
+});
+
+$("#formOtroEmpleoCargoComision select[name='nivelOrdenGobiernoOtro']").on("change",function() {
+    console.log ("onchange de nivelOrdenGobierno");
+    console.log(this.value);
+    $("#formOtroEmpleoCargoComision select[name='ambitoPublicoOtro']").prop("disabled", false);
+    if(this.value === "MUNICIPAL_ALCALDIA"){
+        $("#formOtroEmpleoCargoComision select[name='ambitoPublicoOtro']").val("EJECUTIVO");
+        $("#formOtroEmpleoCargoComision select[name='ambitoPublicoOtro']").prop("disabled", true);
+    }
+});

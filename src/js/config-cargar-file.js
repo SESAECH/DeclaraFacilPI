@@ -41,7 +41,7 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
                     jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision = avanceCaptura.declaracion.situacionPatrimonial.datosEmpleoCargoComision;
                     jsonResult.declaracion.situacionPatrimonial.experienciaLaboral = avanceCaptura.declaracion.situacionPatrimonial.experienciaLaboral;
 */
-                    // cargamos declaracion de situacion patrimonial
+                    // cargamos declaracion de situacion patrimonial                    
 
                     if (jsonResult.captura.formato =='COMPLETA'){
                           if (jsonResult.captura.tipo_declaracion == 'INTERESES'){
@@ -219,6 +219,16 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
 
                       } */
                     }
+
+                    //otro empleo
+                    //console.log("trabajando...");
+                    if(jsonResult.captura.tipo_declaracion === "MODIFICACION"){
+                      if(typeof jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.cuentaConOtroCargoPublico == 'undefined'){
+                        jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.cuentaConOtroCargoPublico=false;
+                        jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.otroEmpleoCargoComision={};
+                      }
+                    }
+                    //----------------
 
                 }
               });
