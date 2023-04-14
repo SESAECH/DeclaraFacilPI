@@ -3,6 +3,7 @@ $("#btnTerminarDeclaracion").on('click',function() {
     if ($("input[name='nameContralor']").val().length<3){ mensajeSwal("Aviso","Ingrese el nombre del Contralor Interno.","error");}
     else{ 
         jsonResult.captura.contralor=$("input[name='nameContralor']").val().toUpperCase();
+		jsonResult.captura.anio = $('#cboAnioEjercicio').val();
         generarPDF();
     }    
 });
@@ -426,16 +427,16 @@ function descargar(doc){
     let fecha = new Date();    
     //archivo .dec
     jsonResult.captura.version=VERSION; 
-    jsonResult.captura.anio = fecha.getFullYear() ;       
+    //jsonResult.captura.anio = fecha.getFullYear() ;       
     //let text = JSON.stringify(jsonResult);
    // text = btoa(unescape(encodeURIComponent(text)));
-    let filename = jsonResult.declaracion.situacionPatrimonial.datosGenerales.curp + "_" + jsonResult.captura.tipo_declaracion + "_" + jsonResult.captura.anio + ".dec";                    
+    let filename = jsonResult.declaracion.situacionPatrimonial.datosGenerales.curp + "_" + jsonResult.captura.tipo_declaracion + "_" + jsonResult.captura.anio.toString() + ".dec";                    
     
     let zip = pako.gzip(JSON.stringify(jsonResult));
     download(filename, zip,"appligation/gzip");
 
     //archivo .pdf
-    filename = jsonResult.declaracion.situacionPatrimonial.datosGenerales.curp + "_" + jsonResult.captura.tipo_declaracion + "_" + fecha.getFullYear() + ".pdf";
+    filename = jsonResult.declaracion.situacionPatrimonial.datosGenerales.curp + "_" + jsonResult.captura.tipo_declaracion + "_" + jsonResult.captura.anio.toString() + ".pdf";
     doc.save(filename);
 }
 
