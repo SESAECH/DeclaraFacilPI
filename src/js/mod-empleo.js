@@ -35,6 +35,7 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
     $("#tblOtrosEmpleos").addClass("hide");
 
     $("#chkOtroEmpleoCargoComision")[0].checked=false;
+    $(form + ".CBOcontratadoPorHonorarios").val("false");
 
     switch(jsonResult.captura.tipo_declaracion){
         case "INICIAL":            
@@ -208,6 +209,7 @@ window.initEmpleoCargoComision = function initEmpleoCargoComision(data){
 
         $("#formOtroEmpleoCargoComision")[0].reset();
         $(formOtro + ".CBOentidadFederativaOtro").val("07").change();
+		$(formOtro + ".CBOcontratadoPorHonorarios").val("false");
         $("#domicilioEmpMXOtro")[0].checked=true;
         $("#formOtroEmpleoCargoComision #domEmpMexicoOtro").removeClass("hide");
         $("#formOtroEmpleoCargoComision #domEmpExtranjeroOtro").addClass("hide");

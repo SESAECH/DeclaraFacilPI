@@ -799,8 +799,11 @@ window.initConstanciaFiscal = function initConstanciaFiscal(data){
     switch(seccion.status){
         case "SIN_INFO":
             //asginar valores predeterminados a catálogos(ayuda al usuario).
-            jsonResult.declaracion.fiscal.constanciaFiscal.constancia=true;
-            $(modulo + "#constanciaFiscalSI")[0].checked=true;
+            //jsonResult.declaracion.fiscal.constanciaFiscal.constancia=true;
+            //$(modulo + "#constanciaFiscalSI")[0].checked=true;
+			jsonResult.declaracion.fiscal.constanciaFiscal.constancia=false;
+            $(modulo + "#constanciaFiscalSI")[0].checked=false;
+            $(modulo + "#constanciaFiscalNO")[0].checked=true;
             $(modulo + ".rdConstanciaFiscal").prop("disabled", false);
             $(modulo + "textarea[name='aclaracionesObservaciones']").val("");
             $(modulo + ".btnTerminar").removeClass("hide");
