@@ -12,7 +12,7 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
             avanceCaptura = JSON.parse(unzip);
             //console.log(avanceCaptura);
             } else{
-            avanceCaptura = JSON.parse(atob(data));
+            avanceCaptura = JSON.parse(atob(data)); //primeras versiones
             //console.log(avanceCaptura);
           }
         //console.log(avanceCaptura);
