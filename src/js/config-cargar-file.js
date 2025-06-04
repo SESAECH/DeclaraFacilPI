@@ -15,7 +15,15 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
             avanceCaptura = JSON.parse(atob(data)); //primeras versiones
             //console.log(avanceCaptura);
           }
-        //console.log(avanceCaptura);
+        console.log(avanceCaptura);
+
+// -------------------------------------------------- ojo -----------------------------
+        //correcciones formato detectadas en 2025 : tipo_de_baja NA en inmueble, mueble y vehículo; tipo de declaración ; documento obtenido en escolaridad
+
+        //tipo declaracion
+        if (avanceCaptura.tipo_declaracion == "MODIFICACION") {avanceCaptura.tipo_declaracion = "MODIFICACIÓN";}
+        if (avanceCaptura.tipo_declaracion == "CONCLUSION"){avanceCaptura.tipo_declaracion = "CONCLUSIÓN";}
+
         let mismoFormato = true;
         avanceCaptura.captura.formato == jsonResult.captura.formato ? mismoFormato = true: mismoFormato = false;
         if (mismoFormato){ avanceCaptura.captura.tipo_declaracion == jsonResult.captura.tipo_declaracion ? mismoFormato = true: mismoFormato = false;}
@@ -112,6 +120,7 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
                                         break;
 
                                       case "MODIFICACION":
+                                      case "MODIFICACIÓN":
                                         jsonResult.declaracion.situacionPatrimonial.ingresos.remuneracionAnualCargoPublico = remuneracionCargoPublico;
                                         jsonResult.declaracion.situacionPatrimonial.ingresos.otrosIngresosAnualesTotal = otrosIngresos;
                                         jsonResult.declaracion.situacionPatrimonial.ingresos.ingresoAnualNetoDeclarante = ingresosDeclarante;
@@ -125,6 +134,7 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
                                         break;
 
                                       case "CONCLUSION":
+                                      case "CONCLUSIÓN":
                                         jsonResult.declaracion.situacionPatrimonial.ingresos.remuneracionConclusionCargoPublico = remuneracionCargoPublico;
                                         jsonResult.declaracion.situacionPatrimonial.ingresos.otrosIngresosConclusionTotal = otrosIngresos;
                                         jsonResult.declaracion.situacionPatrimonial.ingresos.ingresoConclusionNetoDeclarante = ingresosDeclarante;
@@ -156,10 +166,12 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
                                         break;
 
                                       case "MODIFICACION":
+                                      case "MODIFICACIÓN":
                                         jsonResult.declaracion.situacionPatrimonial.inversiones.inversion[row].saldoDiciembreAnterior = saldo;
                                         break;
 
                                       case "CONCLUSION":
+                                      case "CONCLUSIÓN":
                                         jsonResult.declaracion.situacionPatrimonial.inversiones.inversion[row].saldoFechaConclusion = saldo;
                                         break;
                                     }
@@ -180,10 +192,12 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
                                         break;
 
                                       case "MODIFICACION":
+                                      case "MODIFICACIÓN":
                                         jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo[row].saldoInsolutoDiciembreAnterior = saldo;
                                         break;
 
                                       case "CONCLUSION":
+                                      case "CONCLUSIÓN":
                                         jsonResult.declaracion.situacionPatrimonial.adeudos.adeudo[row].saldoInsolutoFechaConclusion = saldo;
                                         break;
                                     }
@@ -222,7 +236,7 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
 
                     //otro empleo
                     //console.log("trabajando...");
-                    if(jsonResult.captura.tipo_declaracion === "MODIFICACION"){
+                    if(jsonResult.captura.tipo_declaracion === "MODIFICACION" || jsonResult.captura.tipo_declaracion ==="MODIFICACIÓN"){
                       if(typeof jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.cuentaConOtroCargoPublico == 'undefined'){
                         jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.cuentaConOtroCargoPublico=false;
                         jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.otroEmpleoCargoComision={};
@@ -255,7 +269,7 @@ window.cargarFileDeclaracion = function cargarFileDeclaracion(data){
             });
 
             //otro empleo
-            if(jsonResult.captura.tipo_declaracion === "MODIFICACION"){
+            if(jsonResult.captura.tipo_declaracion === "MODIFICACION" || jsonResult.captura.tipo_declaracion ==="MODIFICACIÓN"){
               if(typeof jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.cuentaConOtroCargoPublico == 'undefined'){
                 jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.cuentaConOtroCargoPublico=false;
                 jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.otroEmpleoCargoComision={};

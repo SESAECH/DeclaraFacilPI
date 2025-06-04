@@ -117,7 +117,7 @@ $('.btnSelectTipoDeclaracion').on('click',function() {
           }
           else{
             if (jsonResult.captura.formato =="COMPLETA"){
-              if (jsonResult.captura.tipo_declaracion=="MODIFICACION"){
+              if (jsonResult.captura.tipo_declaracion=="MODIFICACION"||jsonResult.captura.tipo_declaracion=="MODIFICACIÓN"){
                 htmlSecciones+='<li class="nav-item">\
                                   <label class="nav-link lnk' + item.moduloName + '">\
                                       <span class="indicador">' + item.no + '</span>\
@@ -613,6 +613,7 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
                   };
                   break;
               case "MODIFICACION":
+              case "MODIFICACIÓN":
                   delete jsonResult.declaracion.situacionPatrimonial.actividadAnualAnterior;
                   jsonResult.captura.declaracion.situacionPatrimonial.secciones[9].status="TERMINADO";
                   jsonResult.declaracion.situacionPatrimonial.ingresos={
@@ -675,6 +676,7 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
                     };
                   break;
               case "CONCLUSION":
+              case "CONCLUSIÓN":
                   jsonResult.declaracion.situacionPatrimonial.ingresos={
                       "remuneracionConclusionCargoPublico": {
                         "valor": 0,
@@ -746,7 +748,7 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
     $(".titulo-declaracion-captura").text("DECLARACIÓN " + jsonResult.captura.tipo_declaracion + " | " + jsonResult.captura.formato);
     
     //etiqueta de datos del empleo para conclusión o inicial/modificacion
-    $(".lblFechaTomaPosesion").text ( jsonResult.captura.tipo_declaracion == "CONCLUSION" ? "FECHA DE CONCLUSIÓN" : "FECHA DE TOMA DE POSESIÓN");
+    $(".lblFechaTomaPosesion").text ( jsonResult.captura.tipo_declaracion == "CONCLUSION" || jsonResult.captura.tipo_declaracion == "CONCLUSIÓN" ? "FECHA DE CONCLUSIÓN" : "FECHA DE TOMA DE POSESIÓN");
 
     //pintar secciones.
     htmlSecciones+='<h6 class="text-muted p10">Situación Patrimonial</h6>';
@@ -762,7 +764,7 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
         }
         else{
           if (jsonResult.captura.formato =="COMPLETA"){
-            if (jsonResult.captura.tipo_declaracion=="MODIFICACION"){
+            if (jsonResult.captura.tipo_declaracion=="MODIFICACION" || jsonResult.captura.tipo_declaracion=="MODIFICACIÓN"){
               htmlSecciones+='<li class="nav-item">\
                                 <label class="nav-link lnk' + item.moduloName + '">\
                                     <span class="indicador">' + item.no + '</span>\
@@ -809,7 +811,7 @@ $('.btnSelectFormatoDeclaracion').on('click',function() {
     }
 
     //otro empleo
-    if(jsonResult.captura.tipo_declaracion === "MODIFICACION"){
+    if(jsonResult.captura.tipo_declaracion === "MODIFICACION" || jsonResult.captura.tipo_declaracion === "MODIFICACIÓN"){
       jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.cuentaConOtroCargoPublico=false;
       jsonResult.declaracion.situacionPatrimonial.datosEmpleoCargoComision.otroEmpleoCargoComision={};
     }

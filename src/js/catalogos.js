@@ -27,7 +27,7 @@ window.relacionConDeclarante = [{"clave":"CÓNYUGE", "valor":"CÓNYUGE"},{"clave
 window.beneficiariosPrograma = [{"clave":"DC","valor":"DECLARANTE"},{"clave":"CY","valor":"CÓNYUGE"},{"clave":"CON","valor":"CONCUBINA O CONCUBINARIO"},{"clave":"CONV","valor":"CONVIVIENTE"},{"clave":"HIJ","valor":"HIJO(A)"},{"clave":"HER","valor":"HERMANO(A)"},{"clave":"CU","valor":"CUÑADO(A)"},{"clave":"MA","valor":"MADRE"},{"clave":"PA","valor":"PADRE"},{"clave":"TIO","valor":"TIO(A)"},{"clave":"PRI","valor":"PRIMO(A)"},{"clave":"SOB","valor":"SOBRINO(A)"},{"clave":"AHI","valor":"AHIJADO(A)"},{"clave":"NUE","valor":"NUERA"},{"clave":"YER","valor":"YERNO"},{"clave":"ABU","valor":"ABUELO(A)"},{"clave":"NIE","valor":"NIETO(A)"},{"clave":"OTRO","valor":"OTRO(A)"}];
 //window.beneficiariosPrograma = beneficiariosPrograma;
 
-window.documentoObtenido = ["BOLETA","CERTIFICADO","CONSTANCIA","TÍTULO"];
+window.documentoObtenido = ["BOLETA","CERTIFICADO","CONSTANCIA","TITULO"];
 //window.documentoObtenido = documentoObtenido;
 
 window.estatus = ["CURSANDO","FINALIZADO","TRUNCO"];
@@ -47,7 +47,8 @@ window.formaRecepcion = ["MONETARIO","ESPECIE"];
 window.lugarDondeReside = [{"clave": "MÉXICO", "valor":"EN MÉXICO"}, {"clave": "EXTRANJERO", "valor":"EN EL EXTRANJERO"}, {"clave": "SE_DESCONOCE", "valor":"SE DESCONOCE"}];
 //window.lugarDondeReside =lugarDondeReside;
 
-window.motivoBaja = [{"clave":"NA","valor":"NO APLICA"},{"clave":"VNT","valor":"VENTA"},{"clave":"DNC","valor":"DONACIÓN"},{"clave":"SNT","valor":"SINIESTRO"},{"clave":"OTRO","valor":"OTRO (ESPECIFIQUE)"}];
+// se cambia para no permitir la clave NO APLICA
+window.motivoBaja = [{"clave":"OTRO","valor":"NO APLICA"},{"clave":"VNT","valor":"VENTA"},{"clave":"DNC","valor":"DONACIÓN"},{"clave":"SNT","valor":"SINIESTRO"},{"clave":"OTRO","valor":"OTRO (ESPECIFIQUE)"}];
 //window.motivoBaja =motivoBaja;
 
 window.nivel = [{"clave":"PRI","valor":"PRIMARIA"},{"clave":"SEC","valor":"SECUNDARIA"},{"clave":"BCH","valor":"BACHILLERATO"},{"clave":"CTC","valor":"CARRERA TÉCNICA O COMERCIAL"},{"clave":"LIC","valor":"LICENCIATURA"},{"clave":"ESP","valor":"ESPECIALIDAD"},{"clave":"MAE","valor":"MAESTRÍA"},{"clave":"DOC","valor":"DOCTORADO"}];
@@ -57,7 +58,8 @@ window.nivel = [{"clave":"PRI","valor":"PRIMARIA"},{"clave":"SEC","valor":"SECUN
 window.parentescoRelacion = [{"clave":"ABU","valor":"ABUELO(A)"},{"clave":"BISA","valor":"BISABUELO(A)"},{"clave":"BISN","valor":"BISNIETO(A)"},{"clave":"CONB","valor":"CONCUBINA O CONCUBINARIO"},{"clave":"CONC","valor":"CONCUÑO(A)"},{"clave":"CONY","valor":"CÓNYUGE"},{"clave":"CUN","valor":"CUÑADO(A)"},{"clave":"HER","valor":"HERMANO(A)"},{"clave":"HIJ","valor":"HIJO(A)"},{"clave":"MAD","valor":"MADRE"},{"clave":"PAD","valor":"PADRE"},{"clave":"PRI","valor":"PRIMO(A)"},{"clave":"SOB","valor":"SOBRINO(A)"},{"clave":"SUE","valor":"SUEGRO(A)"},{"clave":"TATA","valor":"TATARABUELO(A)"},{"clave":"TATN","valor":"TATARANIETO(A)"},{"clave":"TIOA","valor":"TIO(A)"},{"clave":"NIE","valor":"NIETO(A)"},{"clave":"NIN","valor":"NINGUNO"},{"clave":"AHI","valor":"AHIJADO(A)"},{"clave":"NUE","valor":"NUERA"},{"clave":"YER","valor":"YERNO"},{"clave":"OTRO","valor":"OTRO (ESPECIFIQUE)"}];
 //window.parentescoRelacion = parentescoRelacion ;
 
-window.regimenMatrimonial = [{"clave":"SOC","valor":"SOCIEDAD CONYUGAL"},{"clave":"SBI","valor":"SEPARACIÓN DE BIENES"},{"clave":"OTR","valor":"OTRO"}, {"clave":"NA","valor":"NO APLICA"}];
+// se cambia para no permitir la clave NA
+window.regimenMatrimonial = [{"clave":"SOC","valor":"SOCIEDAD CONYUGAL"},{"clave":"SBI","valor":"SEPARACIÓN DE BIENES"},{"clave":"OTR","valor":"OTRO"}, {"clave":"OTR","valor":"NO APLICA"}];
 //window.regimenMatrimonial = regimenMatrimonial;
 
 

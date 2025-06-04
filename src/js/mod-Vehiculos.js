@@ -148,6 +148,7 @@ window.funcionalidadGuardarRegistroVehiculos = function funcionalidadGuardarRegi
     $(form + '.CBOmotivoBaja').on('change', function() {
         $(form + ".content_motivoBaja_especifique").addClass("hide");
         $(form + ".content_motivoBaja_especifique input[name='motivoBaja_especifique']").val($(form + '.CBOmotivoBaja option:selected')[0].innerText);
+        //cambiar para que se soporte el NO APLICA
         if(this.value == "OTRO"){
             $(form + ".content_motivoBaja_especifique").removeClass("hide");
             $(form + ".content_motivoBaja_especifique input[name='motivoBaja_especifique']").val("");
@@ -194,7 +195,7 @@ window.funcionalidadGuardarRegistroVehiculos = function funcionalidadGuardarRegi
     $(form + '.CBOmoneda').val("MXN").prop("disabled", true);
     $(form + '.CBOtitularBien').val("DEC")  .trigger("change");
     $(form + '.CBOparentescoRelacion').val("ABU").trigger("change");
-    $(form + '.CBOmotivoBaja').val("NA").trigger("change");
+    $(form + '.CBOmotivoBaja').val("OTRO").trigger("change");
     $(form + ".CBOentidadFederativa").val("07").trigger("change");
     $(form + ".CBOpais").val("MX").trigger("change");
     $(form + '.CBOtipoPersona').val("FISICA").trigger("change");
