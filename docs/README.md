@@ -1,4 +1,4 @@
-# DeclaraFácilPI
+# Sistema DeclaraFácil PI Portable
 Repositorio del Sistema DeclaraFácil PI Portable
  
 <img src="https://github.com/SESAECH/DeclaraFacilPI/blob/main/docs/Logo%20DeclaraFacil%20PI%20-%20colores.png?raw=true" width="200px" alt="logotipo DeclarafacilPI Portable"> </br>
